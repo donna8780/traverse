@@ -4,3 +4,9 @@ spring:
 
   thymeleaf:
     suffix: .html
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://ec2-3-131-93-152.us-east-2.compute.amazonaws.com:3306/traverse?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    username: user1
+    password: traverse
