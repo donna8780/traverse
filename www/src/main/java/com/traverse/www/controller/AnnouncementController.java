@@ -35,7 +35,7 @@ public class AnnouncementController {
 		AccountsVO user = (AccountsVO) session.getAttribute("user");
 		
 		if (user == null) {
-			return "redirect:/member/announcement";
+			return "redirect:/member/login";
 		}
 		
 		return "member/write";
