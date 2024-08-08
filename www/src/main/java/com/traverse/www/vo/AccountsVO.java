@@ -19,8 +19,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
+
 public class AccountsVO {
+
 	private int accounts_idx;
-	private String userid, userpw, nick, email, name, phone, profile1;
+	private String userid, userpw, nick, emaill, name, phone, profile1;
 	private Date birth;
 }

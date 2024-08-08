@@ -1,12 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입 페이지</title>
 
-
+<link href="/css/signUpStyle.css" rel="stylesheet">
 </head>
+
 <body>
-ddddd
+
+	<fieldset>
+		<form class="form" method="post">
+			<p class="title">Membership Resister</p>
+
+			<div class="flex">
+				<label> <input name="name" required placeholder=""
+					type="text" class="input"> <span>이름</span>
+				</label>
+			</div>
+			<label> <input name="nick" required placeholder=""
+				type="text" class="input"> <span>닉네임</span></label>
+				
+				<label><input name="userid" required placeholder="" type="text"
+					class="input"> <span>아이디</span></label>
+					
+				<label> <input name="userpw" required placeholder="" type="password"
+					class="input"> <span>비밀번호</span></label>
+				
+				<label> <input name="phone" required placeholder="" type="text"
+					class="input"> <span>전화번호</span></label>
+					
+	 			<label> <input name="birth" required placeholder="" type="date"
+					class="input"> <span>생년월일</span></label>
+				
+				<label> <input name="emaill" required placeholder="" type="email"
+					class="input"> <span>E-mail</span></label>
+
+				<button class="submit">회원가입</button>
+		</form>
+	</fieldset>
+
+
 </body>
+
 </html>
