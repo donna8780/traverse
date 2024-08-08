@@ -3,7 +3,7 @@ package com.traverse.www.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.traverse.www.mdoel.LoginDAO;
+import com.traverse.www.model.LoginDAO;
 import com.traverse.www.vo.AccountsVO;
 
 @Service

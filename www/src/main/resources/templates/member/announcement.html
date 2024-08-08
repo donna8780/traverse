@@ -14,7 +14,6 @@
 				<tr>
 					<th>No</th>
 					<th>제목</th>
-					<th>글 내용</th>
 					<th>계정 번호</th>
 					<th>작성일</th>
 					<th>조회수</th>
@@ -22,7 +21,6 @@
 				<tr th:each="row : ${test}">
 					<td th:text="${row.announcement_idx}"></td>
 					<td th:text="${row.title}"></td>
-					<td th:text="${row.contents}"></td>
 					<td th:text="${row.a_idx}"></td>
 					<td th:text="${row.w_date}"></td>
 					<td th:text="${row.v_count}"></td>

@@ -10,7 +10,7 @@ import lombok.Setter;
 	userid	varchar(30)
 	userpw	varchar(30)
 	nick	varchar(30)
-	emaill	varchar(30)
+	email	varchar(30)
 	name	varchar(30)
 	phone	varchar(30)
 	birth	date
@@ -21,6 +21,6 @@ import lombok.Setter;
 @Setter
 public class AccountsVO {
 	private int accounts_idx;
-	private String userid, userpw, nick, emaill, name, phone, profile1;
+	private String userid, userpw, nick, email, name, phone, profile1;
 	private Date birth;
 }
