@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
@@ -9,23 +9,23 @@
 <table>
   <tr>
      <th>회원번호</th>
-     <td th:text="${session.user.accounts_idx}"></td>
+     <td>idx</td>
   </tr>
   <tr>
      <th>아이디</th>
-     <td th:text="${session.user.userid}"></td>
+     <td>userid</td>
   </tr>
   <tr>
      <th>닉네임</th>
-     <td th:text="${session.user.nick}"></td>
+     <td>nick</td>
   </tr>
   <tr>
      <th>이메일</th>
-     <td th:text="${session.user.emaill}"></td>
+     <td>email</td>
   </tr>
   <tr>
      <th>가입일</th>
-     <td th:text="${session.user.birth}"></td>
+     <td>join_date</td>
   </tr>
 </table>
 
