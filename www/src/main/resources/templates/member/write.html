@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <h1>글쓰기</h1>
+  <hr>
+  
+  <form method="POST">
+    <table>
+      <tr>
+        <td><input name="title" placeholder="제목"></td>
+      </tr>
+      <tr>
+        <td><textarea name="contents" placeholder="글 내용"></textarea></td>
+      </tr>
+    </table>
+    
+    <br>
+    
+    <input name="a_idx" type="hidden" value="${user.idx}">
+    
+    <button>작성</button>
+  </form>
+  
+</body>
+</html>
