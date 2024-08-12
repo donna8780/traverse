@@ -12,10 +12,21 @@ public class SignUpSercive {
 	private SignUpDAO dao;
 
 	public int addAccount(AccountsVO input) {
-		
-	
 		return dao.insert(input);
 		
 	}
+
+	public String checkUserID(String userid) {
+		if (userid == "donna8780") {
+			
+			return "중복된 아이디 입니다.";
+		}
+		
+		return dao.select(userid);
+		
+	}
+
+
+
 
 }
