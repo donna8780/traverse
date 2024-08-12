@@ -20,7 +20,7 @@ public class AnnouncementController {
 	@Autowired
 	private AnnouncementService as;
 	
-	@GetMapping("/announcement")
+	@GetMapping("/announcement")//게시글 보여줌
 	public ModelAndView announcement() {
 		ModelAndView mav = new ModelAndView();
 		
@@ -29,7 +29,7 @@ public class AnnouncementController {
 		return mav;
 	}
 	
-	@GetMapping("/write")
+	@GetMapping("/write")//글쓰기
 	public String write(HttpSession session) {
 		
 		AccountsVO user = (AccountsVO) session.getAttribute("user");
@@ -41,7 +41,7 @@ public class AnnouncementController {
 		return "member/write";
 	}
 	
-	@PostMapping("/write")
+	@PostMapping("/write")//글쓰기 실행
 	public String write(AnnouncementVO input) {
 		as.writeAnnouncement(input);
 		
