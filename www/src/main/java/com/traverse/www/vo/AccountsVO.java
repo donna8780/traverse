@@ -10,7 +10,7 @@ import lombok.Setter;
 	userid	varchar(30)
 	userpw	varchar(30)
 	nick	varchar(30)
-	emaill	varchar(30)
+	email	varchar(30)
 	name	varchar(30)
 	phone	varchar(30)
 	birth	date
