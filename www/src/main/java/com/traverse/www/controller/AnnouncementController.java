@@ -3,6 +3,7 @@ package com.traverse.www.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,15 +21,17 @@ public class AnnouncementController {
 	@Autowired
 	private AnnouncementService as;
 	
+	// 공지사항
 	@GetMapping("/announcement")
 	public ModelAndView announcement() {
 		ModelAndView mav = new ModelAndView();
-		
+
 		mav.addObject("test", as.test());
 		
 		return mav;
 	}
 	
+	// 글쓰기
 	@GetMapping("/write")
 	public String write(HttpSession session) {
 		
@@ -41,11 +44,23 @@ public class AnnouncementController {
 		return "member/write";
 	}
 	
+	// 글쓰기 실행
 	@PostMapping("/write")
 	public String write(AnnouncementVO input) {
 		as.writeAnnouncement(input);
 		
 		return "redirect:/";
+	}
+	
+	// 게시글 보기
+	@GetMapping("/view/{announcement_idx}")
+	public ModelAndView view(@PathVariable("announcement_idx") int idx) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("row", as.getBoardOne(idx));
+		mav.setViewName("member/view");
+		
+		return mav;
 	}
 
 }

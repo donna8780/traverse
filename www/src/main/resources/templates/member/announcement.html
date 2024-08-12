@@ -14,14 +14,16 @@
 				<tr>
 					<th>No</th>
 					<th>제목</th>
-					<th>계정 번호</th>
+					<th>닉네임</th>
 					<th>작성일</th>
 					<th>조회수</th>
 				</tr>
 				<tr th:each="row : ${test}">
 					<td th:text="${row.announcement_idx}"></td>
-					<td th:text="${row.title}"></td>
-					<td th:text="${row.a_idx}"></td>
+					 <td>
+            <a th:href="@{/member/view/{announcement_idx}(announcement_idx=${row.announcement_idx})}" th:text="${row.title}"></a>
+            </td>
+					<td th:text="${row.nick}"></td>
 					<td th:text="${row.w_date}"></td>
 					<td th:text="${row.v_count}"></td>
 				</tr>
@@ -31,7 +33,7 @@
 
 	<br>
 
-	<a href="/member/write">
+
 <button>
   <span class="span-mother">
     <span>글</span>
@@ -44,7 +46,18 @@
     <span>기</span>
   </span>
 </button>
-		
-	</a>
+
+	
+	<script>
+    let btns = document.querySelectorAll('button');
+    
+    // 글쓰기 버튼
+    btns[0].onclick = () => {
+      location.href = '/member/write';
+    };
+    
+  </script>
+
+	
 </body>
 </html>
