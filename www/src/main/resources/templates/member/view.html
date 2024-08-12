@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>게시글</title>
+</head>
+<body>
+  <table>
+    <tr>
+      <td th:text="${row.announcement_idx}"></td>
+    </tr>
+    <tr>
+       <td th:text="${row.nick}">
+    </tr>
+    <tr>
+      <td><pre th:text="${row.contents}"></pre></td>
+    </tr>
+  </table>
+</html>
