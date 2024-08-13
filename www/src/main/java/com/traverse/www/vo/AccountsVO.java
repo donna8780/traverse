@@ -2,9 +2,6 @@ package com.traverse.www.vo;
 
 import java.sql.Date;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /*
 	accounts_idx	int
 	userid	varchar(30)
@@ -16,7 +13,6 @@ import lombok.Setter;
 	birth	date
 	profile1	varchar(30)
  */
-
 
 public class AccountsVO {
 	private int accounts_idx;
