@@ -17,6 +17,10 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerService cs;
+	
+	@Autowired
+	private AnnouncementService as;
+
 
 	
 	//고객지원으로 이동해서 qna섹션을 누르면 이동
@@ -24,6 +28,7 @@ public class CustomerController {
 	public ModelAndView csboard() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("test", cs.cstest());
+		mav.addObject("announce", as.announce());
 		return mav;
 	}
 	//글쓰기
@@ -38,5 +43,4 @@ public class CustomerController {
 		}		
 		return "member/cswrite";	
 	}
-
 }
