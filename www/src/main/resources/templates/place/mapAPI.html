@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<table>
+  	<tr>
+  		<th>like_idx</th>
+  		<th>a_idx</th>
+  		<th>place_idx</th>
+  		<th>place_name</th>
+  		<th>place_add</th>
+  		<th>place_x</th>
+  		<th>place_y</th>
+  		<th>relocation</th>
+  	</tr>
+  	
+  	<tr th:each="row : ${mapAPI}">
+  		<td th:text="${row.like_idx}"></td>
+  		<td th:text="${row.a_idx}"></td>
+  		<td th:text="${row.p_idx}"></td>
+  		<td th:text="${row.place_name}"></td>
+  		<td th:text="${row.place_add}"></td>
+  		<td th:text="${row.place_x}"></td>
+  		<td th:text="${row.place_y}"></td>
+  		<td>
+  			<input type="checkbox" th:onclick="'updateMapCoordinates(' + ${row.place_x} + ', ' + ${row.place_y} + ')'">
+  		</td>
+  		<td>
+  			<button th:onclick="'updateMapCoordinates(' + ${row.place_x} + ', ' + ${row.place_y} + ')'">
+  				replace
+  			</button>
+  		</td>
+  	</tr>
+  </table>
+  
+  <hr>
+
+	<div id="map" style="width:600px; height:400px;"></div>
+  
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7717c2c3bc1327ef51412b55ac5ef"></script>
+  
+	<script>
+	
+  	// 초기 좌표
+		let centerLat = 35.1192845;
+		let centerLng = 128.7915767;
+		let markerLat = 35.1192845;
+		let markerLng = 128.7915767;
+	
+		// 지도 생성
+		const container = document.getElementById('map');
+		let map = new kakao.maps.Map(container, {
+	    center: new kakao.maps.LatLng(centerLat, centerLng),
+	    level: 3
+		});
+	
+		// 마커 생성
+		let marker = new kakao.maps.Marker({
+	    position: new kakao.maps.LatLng(markerLat, markerLng)
+		});
+		marker.setMap(map);
+	
+		// 좌표 업데이트 함수
+		function updateMapCoordinates(newCenterLat, newCenterLng) {
+	    // 새로운 좌표로 지도 중심 업데이트
+	    map.setCenter(new kakao.maps.LatLng(newCenterLat, newCenterLng));
+	
+	    // 마커 위치 업데이트
+	    marker.setPosition(new kakao.maps.LatLng(newCenterLat, newCenterLng));
+	
+	    // 변수 업데이트
+	    centerLat = newCenterLat;
+	    centerLng = newCenterLng;
+	    markerLat = newCenterLat;
+	    markerLng = newCenterLng;
+		}
+	
+		// 버튼 클릭 시 좌표 업데이트
+		function updateMapCoordinatesFromButton(button) {
+			var x = button.getAttribute('data-x');
+			var y = button.getAttribute('data-y');
+			console.log('Updating map coordinates to:', x, y);
+			updateMapCoordinates(parseFloat(y), parseFloat(x));  // y가 위도, x가 경도로 사용
+		}
+	</script>
+
+  
+
+</body>
+</html>

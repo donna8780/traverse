@@ -25,7 +25,7 @@ public class LoginController {
 		
 		session.setAttribute("user", ls.getAccounts(input));
 		
-		return "redirect:/member/myPage";
+		return "redirect:/";
 		
 	}
 	
