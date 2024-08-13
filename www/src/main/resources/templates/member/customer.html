@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>고객지원</title>
+<link rel="stylesheet" href="/css/Customerstyle.css">
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="#company-intro"
+					onclick="showSection('company-intro')">기업소개</a></li>
+				<li><a href="#notice" onclick="showSection('notice')">공지사항</a></li>
+				<li><a href="#faq" onclick="showSection('faq')">FAQ</a></li>
+				<li><a href="#qna" onclick="showSection('qna')">Q&A</a></li>
+
+			</ul>
+		</nav>
+	</header>
+
+	<section id="company-intro" class="section">
+		<div class="intro-container">
+			<div class="intro-logo">
+				<img src="/image/traverse.png">
+			</div>
+			<div class="intro-text">
+				<h2>기업소개</h2>
+				<p>여기는 기업 소개 섹션입니다. 기업의 역사, 가치, 미션 등을 소개합니다.</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="notice" class="section" style="display: none;">
+		<h2>공지사항</h2>
+		<p>여기는 공지사항 섹션입니다. 중요한 공지 및 업데이트 정보를 제공합니다.</p>
+		<table class="rwd-table">
+			<tbody>
+				<tr>
+					<th>No</th>
+					<th>제목</th>
+					<th>닉네임</th>
+					<th>작성일</th>
+					<th>조회수</th>
+				</tr>
+				<tr th:each="row : ${announce}">
+					<td th:text="${row.announcement_idx}"></td>
+					<td><a
+						th:href="@{/member/view/{announcement_idx}(announcement_idx=${row.announcement_idx})}"
+						th:text="${row.title}"></a></td>
+					<td th:text="${row.nick}"></td>
+					<td th:text="${row.w_date}"></td>
+					<td th:text="${row.v_count}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<!-- 관리자가 아니면 글쓰기 활성화 안됨 -->
+		<div th:if="${session.user != null and session.user.nick == '관리자'}">
+			<button>
+				<span class="span-mother"> <span>글</span> <span>쓰</span> <span>기</span>
+				</span> <span class="span-mother2"> <span>글</span> <span>쓰</span> <span>기</span>
+				</span>
+			</button>
+		</div>
+	</section>
+
+	<section id="faq" class="section" style="display: none;">
+		<h2>FAQ</h2>
+		<div class="faq-item">
+			<h3>Q: 자주 묻는 질문 1</h3>
+			<p>A: 자주 묻는 질문 1에 대한 답변입니다.</p>
+		</div>
+		<div class="faq-item">
+			<h3>Q: 자주 묻는 질문 2</h3>
+			<p>A: 자주 묻는 질문 2에 대한 답변입니다.</p>
+		</div>
+	</section>
+
+	<section id="qna" class="section" style="display: none;">
+		<h2>Q&A</h2>
+		<div class="qna-item">
+			<h3>qna 게시판</h3>
+			-->
+			<table>
+				<tbody>
+					<tr>
+						<th>No</th>
+						<th>제목</th>
+						<th>내용</th>
+						<th>계정번호</th>
+						<th>작성시간</th>
+					</tr>
+					<tr th:each="row : ${test}">
+						<td th:text="${row.board_idx}"></td>
+						<td th:text="${row.title}"></td>
+						<td th:text="${row.content}"></td>
+						<td th:text="${row.accounts_idx}"></td>
+						<td th:text="${row.create_at}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="qna-item">
+			<h3>Q: Q&A 질문 2</h3>
+			<p>A: Q&A 질문 2에 대한 답변입니다.</p>
+		</div>
+		<a href="/member/cswrite"><button>글쓰기</button></a>
+	</section>
+
+	<script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+            let btns = document.querySelectorAll('button');
+    
+		    // 글쓰기 버튼
+		    btns[0].onclick = () => {
+		      location.href = '/member/write';
+		    };
+    </script>
+</body>
+</html>

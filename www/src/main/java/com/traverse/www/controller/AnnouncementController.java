@@ -21,18 +21,17 @@ public class AnnouncementController {
 	@Autowired
 	private AnnouncementService as;
 	
-	// 공지사항
-	@GetMapping("/announcement")
+  // 공지사항
+	@GetMapping("/announcement")//게시글 보여줌
 	public ModelAndView announcement() {
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("test", as.test());
+		mav.addObject("announce", as.announce());
 		
 		return mav;
 	}
 	
-	// 글쓰기
-	@GetMapping("/write")
+	@GetMapping("/write")//글쓰기
 	public String write(HttpSession session) {
 		
 		AccountsVO user = (AccountsVO) session.getAttribute("user");
@@ -44,12 +43,12 @@ public class AnnouncementController {
 		return "member/write";
 	}
 	
-	// 글쓰기 실행
-	@PostMapping("/write")
+
+	@PostMapping("/write")//글쓰기 실행
 	public String write(AnnouncementVO input) {
 		as.writeAnnouncement(input);
 		
-		return "redirect:/";
+		return "redirect:/member/announcement";
 	}
 	
 	// 게시글 보기
@@ -61,6 +60,30 @@ public class AnnouncementController {
 		mav.setViewName("member/view");
 		
 		return mav;
+	}
+	
+	// 게시글 삭제
+	@GetMapping("/ann_delete/{announcement_idx}")
+	public String ann_delete(AnnouncementVO idx) {
+		
+		as.deleteAccount(idx);
+		
+		return "redirect:/member/announcement";
+	}
+	
+	// 게시글 수정
+	@GetMapping("/ann_update/{announcement_idx}")
+	public String update(@PathVariable("announcement_idx") int idx) {
+		return "member/ann_update";
+	}
+	
+	// 수정 실행
+	@PostMapping("/ann_update/{announcement_idx}")
+	public String update(AnnouncementVO input) {
+		as.update(input);
+		
+		return "redirect:/member/announcement";
+		
 	}
 
 }
