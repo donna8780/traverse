@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.CustomerService.CustomerService;
+import com.traverse.www.service.AnnouncementService;
 import com.traverse.www.vo.AccountsVO;
 
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +18,10 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerService cs;
+	
+	@Autowired
+	private AnnouncementService as;
+
 
 	
 	//고객지원으로 이동해서 qna섹션을 누르면 이동
@@ -24,6 +29,7 @@ public class CustomerController {
 	public ModelAndView csboard() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("test", cs.cstest());
+		mav.addObject("announce", as.announce());
 		return mav;
 	}
 	//글쓰기
@@ -38,6 +44,6 @@ public class CustomerController {
 		return "member/cswrite";	
 	}
 	
-	
+
 
 }
