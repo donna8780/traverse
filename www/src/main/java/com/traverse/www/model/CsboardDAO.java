@@ -1,4 +1,4 @@
-package com.traverse.www.CsboardDAO;
+package com.traverse.www.model;
 
 import java.util.List;
 
