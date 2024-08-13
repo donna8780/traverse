@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="htts://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Location Selector</title>
+<link href="/css/likeStyle.css" rel="stylesheet">
+</head>
+<body>
+
+	<div class="container">
+
+		<div class="left">
+			<div class="all">전체선택</div>
+			<br>
+			<div class="location-item" th:each="row : ${mapAPI}">
+				<div class="image-box">
+					<img id="place_img"
+						th:src="@{/image/{placeImg}(placeImg=${row.place_img})}" />
+				</div>
+				<div class="text-box">
+					<div class="location-name" th:text="${row.place_name}"></div>
+					<div class="location-detail" th:text="${row.place_add}"></div>
+				</div>
+
+				<div>
+        	<input type="checkbox" th:onclick="'updateMapCoordinates(' + ${row.place_x} + ', ' + ${row.place_y} + ')'">
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<hr>
+
+	<div class="right">
+		<div id="map" style="width: 900px; height: 800px;"></div>
+	</div>
+
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7717c2c3bc1327ef51412b55ac5ef"></script>
+
+	<script>
+        // 초기 좌표
+        let centerLat = 35.1192845;
+        let centerLng = 128.7915767;
+        let markerLat = 35.1192845;
+        let markerLng = 128.7915767;
+
+        // 지도 생성
+        const container = document.getElementById('map');
+        let map = new kakao.maps.Map(container, {
+            center: new kakao.maps.LatLng(centerLat, centerLng),
+            level: 3
+        });
+
+        // 마커 생성
+        let marker = new kakao.maps.Marker({
+            position: new kakao.maps.LatLng(markerLat, markerLng)
+        });
+        marker.setMap(map);
+
+        // 좌표 업데이트 함수
+        function updateMapCoordinates(newCenterLat, newCenterLng) {
+            // 새로운 좌표로 지도 중심 업데이트
+            map.setCenter(new kakao.maps.LatLng(newCenterLat, newCenterLng));
+
+            // 마커 위치 업데이트
+            marker.setPosition(new kakao.maps.LatLng(newCenterLat, newCenterLng));
+
+            // 변수 업데이트
+            centerLat = newCenterLat;
+            centerLng = newCenterLng;
+            markerLat = newCenterLat;
+            markerLng = newCenterLng;
+        }
+
+       // 체크박스 클릭 시 좌표 업데이트 함수
+        function updateMapCoordinatesFromCheckbox(checkbox) {
+            var x = checkbox.getAttribute('data-x');
+            var y = checkbox.getAttribute('data-y');
+            console.log('Updating map coordinates to:', x, y);
+            if (x && y) {
+                updateMapCoordinates(parseFloat(y), parseFloat(x));  // y가 위도, x가 경도로 사용
+            } else {
+                console.error('Invalid coordinates:', x, y);
+            }
+        }
+
+    </script>
+
+
+	<!-- <script>
+$(document).ready(function() {
+$("input:checkbox").on('click', function() {
+      if ( $(this).prop('checked') ) {
+        $(this).parent().addClass("selected");
+      } else {
+        $(this).parent().removeClass("selected");
+      }
+    });
+});
+</script> -->
+
+
+</body>
+</html>
