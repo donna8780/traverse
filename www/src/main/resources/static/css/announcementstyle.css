@@ -15,7 +15,7 @@
 
 .rwd-table tr:first-child {
 	border-top: none;
-	background: #428bca;
+	background: #4BB958;
 	color: #fff;
 }
 
@@ -107,10 +107,11 @@ button {
   width: 95.02px;
   height: 42.66px;
   border: none;
-  background-color: #3653f8;
+  background-color: #4BB958;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 900px;
 }
 
 button .span-mother {

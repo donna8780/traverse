@@ -13,10 +13,13 @@ import com.traverse.www.vo.AnnouncementVO;
 @Mapper
 public interface AnnouncementDAO {
 
-	@Select("select * from announcement")
+	@Select("select * from ann_view")
 	List<AnnouncementVO> test();
 	
-	@Insert("insert into Announcement(title, a_idx, contents) values(#{title}, #{a_idx}, #{contents})")
+	@Insert("insert into announcement(title, contents, a_idx) values(#{title}, #{contents}, #{a_idx})")
 	int insert(AnnouncementVO input);
+
+	@Select("select * from ann_view where announcement_idx = ${announcement_idx}")
+	AnnouncementVO selectOne(int idx);
 
 }

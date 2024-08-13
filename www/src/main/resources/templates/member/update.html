@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <form method="POST">
+      <table>
+         <tr>
+            <th>ID</th>
+            <td th:text="${session.user.userid}"></td>
+         </tr>
+         <tr>
+            <th>NICK</th>
+            <td><input name="nick" th:value="${session.user.nick}" required></td>
+         </tr><tr>
+            <th>PW</th>
+            <td><input name="userpw" type="password" required></td>
+         </tr>
+         <tr>
+            <th>EMAIL</th>
+            <td><input name="email" th:value="${session.user.email}" type="email" required></td>
+         </tr>
+      </table>
+      
+      <input name="accounts_idx" th:value="${session.user.accounts_idx}" type="hidden">
+      
+      <button>modify</button>
+   </form>
+</body>
+</html>
