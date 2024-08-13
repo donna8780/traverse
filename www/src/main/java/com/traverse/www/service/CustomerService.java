@@ -1,4 +1,4 @@
-package com.traverse.www.CustomerService;
+package com.traverse.www.service;
 
 import java.util.List;
 
