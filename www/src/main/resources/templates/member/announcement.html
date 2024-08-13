@@ -16,7 +16,6 @@
 					<th>닉네임</th>
 					<th>제목</th>
 					<th>계정 번호</th>
-
 					<th>작성일</th>
 					<th>조회수</th>
 				</tr>
@@ -34,7 +33,7 @@
 
 	<br>
 
-	<a href="/member/write">
+
 <button>
   <span class="span-mother">
     <span>글</span>
@@ -47,7 +46,18 @@
     <span>기</span>
   </span>
 </button>
-		
-	</a>
+
+	
+	<script>
+    let btns = document.querySelectorAll('button');
+    
+    // 글쓰기 버튼
+    btns[0].onclick = () => {
+      location.href = '/member/write';
+    };
+    
+  </script>
+
+	
 </body>
 </html>
