@@ -7,8 +7,8 @@ import lombok.Setter;
 
 
 public class AnnouncementVO {
-	private int announcement_idx, a_idx, v_count;
-	private String title, contents;
+	private int accounts_idx, announcement_idx, a_idx, v_count;
+	private String title, contents, nick;
 	private Date w_date;
 	public int getAnnouncement_idx() {
 		return announcement_idx;

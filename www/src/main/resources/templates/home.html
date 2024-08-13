@@ -3,20 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>traverse</title>
+  
+  <link href="/css/homeStyle.css" rel="stylesheet">
 </head>
 <body>
-  <h1>Main 페이지</h1>
-  
-  <ul>
+
+	<input type="checkbox" id="menuicon">
+	<header>
+		<div>
+			<ul class="navi">
+				<li><a href="/"><img class="logo" th:src="@{/image/logo_w.png}"></a></li>
+				<li th:if="${session.user == null}">
+					<a href="/member/login">login</a>
+				</li>
+				<li th:if="${session.user != null}">
+					<a href="/member/myPage">myPage</a>
+				</li>
+		  </ul>
+		  
+		  <label for="menuicon" class="menubtn">
+		  	<span></span>
+		  	<span></span>
+		  	<span></span>
+		  </label>
+		</div>
+	</header>
+	
+	<div class="container">
+		<div class="contents">
+			<span class="area_desc">
+				<img class="mapimg" th:src="@{/image/map1.png}">
+			</span>
+		</div>
+		<div class="sidebar">
+			<span class="area_desc">
+			  <a href="/member/signUp">signUp</a><br>
+			  <th:block th:if="${session.user == null}">
+			  	<a href="/member/login">login</a><br>
+			  </th:block>
+			  <th:block th:if="${session.user != null}">
+			  	<a href="/member/logout">logout</a><br>
+			  	<a href="/member/myPage">myPage</a><br>
+			  </th:block>
+			  <a href="/member/like">like</a><br>
+			  <a href="/member/announcement">announcement</a><br>
+			  <a href="/place/mapAPI">mapAPI</a><br>
+        <a href="/member/customer">customer</a>
+			</span>
+		</div>
+	</div>
+	
+	<footer>
+		<hr>
+		<div>회사소개  |  이용약관  |  등등...</div>
+	</footer>
+ 
+
+
+
+
+
+
+
+<!-- 
+	<ul>
   	<li><a href="/member/signUp">signUp</a></li>
+  	<th:block th:if="${session.user == null}">
   	<li><a href="/member/login">login</a></li>
+  	</th:block>
+  	<th:block th:if="${session.user != null}">
+    <li><a href="/member/logout">logout</a></li>
+    </th:block>
   	<li><a href="/member/myPage">myPage</a></li>
   	<li><a href="/member/like">like</a></li>
   	<li><a href="/member/announcement">announcement</a></li>
+  	<li><a href="/place/mapAPI">mapAPI</a></li>
+  	<li><a href="/member/customer">customer</a></li>
   </ul>
+  
   <hr>
-
   
   <table>
   	<tr>
@@ -61,7 +127,7 @@
   </script>
   
   <img th:src="@{/image/map.png}">
-  
+ -->
 
 </body>
 </html>
