@@ -3,31 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+body {
+	font-family: 'Arial', sans-serif;
+	background-color: #e9f5e9;
+	color: #333;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+form {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 15px;
+}
+
+th, td {
+	padding: 10px;
+	text-align: left;
+	font-size: 16px;
+}
+
+th {
+	background-color: #4CAF50;
+	color: white;
+	width: 30%;
+}
+
+td {
+	width: 70%;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+	width: 100%;
+	padding: 8px;
+	margin: 5px 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+button {
+	width: 100%;
+	padding: 10px;
+	font-size: 18px;
+	color: white;
+	background-color: #4CAF50;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+button:hover {
+	background-color: #45a049;
+}
+</style>
 </head>
 <body>
-   <form method="POST">
-      <table>
-         <tr>
-            <th>ID</th>
-            <td th:text="${session.user.userid}"></td>
-         </tr>
-         <tr>
-            <th>NICK</th>
-            <td><input name="nick" th:value="${session.user.nick}" required></td>
-         </tr><tr>
-            <th>PW</th>
-            <td><input name="userpw" type="password" required></td>
-         </tr>
-         <tr>
-            <th>EMAIL</th>
-            <td><input name="email" th:value="${session.user.email}" type="email" required></td>
-         </tr>
-      </table>
-      
-      <input name="accounts_idx" th:value="${session.user.accounts_idx}" type="hidden">
-      
-      <button>modify</button>
-   </form>
+	<form method="POST">
+		<table>
+			<tr>
+				<th>ID</th>
+				<td th:text="${session.user.userid}"></td>
+			</tr>
+			<tr>
+				<th>NICK</th>
+				<td><input name="nick" th:value="${session.user.nick}" required></td>
+			</tr>
+			<tr>
+				<th>PW</th>
+				<td><input name="userpw" type="password" required></td>
+			</tr>
+			<tr>
+				<th>EMAIL</th>
+				<td><input name="email" th:value="${session.user.email}"
+					type="email" required></td>
+			</tr>
+		</table>
+
+		<input name="accounts_idx" th:value="${session.user.accounts_idx}"
+			type="hidden">
+
+		<button>modify</button>
+	</form>
 
 </body>
 </html>
