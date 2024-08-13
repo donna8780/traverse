@@ -12,5 +12,7 @@ public interface CsboardDAO {
 
 	@Select("select * from cus_view")
 	List<CustomerVO> cstest();
+	
+	
 
 }
