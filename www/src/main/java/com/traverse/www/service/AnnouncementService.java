@@ -25,4 +25,9 @@ public class AnnouncementService {
 		return dao.insert(input);
 	}
 
+	public AnnouncementVO getBoardOne(int idx) {
+		
+		return dao.selectOne(idx);
+	}
+
 }

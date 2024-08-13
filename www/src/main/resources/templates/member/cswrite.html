@@ -77,15 +77,13 @@
 
     <!-- 글쓰기 폼 -->
     <div id="write-form" class="write-form" style="display: none;">
-        <form method="post">
+        <form th:action="@{/post}" method="post">
             <label for="title">제목:</label>
             <input type="text" id="title" name="title" placeholder="제목을 입력하세요" required>
 
             <label for="content">내용:</label>
-            <textarea id="content" name="contents" placeholder="내용을 입력하세요" required></textarea>
-             
-            <input name="a_idx" type="hidden" th:value="${session.user.accounts_idx}"> 
-            
+            <textarea id="content" name="content" placeholder="내용을 입력하세요" required></textarea>
+
             <input type="submit" value="글 작성">
         </form>
     </div>

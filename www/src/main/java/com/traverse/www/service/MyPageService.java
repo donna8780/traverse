@@ -8,12 +8,17 @@ import com.traverse.www.vo.AccountsVO;
 
 @Service
 public class MyPageService {
-	
-	@Autowired
-	MyPageDAO dao;
+   
+   @Autowired
+   MyPageDAO dao;
 
-	public int update(AccountsVO input) {
-		return dao.update(input);
+   public int update(AccountsVO input) {
+      return dao.update(input);
+   }
+
+	public int deleteAccount(AccountsVO idx) {
+		
+		return dao.delete(idx);
 	}
 
 }

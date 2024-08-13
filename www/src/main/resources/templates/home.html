@@ -38,17 +38,18 @@
 		</div>
 		<div class="sidebar">
 			<span class="area_desc">
-			  	<a href="/member/signUp">signUp</a><br>
-			  	<th:block th:if="${session.user == null}">
+			  <a href="/member/signUp">signUp</a><br>
+			  <th:block th:if="${session.user == null}">
 			  	<a href="/member/login">login</a><br>
-			  	</th:block>
-			  	<th:block th:if="${session.user != null}">
+			  </th:block>
+			  <th:block th:if="${session.user != null}">
 			  	<a href="/member/logout">logout</a><br>
 			  	<a href="/member/myPage">myPage</a><br>
-			  	</th:block>
-			  	<a href="/member/like">like</a><br>
-			  	<a href="/member/announcement">announcement</a><br>
-			  	<a href="/place/mapAPI">mapAPI</a><br>
+			  </th:block>
+			  <a href="/member/like">like</a><br>
+			  <a href="/member/announcement">announcement</a><br>
+			  <a href="/place/mapAPI">mapAPI</a><br>
+        <a href="/member/customer">customer</a>
 			</span>
 		</div>
 	</div>
@@ -73,6 +74,7 @@
   	<li><a href="/member/like">like</a></li>
   	<li><a href="/member/announcement">announcement</a></li>
   	<li><a href="/place/mapAPI">mapAPI</a></li>
+  	<li><a href="/member/customer">customer</a></li>
   </ul>
   
   <hr>
