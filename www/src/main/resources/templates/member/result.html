@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <script th:inline="javascript">
+    var row = [[${row}]];
+    var data = '[[${data}]]';
+    if (row != 0){
+      alert(data);
+      location.href = 'http://localhost:8080/member/login';
+    }
+    else {
+      alert('존재하지 않는 정보입니다');
+      history.go(-1);
+    }
+  </script>
+</body>
+</html>
