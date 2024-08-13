@@ -29,7 +29,7 @@ public class MypageController {
    @PostMapping("/update")
    public String update(AccountsVO input) {
       ms.update(input);
-      return "redirect:/";
+      return "redirect:/member/logout";
    }
    
    // 삭제

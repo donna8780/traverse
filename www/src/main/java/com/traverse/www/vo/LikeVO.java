@@ -1,8 +1,5 @@
 package com.traverse.www.vo;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /*
    like_idx  	 	int
    a_idx   			int
@@ -14,12 +11,11 @@ import lombok.Setter;
    p_idx   			int
  */
 
-@Getter
-@Setter
 public class LikeVO {
    private int like_idx, a_idx, p_idx;
    private String place_name, place_add, place_img;
    private double place_x, place_y;
+   
 	public int getLike_idx() {
 		return like_idx;
 	}
@@ -68,7 +64,4 @@ public class LikeVO {
 	public void setPlace_y(double place_y) {
 		this.place_y = place_y;
 	}
-
-
-
 }
