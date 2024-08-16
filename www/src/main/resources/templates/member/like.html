@@ -21,7 +21,6 @@
 					<div class="location-name" th:text="${row.place_name}"></div>
 					<div class="location-detail" th:text="${row.place_add}"></div>
 				</div>
-				
 				<div class="con-like">
 					<input class="like" type="checkbox" title="like" th:onclick="|toggleMarker(this,${row.place_x},${row.place_y})|">
 					<div class="checkmark">
@@ -50,9 +49,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
 
 
 	<div id="map" style="width: 900px; height: 900px;"></div>
