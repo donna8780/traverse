@@ -38,6 +38,6 @@ public class MypageController {
  		
  		ms.deleteAccount(idx);
  		
- 		return "redirect:/";
+ 		return "redirect:/member/logout";
  	}
 }

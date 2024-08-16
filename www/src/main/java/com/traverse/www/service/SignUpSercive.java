@@ -17,14 +17,15 @@ public class SignUpSercive {
 	}
 
 	public String checkUserID(String userid) {
-		if (userid == "donna8780") {
-			
-			return "중복된 아이디 입니다.";
-		}
-		
 		return dao.select(userid);
-		
 	}
+	public String checkUserNick(String nick) {
+		return dao.select_nick(nick);
+	}
+	public String checkUserPhone(String phone) {
+		return dao.select_phone(phone);
+	}
+	
 
 
 
