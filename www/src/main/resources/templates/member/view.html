@@ -16,7 +16,7 @@
     </div>
   
   <!-- 글쓴 본인만 수정 삭제 버튼 활성화 -->
-  <div th:if="${session.user != null and session.user.nick == row.nick and session.user.nick == '관리자'}">
+  <div th:if="${session.user != null and (session.user.nick == row.nick or session.user.nick == '관리자')}">
     <button>수정</button>
     <button>삭제</button>
   </div>
