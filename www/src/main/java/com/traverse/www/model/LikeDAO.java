@@ -8,10 +8,10 @@ import org.apache.ibatis.annotations.Select;
 import com.traverse.www.vo.LikeVO;
 
 
+
+
 @Mapper
 public interface LikeDAO {
-
-   @Select("select * from like_place")
-   List<LikeVO> selectAll();
-
+   @Select("select * from like_view where nick = #{usernick}")
+   List<LikeVO> selectAll(String usernick);
 }

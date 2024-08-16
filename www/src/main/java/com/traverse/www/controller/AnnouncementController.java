@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.AnnouncementService;
+import com.traverse.www.service.ReplyService;
 import com.traverse.www.vo.AccountsVO;
 import com.traverse.www.vo.AnnouncementVO;
+import com.traverse.www.vo.ReplyVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,12 +23,15 @@ public class AnnouncementController {
 	@Autowired
 	private AnnouncementService as;
 	
+	@Autowired
+	private ReplyService rs;
+	
   // 공지사항
 	@GetMapping("/announcement")//게시글 보여줌
 	public ModelAndView announcement() {
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("test", as.test());
+		mav.addObject("announce", as.announce());
 		
 		return mav;
 	}
@@ -60,6 +65,38 @@ public class AnnouncementController {
 		mav.setViewName("member/view");
 		
 		return mav;
+	}
+	
+	// 게시글 삭제
+	@GetMapping("/ann_delete/{announcement_idx}")
+	public String ann_delete(AnnouncementVO idx) {
+		
+		as.deleteAccount(idx);
+		
+		return "redirect:/member/announcement";
+	}
+	
+	// 게시글 수정
+	@GetMapping("/ann_update/{announcement_idx}")
+	public String update(@PathVariable("announcement_idx") int idx) {
+		return "member/ann_update";
+	}
+	
+	// 수정 실행
+	@PostMapping("/ann_update/{announcement_idx}")
+	public String update(AnnouncementVO input) {
+		as.update(input);
+		
+		return "redirect:/member/announcement";
+		
+	}
+	
+	// 댓글 작성
+	@PostMapping("/view/{b_idx}")
+	public String writeReply(ReplyVO input) {
+		rs.addReply(input);
+		
+		return "redirect:/board/view/" + input.getB_idx();
 	}
 
 }

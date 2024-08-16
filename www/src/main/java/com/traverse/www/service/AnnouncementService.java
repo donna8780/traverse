@@ -16,8 +16,8 @@ public class AnnouncementService {
 	@Autowired
 	private AnnouncementDAO dao;
 	
-	public List<AnnouncementVO> test() {
-		return dao.test();
+	public List<AnnouncementVO> announce() {
+		return dao.announce();
 	}
 
 	public int writeAnnouncement(AnnouncementVO input) {
@@ -28,6 +28,16 @@ public class AnnouncementService {
 	public AnnouncementVO getBoardOne(int idx) {
 		
 		return dao.selectOne(idx);
+	}
+
+	public int deleteAccount(AnnouncementVO idx) {
+		
+		return dao.delete(idx);
+	}
+
+	public int update(AnnouncementVO input) {
+		return dao.update(input);
+		
 	}
 
 }

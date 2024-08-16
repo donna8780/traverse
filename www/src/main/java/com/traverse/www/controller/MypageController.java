@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.traverse.www.service.MyPageService;
 import com.traverse.www.vo.AccountsVO;
 
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/member")
@@ -19,7 +21,15 @@ public class MypageController {
    
    // 마이페이지
    @GetMapping("/myPage")
-   public void mypage() {}
+   public String mypage(HttpSession session) {
+  	 AccountsVO user = (AccountsVO) session.getAttribute("user");
+  	 
+  	 if (user == null) {
+  		 return "redirect:/member/login";
+  	 }
+  	 
+  	 return "member/myPage";
+   }
    
    // 수정
    @GetMapping("/update")
@@ -38,6 +48,6 @@ public class MypageController {
  		
  		ms.deleteAccount(idx);
  		
- 		return "redirect:/";
+ 		return "redirect:/member/logout";
  	}
 }

@@ -1,4 +1,4 @@
-package com.traverse.www.CsboardDAO;
+package com.traverse.www.model;
 
 import java.util.List;
 
@@ -12,5 +12,7 @@ public interface CsboardDAO {
 
 	@Select("select * from cus_view")
 	List<CustomerVO> cstest();
+	
+	
 
 }
