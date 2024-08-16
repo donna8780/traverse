@@ -26,65 +26,46 @@
 			<td th:text="${row.place_add}"></td>
 			<td th:text="${row.place_x}"></td>
 			<td th:text="${row.place_y}"></td>
-			<td><input type="checkbox"
-				th:onclick="'updateMapCoordinates(' + ${row.place_x} + ', ' + ${row.place_y} + ')'">
-			</td>
-			<td>
-				<button
-					th:onclick="'updateMapCoordinates(' + ${row.place_x} + ', ' + ${row.place_y} + ')'">
-					replace</button>
-			</td>
+			<td><input type="checkbox" th:onclick="|toggleMarker(this,${row.place_x},${row.place_y})|"></td>
 		</tr>
 	</table>
 
 	<hr>
 
-	<div id="map" style="width:600px; height:400px;"></div>
+   <div id="map" style="width:900px; height:600px;"></div>
   
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7717c2c3bc1327ef51412b55ac5ef"></script>
   
-	<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-		mapOption = {
-			center : new kakao.maps.LatLng(35.181431, 128.9464563), // 지도의 중심좌표
-			level : 5
-		// 지도의 확대 레벨
-		};
+   <script>
+      var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+      mapOption = {
+         center : new kakao.maps.LatLng(35.181431, 128.9464563), // 지도의 중심좌표
+         level : 5
+      // 지도의 확대 레벨
+      };
 
-		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+      var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+  
+  
+      var markers = {}; // 마커를 저장할 객체 (key-value pair로 관리)
 
-		// 마커를 표시할 위치와 title 객체 배열입니다 
-		var positions = [ {
-			title : '소백이네',
-			latlng : new kakao.maps.LatLng(35.1192845, 128.7915767)
-		}, {
-			title : '학원',
-			latlng : new kakao.maps.LatLng(35.1670413, 129.1328838)
-		}, {
-			title : '민지네',
-			latlng : new kakao.maps.LatLng(35.166423, 129.113169)
-		} ];
+      function toggleMarker(check, x, y) {
+          var key = x + ',' + y; // x,y 좌표를 문자열로 결합하여 키로 사용
 
-		for (var i = 0; i < positions.length; i++) {
-		    // 마커 생성
-		    var marker = new kakao.maps.Marker({
-		        map: map, // 마커를 표시할 지도
-		        position: positions[i].latlng, // 마커를 표시할 위치
-		        title : positions[i].title // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-		    });
-		}
-		
-		// 지도 좌표를 업데이트하는 함수 정의
-	    function updateMapCoordinates(x, y) {
-	        var newPosition = new kakao.maps.LatLng(y, x);
-	        map.setCenter(newPosition); // 지도의 중심을 새로운 좌표로 이동합니다
-	        var marker = new kakao.maps.Marker({
-	            position: newPosition,
-	            map: map
-	        });
-	    }
-		
-	</script>
+          if (check.checked) {
+              var marker = new kakao.maps.Marker({
+                  position: new kakao.maps.LatLng(x, y),
+                  map: map
+              });
+              markers[key] = marker; // 마커를 객체에 저장
+          } else {
+              if (markers[key]) {
+                  markers[key].setMap(null); // 마커를 지도에서 제거
+                  delete markers[key]; // 객체에서 마커 삭제
+              }
+          }
+      }
+  </script>
 
 
 
