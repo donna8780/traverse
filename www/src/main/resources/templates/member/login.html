@@ -10,8 +10,8 @@
   <legend>로그인</legend>
   
   <form method="post">
-  <p><input name="userid" placeholder="ID"></p>
-  <p><input name="userpw" placeholder="PW" type="password"></p>
+  <p><input name="userid" placeholder="ID" required></p>
+  <p><input name="userpw" placeholder="PW" type="password" required></p>
   
   <a href="findID">ID 찾기</a>
   <a href="findPW">PW 찾기</a>
@@ -20,10 +20,6 @@
   <button>로그인</button>
   </form>
   
-  
-  <th:block th:if="${session.user != null}">
-    <p th:text="${session.user.nick}"></p>
-  </th:block>
   
 </fieldset>
 </body>
