@@ -1,22 +1,12 @@
 package com.traverse.www.vo;
 
-/*
-	board_idx	int
-	title	varchar(255)
-	content	text
-	create_at	timestamp
-	accounts_idx	int
-	
-	nick	varchar(30)
- */
-
-import com.google.protobuf.Timestamp;
+import java.sql.Date;
 
 public class CustomerVO {
 
 	private int board_idx, accounts_idx;
 	private String title, content,nick;
-	private Timestamp create_at;
+	private Date create_at;
 	
 	public int getBoard_idx() {
 		return board_idx;
@@ -48,10 +38,10 @@ public class CustomerVO {
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
-	public Timestamp getCreate_at() {
+	public Date getCreate_at() {
 		return create_at;
 	}
-	public void setCreate_at(Timestamp create_at) {
+	public void setCreate_at(Date create_at) {
 		this.create_at = create_at;
 	}
 }

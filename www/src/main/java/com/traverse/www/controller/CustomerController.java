@@ -3,14 +3,17 @@ package com.traverse.www.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.AnnouncementService;
 import com.traverse.www.service.CustomerService;
 import com.traverse.www.vo.AccountsVO;
+import com.traverse.www.vo.CustomerVO;
 
 import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/member")
@@ -44,4 +47,13 @@ public class CustomerController {
 		}		
 		return "member/cswrite";	
 	}
+	//Q&A 글쓰기 실행
+	@PostMapping("/cswrite")
+	public String cswrite(CustomerVO input)
+	{
+		cs.cusWrite(input);
+		return "redirect:/member/customer#qna";
+	}
+	
+	
 }
