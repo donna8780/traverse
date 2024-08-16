@@ -65,7 +65,6 @@ INDEX VERSION 1.134+C:\testttttt\.metadata\.plugins\org.eclipse.jdt.core
 1977506853.index
 101508793.index
 3012558305.index
-1597905533.index
 3110620500.index
 3440331776.index
 1150330459.index

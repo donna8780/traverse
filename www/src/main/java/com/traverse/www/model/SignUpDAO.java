@@ -12,7 +12,13 @@ public interface SignUpDAO {
 	@Insert("insert into accounts(userid, userpw, name, nick, email, phone, birth) values(#{userid}, #{userpw}, #{name}, #{nick}, #{email}, #{phone}, #{birth})")
 	int insert(AccountsVO input);
 
+	//아이디 중복 체크
 	@Select("select userid from accounts where userid = #{userid}")
 	String select(String userid);
-	
+	//닉네임 중복 체크
+	@Select("select nick from accounts where nick = #{userNick}")
+	String select_nick(String userNick);
+	//전화번호 중복 체크
+	@Select("select phone from accounts where phone = #{phone}")
+	String select_phone(String phone);
 }
