@@ -101,12 +101,14 @@ header > div ul.navi > li > a {
 .container {
 	width: 100%;
 	position: relative;
+	display: inline-block;
 }
 
 .container .contents {
 	width: 1200px;
 	margin: 0 auto;
 	min-height: 700px;
+	/*background: #b1d0e8;*/
 	/*border: 1px solid #2A3854;
 	background: #4BB958;*/
 }
@@ -121,6 +123,34 @@ header > div ul.navi > li > a {
 	border: 1px solid #2A3854;*/
 	z-index: 30;
 	transition: .35s;
+}
+
+.contents img {
+	display: block;
+}
+
+.contents a {
+	text-decoration: none;
+	position: absolute;
+	transform: translate(-50%, -50%);
+	transition: all 0.3s ease;
+	color: white;
+	/*text-shadow: 
+  	-1px -1px 0 #2A3854,  
+    1px -1px 0 #2A3854,
+    -1px  1px 0 #2A3854,
+    1px  1px 0 #2A3854;*/
+}
+
+.contents a:hover {
+	transform: translate(-50%, -50%) scale(1.6);
+	color: white;
+	font-weight: bold;
+	text-shadow: 
+  	-1px -1px 0 #2A3854,  
+    1px -1px 0 #2A3854,
+    -1px  1px 0 #2A3854,
+    1px  1px 0 #2A3854;
 }
 
 input[id="menuicon"]:checked ~ header .menubtn {
@@ -157,9 +187,127 @@ input[id="menuicon"]:checked ~ .container .sidebar {
   text-decoration: none;
 }
 
+.checkbox {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
 footer {
 	width: 1200px;
 	margin: 0 auto;
 	min-height: 60px;
 	/*background: #4BB958;*/
+}
+
+
+/* checkbox css */
+.container1 input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.container1 {
+  display: block;
+  position: absolute;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+  animation: jello-horizontal 0.9s both;
+}
+
+.checkmark1:hover {
+  animation: jello-horizontal 0.9s both;
+}
+
+.checkmark1 {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 0.8em;
+  width: 0.8em;
+  border-radius: 50%;
+  background-color: #eee;
+}
+
+.container1 input:checked ~ .checkmark1 {
+  background-color: #F89D4A;
+}
+
+.checkmark1:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container1 input:checked ~ .checkmark1:after {
+  display: block;
+}
+
+.container1 .checkmark1:after {
+  left: 0.25em;
+  top: 0.08em;
+  width: 0.2em;
+  height: 0.4em;
+  border: solid white;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
+}
+
+@keyframes jello-horizontal {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.display-text {
+  position: absolute;
+  top: -1.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1em;
+  white-space: nowrap;
+  color: white;
+	font-weight: bold;
+	text-shadow: 
+  	-1px -1px 0 #2A3854,  
+    1px -1px 0 #2A3854,
+    -1px  1px 0 #2A3854,
+    1px  1px 0 #2A3854;
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.traverse.www.vo.AccountsVO;
+import com.traverse.www.vo.LikeVO;
 import com.traverse.www.vo.MapAPIVO;
 
 @Mapper
