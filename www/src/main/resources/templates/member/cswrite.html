@@ -1,104 +1,25 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" href="/css/csboardStyle.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판 글쓰기</title>
-    <style>
-        /* 전체 레이아웃 스타일 */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        /* 글쓰기 버튼 스타일 */
-        .write-button {
-            background-color: #2A3854; /* 요청된 색깔 */
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        .write-button:hover {
-            background-color: #1f2a40; /* 약간 어두운 색상으로 변경 */
-        }
-
-        /* 글쓰기 폼 스타일 */
-        .write-form {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .write-form input[type="text"],
-        .write-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-
-        .write-form textarea {
-            height: 200px;
-            resize: vertical;
-        }
-
-        .write-form input[type="submit"] {
-            background-color: #2A3854;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .write-form input[type="submit"]:hover {
-            background-color: #1f2a40;
-        }
-    </style>
+    <title>글쓰기</title>
 </head>
 <body>
-
-    <!-- 글쓰기 버튼 -->
-    <button class="write-button" onclick="document.getElementById('write-form').style.display='block'">글쓰기</button>
-
-    <!-- 글쓰기 폼 -->
-    <div id="write-form" class="write-form" style="display: none;">
-        <form th:action="@{/post}" method="post">
+    <h1>QnA</h1>
+    <form method="post">
+        <div>
             <label for="title">제목:</label>
-            <input type="text" id="title" name="title" placeholder="제목을 입력하세요" required>
-
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div>
             <label for="content">내용:</label>
-            <textarea id="content" name="content" placeholder="내용을 입력하세요" required></textarea>
-
-            <input type="submit" value="글 작성">
-        </form>
-    </div>
-
-    <script>
-        // 간단한 스크립트로 글쓰기 폼을 표시합니다.
-        function toggleWriteForm() {
-            var form = document.getElementById('write-form');
-            if (form.style.display === 'none' || form.style.display === '') {
-                form.style.display = 'block';
-            } else {
-                form.style.display = 'none';
-            }
-        }
-    </script>
-
+            <textarea id="content" name="content" rows="10" cols="30" required></textarea>
+            <input name="accounts_idx" type="hidden" th:value="${session.user.accounts_idx}">
+        </div>
+        <div>
+            <button type="submit">저장</button>
+        </div>
+    </form>
 </body>
 </html>

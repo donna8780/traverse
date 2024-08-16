@@ -17,5 +17,9 @@ public class CustomerService {
 		
 		return dao.cstest();
 	}
+	public int cusWrite(CustomerVO input) {
+		return dao.insert(input);
+		
+	}
 
 }
