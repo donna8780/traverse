@@ -11,7 +11,7 @@ import com.traverse.www.vo.LikeVO;
 @Mapper
 public interface LikeDAO {
 
-   @Select("select * from like_place")
+   @Select("select * from like_place where a_idx = #{a_idx}")
    List<LikeVO> selectAll();
 
 }
