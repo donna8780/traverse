@@ -56,7 +56,7 @@ public class AnnouncementController {
 		return "redirect:/member/announcement";
 	}
 	
-	// 게시글 보기
+	// 게시글 보기 : 해당 게시물에 접근하기 위함
 	@GetMapping("/view/{announcement_idx}")
 	public ModelAndView view(@PathVariable("announcement_idx") int idx) {
 		ModelAndView mav = new ModelAndView();
