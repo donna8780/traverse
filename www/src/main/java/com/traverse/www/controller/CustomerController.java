@@ -3,6 +3,7 @@ package com.traverse.www.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,9 +26,7 @@ public class CustomerController {
 	@Autowired
 	private AnnouncementService as;
 
-
-	
-	//고객지원으로 이동해서 qna섹션을 누르면 이동
+	//고객지원에서 qna섹션을 누르면 이동
 	@GetMapping("/customer")
 	public ModelAndView csboard() {
 		ModelAndView mav = new ModelAndView();
@@ -52,8 +51,35 @@ public class CustomerController {
 	public String cswrite(CustomerVO input)
 	{
 		cs.cusWrite(input);
+		return "redirect:/member/customer";
+	} 
+	//Q&A 하나의 게시글 보기
+	@GetMapping("/csView/{board_idx}")
+	public ModelAndView csview(@PathVariable("board_idx")int idx) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("row", cs.getCsBoardOne(idx));
+		mav.setViewName("member/csView");
+		return mav;
+	}
+	@GetMapping("/csUpdate/{board_idx}")
+	public String update(@PathVariable("board_idx")int idx) {
+		return "member/csUpdate";
+	}
+	//Q&A게시글 수정
+	@PostMapping("/csUpdate/{board_idx}") 
+		public String update(CustomerVO input) {
+			cs.update(input);
+			return "redirect:/member/customer#qna";
+		}
+	//게시글 삭제
+	@GetMapping("/csdelete/{board_idx}")
+	public String csdelete(CustomerVO idx) {
+		cs.deleteCS(idx);
 		return "redirect:/member/customer#qna";
+	}
+		
 	}
 	
 	
-}
+
