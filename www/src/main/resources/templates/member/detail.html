@@ -43,8 +43,8 @@
 	</header>
 
 	<section class="slider">
-		<div class="slide">
-			<img src="/image/logo_w.png" alt="Slide 1">
+		<div class="slide" th:each="row : ${detail}">
+		      <img th:src="@{${row.firstimage}}" alt="Image">
 		</div>
 		<div class="slide">
 			<img src="/image/logo_w.png" alt="Slide 2">
@@ -55,14 +55,22 @@
 	</section>
 
 	<section class="description">
-		<h2>설명</h2>
-		<p>여기에 설명을 입력하세요.</p>
+		<h2>장소명</h2>
+		<table>
+		  <tr th:each="row : ${detail}">
+		    <td th:text="${row.title}"></td>
+		  </tr>
+		</table>
 	</section>
 
-	주변 환경, 장점
+
 	<section class="features">
-		<h2>주변 환경, 장점</h2>
-		<p>여기에 주변 환경이나 장점을 설명하세요.</p>
+		<h2>주소</h2>
+		<table>
+		  <tr th:each="row : ${detail}">
+		    <td th:text="${row.addr1}"></td>
+		  </tr>
+		</table>
 	</section>
 
 	별점 및 후기
@@ -75,8 +83,11 @@
 				data-value="1">★</span>
 		</div>
 		<h3>후기</h3>
+		<form method="POST">
 		<textarea placeholder="후기를 작성하세요"></textarea>
 		<button type="submit">등록</button>
+		<input name="a_idx" type="hidden" th:value="${session.user.accounts_idx}"> 
+		</form>
 	</section>
 
 	<script>
