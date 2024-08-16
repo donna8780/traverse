@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.AnnouncementService;
+import com.traverse.www.service.ReplyService;
 import com.traverse.www.vo.AccountsVO;
 import com.traverse.www.vo.AnnouncementVO;
+import com.traverse.www.vo.ReplyVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,6 +22,9 @@ public class AnnouncementController {
 	
 	@Autowired
 	private AnnouncementService as;
+	
+	@Autowired
+	private ReplyService rs;
 	
   // 공지사항
 	@GetMapping("/announcement")//게시글 보여줌
@@ -51,7 +56,7 @@ public class AnnouncementController {
 		return "redirect:/member/announcement";
 	}
 	
-	// 게시글 보기
+	// 게시글 보기 : 해당 게시물에 접근하기 위함
 	@GetMapping("/view/{announcement_idx}")
 	public ModelAndView view(@PathVariable("announcement_idx") int idx) {
 		ModelAndView mav = new ModelAndView();
@@ -84,6 +89,14 @@ public class AnnouncementController {
 		
 		return "redirect:/member/announcement";
 		
+	}
+	
+	// 댓글 작성
+	@PostMapping("/view/{b_idx}")
+	public String writeReply(ReplyVO input) {
+		rs.addReply(input);
+		
+		return "redirect:/board/view/" + input.getB_idx();
 	}
 
 }

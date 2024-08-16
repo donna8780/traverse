@@ -21,5 +21,17 @@ public class CustomerService {
 		return dao.insert(input);
 		
 	}
+	public CustomerVO getCsBoardOne(int idx) {
+		
+		return dao.selectOne(idx);
+	}
+	public int update(CustomerVO input) {
+		return dao.update(input);
+		
+	}
+	public int deleteCS(CustomerVO idx) {
+		return dao.delete(idx);
+		
+	}
 
 }
