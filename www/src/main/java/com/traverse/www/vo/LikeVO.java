@@ -10,10 +10,21 @@ package com.traverse.www.vo;
    place_img   	varchar(50)
    p_idx   			int
  */
+/*
+accounts_idx	int
+userid	varchar(30)
+userpw	varchar(30)
+nick	varchar(30)
+email	varchar(30)
+name	varchar(30)
+phone	varchar(30)
+birth	date
+profile1	varchar(30)
+*/
 
 public class LikeVO {
    private int like_idx, a_idx, p_idx;
-   private String place_name, place_add, place_img;
+   private String place_name, place_add, place_img,nick;
    private double place_x, place_y;
    
 	public int getLike_idx() {
@@ -64,4 +75,11 @@ public class LikeVO {
 	public void setPlace_y(double place_y) {
 		this.place_y = place_y;
 	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	
 }

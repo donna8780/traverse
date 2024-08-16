@@ -23,9 +23,6 @@ public class AnnouncementController {
 	@Autowired
 	private AnnouncementService as;
 	
-	@Autowired
-	private ReplyService rs;
-	
   // 공지사항
 	@GetMapping("/announcement")//게시글 보여줌
 	public ModelAndView announcement() {
@@ -91,12 +88,5 @@ public class AnnouncementController {
 		
 	}
 	
-	// 댓글 작성
-	@PostMapping("/view/{b_idx}")
-	public String writeReply(ReplyVO input) {
-		rs.addReply(input);
-		
-		return "redirect:/board/view/" + input.getB_idx();
-	}
 
 }

@@ -6,21 +6,39 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.LikeService;
+import com.traverse.www.vo.AccountsVO;
 
-
+import jakarta.servlet.http.HttpSession;
+	
 @Controller
 public class LikeController {
    
    @Autowired
    private LikeService like;
 
+   //main
    @GetMapping("/member/like")
-   public ModelAndView like() {
+   public ModelAndView like(HttpSession session) {
+  	 
       ModelAndView mav = new ModelAndView();
       
-      mav.addObject("mapAPI", like.getboards());
       
-      return mav;
+      
+      
+      if(session.getAttribute("user") == null) {
+      	mav.setViewName("redirect:/member/login");
+      	return mav;
+      }
+      else {
+      	
+      	AccountsVO user = (AccountsVO) session.getAttribute("user");
+        
+        String usernick = user.getNick();
+        mav.addObject("mapAPI", like.getboards(usernick));
+        
+      	return mav;
+      }
+      
    }
 
 
