@@ -7,6 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.MapAPIService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class MapAPIController {
 	
@@ -14,7 +16,7 @@ public class MapAPIController {
 	private MapAPIService ms;
 
 	@GetMapping("/place/mapAPI")
-	public ModelAndView mapAPI() {
+	public ModelAndView mapAPI(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("mapAPI", ms.selectAll());

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.traverse.www.model.MapAPIDAO;
+import com.traverse.www.vo.AccountsVO;
+import com.traverse.www.vo.LikeVO;
 import com.traverse.www.vo.MapAPIVO;
 
 @Service

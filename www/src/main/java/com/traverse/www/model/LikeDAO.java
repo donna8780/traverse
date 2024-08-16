@@ -14,5 +14,4 @@ import com.traverse.www.vo.LikeVO;
 public interface LikeDAO {
    @Select("select * from like_view where nick = #{usernick}")
    List<LikeVO> selectAll(String usernick);
-
 }
