@@ -82,21 +82,24 @@
 		<h2>Q&A</h2>
 		<div class="qna-item">
 			<h3>qna 게시판</h3>
-			-->
+			
 			<table>
 				<tbody>
 					<tr>
 						<th>No</th>
 						<th>제목</th>
+						<th>닉네임</th>
 						<th>내용</th>
-						<th>계정번호</th>
 						<th>작성시간</th>
 					</tr>
 					<tr th:each="row : ${test}">
 						<td th:text="${row.board_idx}"></td>
+						<td>
+						  <a th:href="@{/member/csView/{board_idx}(board_idx=${row.board_idx})}" th:text="${row.title}"></a>
+						</td>
+						<td th:text="${row.nick}"></td>
 						<td th:text="${row.title}"></td>
 						<td th:text="${row.content}"></td>
-						<td th:text="${row.accounts_idx}"></td>
 						<td th:text="${row.create_at}"></td>
 					</tr>
 				</tbody>
@@ -110,7 +113,11 @@
 	</section>
 
 	<script>
+	//세션에서 로그인 상태 가져옴
+	let userlogin = sessionStrage.getItem('userlogin') === 'true';
+	
         function showSection(sectionId) {
+          //섹션 클래스를 가진 요소중 특정 섹션만 보여줌
             const sections = document.querySelectorAll('.section');
             sections.forEach(section => {
                 if (section.id === sectionId) {
@@ -120,12 +127,20 @@
                 }
             });
         }
-            let btns = document.querySelectorAll('button');
+            let button = document.querySelector('button');
     
 		    // 글쓰기 버튼
-		    btns[0].onclick = () => {
-		      location.href = '/member/write';
+		    button.onclick = () => {
+		      alert('asdasd');
+
 		    };
+		    
+		    function loginSuccess() {
+		      userlogin = true;
+		      sessionStorage.setItem('userlogin', true);
+		      //세션 스토리지에 로그인 상태 저장
+		      
+		    }
     </script>
 </body>
 </html>

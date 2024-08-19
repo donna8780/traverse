@@ -11,7 +11,6 @@ public interface SignUpDAO {
 
 	@Insert("insert into accounts(userid, userpw, name, nick, email, phone, birth) values(#{userid}, #{userpw}, #{name}, #{nick}, #{email}, #{phone}, #{birth})")
 	int insert(AccountsVO input);
-
 	//아이디 중복 체크
 	@Select("select userid from accounts where userid = #{userid}")
 	String select(String userid);
