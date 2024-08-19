@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${row.title}">Q&A 게시글</title>
+    <link rel="stylesheet" href="/css/viewStyle.css"> <!-- 스타일을 위한 CSS 파일 경로 -->
+</head>
+<body>
+    <div class="post-container">
+        <h1 th:text="${row.title}">Q&A 제목</h1>
+        <p><strong>작성자:</strong> <span th:text="${row.nick}">작성자</span></p>
+        <hr/>
+        <div class="post-content">
+            <p th:text="${row.content}">Q&A 내용</p>
+        </div>
+    </div>
+    
+   <!-- 댓글 작성 폼 -->
+    <form method="POST">
+      <p><textarea name="contents" placeholder="댓글을 입력해 주세요"></textarea></p>
+      <p><input name="a_idx" type="hidden" th:value="${session.user.accounts_idx}"></p>
+      
+      <button>작성</button>
+    </form>
+    
+    <br>
+    
+    <fieldset th:each="rep : ${replys}">
+      <h5 th:text="${rep.nick}"> | </h5><h5 th:text="${rep.w_date}"></h5>
+      
+      <pre th:text="${rep.contents}"></pre>
+    </fieldset>
+  
+  <!-- 글쓴 본인만 수정 삭제 버튼 활성화 -->
+<div th:if="${session.user != null and (session.user.nick == row.nick or session.user.nick == '관리자')}">    <button>수정</button>
+    <button>삭제</button>
+  </div>
+  
+  <script th:inline="javascript">
+    // 타임리프를 통해 세션에 저장된 로그인된 유저 ID를 JavaScript 변수에 할당
+
+        // 수정 버튼
+        let btns = document.querySelectorAll('button');
+        btns[0].onclick = () => {
+            location.href = '/member/csUpdate/[[${row.board_idx}]]';
+        };
+        
+        // 삭제 버튼
+        btns[1].onclick = () => {
+            location.href = '/member/csdelete/[[${row.board_idx}]]';
+        };
+    	
+      //js에서 타임리프 구문 
+      location.href = '/member/csdelete/[[${row.board_idx}]]';
+    };
+  </script>
+</body>  
+</html>

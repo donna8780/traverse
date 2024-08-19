@@ -17,5 +17,21 @@ public class CustomerService {
 		
 		return dao.cstest();
 	}
+	public int cusWrite(CustomerVO input) {
+		return dao.insert(input);
+		
+	}
+	public CustomerVO getCsBoardOne(int idx) {
+		
+		return dao.selectOne(idx);
+	}
+	public int update(CustomerVO input) {
+		return dao.update(input);
+		
+	}
+	public int deleteCS(CustomerVO idx) {
+		return dao.delete(idx);
+		
+	}
 
 }

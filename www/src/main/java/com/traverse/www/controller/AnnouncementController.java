@@ -23,15 +23,12 @@ public class AnnouncementController {
 	@Autowired
 	private AnnouncementService as;
 	
-	@Autowired
-	private ReplyService rs;
-	
   // 공지사항
 	@GetMapping("/announcement")//게시글 보여줌
 	public ModelAndView announcement() {
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("announce", as.announce());
+		//mav.addObject("announce", as.announce());
 		
 		return mav;
 	}
@@ -56,7 +53,7 @@ public class AnnouncementController {
 		return "redirect:/member/announcement";
 	}
 	
-	// 게시글 보기
+	// 게시글 보기 : 해당 게시물에 접근하기 위함
 	@GetMapping("/view/{announcement_idx}")
 	public ModelAndView view(@PathVariable("announcement_idx") int idx) {
 		ModelAndView mav = new ModelAndView();
@@ -91,12 +88,5 @@ public class AnnouncementController {
 		
 	}
 	
-	// 댓글 작성
-	@PostMapping("/view/{b_idx}")
-	public String writeReply(ReplyVO input) {
-		rs.addReply(input);
-		
-		return "redirect:/board/view/" + input.getB_idx();
-	}
 
 }
