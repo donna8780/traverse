@@ -124,39 +124,37 @@
 
 	<script>
 	//세션에서 로그인 상태 가져옴
-	let userlogin = sessionStrage.getItem('userlogin') === 'true';
+	let userlogin = sessionStorage.getItem('userlogin') === 'true';
 	
-        function showSection(sectionId) {
-          //섹션 클래스를 가진 요소중 특정 섹션만 보여줌
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                if (section.id === sectionId) {
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = 'none';
-                }
-            });
-        }
-            let button = document.querySelector('button');
+  function showSection(sectionId) {
+  	//섹션 클래스를 가진 요소중 특정 섹션만 보여줌
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+    	if (section.id === sectionId) {
+      	section.style.display = 'block';
+      } else {
+          section.style.display = 'none';
+      }
+		});
+	}
+ 	let button = document.querySelector('button');
     
-		    // 글쓰기 버튼
-		    button.onclick = () => {
-		      alert('asdasd');
-
-		    };
+	// 글쓰기 버튼
+	button.onclick = () => {
+ 		alert('asdasd');
+	};
+  function loginSuccess() {
+	  userlogin = true;
+	  sessionStorage.setItem('userlogin', true);
+	  //세션 스토리지에 로그인 상태 저장
+	}
 		    
-		    document.addEventListener('DOMContentLoaded', function() {
-        if (window.location.hash === '#notice') {
-            showSection('notice');
-            document.getElementById('notice').scrollIntoView();
-        }
-    });
-		    function loginSuccess() {
-		      userlogin = true;
-		      sessionStorage.setItem('userlogin', true);
-		      //세션 스토리지에 로그인 상태 저장
-		      
-		    }
-    </script>
+	document.addEventListener('DOMContentLoaded', function() {
+  	if (window.location.hash === '#notice') {
+	    showSection('notice');
+	    document.getElementById('notice').scrollIntoView();
+    }
+  });
+  </script>
 </body>
 </html>
