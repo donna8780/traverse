@@ -13,8 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.AnnouncementService;
 import com.traverse.www.service.CustomerService;
+import com.traverse.www.service.ReplyService;
 import com.traverse.www.vo.AccountsVO;
 import com.traverse.www.vo.CustomerVO;
+import com.traverse.www.vo.ReplyVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -28,6 +30,9 @@ public class CustomerController {
 	
 	@Autowired
 	private AnnouncementService as;
+	
+	@Autowired
+	private ReplyService rs;
 
 	//고객지원에서 qna섹션을 누르면 이동
 	@GetMapping("/customer")
@@ -66,9 +71,19 @@ public class CustomerController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("row", cs.getCsBoardOne(idx));
+		mav.addObject("replys", rs.getReplys(idx));
 		mav.setViewName("member/csView");
 		return mav;
 	}
+	
+	// QnA 댓글 작성
+	@PostMapping("/csView/{c_idx}")
+	public String writeReply(ReplyVO input) {
+		rs.addReply(input);
+		
+		return "redirect:/member/csView/" + input.getC_idx();
+	}	
+	
 	@GetMapping("/csUpdate/{board_idx}")
 	public String update(@PathVariable("board_idx")int idx) {
 		return "member/csUpdate";
