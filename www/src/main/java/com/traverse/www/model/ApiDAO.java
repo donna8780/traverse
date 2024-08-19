@@ -11,8 +11,8 @@ import com.traverse.www.vo.ApiVO;
 public interface ApiDAO {
 	
 	 @Insert("insert into "
-	 		+ "gangwon(title, addr1, mapx, mapy,area_code,cat0,cat1,cat2,cat3,firstimage,firstimage2,sigungucode,tel) "
-	 		+ "values(#{title}, #{addr1}, #{mapx}, #{mapy},#{area_code},#{cat0},#{cat1},#{cat2},#{cat3},#{firstimage},#{firstimage2},#{sigungucode},#{tel})")
+	 		+ "place(title, addr1, mapx, mapy,areacode,contenttypeid,cat1,cat2,cat3,firstimage,firstimage2,sigungucode,tel) "
+	 		+ "values(#{title}, #{addr1}, #{mapx}, #{mapy},#{areacode},#{contenttypeid},#{cat1},#{cat2},#{cat3},#{firstimage},#{firstimage2},#{sigungucode},#{tel})")
    void insertSingleData(ApiVO data);
 
    default void insertData(List<ApiVO> dataList) {

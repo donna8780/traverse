@@ -1,9 +1,25 @@
 package com.traverse.www.vo;
 
+/*
+	idx	int
+	areacode	int
+	contenttypeid	int
+	cat1	varchar(90)
+	cat2	varchar(90)
+	cat3	varchar(90)
+	firstimage	text
+	firstimage2	text
+	sigungucode	int
+	tel	varchar(120)
+	title	text
+	addr1	text
+	mapx	double
+	mapy	double
+ */
 
-public class ApiVO {
-	private int idx, areacode, sigungucode, contenttypeid;
-	private String title, addr1, cat1, cat2, cat3, firstimage, firstimage2, tel;
+public class PlaceVO {
+	private int idx, areacode, contenttypeid, sigungucode;
+	private String cat1, cat2, cat3, firstimage, firstimage2, tel, title, addr1;
 	private double mapx, mapy;
 	
 	public int getIdx() {
@@ -18,29 +34,17 @@ public class ApiVO {
 	public void setAreacode(int areacode) {
 		this.areacode = areacode;
 	}
-	public int getSigungucode() {
-		return sigungucode;
-	}
-	public void setSigungucode(int sigungucode) {
-		this.sigungucode = sigungucode;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getAddr1() {
-		return addr1;
-	}
-	public void setAddr1(String addr1) {
-		this.addr1 = addr1;
-	}
 	public int getContenttypeid() {
 		return contenttypeid;
 	}
 	public void setContenttypeid(int contenttypeid) {
 		this.contenttypeid = contenttypeid;
+	}
+	public int getSigungucode() {
+		return sigungucode;
+	}
+	public void setSigungucode(int sigungucode) {
+		this.sigungucode = sigungucode;
 	}
 	public String getCat1() {
 		return cat1;
@@ -78,6 +82,18 @@ public class ApiVO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getAddr1() {
+		return addr1;
+	}
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
 	public double getMapx() {
 		return mapx;
 	}
@@ -90,6 +106,4 @@ public class ApiVO {
 	public void setMapy(double mapy) {
 		this.mapy = mapy;
 	}
-	
-	
 }
