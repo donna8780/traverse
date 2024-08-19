@@ -23,13 +23,28 @@ body {
 }
 
 .left {
-    width: 280px; /* 왼쪽 영역의 고정 너비를 설정 */
-    overflow-y: auto;
-    margin-right: 0; /* right margin 제거 */
+    width: 375px; /* 왼쪽 영역의 고정 너비를 설정 */
+    overflow-y: auto; /* 세로 스크롤을 추가 */
+    max-height: 550px; /* 최대 높이를 설정하여 스크롤이 생기도록 함 */
+    margin-right: 0; /* 오른쪽 여백 제거 */
     background-color: #ffffff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding: 10px; /* 패딩을 줄여 내부 여백 최소화 */
     border-radius: 8px;
+}
+    
+/* 이 클래스는 스크롤바를 스타일링하기 위해 추가 */
+.left::-webkit-scrollbar {
+    width: 8px;
+}
+
+.left::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* 스크롤바 색상 */
+    border-radius: 4px;
+}
+
+.left::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* 스크롤바 배경색 */
 }
 
 .map-container {
@@ -105,6 +120,7 @@ button:hover {
   position: relative;
   width: 50px;
   height: 50px;
+  top: -30px;
 }
 
 .con-like .like {
@@ -117,15 +133,18 @@ button:hover {
 }
 
 .con-like .checkmark {
-  width: 100%;
-  height: 100%;
+  width: 50px; /* 고정된 너비 */
+  height: 50px; /* 고정된 높이 */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .con-like .outline,
-.con-like .filled {
+.con-like .filled,
+.con-like .celebrate {
+  width: 30px; /* 고정된 너비 */
+  height: 30px; /* 고정된 높이 */
   fill: var(--red);
   position: absolute;
 }
@@ -136,7 +155,6 @@ button:hover {
 }
 
 .con-like .celebrate {
-  position: absolute;
   animation: kfr-celebrate 0.5s;
   animation-fill-mode: forwards;
   display: none;
@@ -148,11 +166,11 @@ button:hover {
 }
 
 .con-like .like:checked ~ .checkmark .filled {
-  display: block
+  display: block;
 }
 
 .con-like .like:checked ~ .checkmark .celebrate {
-  display: block
+  display: block;
 }
 
 @keyframes kfr-filled {
@@ -181,4 +199,6 @@ button:hover {
     opacity: 0;
     display: none;
   }
+  
+  
 }
