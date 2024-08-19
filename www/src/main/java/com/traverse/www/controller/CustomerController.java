@@ -85,8 +85,10 @@ public class CustomerController {
 		cs.deleteCS(idx);
 		return "redirect:/member/customer#qna";
 	}
-		
+
 	}
+
+	
 	
 	
 
