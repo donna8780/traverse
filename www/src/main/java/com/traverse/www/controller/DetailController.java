@@ -31,14 +31,7 @@ public class DetailController {
 		return mav;
 		
 	}
-	
-	// 상세 페이지 댓글 작성
-	@PostMapping("/detail")
-	public String writeReply(ReplyVO input) {
-		rs.addReply(input);
-		
-		return "redirect:/member/detail" + input.getRep_idx();
-	}
+
 
 
 }
