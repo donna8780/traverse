@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="htts://www.thymeleaf.org">
 <head>
@@ -10,21 +11,32 @@
 	<div class="container">
 
 		<div class="left">
-			<br>
+
+			<!-- 전체 선택 체크박스 추가 -->
+			<label> <input type="checkbox" id="selectAllLikes"
+				onclick="toggleSelectAllLikes(this)"> 전체 선택
+			</label> <br>
+			<br> <br>
+			
+			
+			
 			<div class="location-item" th:each="row : ${mapAPI}">
 				<div class="image-box">
 					<img id="place_img"
 						th:src="@{/image/{placeImg}(placeImg=${row.place_img})}" />
 				</div>
-				
+
 				<div class="text-box">
 					<div class="location-name" th:text="${row.place_name}"></div>
 					<div class="location-detail" th:text="${row.place_add}"></div>
 				</div>
-				
+
 				<div class="con-like">
-					<input class="like" type="checkbox" title="like" th:onclick="|toggleMarker(this,${row.place_x},${row.place_y})|">
+					<input class="like" type="checkbox" title="like"
+						th:onclick="|toggleMarker(this,${row.place_x},${row.place_y})|">
 					<div class="checkmark">
+					
+					<!-- 하트 아이콘 -->
 						<svg xmlns="http://www.w3.org/2000/svg" class="outline"
 							viewBox="0 0 24 24">
       <path
@@ -45,17 +57,19 @@
       <polygon class="poly" points="80,80 70,70"></polygon>
     </svg>
 					</div>
+					<!-- 삭제 버튼 추가 -->
+					<a th:href="@{/member/likeDel/{likeIdx}(likeIdx=${row.like_idx})}"><button>삭제</button></a>
 				</div>
-				
+
 			</div>
+
+
 		</div>
 	</div>
 
 
 
-
-
-	<div id="map" style="width: 900px; height: 900px;"></div>
+	<div id="map" style="width: 800px; height: 900px;"></div>
 
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7717c2c3bc1327ef51412b55ac5ef"></script>
@@ -89,6 +103,29 @@
               }
           }
       }
+     
+     //삭제 버튼 클릭 하면 선택된 항목 삭제
+    	function deleteSelectedItems() {
+          var checkedItems = document.querySelectorAll('.like:checked');
+          checkedItems.forEach(function(item) {
+              var locationItem = item.closest('.location-item');
+              if (locationItem) {
+                  locationItem.remove(); // 해당 항목을 DOM에서 제거
+              }
+          });
+      }
+      
+      
+          // 하트 전체 선택 함수
+      function toggleSelectAllLikes(selectAllCheckbox) {
+          var likeCheckboxes = document.querySelectorAll('.like');
+          likeCheckboxes.forEach(function(checkbox) {
+              checkbox.checked = selectAllCheckbox.checked;
+              checkbox.dispatchEvent(new Event('click'));  // 강제로 클릭 이벤트를 발생시켜 마커 업데이트
+          });
+      }
+      
+
       
     
   </script>
