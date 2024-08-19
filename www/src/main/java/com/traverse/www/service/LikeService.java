@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.traverse.www.model.LikeDAO;
 import com.traverse.www.vo.LikeVO;
 
-import jakarta.servlet.http.HttpSession;
 
 
 @Service
@@ -21,5 +20,17 @@ public class LikeService {
    public List<LikeVO> getboards(String usernick) {
       return dao.selectAll(usernick);
    }
+
+
+	public String delete(LikeVO idx) {
+		return dao.delete(idx);
+	}
+
+
+	public int likeDel(int likeIdx) {
+		return dao.likeDel(likeIdx);
+	}
+
+
 
 }
