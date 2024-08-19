@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.MainService;
 import com.traverse.www.vo.AccountsVO;
+import com.traverse.www.vo.SelPlaceVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -19,6 +20,7 @@ public class MainController {
 	
 	@Autowired
 	private MainService ms;
+	
 
   @GetMapping("/")
   public ModelAndView home() {
@@ -67,21 +69,17 @@ public class MainController {
   	int sigunguCode1 = 0, sigunguCode2 = 0, sigunguCode3 = 0;
     
     if (selectePlaces != null && !selectePlaces.isEmpty()) {
-        for (int i = 0; i < selectePlaces.size(); i++) {
-            int place = selectePlaces.get(i);
-            System.out.println("selectePlaces: " + place);
+    	for (int i = 0; i < selectePlaces.size(); i++) {
+    		int place = selectePlaces.get(i);
 
-            switch (i) {
-                case 0: sigunguCode1 = place; break;
-                case 1: sigunguCode2 = place; break;
-                case 2: sigunguCode3 = place; break;
-            }
+        switch (i) {
+        case 0: sigunguCode1 = place; break;
+        case 1: sigunguCode2 = place; break;
+        case 2: sigunguCode3 = place; break;
         }
-        ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3);
-    } else {    
-        System.out.println("No places selected.");
+      }
+      ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3);
     }
-  	
   	mav.setViewName("redirect:/duration");
   	
   	return mav;
@@ -122,22 +120,18 @@ public class MainController {
   	
   	int sigunguCode1 = 0, sigunguCode2 = 0, sigunguCode3 = 0;
     
-    if (selectePlaces != null && !selectePlaces.isEmpty()) {
-        for (int i = 0; i < selectePlaces.size(); i++) {
-            int place = selectePlaces.get(i);
-            System.out.println("selectePlaces: " + place);
+  	if (selectePlaces != null && !selectePlaces.isEmpty()) {
+    	for (int i = 0; i < selectePlaces.size(); i++) {
+    		int place = selectePlaces.get(i);
 
-            switch (i) {
-                case 0: sigunguCode1 = place; break;
-                case 1: sigunguCode2 = place; break;
-                case 2: sigunguCode3 = place; break;
-            }
+        switch (i) {
+        case 0: sigunguCode1 = place; break;
+        case 1: sigunguCode2 = place; break;
+        case 2: sigunguCode3 = place; break;
         }
-        ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3);
-    } else {    
-        System.out.println("No places selected.");
+      }
+      ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3);
     }
-  	
   	mav.setViewName("redirect:/duration");
   	
   	return mav;
@@ -178,22 +172,18 @@ public class MainController {
   	
   	int sigunguCode1 = 0, sigunguCode2 = 0, sigunguCode3 = 0;
     
-    if (selectePlaces != null && !selectePlaces.isEmpty()) {
-        for (int i = 0; i < selectePlaces.size(); i++) {
-            int place = selectePlaces.get(i);
-            System.out.println("selectePlaces: " + place);
+  	if (selectePlaces != null && !selectePlaces.isEmpty()) {
+    	for (int i = 0; i < selectePlaces.size(); i++) {
+    		int place = selectePlaces.get(i);
 
-            switch (i) {
-                case 0: sigunguCode1 = place; break;
-                case 1: sigunguCode2 = place; break;
-                case 2: sigunguCode3 = place; break;
-            }
+        switch (i) {
+        case 0: sigunguCode1 = place; break;
+        case 1: sigunguCode2 = place; break;
+        case 2: sigunguCode3 = place; break;
         }
-        ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3);
-    } else {    
-        System.out.println("No places selected.");
+      }
+      ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3);
     }
-  	
   	mav.setViewName("redirect:/duration");
   	
   	return mav;
@@ -234,22 +224,18 @@ public class MainController {
   	
   	int sigunguCode1 = 0, sigunguCode2 = 0, sigunguCode3 = 0;
     
-    if (selectePlaces != null && !selectePlaces.isEmpty()) {
-        for (int i = 0; i < selectePlaces.size(); i++) {
-            int place = selectePlaces.get(i);
-            System.out.println("selectePlaces: " + place);
+  	if (selectePlaces != null && !selectePlaces.isEmpty()) {
+    	for (int i = 0; i < selectePlaces.size(); i++) {
+    		int place = selectePlaces.get(i);
 
-            switch (i) {
-                case 0: sigunguCode1 = place; break;
-                case 1: sigunguCode2 = place; break;
-                case 2: sigunguCode3 = place; break;
-            }
+        switch (i) {
+        case 0: sigunguCode1 = place; break;
+        case 1: sigunguCode2 = place; break;
+        case 2: sigunguCode3 = place; break;
         }
-        ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3);
-    } else {    
-        System.out.println("No places selected.");
+      }
+      ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3);
     }
-  	
   	mav.setViewName("redirect:/duration");
   	
   	return mav;
@@ -290,22 +276,18 @@ public class MainController {
   	
   	int sigunguCode1 = 0, sigunguCode2 = 0, sigunguCode3 = 0;
     
-    if (selectePlaces != null && !selectePlaces.isEmpty()) {
-        for (int i = 0; i < selectePlaces.size(); i++) {
-            int place = selectePlaces.get(i);
-            System.out.println("selectePlaces: " + place);
+  	if (selectePlaces != null && !selectePlaces.isEmpty()) {
+    	for (int i = 0; i < selectePlaces.size(); i++) {
+    		int place = selectePlaces.get(i);
 
-            switch (i) {
-                case 0: sigunguCode1 = place; break;
-                case 1: sigunguCode2 = place; break;
-                case 2: sigunguCode3 = place; break;
-            }
+        switch (i) {
+        case 0: sigunguCode1 = place; break;
+        case 1: sigunguCode2 = place; break;
+        case 2: sigunguCode3 = place; break;
         }
-        ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3);
-    } else {    
-        System.out.println("No places selected.");
+      }
+      ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3);
     }
-  	
   	mav.setViewName("redirect:/duration");
   	
   	return mav;
@@ -331,6 +313,38 @@ public class MainController {
   	return mav;
   }
   
+  @PostMapping("/gyeongnam")
+  public ModelAndView gyeongnam(@RequestParam(name = "gyeongnam", required = false) List<Integer> selectePlaces, HttpSession session) {
+  	ModelAndView mav = new ModelAndView();
+  	
+  	AccountsVO user = (AccountsVO) session.getAttribute("user");
+  	
+  	if (user == null) {
+  		mav.setViewName("redirect:/member/login");
+  		return mav;
+  	}
+  	
+  	int a_idx = user.getAccounts_idx();
+  	
+  	int sigunguCode1 = 0, sigunguCode2 = 0, sigunguCode3 = 0;
+    
+  	if (selectePlaces != null && !selectePlaces.isEmpty()) {
+    	for (int i = 0; i < selectePlaces.size(); i++) {
+    		int place = selectePlaces.get(i);
+
+        switch (i) {
+        case 0: sigunguCode1 = place; break;
+        case 1: sigunguCode2 = place; break;
+        case 2: sigunguCode3 = place; break;
+        }
+      }
+      ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3);
+    }
+  	mav.setViewName("redirect:/duration");
+  	
+  	return mav;
+  }
+  
   @GetMapping("/jeonbuk")
   public ModelAndView jeonbuk(HttpSession session) {
   	ModelAndView mav = new ModelAndView();
@@ -351,6 +365,38 @@ public class MainController {
   	return mav;
   }
   
+  @PostMapping("/jeonbuk")
+  public ModelAndView jeonbuk(@RequestParam(name = "jeonbuk", required = false) List<Integer> selectePlaces, HttpSession session) {
+  	ModelAndView mav = new ModelAndView();
+  	
+  	AccountsVO user = (AccountsVO) session.getAttribute("user");
+  	
+  	if (user == null) {
+  		mav.setViewName("redirect:/member/login");
+  		return mav;
+  	}
+  	
+  	int a_idx = user.getAccounts_idx();
+  	
+  	int sigunguCode1 = 0, sigunguCode2 = 0, sigunguCode3 = 0;
+    
+  	if (selectePlaces != null && !selectePlaces.isEmpty()) {
+    	for (int i = 0; i < selectePlaces.size(); i++) {
+    		int place = selectePlaces.get(i);
+
+        switch (i) {
+        case 0: sigunguCode1 = place; break;
+        case 1: sigunguCode2 = place; break;
+        case 2: sigunguCode3 = place; break;
+        }
+      }
+      ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3);
+    }
+  	mav.setViewName("redirect:/duration");
+  	
+  	return mav;
+  }
+  
   @GetMapping("/jeonnam")
   public ModelAndView jeonnam(HttpSession session) {
   	ModelAndView mav = new ModelAndView();
@@ -367,6 +413,38 @@ public class MainController {
   	
   	ms.delete(a_idx);
   	ms.sel_areaCode(areaCode, a_idx);
+  	
+  	return mav;
+  }
+  
+  @PostMapping("/jeonnam")
+  public ModelAndView jeonnam(@RequestParam(name = "jeonnam", required = false) List<Integer> selectePlaces, HttpSession session) {
+  	ModelAndView mav = new ModelAndView();
+  	
+  	AccountsVO user = (AccountsVO) session.getAttribute("user");
+  	
+  	if (user == null) {
+  		mav.setViewName("redirect:/member/login");
+  		return mav;
+  	}
+  	
+  	int a_idx = user.getAccounts_idx();
+  	
+  	int sigunguCode1 = 0, sigunguCode2 = 0, sigunguCode3 = 0;
+    
+  	if (selectePlaces != null && !selectePlaces.isEmpty()) {
+    	for (int i = 0; i < selectePlaces.size(); i++) {
+    		int place = selectePlaces.get(i);
+
+        switch (i) {
+        case 0: sigunguCode1 = place; break;
+        case 1: sigunguCode2 = place; break;
+        case 2: sigunguCode3 = place; break;
+        }
+      }
+      ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3);
+    }
+  	mav.setViewName("redirect:/duration");
   	
   	return mav;
   }
@@ -406,12 +484,30 @@ public class MainController {
   	
   	ms.sel_duration(duration, a_idx);
   	
-  	mav.setViewName("/recommendResult");
+  	mav.setViewName("redirect:/recommendResult");
   	
   	return mav;
   }
   
   @GetMapping("/recommendResult")
-  public void recommendResult() {}
+  public ModelAndView recommendResult(HttpSession session) {
+  	ModelAndView mav = new ModelAndView();
+  	
+  	AccountsVO user = (AccountsVO) session.getAttribute("user");
+  	
+  	if (user == null) {
+  		mav.setViewName("/member/login");
+  		return mav;
+  	}
+  	
+  	int a_idx = user.getAccounts_idx();
+  	
+  	SelPlaceVO result = ms.getSelPlace(a_idx);
+  	
+  	mav.addObject("result", result);
+  	mav.addObject("place", ms.getPlaces(result));
+  	
+  	return mav;
+  }
   
 }

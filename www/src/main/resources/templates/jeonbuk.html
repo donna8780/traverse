@@ -34,6 +34,103 @@
 		<div class="contents">
 			<span class="area_desc">
 				<img class="mapimg" th:src="@{/image/jeonbuk.png}">
+				
+				<form id="locationForm" method="POST" onsubmit="return validateForm()">
+				
+				<label class="container1" style="top: 28%; left: 27%;">
+					<div id="displayText1" class="display-text" style="display: none;">군산</div>
+				  <input type="checkbox" id="checkbox1" name="jeonbuk" value="2">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 22%; left: 41%;">
+					<div id="displayText2" class="display-text" style="display: none;">익산</div>
+				  <input type="checkbox" id="checkbox2" name="jeonbuk" value="9">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 38%; left: 35%;">
+					<div id="displayText3" class="display-text" style="display: none;">김제</div>
+				  <input type="checkbox" id="checkbox3" name="jeonbuk" value="3">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 30%; left: 54%;">
+					<div id="displayText4" class="display-text" style="display: none;">완주</div>
+				  <input type="checkbox" id="checkbox4" name="jeonbuk" value="8">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 40%; left: 66%;">
+					<div id="displayText5" class="display-text" style="display: none;">진안</div>
+			    <input type="checkbox" id="checkbox5" name="jeonbuk" value="14">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 50%; left: 21%;">
+					<div id="displayText6" class="display-text" style="display: none;">부안</div>
+			    <input type="checkbox" id="checkbox6" name="jeonbuk" value="6">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 57%; left: 34%;">
+					<div id="displayText7" class="display-text" style="display: none;">정읍</div>
+			    <input type="checkbox" id="checkbox7" name="jeonbuk" value="13">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 37%; left: 47%;">
+					<div id="displayText8" class="display-text" style="display: none;">전주</div>
+			    <input type="checkbox" id="checkbox8" name="jeonbuk" value="12">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 58%; left: 54%;">
+					<div id="displayText9" class="display-text" style="display: none;">임실</div>
+			    <input type="checkbox" id="checkbox9" name="jeonbuk" value="10">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top:53%; left: 73%;">
+					<div id="displayText10" class="display-text" style="display: none;">장수</div>
+			    <input type="checkbox" id="checkbox10" name="jeonbuk" value="11">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 71%; left: 18%;">
+					<div id="displayText11" class="display-text" style="display: none;">고창</div>
+			    <input type="checkbox" id="checkbox11" name="jeonbuk" value="1">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 73%; left: 47%;">
+					<div id="displayText12" class="display-text" style="display: none;">순창</div>
+			    <input type="checkbox" id="checkbox12" name="jeonbuk" value="7">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 30%; left: 82%;">
+					<div id="displayText13" class="display-text" style="display: none;">무주</div>
+			    <input type="checkbox" id="checkbox13" name="jeonbuk" value="5">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 74%; left: 66%;">
+					<div id="displayText14" class="display-text" style="display: none;">남원</div>
+			    <input type="checkbox" id="checkbox14" name="jeonbuk" value="4">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<button class="container1" style="bottom: 5%; right: 0%;" type="reset" onclick="resetDisplayTexts()">
+					reset
+				</button>
+				
+				<button class="container1" style="bottom: 0%; right: 0%;">
+					submit
+				</button>
+				
+				</form>
+				
 			</span>
 		</div>
 		<div class="sidebar">
@@ -48,7 +145,8 @@
 			  </th:block>
 			  <a href="/member/like">like</a><br>
 			  <a href="/place/mapAPI">mapAPI</a><br>
-        <a href="/member/customer">customer</a>
+        <a href="/member/customer">customer</a><br>
+        <a href="/member/detail">상세페이지</a>
 			</span>
 		</div>
 	</div>
@@ -57,5 +155,44 @@
 		<hr>
 		<div>회사소개  |  이용약관  |  등등...</div>
 	</footer>
+	
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+	  	var checkboxes = document.querySelectorAll('.container1 input[type="checkbox"]');
+	
+	    checkboxes.forEach(function(checkbox, index) {
+	    	var displayText = document.getElementById('displayText' + (index + 1));
+	
+	      checkbox.addEventListener('change', function() {
+	      	if (checkbox.checked) {
+	        	displayText.style.display = 'block';
+	        }
+	      	else {
+	        	displayText.style.display = 'none';
+	        }
+	      });
+	    });
+		});
+		
+		function resetDisplayTexts() {
+			const displayTexts = document.querySelectorAll('.display-text');
+		  displayTexts.forEach(text => {
+		  	text.style.display = 'none';
+		  });
+		}
+		function validateForm() {
+			var checkboxes = document.querySelectorAll('.container1 input[type="checkbox"]:checked');
+			if (checkboxes.length === 0) {
+				alert("최소 1개 이상의 항목을 선택해주세요.");
+				return false;
+			}
+			else if (checkboxes.length > 3) {
+				alert("최대 3개 항목만 선택할 수 있습니다.");
+				return false;
+			}
+			return true;
+		}
+	</script>
+	
 </body>
 </html>
