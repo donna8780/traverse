@@ -28,7 +28,7 @@ public class AnnouncementController {
 	public ModelAndView announcement() {
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("announce", as.announce());
+		//mav.addObject("announce", as.announce());
 		
 		return mav;
 	}
