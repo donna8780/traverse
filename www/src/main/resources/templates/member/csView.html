@@ -16,12 +16,14 @@
     </div>
     
    <!-- 댓글 작성 폼 -->
+    <div th:if="${session.user != null}">
     <form method="POST">
       <p><textarea name="contents" placeholder="댓글을 입력해 주세요"></textarea></p>
       <p><input name="a_idx" type="hidden" th:value="${session.user.accounts_idx}"></p>
       
       <button>작성</button>
     </form>
+    </div>
     
     <br>
     
