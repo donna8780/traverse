@@ -256,3 +256,12 @@ button .span-mother2 span:nth-child(5) {
 button .span-mother2 span:nth-child(6) {
   transition: 0.7s;
 }
+.pagemenu{
+		list-style: none;
+		display: flex;
+		padding: 0;
+		margin: 0 600px;
+}
+.pagemenu > li{
+		margin: 0 20px;
+}

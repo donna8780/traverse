@@ -1,11 +1,14 @@
 package com.traverse.www.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.AnnouncementService;
@@ -28,10 +31,14 @@ public class CustomerController {
 
 	//고객지원에서 qna섹션을 누르면 이동
 	@GetMapping("/customer")
-	public ModelAndView csboard() {
+	public ModelAndView csboard(@RequestParam(value = "idx", required = false) Integer idx) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("test", cs.cstest());
-		mav.addObject("announce", as.announce());
+		
+		Map<String, Object> announceMap = as.announce(idx);
+
+		mav.addObject("pg", announceMap.get("pg"));
+		mav.addObject("announce", announceMap.get("list"));
+		
 		return mav;
 	}
 	//글쓰기
