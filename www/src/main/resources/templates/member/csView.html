@@ -32,22 +32,23 @@
     </fieldset>
   
   <!-- 글쓴 본인만 수정 삭제 버튼 활성화 -->
-  <div>
-    <button>수정</button>
+<div th:if="${session.user != null and (session.user.nick == row.nick or session.user.nick == '관리자')}">    <button>수정</button>
     <button>삭제</button>
   </div>
   
   <script th:inline="javascript">
-    let btns = document.querySelectorAll('button');
-    
-    // 수정 버튼
-    btns[0].onclick = () => {
-      location.href = '/member/csUpdate/[[${row.board_idx}]]';
-    };
-    
-    // 삭제 버튼
-    btns[1].onclick = () => {
+    // 타임리프를 통해 세션에 저장된 로그인된 유저 ID를 JavaScript 변수에 할당
 
+        // 수정 버튼
+        let btns = document.querySelectorAll('button');
+        btns[0].onclick = () => {
+            location.href = '/member/csUpdate/[[${row.board_idx}]]';
+        };
+        
+        // 삭제 버튼
+        btns[1].onclick = () => {
+            location.href = '/member/csdelete/[[${row.board_idx}]]';
+        };
     	
       //js에서 타임리프 구문 
       location.href = '/member/csdelete/[[${row.board_idx}]]';
