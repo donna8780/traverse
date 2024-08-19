@@ -31,7 +31,7 @@
 			</div>
 		</div>
 	</section>
-
+  
 	<section id="notice" class="section" style="display: none;">
 		<h2>공지사항</h2>
 		<p>여기는 공지사항 섹션입니다. 중요한 공지 및 업데이트 정보를 제공합니다.</p>
@@ -56,6 +56,16 @@
 			</tbody>
 		</table>
 		<br>
+		
+		<ul class="pagemenu">
+
+      <li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}">
+          <a th:href="@{customer(idx=${i})} + '#notice'">
+              <span th:text="${i}"></span>
+          </a>
+      </li>
+         
+		</ul>
 		<!-- 관리자가 아니면 글쓰기 활성화 안됨 -->
 		<div th:if="${session.user != null and session.user.nick == '관리자'}">
 			<button>
@@ -135,6 +145,12 @@
 
 		    };
 		    
+		    document.addEventListener('DOMContentLoaded', function() {
+        if (window.location.hash === '#notice') {
+            showSection('notice');
+            document.getElementById('notice').scrollIntoView();
+        }
+    });
 		    function loginSuccess() {
 		      userlogin = true;
 		      sessionStorage.setItem('userlogin', true);

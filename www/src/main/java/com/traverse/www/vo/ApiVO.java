@@ -2,7 +2,7 @@ package com.traverse.www.vo;
 
 
 public class ApiVO {
-	private int idx,area_code,sigungucode;
+	private int idx,area_Code,sigungucode;
 	private String title,addr1,cat0,cat1,cat2,cat3,firstimage,firstimage2,tel;
 	private double mapx,mapy;
 	public int getIdx() {
@@ -12,10 +12,10 @@ public class ApiVO {
 		this.idx = idx;
 	}
 	public int getArea_code() {
-		return area_code;
+		return area_Code;
 	}
-	public void setArea_code(int area_code) {
-		this.area_code = area_code;
+	public void setArea_code(int area_Code) {
+		this.area_Code = area_Code;
 	}
 	public int getSigungucode() {
 		return sigungucode;
