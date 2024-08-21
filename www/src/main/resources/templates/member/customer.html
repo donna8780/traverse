@@ -58,12 +58,22 @@
 		<br>
 		
 		<ul class="pagemenu">
-
-      <li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}">
-          <a th:href="@{customer(idx=${i})} + '#notice'">
-              <span th:text="${i}"></span>
-          </a>
-      </li>
+			<li th:if="${pg.reqPage != 1}">
+	        <a th:href="@{customer(idx=${pg.reqPage - 1})} + '#notice'">
+	            <span>이전</span>
+	        </a>
+	    </li>
+	
+	    <li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}">
+	        <a th:href="@{customer(idx=${i})} + '#notice'">
+	            <span th:text="${i}"></span>
+	        </a>
+	    </li>
+	    <li th:if="${pg.reqPage != pg.totalPage and pg.totalPage > 1}">
+	      <a th:href="@{customer(idx=${pg.reqPage + 1})} + '#notice'">
+	          <span>다음</span>
+	      </a>
+    </li>
          
 		</ul>
 		<!-- 관리자가 아니면 글쓰기 활성화 안됨 -->
@@ -137,6 +147,7 @@
       }
 		});
 	}
+
  	let button = document.querySelectorAll('button');
     
 	// 글쓰기 버튼
@@ -150,13 +161,16 @@
 	  sessionStorage.setItem('userlogin', true);
 	  //세션 스토리지에 로그인 상태 저장
 	}
-		    
-	document.addEventListener('DOMContentLoaded', function() {
-  	if (window.location.hash === '#notice') {
-	    showSection('notice');
-	    document.getElementById('notice').scrollIntoView();
-    }
-  });
-  </script>
+
+		    document.addEventListener('DOMContentLoaded', function() {
+        if (window.location.hash === '#notice') {
+            showSection('notice');
+            document.getElementById('notice').scrollIntoView();
+        }
+        });
+
+    
+    </script>
+
 </body>
 </html>

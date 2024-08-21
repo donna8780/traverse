@@ -48,6 +48,7 @@ public class CustomerController {
 		mav.addObject("pg", announceMap.get("pg"));
 		mav.addObject("announce", announceMap.get("list"));
 		
+		
 		return mav;
 	}
 	//글쓰기
