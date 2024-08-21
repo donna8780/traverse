@@ -137,12 +137,14 @@
       }
 		});
 	}
- 	let button = document.querySelector('button');
+ 	let button = document.querySelectorAll('button');
     
 	// 글쓰기 버튼
-	button.onclick = () => {
- 		alert('asdasd');
+	
+	button[0].onclick = () => {
+	  location.href = '/member/write';
 	};
+
   function loginSuccess() {
 	  userlogin = true;
 	  sessionStorage.setItem('userlogin', true);

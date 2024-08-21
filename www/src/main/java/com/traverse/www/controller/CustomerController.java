@@ -3,6 +3,8 @@ package com.traverse.www.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +44,7 @@ public class CustomerController {
 		mav.addObject("test", cs.cstest());
 		Map<String, Object> announceMap = as.announce(idx);
 
+		mav.addObject("test", cs.cstest());
 		mav.addObject("pg", announceMap.get("pg"));
 		mav.addObject("announce", announceMap.get("list"));
 		
@@ -85,11 +88,30 @@ public class CustomerController {
 		return "redirect:/member/csView/" + input.getC_idx();
 	}	
 	
+	// QnA 댓글 삭제
+	@GetMapping("/csView/delete")
+	public String repdelete(@RequestParam(value = "rep_idx", required = false) Integer rep_idx, 
+	                        @RequestParam(value = "c_idx", required = false) Integer c_idx) {
+	    System.out.println(rep_idx);
+	    rs.deleteRep(rep_idx);
+	    
+	    // 댓글이 속한 Q&A 게시글로 리다이렉트
+	    return "redirect:/member/csView/" + c_idx;
+	}
+	
+	@PostMapping("/repUpdate")
+	public String repUpdate(ReplyVO input) {
+	    rs.updateReply(input);
+	    System.out.println(input.getC_idx());
+	     return "redirect:/member/csView/" + input.getC_idx();
+	}
+
+	// QnA 게시글 수정
 	@GetMapping("/csUpdate/{board_idx}")
 	public String update(@PathVariable("board_idx")int idx) {
 		return "member/csUpdate";
 	}
-	//Q&A게시글 수정
+	//Q&A게시글 수정 실행
 	@PostMapping("/csUpdate/{board_idx}") 
 		public String update(CustomerVO input) {
 			cs.update(input);
@@ -105,6 +127,6 @@ public class CustomerController {
 	}
 
 	
-	
+
 	
 

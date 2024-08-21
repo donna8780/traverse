@@ -40,7 +40,7 @@ public class AnnouncementController {
 	public String write(AnnouncementVO input) {
 		as.writeAnnouncement(input);
 		
-		return "redirect:/member/announcement";
+		return "redirect:/member/customer";
 	}
 	
 	// 게시글 보기 : 해당 게시물에 접근하기 위함
