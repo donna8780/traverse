@@ -34,6 +34,127 @@
 		<div class="contents">
 			<span class="area_desc">
 				<img class="mapimg" th:src="@{/image/gyeongnam.png}">
+				
+				<form id="locationForm" method="POST" onsubmit="return validateForm()">
+				
+				<label class="container1" style="top: 18%; left: 26%;">
+					<div id="displayText1" class="display-text" style="display: none;">거창</div>
+				  <input type="checkbox" id="checkbox1" name="gyeongnam" value="2">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 31%; left: 15%;">
+					<div id="displayText2" class="display-text" style="display: none;">함양</div>
+				  <input type="checkbox" id="checkbox2" name="gyeongnam" value="20">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 31%; left: 37%;">
+					<div id="displayText3" class="display-text" style="display: none;">합천</div>
+				  <input type="checkbox" id="checkbox3" name="gyeongnam" value="21">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 33%; left: 56%;">
+					<div id="displayText4" class="display-text" style="display: none;">창녕</div>
+				  <input type="checkbox" id="checkbox4" name="gyeongnam" value="15">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 36%; left: 72%;">
+					<div id="displayText5" class="display-text" style="display: none;">밀양</div>
+			    <input type="checkbox" id="checkbox5" name="gyeongnam" value="7">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 44%; left: 24%;">
+					<div id="displayText6" class="display-text" style="display: none;">산청</div>
+			    <input type="checkbox" id="checkbox6" name="gyeongnam" value="9">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 55%; left: 37%;">
+					<div id="displayText7" class="display-text" style="display: none;">진주</div>
+			    <input type="checkbox" id="checkbox7" name="gyeongnam" value="13">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 41%; left: 45%;">
+					<div id="displayText8" class="display-text" style="display: none;">의령</div>
+			    <input type="checkbox" id="checkbox8" name="gyeongnam" value="12">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 49%; left: 53%;">
+					<div id="displayText9" class="display-text" style="display: none;">함안</div>
+			    <input type="checkbox" id="checkbox9" name="gyeongnam" value="19">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top:49%; left: 75%;">
+					<div id="displayText10" class="display-text" style="display: none;">김해</div>
+			    <input type="checkbox" id="checkbox10" name="gyeongnam" value="4">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 60%; left: 19%;">
+					<div id="displayText11" class="display-text" style="display: none;">하동</div>
+			    <input type="checkbox" id="checkbox11" name="gyeongnam" value="18">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 67%; left: 35%;">
+					<div id="displayText12" class="display-text" style="display: none;">사천</div>
+			    <input type="checkbox" id="checkbox12" name="gyeongnam" value="8">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 40%; left: 85%;">
+					<div id="displayText13" class="display-text" style="display: none;">양산</div>
+			    <input type="checkbox" id="checkbox13" name="gyeongnam" value="10">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 52%; left: 61%;">
+					<div id="displayText14" class="display-text" style="display: none;">창원</div>
+			    <input type="checkbox" id="checkbox14" name="gyeongnam" value="16">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 80%; left: 64%;">
+					<div id="displayText15" class="display-text" style="display: none;">거제</div>
+			    <input type="checkbox" id="checkbox15" name="gyeongnam" value="1">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 83%; left: 26%;">
+					<div id="displayText16" class="display-text" style="display: none;">남해</div>
+				  <input type="checkbox" id="checkbox16" name="gyeongnam" value="5">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 79%; left: 52%;">
+					<div id="displayText17" class="display-text" style="display: none;">통영</div>
+				  <input type="checkbox" id="checkbox17" name="gyeongnam" value="17">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 68%; left: 46%;">
+					<div id="displayText18" class="display-text" style="display: none;">고성</div>
+				  <input type="checkbox" id="checkbox18" name="gyeongnam" value="3">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<button class="container1" style="bottom: 5%; right: 0%;" type="reset" onclick="resetDisplayTexts()">
+					reset
+				</button>
+				
+				<button class="container1" style="bottom: 0%; right: 0%;">
+					submit
+				</button>
+				
+				</form>
+				
 			</span>
 		</div>
 		<div class="sidebar">
@@ -48,7 +169,8 @@
 			  </th:block>
 			  <a href="/member/like">like</a><br>
 			  <a href="/place/mapAPI">mapAPI</a><br>
-        <a href="/member/customer">customer</a>
+        <a href="/member/customer">customer</a><br>
+        <a href="/member/detail">상세페이지</a>
 			</span>
 		</div>
 	</div>
@@ -57,5 +179,44 @@
 		<hr>
 		<div>회사소개  |  이용약관  |  등등...</div>
 	</footer>
+	
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+	  	var checkboxes = document.querySelectorAll('.container1 input[type="checkbox"]');
+	
+	    checkboxes.forEach(function(checkbox, index) {
+	    	var displayText = document.getElementById('displayText' + (index + 1));
+	
+	      checkbox.addEventListener('change', function() {
+	      	if (checkbox.checked) {
+	        	displayText.style.display = 'block';
+	        }
+	      	else {
+	        	displayText.style.display = 'none';
+	        }
+	      });
+	    });
+		});
+		
+		function resetDisplayTexts() {
+			const displayTexts = document.querySelectorAll('.display-text');
+		  displayTexts.forEach(text => {
+		  	text.style.display = 'none';
+		  });
+		}
+		function validateForm() {
+			var checkboxes = document.querySelectorAll('.container1 input[type="checkbox"]:checked');
+			if (checkboxes.length === 0) {
+				alert("최소 1개 이상의 항목을 선택해주세요.");
+				return false;
+			}
+			else if (checkboxes.length > 3) {
+				alert("최대 3개 항목만 선택할 수 있습니다.");
+				return false;
+			}
+			return true;
+		}
+	</script>
+	
 </body>
 </html>

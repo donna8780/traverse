@@ -23,15 +23,7 @@ public class AnnouncementController {
 	@Autowired
 	private AnnouncementService as;
 	
-  // 공지사항
-	@GetMapping("/announcement")//게시글 보여줌
-	public ModelAndView announcement() {
-		ModelAndView mav = new ModelAndView();
-
-		//mav.addObject("announce", as.announce());
-		
-		return mav;
-	}
+  
 	
 	@GetMapping("/write")//글쓰기
 	public String write(HttpSession session) {

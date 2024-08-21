@@ -34,7 +34,26 @@
 		<div class="contents">
 			<span class="area_desc">
 				추천 결과 보여주는 페이지
+				<ul>
+					<li th:text="'계정 번호 : ' + ${result.a_idx}"></li>
+					<li th:text="'지역 코드 : ' + ${result.areaCode} + ' : ' + ${result.sigunguCode1} + ', ' + ${result.sigunguCode2} + ', ' + ${result.sigunguCode3}"></li>
+					<li th:text="'여행 기간 : ' + ${result.duration / 5}"></li>
+				</ul>
+				
+				<div class="table-container">
+					<table>
+						<tr>
+							<th>title</th>
+							<th>address</th>
+						</tr>
+						<tr th:each="row : ${place}">
+							<td th:text="${row.title}"></td>
+							<td th:text="${row.addr1}"></td>
+						</tr>
+					</table>
+				</div>
 			</span>
+			
 		</div>
 		<div class="sidebar">
 			<span class="area_desc">
@@ -48,7 +67,8 @@
 			  </th:block>
 			  <a href="/member/like">like</a><br>
 			  <a href="/place/mapAPI">mapAPI</a><br>
-        <a href="/member/customer">customer</a>
+        <a href="/member/customer">customer</a><br>
+        <a href="/member/detail">상세페이지</a>
 			</span>
 		</div>
 	</div>

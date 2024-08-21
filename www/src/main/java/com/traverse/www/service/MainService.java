@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.traverse.www.model.AccountsDAO;
 import com.traverse.www.vo.AccountsVO;
+import com.traverse.www.vo.PlaceVO;
 import com.traverse.www.vo.SelPlaceVO;
 
 @Service
@@ -44,6 +45,17 @@ public class MainService {
 		vo.setSigunguCode2(sigunguCode2);
 		vo.setSigunguCode3(sigunguCode3);
 		return dao.sel_sigunguCode(vo);
+	}
+
+	public SelPlaceVO getSelPlace(int a_idx) {
+		return dao.getSelPlace(a_idx);
+	}
+
+	public List<PlaceVO> getPlaces(SelPlaceVO result) {
+		int d = result.getDuration();
+		result.setDuration(d * 5);
+		
+		return dao.getPlaces(result);
 	}
 
 }
