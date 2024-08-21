@@ -1,7 +1,21 @@
 @charset "UTF-8";
 
 
-body {
+.sticky-header{
+	position:sticky;
+	top:0;
+	z-index:1000;
+	padding:10px;
+	background-color: white;
+	
+}
+.scrollable-content {
+        max-height: 80vh; /* 전체 높이의 80%만큼 제한 */
+        padding-right: 10px; /* 스크롤바를 고려한 패딩 */
+    }
+
+
+html,body {
     font-family: Arial, sans-serif;
     margin: 0 auto;
     background-color: #f9f9f9;
@@ -9,8 +23,15 @@ body {
     display: flex;
     height: 100vh;
     width:1200px;
+	overflow: hidden;
+	overflow-y: auto; /* 수직 스크롤만 허용 */
+	justify-content: center;
+    align-items: flex-start;
+     padding: 0;
 
 }
+
+
 
 .container {
 		position:relative; /* 하트 올릴 부모 코드(relative) */
@@ -20,20 +41,24 @@ body {
     align-items: flex-start; /* 요소들을 위쪽으로 정렬 */
     gap: 0; /* 요소들 사이의 간격을 완전히 없앰 */
     margin-top: 60px; /* 여기서 20px의 상단 여백을 추가 */
+    max-height:90vh;
+    max-width:400px;
+    overflow-y:auto;
 }
 
 .left {
     width: 375px; /* 왼쪽 영역의 고정 너비를 설정 */
     overflow-y: auto; /* 세로 스크롤을 추가 */
-    max-height: 550px; /* 최대 높이를 설정하여 스크롤이 생기도록 함 */
+    max-height: 870px; /* 최대 높이를 설정하여 스크롤이 생기도록 함 */
     margin-right: 0; /* 오른쪽 여백 제거 */
     background-color: #ffffff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    padding: 10px; /* 패딩을 줄여 내부 여백 최소화 */
+    /*padding: 10px; /* 패딩을 줄여 내부 여백 최소화 */
     border-radius: 8px;
+    height: 100%;
 }
     
-/* 이 클래스는 스크롤바를 스타일링하기 위해 추가 */
+/* 스크롤바 스타일링 */
 .left::-webkit-scrollbar {
     width: 8px;
 }
@@ -52,16 +77,16 @@ body {
     border: 2px solid #ddd;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin-left: 0; /* 왼쪽 margin 제거 */
+    margin-left: 10px; /* 왼쪽 margin 제거 */
     width: calc(100% - 200px); /* 지도 영역이 남은 모든 공간을 차지하도록 설정 */
-  
+ 	height: 100%;
 
 }
 
 .location-item {
     display: flex;
     align-items: center;
-    margin-bottom: 10px; /* 항목 사이의 간격 조정 */
+    margin-bottom: 15px; /* 항목 사이의 간격 조정 */
 }
 
 .image-box {
@@ -199,6 +224,8 @@ button:hover {
     opacity: 0;
     display: none;
   }
+  
+  
   
   
 }
