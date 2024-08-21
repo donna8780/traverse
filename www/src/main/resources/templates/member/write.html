@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="/css/csboardStyle.css">
+    <meta charset="UTF-8">
+    <title>글쓰기</title>
+</head>
+<body>
+    <h1>QnA</h1>
+    <form method="post">
+        <div>
+            <label for="title">제목:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div>
+            <label for="content">내용:</label>
+            <textarea id="content" name="contents" rows="10" cols="30" required></textarea>
+            <input name="a_idx" type="hidden" th:value="${session.user.accounts_idx}">
+        </div>
+        <div>
+            <button type="submit">저장</button>
+        </div>
+    </form>
+</body>
+</html>

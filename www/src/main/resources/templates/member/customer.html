@@ -147,27 +147,29 @@
       }
 		});
 	}
- 	let button = document.querySelector('button');
 
-		    // 글쓰기 버튼
-		    button.onclick = () => {
-		      alert('asdasd');
+ 	let button = document.querySelectorAll('button');
+    
+	// 글쓰기 버튼
+	
+	button[0].onclick = () => {
+	  location.href = '/member/write';
+	};
 
-		    };
+  function loginSuccess() {
+	  userlogin = true;
+	  sessionStorage.setItem('userlogin', true);
+	  //세션 스토리지에 로그인 상태 저장
+	}
+
 		    document.addEventListener('DOMContentLoaded', function() {
         if (window.location.hash === '#notice') {
             showSection('notice');
             document.getElementById('notice').scrollIntoView();
         }
         });
-		    
+
     
-		    function loginSuccess() {
-		      userlogin = true;
-		      sessionStorage.setItem('userlogin', true);
-		      //세션 스토리지에 로그인 상태 저장
-		      
-		    }
     </script>
 
 </body>
