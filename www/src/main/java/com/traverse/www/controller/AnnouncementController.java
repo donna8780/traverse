@@ -23,8 +23,6 @@ public class AnnouncementController {
 	@Autowired
 	private AnnouncementService as;
 	
-  
-	
 	@GetMapping("/write")//글쓰기
 	public String write(HttpSession session) {
 		

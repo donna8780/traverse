@@ -39,6 +39,7 @@ public class CustomerController {
 	public ModelAndView csboard(@RequestParam(value = "idx", required = false) Integer idx) {
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("test", cs.cstest());
 		Map<String, Object> announceMap = as.announce(idx);
 		mav.addObject("test", cs.cstest());
 		mav.addObject("pg", announceMap.get("pg"));

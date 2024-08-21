@@ -136,19 +136,19 @@
 	//세션에서 로그인 상태 가져옴
 	let userlogin = sessionStorage.getItem('userlogin') === 'true';
 	
-        function showSection(sectionId) {
-          //섹션 클래스를 가진 요소중 특정 섹션만 보여줌
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                if (section.id === sectionId) {
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = 'none';
-                }
-            });
-        }
-            let button = document.querySelector('button');
-    
+  function showSection(sectionId) {
+  	//섹션 클래스를 가진 요소중 특정 섹션만 보여줌
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+    	if (section.id === sectionId) {
+      	section.style.display = 'block';
+      } else {
+          section.style.display = 'none';
+      }
+		});
+	}
+ 	let button = document.querySelector('button');
+
 		    // 글쓰기 버튼
 		    button.onclick = () => {
 		      alert('asdasd');
@@ -169,5 +169,6 @@
 		      
 		    }
     </script>
+
 </body>
 </html>
