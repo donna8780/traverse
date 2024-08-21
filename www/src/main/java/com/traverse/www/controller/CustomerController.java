@@ -1,16 +1,25 @@
 package com.traverse.www.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.AnnouncementService;
 import com.traverse.www.service.CustomerService;
+import com.traverse.www.service.ReplyService;
 import com.traverse.www.vo.AccountsVO;
+import com.traverse.www.vo.CustomerVO;
+import com.traverse.www.vo.ReplyVO;
 
 import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/member")
@@ -21,15 +30,21 @@ public class CustomerController {
 	
 	@Autowired
 	private AnnouncementService as;
-
-
 	
-	//고객지원으로 이동해서 qna섹션을 누르면 이동
+	@Autowired
+	private ReplyService rs;
+
+	//고객지원에서 qna섹션을 누르면 이동
 	@GetMapping("/customer")
-	public ModelAndView csboard() {
+	public ModelAndView csboard(@RequestParam(value = "idx", required = false) Integer idx) {
 		ModelAndView mav = new ModelAndView();
+		
 		mav.addObject("test", cs.cstest());
-		mav.addObject("announce", as.announce());
+		Map<String, Object> announceMap = as.announce(idx);
+
+		mav.addObject("pg", announceMap.get("pg"));
+		mav.addObject("announce", announceMap.get("list"));
+		
 		return mav;
 	}
 	//글쓰기
@@ -44,4 +59,52 @@ public class CustomerController {
 		}		
 		return "member/cswrite";	
 	}
-}
+	//Q&A 글쓰기 실행
+	@PostMapping("/cswrite")
+	public String cswrite(CustomerVO input)
+	{
+		cs.cusWrite(input);
+		return "redirect:/member/customer";
+	} 
+	//Q&A 하나의 게시글 보기
+	@GetMapping("/csView/{board_idx}")
+	public ModelAndView csview(@PathVariable("board_idx")int idx) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("row", cs.getCsBoardOne(idx));
+		mav.addObject("replys", rs.getReplys(idx));
+		mav.setViewName("member/csView");
+		return mav;
+	}
+	
+	// QnA 댓글 작성
+	@PostMapping("/csView/{c_idx}")
+	public String writeReply(ReplyVO input) {
+		rs.addReply(input);
+		
+		return "redirect:/member/csView/" + input.getC_idx();
+	}	
+	
+	@GetMapping("/csUpdate/{board_idx}")
+	public String update(@PathVariable("board_idx")int idx) {
+		return "member/csUpdate";
+	}
+	//Q&A게시글 수정
+	@PostMapping("/csUpdate/{board_idx}") 
+		public String update(CustomerVO input) {
+			cs.update(input);
+			return "redirect:/member/customer#qna";
+		}
+	//게시글 삭제
+	@GetMapping("/csdelete/{board_idx}")
+	public String csdelete(CustomerVO idx) {
+		cs.deleteCS(idx);
+		return "redirect:/member/customer#qna";
+	}
+
+	}
+
+	
+	
+	
+

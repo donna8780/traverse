@@ -1,10 +1,13 @@
 package com.traverse.www.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.traverse.www.component.Paging;
 import com.traverse.www.model.AnnouncementDAO;
 import com.traverse.www.vo.AnnouncementVO;
 
@@ -16,8 +19,17 @@ public class AnnouncementService {
 	@Autowired
 	private AnnouncementDAO dao;
 	
-	public List<AnnouncementVO> announce() {
-		return dao.announce();
+	public Map<String, Object> announce(Integer idx) {
+		
+		if(idx == null) {idx = 1;}
+		Paging pg = new Paging(idx,dao.totalBoard());
+		List<AnnouncementVO> list = dao.announce(pg);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pg", pg);
+		map.put("list", list);
+	
+		return map;
 	}
 
 	public int writeAnnouncement(AnnouncementVO input) {
@@ -39,5 +51,7 @@ public class AnnouncementService {
 		return dao.update(input);
 		
 	}
+
+
 
 }

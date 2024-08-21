@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <!-- 왼쪽 사이드바 (날씨 정보) -->
+    <div class="sidebar">
+        <h1>Weather in [[${city}]]</h1>
+
+        <div class="weather-info">
+            <!-- 온도 변환: K -> ℃ (소수점 한 자리) -->
+            <p>온도: [[${#numbers.formatDecimal(weather.main.temp - 273.15, 0, 1)}]] ℃</p>
+            
+            <!-- 체감 온도 변환: K -> ℃ (소수점 한 자리) -->
+            <p>체감 온도: [[${#numbers.formatDecimal(weather.main.feels_like - 273.15, 0, 1)}]] ℃</p>
+            
+            <!-- 날씨 설명 -->
+            <p>날씨: [[${weather.weather[0].description}]]</p>
+            
+            <!-- 풍속 변환: m/s -> km/h (소수점 한 자리) -->
+            <p>바람: [[${#numbers.formatDecimal(weather.wind.speed * 3.6, 0, 1)}]] km/h</p>
+            
+            <!-- 습도 그대로 출력 -->
+            <p>습도: [[${weather.main.humidity}]]%</p>
+        </div>
+    </div>
+</body>
+</html>
