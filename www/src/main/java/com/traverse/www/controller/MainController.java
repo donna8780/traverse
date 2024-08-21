@@ -1,6 +1,7 @@
 package com.traverse.www.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.MainService;
+import com.traverse.www.service.WeatherService;
 import com.traverse.www.vo.AccountsVO;
 import com.traverse.www.vo.SelPlaceVO;
 
@@ -21,10 +23,17 @@ public class MainController {
 	@Autowired
 	private MainService ms;
 	
+	@Autowired
+	private WeatherService ws;
 
   @GetMapping("/")
-  public ModelAndView home() {
+  public ModelAndView home(@RequestParam(name = "city", defaultValue = "Seoul") String city) {
     ModelAndView mav = new ModelAndView();
+    
+    Map<String, Object> weather = ws.getWeather(city);
+		
+		mav.addObject("weather", weather);
+		mav.addObject("city", city);
 
     mav.setViewName("home");
     
