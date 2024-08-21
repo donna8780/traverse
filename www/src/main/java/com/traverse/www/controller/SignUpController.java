@@ -1,7 +1,9 @@
 package com.traverse.www.controller;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,7 @@ public class SignUpController {
 	
 	//회원가입 입력
 	@PostMapping("/signUp")
-	public String signUp(AccountsVO input) {
+	public String signUp(AccountsVO input) throws NoSuchAlgorithmException {
 		
 		ss.addAccount(input);
 		return "redirect:/";

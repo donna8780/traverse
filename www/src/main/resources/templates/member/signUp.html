@@ -20,24 +20,27 @@
 
 			<div class="flex">
 				<label class="input-label"> <input id="userid" name="userid"
-					required placeholder="" type="text" class="input" onblur="checkUserid()"> <span>아이디</span>
+					required placeholder="" type="text" class="input"
+					onblur="checkUserid()"> <span>아이디</span>
 				</label>
 			</div>
 
 			<div class="flex">
-				<label class="input-label"> <input id="nick" name="nick" 
-				required placeholder="" type="text" class="input" onblur="checkUserNick()"> <span>닉네임</span>
+				<label class="input-label"> <input id="nick" name="nick"
+					required placeholder="" type="text" class="input"
+					onblur="checkUserNick()"> <span>닉네임</span>
 				</label>
 			</div>
 
 			<label> <input name="userpw" required placeholder=""
 				type="password" class="input"> <span>비밀번호</span>
-			</label> 
-			
+			</label>
+
 			<div class="flex">
-			 <label class="input-label"> <input id="phone" name="phone" required placeholder=""
-				type="text" class="input" onblur="checkUserPhone()"> <span>전화번호</span>
-			</label> 
+				<label class="input-label"> <input id="phone" name="phone"
+					required placeholder="" type="text" class="input"
+					onblur="checkUserPhone()"> <span>전화번호</span>
+				</label>
 			</div>
 			<label> <input name="birth" required placeholder=""
 				type="date" class="input"> <span>생년월일</span>
@@ -50,18 +53,19 @@
 
 		<script>//서버 통신 코드
 		
-	   let alertUseridShown = false; //아이디 알림창 떴는지 추적변수
-	   
+	 
 			function checkUserid() {
+				let alertUseridShown = false; //아이디 알림창 떴는지 추적변수
 			  //'#userid'라는 HTML 입력 요소를 찾아서 그 값을 userid에 저장
 			  //사용자가 입력한 아이디를 가져옴
-				let userid = document.querySelector("#userid").value;
+				let userid = document.querySelector("#userid").value.trim();
 				
 			  /*fetch API를 사용하여 아래 서버에 GET요청을 보낸다.(요청을 보낼 URL)
 			  여기서 userid는 사용자가 입력한 값이 추가된 쿼리 파라미터로, 서버에 전달
 			  '{method:"get"}은 get요청을 사용한다는 것을 지정한다'
 			  즉, 서버의 '/member/checkUserid'경로로 'userid'값을 쿼리로 전달하여
 			  사용자가 입력한 아이디가 데이터베이스에 존재하는지 확인하도록 한다.*/
+			  if(userid !== ""){
 			  fetch("http://localhost:8080/member/checkUserid?userid=" + userid, {method:"get"})
 			  /*페치가 서버로부터 응답을 받으면 이 응답은 첫 번째 'then'에서 처리
 			  response는 서버의 응답 객체를 의미
@@ -73,42 +77,53 @@
 			  */
  			  .then(data => {
  			  	//알림창이 뜬 적 없고, 서버에서 받은 데이터에 name이 있으면,
- 			     if(!alertUseridShown && data.name){ 
+ 			     if(!alertUseridShown && typeof data.name ==='string' && data.name.length > 0)
  			    	  alert(data.name);
  			    	 alertUseridShown = true; //알림창이 떴다고 상태 바꿔줌
- 			      }
-			  });
-			}
+ 			      })
+			  }
+	   }
 			
-		  let alertNickShown = false;
+		  
 	   
 			function checkUserNick(){
-
-				let userNick = document.querySelector("#nick").value;
-				console.log(userNick);
+				let alertNickShown = false;
+				let userNick = document.querySelector("#nick").value.trim();
+				
+				//닉네임을 입력하지 않았다면 fetch 요청을 보냄
+				if(userNick !== ""){
 				fetch("http://localhost:8080/member/checkUserNick?userNick=" + userNick, {method:"get"})
 				.then(response => response.json())
 				.then(data => {
-				  if(!alertNickShown && data.nick){
-	        alert(data.nick);
-	        alertNickShown = true;
-	        }
-				});
 
-	    } 
+				  if(!alertNickShown && typeof data.nick === 'string' && data.nick.length > 0)
+				  	alert(data.nick);
+				  	alertNickShown = true;
+				  })
+	     } 
+		}
 			
-			let alertPhoneShown = false; 
+			
+			
+			
 			
 			 function checkUserPhone(){
-			  let phone = document.querySelector('#phone').value;
+				let alertPhoneShown = false; 
+			  let phone = document.querySelector('#phone').value.trim();//공백을 제거한 전화번호 값
+			  
+			  //전화번호가 비어있지 않으면 fetch 요청
+			  if(phone !== ""){
 			  fetch("http://localhost:8080/member/checkUserPhone?phone=" + phone, {method:"get"})
 			  .then(response => response.json())
           .then(data => {
-            if(!alertPhoneShown && data.phone)
-            alert(data.phone);
-            alertPhoneShown = true;
+            
+            	if(!alertPhoneShown && typeof data.phone === 'string' && data.phone.length > 0){
+                alert(data.phone);
+                alertPhoneShown = true;
+              }   
           })
-			} 
+			}  
+	}
 		</script>
 
 	</div>
