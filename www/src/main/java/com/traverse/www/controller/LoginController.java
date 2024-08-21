@@ -29,7 +29,7 @@ public class LoginController {
 		
 		session.setAttribute("user", ls.getAccounts(input));	
 		return "redirect:/";
-		
+
 	}
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
@@ -75,7 +75,7 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("newPW", ls.newPW(input));
-		mav.setViewName("member/login");
+		mav.setViewName("redirect:/member/login");
 		
 		return mav;
 	}

@@ -145,15 +145,25 @@
       }
 		});
 	}
- 	let button = document.querySelector('button');
+
+ 	let button = document.querySelectorAll('button');
     
-	
+
   function loginSuccess() {
 	  userlogin = true;
 	  sessionStorage.setItem('userlogin', true);
 	  //세션 스토리지에 로그인 상태 저장
 	}
 
-  </script>
+		    document.addEventListener('DOMContentLoaded', function() {
+        if (window.location.hash === '#notice') {
+            showSection('notice');
+            document.getElementById('notice').scrollIntoView();
+        }
+        });
+
+    
+    </script>
+
 </body>
 </html>
