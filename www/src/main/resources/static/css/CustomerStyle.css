@@ -256,12 +256,23 @@ button .span-mother2 span:nth-child(5) {
 button .span-mother2 span:nth-child(6) {
   transition: 0.7s;
 }
-.pagemenu{
-		list-style: none;
-		display: flex;
-		padding: 0;
-		margin: 0 600px;
+.pagemenu {
+    display: flex; /* Flexbox를 사용하여 가로로 배치 */
+    list-style: none; /* 기본 불릿 포인트 제거 */
+    padding: 0;
+    margin: 0 600px; /*이 부분 수정*/
 }
-.pagemenu > li{
-		margin: 0 20px;
+
+.pagemenu li {
+    display: inline; /* 각 항목을 가로로 배치 */
+    margin-right: 25px; /* 항목 간 간격 추가 */
+}
+
+.pagemenu li a {
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    color: #000; /* 링크 색상 설정 */
+}
+
+.pagemenu li a:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
 }
