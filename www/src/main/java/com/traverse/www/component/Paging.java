@@ -1,7 +1,7 @@
 package com.traverse.www.component;
 
 public class Paging {
-	private int offset, reqPage,perBoard=3;
+	private int offset, reqPage,perBoard=5;
 	private int totalBoard, totalPage;
 	private int index=0;
 	private int perPage = 10;
@@ -22,7 +22,9 @@ public class Paging {
 		end = (index + 1) * perPage;
 		
 		end = (end < totalPage) ? end : totalPage;
-		
+		if(end == 0) {
+			end = 1;
+		}
 		prev = (index != 0);
 		next = (end != totalPage);
 	}

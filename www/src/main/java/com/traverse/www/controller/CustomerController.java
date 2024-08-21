@@ -41,9 +41,10 @@ public class CustomerController {
 		
 		mav.addObject("test", cs.cstest());
 		Map<String, Object> announceMap = as.announce(idx);
-
+		mav.addObject("test", cs.cstest());
 		mav.addObject("pg", announceMap.get("pg"));
 		mav.addObject("announce", announceMap.get("list"));
+		
 		
 		return mav;
 	}
