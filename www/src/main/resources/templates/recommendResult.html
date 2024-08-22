@@ -35,21 +35,37 @@
 					<li
 						th:text="'지역 코드 : ' + ${result.areaCode} + ' : ' + ${result.sigunguCode1} + ', ' + ${result.sigunguCode2} + ', ' + ${result.sigunguCode3}"></li>
 					<li th:text="'여행 기간 : ' + ${result.duration / 5}"></li>
+					<li th:text="${seldate}"></li>
 				</ul>
 
 				<div class="table-container">
 					<table>
 						<tr>
+							<th></th>
 							<th>title</th>
 							<th>address</th>
 						</tr>
 						<tr th:each="row : ${place}">
+						  <td>
+                 <a th:href="@{/place/planadd(
+								    p_idx=${row.idx},
+								    a_idx=${result.a_idx},
+								    areaCode=${result.areaCode},
+								    sigunguCode1=${result.sigunguCode1},
+								    sigunguCode2=${result.sigunguCode2},
+								    sigunguCode3=${result.sigunguCode3},
+								    sel_idx=${result.sel_idx},
+								    duration=${result.duration})}">
+								    추가
+								</a>
+              </td>
 							<td class="normal">
 								<!-- 제목을 클릭하면 해당 상세 페이지로 이동 --> <a
 								th:href="@{/member/detail/{idx}(idx=${row.idx})}"
 								th:text="${row.title}"></a>
 							</td>
 							<td th:text="${row.addr1}"></td>
+							<td th:text="${row.idx}"></td>
 						</tr>
 					</table>
 				</div>
