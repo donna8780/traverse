@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+.contents h1 {
+	position: absolute;
+	left: 25%;
+}
+
+.search {
+  display: inline-block;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.search input[type="text"] {
+  width: 400px;
+  padding: 15px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  font-size: 1.3em;
+}
+
+.search button[type="submit"] {
+  background-color: #2A3854;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 15px 30px;
+  border-radius: 30px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  right: 0px;
+  transition: .5s ease;
+  font-size: 1.3em;
+}
+
+.search button[type="submit"]:hover {
+  transform: scale(1.1);
+  color: rgb(255, 255, 255);
+  background-color: #F89D4A;
+}
+
+.trending {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.trending span {
+  margin-right: 30px; /* 각 span 요소의 오른쪽에 15px의 간격 추가 */
+}
+
+.trending span:last-child {
+  margin-right: 0; /* 마지막 span의 오른쪽에는 간격을 추가하지 않음 */
+}
