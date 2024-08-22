@@ -345,4 +345,16 @@ footer {
     1px  1px 0 #2A3854;
 }
 
+.date-picker-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px; /* 달력 간의 간격 */
+}
+
+.date-picker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
