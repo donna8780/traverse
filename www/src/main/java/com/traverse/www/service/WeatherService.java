@@ -19,7 +19,7 @@ public class WeatherService {
 
 	public Map<String, Object> getWeather(String city) {
 		String apiKey = "3f8f9e261af9ec5e9fb7b4634a4ec8d8";
-		String url = String.format("http://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city, apiKey);
+		String url = String.format("http://api.openweathermap.org/data/2.5/weather?q=%s&lang=kr&appid=%s", city, apiKey);
 		
 		return rt.exchange(
         url,

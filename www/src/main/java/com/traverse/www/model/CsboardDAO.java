@@ -8,13 +8,14 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.traverse.www.component.Paging;
 import com.traverse.www.vo.CustomerVO;
 
 @Mapper
 public interface CsboardDAO {
 
-	@Select("select * from cus_view")
-	List<CustomerVO> cstest();
+	@Select("select * from cus_view LIMIT #{perBoard} OFFSET #{offset}")
+	List<CustomerVO> cstest(Paging pg);
 
 	@Insert("insert into customer_board(accounts_idx, title, content) values(#{accounts_idx}, #{title}, #{content})")
 	int insert(CustomerVO input);
@@ -31,6 +32,9 @@ public interface CsboardDAO {
 
 	@Delete("delete from customer_board where board_idx = ${board_idx}")
 	int delete(CustomerVO idx);
+
+	@Select("select count(*) from customer_board")
+	int totalQna();
 	
 	
 

@@ -26,4 +26,15 @@ public class ReplyService {
 		return dao.selectAll(idx);
 	}
 
+
+	public int deleteRep(Integer idx) {
+		return dao.delete(idx);
+	}
+
+	public int updateReply(ReplyVO input) {
+    return dao.update(input);
+}
+
+
+
 }
