@@ -1,7 +1,5 @@
 package com.traverse.www.model;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -10,8 +8,7 @@ import com.traverse.www.vo.DetailVO;
 @Mapper
 public interface DetailDAO {
 
-	@Select("select * from gangwon where idx = 5")
-	List<DetailVO> show();
-
-	
+    // 특정 idx로 상세 정보 가져오기
+    @Select("select * from tourist_destination where idx = #{idx}")
+    DetailVO findById(int idx);
 }
