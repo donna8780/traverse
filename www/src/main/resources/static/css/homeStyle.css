@@ -161,19 +161,29 @@ header > div ul.navi > li > a {
 }
 
 .sidebar-left {
-    width: 10%; /* 너비를 화면 너비의 20%로 설정 */
-    height: 40vh; /* 높이를 화면 높이의 50%로 설정 */
+    width: 12%;
+    height: 30vh;
     position: absolute; /* 절대 위치로 변경 */
-    top: 50%; /* 화면의 세로 중간에 배치 */
-    left: 15px;
+    top: 40%; /* 화면의 세로 중간에 배치 */
+    left: 25px;
     transform: translateY(-50%); /* 수직 정렬을 위해 transform 사용 */
     background-color: #f4f4f4;
     border-right: 1px solid #ccc;
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
     z-index: 1000;
     min-width: 100px; /* 최소 너비를 설정하여 너무 작아지는 것을 방지 */
     max-width: 300px; /* 최대 너비를 설정하여 너무 커지는 것을 방지 */
+    font-size: 15px;
+}
+
+.sidebar-left .weather-info {
+    font-size: 13px; /* 날씨 정보의 글자 크기 조정 */
+}
+
+.sidebar-left select,
+.sidebar-left h1 {
+    font-size: 15px; /* 사이드바 안의 선택 박스와 제목 글자 크기 조정 */
 }
 
 input[id="menuicon"]:checked ~ header .menubtn {
@@ -334,5 +344,14 @@ footer {
     -1px  1px 0 #2A3854,
     1px  1px 0 #2A3854;
 }
-
-
+.normal {
+   font-family: 'Arial', sans-serif; /* 원하는 폰트 설정 */
+   font-size: 18px; /* 글씨 크기 설정 */
+   font-weight: bold; /* 글씨 굵기 설정 */
+   color: #ff6600; /* 글씨 색상 설정 */
+   text-align: left; /* 텍스트 정렬 (예: left, center, right) */
+   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* 텍스트 그림자 설정 */
+   padding: 10px; /* 내부 여백 설정 */
+   background-color: #f4f4f4; /* 배경색 설정 */
+   border-radius: 5px; /* 모서리 둥글게 설정 */
+}

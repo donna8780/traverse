@@ -35,22 +35,28 @@ public class CustomerController {
 	
 	@Autowired
 	private ReplyService rs;
+	
+	
 
-	//고객지원에서 qna섹션을 누르면 이동
+	/*공지사항으로 이동하는 코드*/
 	@GetMapping("/customer")
+	/*@RequestParam은 URL에 포함된 파라미터 값을 서버에서 받아올 때 사용*/
 	public ModelAndView csboard(@RequestParam(value = "idx", required = false) Integer idx) {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("test", cs.cstest());
 		Map<String, Object> announceMap = as.announce(idx);
 
-		mav.addObject("test", cs.cstest());
 		mav.addObject("pg", announceMap.get("pg"));
 		mav.addObject("announce", announceMap.get("list"));
 		
+		Map<String, Object> qnaMap = cs.cstest(idx);
+		mav.addObject("qnapg", qnaMap.get("pg"));
+		mav.addObject("qna", qnaMap.get("list"));
+
 		
 		return mav;
 	}
+	
 	//글쓰기
 	@GetMapping("/cswrite")
 	public String cswrite(HttpSession session) {

@@ -32,7 +32,45 @@
 	
 	<div class="sidebar sidebar-left">
     <span class="area_desc">
-      여기에 날씨 띄우기
+          <!-- 왼쪽 사이드바 (날씨 정보) -->
+    <div class="sidebar">
+        <h1>[[${city}]]</h1>
+        
+
+<select id="weather-select" name="city" onchange="this.form.submit()">
+    <option value="">지역 선택</option>
+    <option value="Seoul">Seoul</option>
+    <option value="Busan">Busan</option>
+    <option value="Jeju">Jeju</option>
+    <option value="Ulsan">Ulsan</option>
+    <option value="Gwangju">Gwangju</option>
+    <option value="Gangneung">Gangneung</option>
+</select>
+
+        <div class="weather-info">
+            <!-- 온도 변환: K -> ℃ (소수점 한 자리) -->
+            <div>온도: [[${#numbers.formatDecimal(weather.main.temp - 273.15, 0, 1)}]] ℃</div>
+            
+            <!-- 체감 온도 변환: K -> ℃ (소수점 한 자리) -->
+            <div>체감 온도: [[${#numbers.formatDecimal(weather.main.feels_like - 273.15, 0, 1)}]] ℃</div>
+            
+            <!-- 날씨 설명 -->
+            <div>날씨: [[${weather.weather[0].description}]]</div>
+            
+            <!-- 풍속 변환: m/s -> km/h (소수점 한 자리) -->
+            <div>바람: [[${#numbers.formatDecimal(weather.wind.speed * 3.6, 0, 1)}]] km/h</div>
+            
+            <!-- 습도 그대로 출력 -->
+            <div>습도: [[${weather.main.humidity}]]%</div>
+        </div>
+    </div>
+    
+    <script>
+    document.getElementById('weather-select').addEventListener('change', function() {
+        var selectedCity = this.value;
+        window.location.href = '/?city=' + encodeURIComponent(selectedCity);
+    });
+</script>
     </span>
   </div>
 	
@@ -73,6 +111,8 @@
 			  <a href="/place/mapAPI">mapAPI</a><br>
         <a href="/member/customer">customer</a><br>
         <a href="/member/detail">상세페이지</a>
+        <a href="/member/accommodation">숙박</a>
+        <a href="/member/location">길찾기</a>
 			</span>
 		</div>
 	</div>

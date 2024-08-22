@@ -9,29 +9,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.DetailService;
-import com.traverse.www.service.ReplyService;
-import com.traverse.www.vo.ReplyVO;
+import com.traverse.www.service.ReviewService;
 
 @Controller
 @RequestMapping("/member")
 public class DetailController {
-	
-	@Autowired
-	private DetailService ds;
-	
-	@Autowired ReplyService rs;
-	
-	//상세페이지
-	@GetMapping("/detail")
-	public ModelAndView detail() {
-		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("detail", ds.showdetail());
+    
+    @Autowired
+    private DetailService ds;
+    
+    @Autowired
+    private ReviewService rs;
 
-		return mav;
-		
-	}
-
-
-
+    // 특정 관광지의 상세페이지
+    @GetMapping("/detail/{idx}")
+    public ModelAndView detail(@PathVariable("idx") int idx) {
+        ModelAndView mav = new ModelAndView();
+        
+        mav.addObject("detail", ds.getDetailById(idx));
+        mav.addObject("reviews", rs.getReviewsByPlaceId(idx)); // 리뷰 데이터 추가
+        mav.setViewName("member/detail");  // detail.html 뷰로 연결
+        
+        return mav;
+    }
+    
 }
