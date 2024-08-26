@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>길찾기</title>
+    <link href="/css/map.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/mainStyle.css">
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7717c2c3bc1327ef51412b55ac5ef&libraries=services"></script>
+    <style>
+        #map {
+            width: 70%;
+            height: 500px;
+            display: inline-block;
+        }
+        #placesList {
+            width: 28%;
+            height: 500px;
+            display: inline-block;
+            vertical-align: top;
+            overflow-y: scroll;
+            padding-left: 10px;
+            border-left: 1px solid #ddd;
+        }
+        #placesList ul {
+            list-style: none;
+            padding: 0;
+        }
+        #placesList ul li {
+            margin-bottom: 10px;
+            cursor: pointer;
+            color: blue;
+        }
+        #placesList ul li:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>길찾기</h1>
+    <div>
+        <label for="origin">출발지: </label>
+        <input type="text" id="origin" placeholder="출발지 주소">
+        <button onclick="searchPlace('origin')">검색</button>
+        <br>
+        <label for="destination">도착지: </label>
+        <input type="text" id="destination" placeholder="도착지 주소">
+        <button onclick="searchPlace('destination')">검색</button>
+        <br>
+        <button onclick="showTransitLink()">교통 정보 보기</button>
+    </div>
+    <div id="map"></div>
+
+    <div id="placesList">
+        <h2>유명한 장소</h2>
+        <ul id="famousPlacesList">
+            <!-- 유명한 장소 목록이 여기에 추가됩니다 -->
+        </ul>
+    </div>
+
+    <script>
+        var previousMarker = null; // 이전에 클릭한 마커를 저장할 변수
+        var polyline = null; // 폴리라인을 저장할 변수
+
+        var map = new kakao.maps.Map(document.getElementById('map'), {
+            center: new kakao.maps.LatLng(35.1796, 129.0756), // 초기 지도 중심좌표
+            level: 10
+        });
+
+        var geocoder = new kakao.maps.services.Geocoder();
+        var markers = {
+            origin: null,
+            destination: null,
+            famousPlaces: []
+        };
+
+        function getFamousPlaces(area) {
+            // 지역에 따른 유명 장소를 반환하는 함수 (실제 데이터에 따라 수정 필요)
+            if (area.includes("부산")) {
+                return [
+                    {name: "해운대 해수욕장", lat: 35.1587, lng: 129.1603},
+                    {name: "광안리 해수욕장", lat: 35.1530, lng: 129.1185},
+                    {name: "자갈치 시장", lat: 35.0969, lng: 129.0374},
+                    {name: "감천문화마을", lat: 35.0971, lng: 129.0109},
+                    {name: "태종대", lat: 35.0512, lng: 129.0856}
+                ];
+            } else if (area.includes("서울")) {
+                return [
+                    {name: "남산서울타워", lat: 37.5512, lng: 126.9882},
+                    {name: "경복궁", lat: 37.5796, lng: 126.9770},
+                    {name: "명동", lat: 37.5636, lng: 126.9827},
+                    {name: "동대문디자인플라자", lat: 37.5665, lng: 127.0097},
+                    {name: "북촌한옥마을", lat: 37.5823, lng: 126.9830}
+                ];
+            } else if (area.includes("제주")) {
+                return [
+                    {name: "성산일출봉", lat: 33.4588, lng: 126.9407},
+                    {name: "한라산", lat: 33.3625, lng: 126.5331},
+                    {name: "협재해수욕장", lat: 33.3944, lng: 126.2396},
+                    {name: "섭지코지", lat: 33.4314, lng: 126.9256},
+                    {name: "우도", lat: 33.4996, lng: 126.9543}
+                ];
+            } else if (area.includes("대구")) {
+                return [
+                    {name: "대구타워", lat: 35.8580, lng: 128.5789},
+                    {name: "동성로", lat: 35.8687, lng: 128.5964},
+                    {name: "수성못", lat: 35.8493, lng: 128.6217},
+                    {name: "이월드", lat: 35.8533, lng: 128.5648},
+                    {name: "팔공산", lat: 35.9745, lng: 128.6851}
+                ];
+            } else if (area.includes("광주")) {
+                return [
+                    {name: "무등산", lat: 35.1600, lng: 126.9224},
+                    {name: "국립아시아문화전당", lat: 35.1466, lng: 126.9183},
+                    {name: "광주패밀리랜드", lat: 35.1713, lng: 126.9122},
+                    {name: "송정역시장", lat: 35.1371, lng: 126.7925},
+                    {name: "충장로", lat: 35.1495, lng: 126.9175}
+                ];
+            } else if (area.includes("인천")) {
+                return [
+                    {name: "월미도", lat: 37.4742, lng: 126.6019},
+                    {name: "차이나타운", lat: 37.4740, lng: 126.6216},
+                    {name: "송도센트럴파크", lat: 37.3925, lng: 126.6377},
+                    {name: "을왕리해수욕장", lat: 37.4597, lng: 126.3779},
+                    {name: "인천대교", lat: 37.4602, lng: 126.5455}
+                ];
+            }
+            // 다른 지역에 대한 유명 장소도 추가할 수 있습니다.
+            return [];
+        }
+
+        function showFamousPlaces(area) {
+            clearMarkers();
+            var places = getFamousPlaces(area);
+            var placesList = document.getElementById('famousPlacesList');
+            placesList.innerHTML = ''; // 기존 목록 초기화
+
+            places.forEach(function(place, index) {
+                // 기본 마커 이미지
+                var markerImage = new kakao.maps.MarkerImage(
+                    'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png',
+                    new kakao.maps.Size(24, 35)
+                );
+
+                // 빨간색 마커 이미지
+                var redMarkerImage = new kakao.maps.MarkerImage(
+                    'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
+                    new kakao.maps.Size(24, 35)
+                );
+
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: new kakao.maps.LatLng(place.lat, place.lng),
+                    title: place.name,
+                    image: markerImage // 기본 마커 이미지 설정
+                });
+                markers.famousPlaces.push(marker);
+
+                var listItem = document.createElement('li');
+                listItem.textContent = place.name;
+                listItem.setAttribute('data-index', index);
+                listItem.onclick = function() {
+                    moveToPlace(index);
+                    changeMarkerColor(marker, redMarkerImage);
+
+                    // 이전에 클릭한 마커가 있는지 확인
+                    if (previousMarker) {
+                        // 현재 마커와 이전 마커를 연결하는 폴리라인 그리기
+                        drawPolyline(previousMarker.getPosition(), marker.getPosition());
+                    }
+
+                    // 현재 마커를 이전 마커로 저장
+                    previousMarker = marker;
+                };
+                placesList.appendChild(listItem);
+            });
+
+            map.setLevel(12, { // 지도 레벨을 좀 더 확대해서 유명 장소들을 잘 볼 수 있게 합니다.
+                animate: true
+            });
+        }
+
+        function moveToPlace(index) {
+            var place = markers.famousPlaces[index].getPosition();
+            map.panTo(place);
+        }
+
+        function changeMarkerColor(marker, redMarkerImage) {
+            // 모든 마커를 기본 이미지로 변경
+            markers.famousPlaces.forEach(function(m) {
+                m.setImage(new kakao.maps.MarkerImage(
+                    'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png',
+                    new kakao.maps.Size(24, 35)
+                ));
+            });
+
+            // 선택된 마커의 이미지 변경
+            marker.setImage(redMarkerImage);
+        }
+
+        function drawPolyline(position1, position2) {
+          console.log("Position 1:", position1);
+          console.log("Position 2:", position2);
+
+          // 기존 폴리라인이 있다면 제거
+          if (polyline) {
+              polyline.setMap(null);
+          }
+
+          // 두 지점을 잇는 새로운 폴리라인 생성
+          polyline = new kakao.maps.Polyline({
+              map: map,
+              path: [position1, position2],
+              strokeWeight: 5, // 선의 두께
+              strokeColor: '#FF0000', // 선의 색깔
+              strokeOpacity: 0.8, // 선의 불투명도
+              strokeStyle: 'solid' // 선의 스타일
+          });
+
+          polyline.setMap(map); // 폴리라인을 지도에 추가
+      }
+
+        function clearMarkers() {
+            markers.famousPlaces.forEach(function(marker) {
+                marker.setMap(null);
+            });
+            markers.famousPlaces = [];
+            previousMarker = null;
+
+            // 기존 폴리라인이 있다면 제거
+            if (polyline) {
+                polyline.setMap(null);
+                polyline = null;
+            }
+        }
+
+        function searchPlace(type) {
+            var place = document.getElementById(type).value;
+
+            if (!place) {
+                alert(type === 'origin' ? '출발지' : '도착지' + '를 입력해주세요.');
+                return;
+            }
+
+            geocoder.addressSearch(place, function(result, status) {
+                if (status === kakao.maps.services.Status.OK) {
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                    if (markers[type]) {
+                        markers[type].setMap(null);
+                    }
+
+                    markers[type] = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+
+                    map.setCenter(coords);
+
+                    // 사용자가 출발지나 도착지를 검색했을 때, 해당 지역의 유명 장소를 표시합니다.
+                    showFamousPlaces(place);
+
+                    // 출발지와 도착지가 모두 설정되었을 때 폴리라인 그리기
+                    if (markers.origin && markers.destination) {
+                        drawPolyline(markers.origin.getPosition(), markers.destination.getPosition());
+                    }
+                } else {
+                    alert('검색 결과가 없습니다.');
+                }
+            });
+        }
+
+        function showTransitLink() {
+            if (markers.origin && markers.destination) {
+                var originCoords = markers.origin.getPosition();
+                var destinationCoords = markers.destination.getPosition();
+                var originPlace = document.getElementById('origin').value;
+                var destinationPlace = document.getElementById('destination').value;
+
+                var url = `https://map.kakao.com/?sName=${encodeURIComponent(originPlace)}&eName=${encodeURIComponent(destinationPlace)}&sX=${originCoords.getLng()}&sY=${originCoords.getLat()}&eX=${destinationCoords.getLng()}&eY=${destinationCoords.getLat()}`;
+                window.open(url, '_blank');
+            } else {
+                alert('출발지와 도착지를 모두 설정해주세요.');
+            }
+        }
+    </script>
+</body>
+</html>

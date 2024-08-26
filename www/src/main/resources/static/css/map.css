@@ -1,0 +1,102 @@
+/* 기본적인 바디 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* 전체 내용을 감싸는 컨테이너 */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 스타일링 */
+h1 {
+    font-size: 2.5em;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* 폼 스타일 */
+form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+form input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+form input[type="button"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+form input[type="button"]:hover {
+    background-color: #45a049;
+}
+
+/* 지도 컨테이너 스타일링 */
+.map-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.map-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* 유명한 장소 목록 스타일 */
+.famous-places {
+    margin-top: 20px;
+}
+
+.famous-places ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.famous-places li {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.famous-places li a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+.famous-places li a:hover {
+    text-decoration: underline;
+}
+
+/* 푸터 스타일 */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 8px;
+}

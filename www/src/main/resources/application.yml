@@ -25,4 +25,7 @@ server:
     session:
       tracking-modes: cookie
       
-        
+kakao:
+  api:
+    key: a1a7717c2c3bc1327ef51412b55ac5ef 
+    
