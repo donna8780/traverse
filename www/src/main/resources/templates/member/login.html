@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="/css/LoginStyle.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>traverse</title>
+  
+  <link href="/css/mainStyle.css" rel="stylesheet">
+  <link href="/css/LoginStyle.css" rel="stylesheet">
 </head>
 <body>
-  <fieldset>
+
+  <th:block th:replace="/fragment::header"></th:block>
+      
+ <fieldset>
   <legend>로그인</legend>
   
   <form method="post">
-  <p><input name="userid" placeholder="ID" required></p>
+  <p><input name="userid" placeholder="ID" required type="text"></p>
   <p><input name="userpw" placeholder="PW" type="password" required></p>
   
   <a href="findID">ID 찾기</a>
@@ -20,7 +26,14 @@
   <button>로그인</button>
   </form>
   
-  
 </fieldset>
+<th:block th:replace="/fragment::footer"></th:block>
+  
 </body>
 </html>
+
+
+
+
+
+

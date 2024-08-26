@@ -479,7 +479,7 @@ public class MainController {
   }
 
   @PostMapping("/duration")
-  public ModelAndView duration(@RequestParam(name = "duration") int duration, HttpSession session) {
+  public ModelAndView duration(@RequestParam(name = "duration") int duration, @RequestParam(name = "seldate") String seldate, HttpSession session) {
   	ModelAndView mav = new ModelAndView();
   	
   	AccountsVO user = (AccountsVO) session.getAttribute("user");
@@ -491,15 +491,16 @@ public class MainController {
   	
   	int a_idx = user.getAccounts_idx();
   	
-  	ms.sel_duration(duration, a_idx);
   	
-  	mav.setViewName("redirect:/recommendResult");
+  	ms.sel_duration(duration, a_idx);
+
+  	mav.setViewName("redirect:/recommendResult?seldate=" + seldate);
   	
   	return mav;
   }
   
   @GetMapping("/recommendResult")
-  public ModelAndView recommendResult(HttpSession session) {
+  public ModelAndView recommendResult(@RequestParam(name = "seldate", required = false) String seldate,HttpSession session) {
   	ModelAndView mav = new ModelAndView();
   	
   	AccountsVO user = (AccountsVO) session.getAttribute("user");
@@ -514,9 +515,11 @@ public class MainController {
   	SelPlaceVO result = ms.getSelPlace(a_idx);
   	
   	mav.addObject("result", result);
+  	mav.addObject("seldate", seldate);
   	mav.addObject("place", ms.getPlaces(result));
   	
   	return mav;
   }
+
   
 }

@@ -92,12 +92,11 @@ button {
 button:hover {
     background-color: #45a049;
 }
-/* From Uiverse.io by catraco */ 
 .heart-container {
-  --heart-color: rgb(255, 50, 50);
+  --heart-color: rgb(255, 91, 137);
   position: relative;
-  width: 25px;
-  height: 25px;
+  width: 50px;
+  height: 50px;
   transition: .3s;
 }
 
