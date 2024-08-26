@@ -78,6 +78,5 @@ public class LikeController {
            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while liking place.");
        }
    }
-   
 
 }

@@ -1,4 +1,5 @@
 package com.traverse.www.vo;
+
 /*'like_idx', 'int', 'NO', '', '0', ''
 'a_idx', 'int', 'YES', '', NULL, ''
 'firstimage', 'text', 'YES', '', NULL, ''
@@ -61,7 +62,4 @@ public class LikeVO {
 	public void setMapy(double mapy) {
 		this.mapy = mapy;
 	}
-	
-	
-	
 }
