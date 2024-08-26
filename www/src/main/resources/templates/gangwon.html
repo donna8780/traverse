@@ -34,121 +34,236 @@
 	<div class="container">
 		<div class="contents">
 			<span class="area_desc">
-				<img class="mapimg" th:src="@{/image/gangwon.png}">
+				<!-- <img class="regionimg" th:src="@{/image/강원1.png}"> -->
 				
+				<div class="title">【강원】</div>
+				
+				<div class="slider-container">
+				  <img th:src="@{/image/강원 대표이미지.jpg}" class="slide">
+				  <img th:src="@{/image/강원 대표이미지2.jpg}" class="slide">
+				  <img th:src="@{/image/강원 대표이미지3.jpg}" class="slide">
+				  <img th:src="@{/image/강원 대표이미지4.jpg}" class="slide">
+				</div>
+				
+				<br>
+				
+<!-- 폼 시작 -->
+<form id="checkboxForm" method="post" onsubmit="return validateForm()">
+  <!-- 첫 번째 버튼과 체크박스 -->
+  <input name="gangwon" value="1" type="checkbox" id="checkbox1" style="display:none;">
+  <button type="button" id="button1" class="checkbox-button">강릉</button>
+
+  <!-- 두 번째 버튼과 체크박스 -->
+  <input name="gangwon" value="2" type="checkbox" id="checkbox2" style="display:none;">
+  <button type="button" id="button2" class="checkbox-button">고성</button>
+
+  <!-- 세 번째 버튼과 체크박스 -->
+  <input name="gangwon" value="3" type="checkbox" id="checkbox3" style="display:none;">
+  <button type="button" id="button3" class="checkbox-button">동해</button>
+
+  <!-- 네 번째 버튼과 체크박스 -->
+  <input name="gangwon" value="4" type="checkbox" id="checkbox4" style="display:none;">
+  <button type="button" id="button4" class="checkbox-button">삼척</button>
+
+  <!-- 다섯 번째 버튼과 체크박스 -->
+  <input name="gangwon" value="5" type="checkbox" id="checkbox5" style="display:none;">
+  <button type="button" id="button5" class="checkbox-button">속초</button>
+ 
+  <input name="gangwon" value="6" type="checkbox" id="checkbox6" style="display:none;">
+  <button type="button" id="button6" class="checkbox-button">양구</button>
+
+  <input name="gangwon" value="7" type="checkbox" id="checkbox7" style="display:none;">
+  <button type="button" id="button7" class="checkbox-button">양양</button>
+
+  <input name="gangwon" value="8" type="checkbox" id="checkbox8" style="display:none;">
+  <button type="button" id="button8" class="checkbox-button">영월</button>
+
+  <input name="gangwon" value="9" type="checkbox" id="checkbox9" style="display:none;">
+  <button type="button" id="button9" class="checkbox-button">원주</button>
+
+  <input name="gangwon" value="10" type="checkbox" id="checkbox10" style="display:none;">
+  <button type="button" id="button10" class="checkbox-button">인제</button>
+
+  <input name="gangwon" value="11" type="checkbox" id="checkbox11" style="display:none;">
+  <button type="button" id="button11" class="checkbox-button">정선</button>
+
+  <input name="gangwon" value="12" type="checkbox" id="checkbox12" style="display:none;">
+  <button type="button" id="button12" class="checkbox-button">철원</button>
+
+  <input name="gangwon" value="13" type="checkbox" id="checkbox13" style="display:none;">
+  <button type="button" id="button13" class="checkbox-button">춘천</button>
+
+  <input name="gangwon" value="14" type="checkbox" id="checkbox14" style="display:none;">
+  <button type="button" id="button14" class="checkbox-button">태백</button>
+
+  <input name="gangwon" value="15" type="checkbox" id="checkbox15" style="display:none;">
+  <button type="button" id="button5" class="checkbox-button">평창</button>
+  
+  <input name="gangwon" value="16" type="checkbox" id="checkbox16" style="display:none;">
+  <button type="button" id="button6" class="checkbox-button">홍천</button>
+
+  <input name="gangwon" value="17" type="checkbox" id="checkbox17" style="display:none;">
+  <button type="button" id="button17" class="checkbox-button">화천</button>
+
+  <input name="gangwon" value="18" type="checkbox" id="checkbox18" style="display:none;">
+  <button type="button" id="button18" class="checkbox-button">횡성</button>
+
+  <!-- 폼 제출 버튼 -->
+    <button type="submit" class="submit-button">Submit</button>
+</form>
+
+<script>
+  const maxSelections = 3;
+
+  document.querySelectorAll('.checkbox-button').forEach((button, index) => {
+    const checkbox = document.getElementById(`checkbox${index + 1}`);
+
+    button.addEventListener('click', function() {
+      const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
+
+      // 체크박스 상태를 반전시킴
+      checkbox.checked = !checkbox.checked;
+
+      // 체크박스 상태에 따라 버튼 스타일 변경
+      if (checkbox.checked) {
+        button.classList.add('checked');
+      } else {
+        button.classList.remove('checked');
+      }
+    });
+  });
+
+  function validateForm() {
+    const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    
+    if (checkedCheckboxes === 0) {
+      alert('최소 1개 이상의 항목을 선택해주세요.');
+      return false;
+    }
+
+    if (checkedCheckboxes > maxSelections) {
+      alert('최대 3개 항목만 선택할 수 있습니다.');
+      return false;
+    }
+
+    return true;
+  }
+</script>
+				
+				<!-- 
 				<form id="locationForm" method="POST" onsubmit="return validateForm()">
 				
-				<label class="container1" style="top: 28%; left: 17%;">
+				<label class="container1" style="top: 29%; left: 15%;">
 					<div id="displayText1" class="display-text" style="display: none;">철원</div>
-				  <input type="checkbox" id="checkbox1" name="gangwon" value="12">
+				  <input type="checkbox" id="checkbox1" name="gangwon" value="12" checked>
 				  <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 31%; left: 29%;">
+				<label class="container1" style="top: 31%; left: 27%;">
 					<div id="displayText2" class="display-text" style="display: none;">화천</div>
-				  <input type="checkbox" id="checkbox2" name="gangwon" value="17">
+				  <input type="checkbox" id="checkbox2" name="gangwon" value="17" checked>
 				  <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 31%; left: 39%;">
+				<label class="container1" style="top: 31%; left: 38%;">
 					<div id="displayText3" class="display-text" style="display: none;">양구</div>
-				  <input type="checkbox" id="checkbox3" name="gangwon" value="6">
+				  <input type="checkbox" id="checkbox3" name="gangwon" value="6" checked>
 				  <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 36%; left: 48%;">
+				<label class="container1" style="top: 37%; left: 48%;">
 					<div id="displayText4" class="display-text" style="display: none;">인제</div>
-				  <input type="checkbox" id="checkbox4" name="gangwon" value="10">
+				  <input type="checkbox" id="checkbox4" name="gangwon" value="10" checked>
 				  <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 21%; left: 54%;">
+				<label class="container1" style="top: 22%; left: 53%;">
 					<div id="displayText5" class="display-text" style="display: none;">고성</div>
-			    <input type="checkbox" id="checkbox5" name="gangwon" value="2">
+			    <input type="checkbox" id="checkbox5" name="gangwon" value="2" checked>
 			    <div class="checkmark1"></div>
 				</label>
 				
 				<label class="container1" style="top: 30%; left: 58%;">
 					<div id="displayText6" class="display-text" style="display: none;">속초</div>
-			    <input type="checkbox" id="checkbox6" name="gangwon" value="5">
+			    <input type="checkbox" id="checkbox6" name="gangwon" value="5" checked>
 			    <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 44%; left: 30%;">
+				<label class="container1" style="top: 46%; left: 28%;">
 					<div id="displayText7" class="display-text" style="display: none;">춘천</div>
-			    <input type="checkbox" id="checkbox7" name="gangwon" value="13">
+			    <input type="checkbox" id="checkbox7" name="gangwon" value="13" checked>
 			    <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 38%; left: 61%;">
+				<label class="container1" style="top: 41%; left: 61%;">
 					<div id="displayText8" class="display-text" style="display: none;">양양</div>
-			    <input type="checkbox" id="checkbox8" name="gangwon" value="7">
+			    <input type="checkbox" id="checkbox8" name="gangwon" value="7" checked>
 			    <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 50%; left: 43%;">
+				<label class="container1" style="top: 52%; left: 41%;">
 					<div id="displayText9" class="display-text" style="display: none;">홍천</div>
-			    <input type="checkbox" id="checkbox9" name="gangwon" value="16">
+			    <input type="checkbox" id="checkbox9" name="gangwon" value="16" checked>
 			    <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 51%; left: 70%;">
+				<label class="container1" style="top: 55%; left: 70%;">
 					<div id="displayText10" class="display-text" style="display: none;">강릉</div>
-			    <input type="checkbox" id="checkbox10" name="gangwon" value="1">
+			    <input type="checkbox" id="checkbox10" name="gangwon" value="1" checked>
 			    <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 60%; left: 43%;">
+				<label class="container1" style="top: 66%; left: 44%;">
 					<div id="displayText11" class="display-text" style="display: none;">횡성</div>
-			    <input type="checkbox" id="checkbox11" name="gangwon" value="18">
+			    <input type="checkbox" id="checkbox11" name="gangwon" value="18" checked>
 			    <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 59%; left: 55%;">
+				<label class="container1" style="top: 64%; left: 56%;">
 					<div id="displayText12" class="display-text" style="display: none;">평창</div>
-			    <input type="checkbox" id="checkbox12" name="gangwon" value="15">
+			    <input type="checkbox" id="checkbox12" name="gangwon" value="15" checked>
 			    <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 66%; left: 64%;">
+				<label class="container1" style="top: 73%; left: 66%;">
 					<div id="displayText13" class="display-text" style="display: none;">정선</div>
-			    <input type="checkbox" id="checkbox13" name="gangwon" value="11">
+			    <input type="checkbox" id="checkbox13" name="gangwon" value="11" checked>
 			    <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 60%; left: 77%;">
+				<label class="container1" style="top: 66%; left: 78%;">
 					<div id="displayText14" class="display-text" style="display: none;">동해</div>
-			    <input type="checkbox" id="checkbox14" name="gangwon" value="3">
+			    <input type="checkbox" id="checkbox14" name="gangwon" value="3" checked>
 			    <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 69%; left: 37%;">
+				<label class="container1" style="top: 77%; left: 37%;">
 					<div id="displayText15" class="display-text" style="display: none;">원주</div>
-			    <input type="checkbox" id="checkbox15" name="gangwon" value="9">
+			    <input type="checkbox" id="checkbox15" name="gangwon" value="9" checked>
 			    <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 75%; left: 58%;">
+				<label class="container1" style="top: 84%; left: 57%;">
 					<div id="displayText16" class="display-text" style="display: none;">영월</div>
-				  <input type="checkbox" id="checkbox16" name="gangwon" value="8">
+				  <input type="checkbox" id="checkbox16" name="gangwon" value="8" checked>
 				  <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 76%; left: 74%;">
+				<label class="container1" style="top: 85%; left: 76%;">
 					<div id="displayText17" class="display-text" style="display: none;">태백</div>
-				  <input type="checkbox" id="checkbox17" name="gangwon" value="14">
+				  <input type="checkbox" id="checkbox17" name="gangwon" value="14" checked>
 				  <div class="checkmark1"></div>
 				</label>
 				
-				<label class="container1" style="top: 71%; left: 80%;">
+				<label class="container1" style="top: 79%; left: 82%;">
 					<div id="displayText18" class="display-text" style="display: none;">삼척</div>
-				  <input type="checkbox" id="checkbox18" name="gangwon" value="4">
+				  <input type="checkbox" id="checkbox18" name="gangwon" value="4" checked>
 				  <div class="checkmark1"></div>
 				</label>
 				
 				</label>
 				
-				<button class="container1" style="bottom: 5%; right: 0%;" type="reset" onclick="resetDisplayTexts()">
+				<button class="container1" style="bottom: 5%; right: 0%;" type="button" onclick="resetDisplayTexts()">
 					reset
 				</button>
 				
@@ -157,6 +272,7 @@
 				</button>
 				
 				</form>
+			 -->
 				
 			</span>
 		</div>
@@ -182,7 +298,7 @@
 		<hr>
 		<div>회사소개  |  이용약관  |  등등...</div>
 	</footer>
-	
+	<!-- 
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 	  	var checkboxes = document.querySelectorAll('.container1 input[type="checkbox"]');
@@ -190,6 +306,10 @@
 	    checkboxes.forEach(function(checkbox, index) {
 	    	var displayText = document.getElementById('displayText' + (index + 1));
 	
+		    	if (checkbox.checked) {
+					displayText.style.display = 'block';
+				}
+	    	
 	      checkbox.addEventListener('change', function() {
 	      	if (checkbox.checked) {
 	        	displayText.style.display = 'block';
@@ -202,10 +322,17 @@
 		});
 		
 		function resetDisplayTexts() {
-			const displayTexts = document.querySelectorAll('.display-text');
-		  displayTexts.forEach(text => {
-		  	text.style.display = 'none';
-		  });
+		    // 모든 체크박스를 해제합니다.
+		    const checkboxes = document.querySelectorAll('.container1 input[type="checkbox"]');
+		    checkboxes.forEach(checkbox => {
+		        checkbox.checked = false;
+		    });
+
+		    // 모든 텍스트를 숨깁니다.
+		    const displayTexts = document.querySelectorAll('.display-text');
+		    displayTexts.forEach(text => {
+		        text.style.display = 'none';
+		    });
 		}
 		function validateForm() {
 			var checkboxes = document.querySelectorAll('.container1 input[type="checkbox"]:checked');
@@ -220,6 +347,6 @@
 			return true;
 		}
 	</script>
-	
+	 -->
 </body>
 </html>
