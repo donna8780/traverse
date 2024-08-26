@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/css/LoginStyle.css" rel="stylesheet">
+<link href="/css/mainStyle.css" rel="stylesheet">
+  <link href="/css/LoginStyle.css" rel="stylesheet">
 </head>
 <body>
+<th:block th:replace="/fragment::header"></th:block>
 <fieldset>
   <legend>PW찾기</legend>
  
@@ -17,5 +19,6 @@
   </form>
   
 </fieldset>
+<th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

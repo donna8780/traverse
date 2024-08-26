@@ -1,6 +1,7 @@
 package com.traverse.www.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.MainService;
+import com.traverse.www.service.WeatherService;
 import com.traverse.www.vo.AccountsVO;
 import com.traverse.www.vo.SelPlaceVO;
 
@@ -21,10 +23,17 @@ public class MainController {
 	@Autowired
 	private MainService ms;
 	
+	@Autowired
+	private WeatherService ws;
 
   @GetMapping("/")
-  public ModelAndView home() {
+  public ModelAndView home(@RequestParam(name = "city", defaultValue = "Seoul") String city) {
     ModelAndView mav = new ModelAndView();
+    
+    Map<String, Object> weather = ws.getWeather(city);
+		
+		mav.addObject("weather", weather);
+		mav.addObject("city", city);
 
     mav.setViewName("home");
     
@@ -470,7 +479,7 @@ public class MainController {
   }
 
   @PostMapping("/duration")
-  public ModelAndView duration(@RequestParam(name = "duration") int duration, HttpSession session) {
+  public ModelAndView duration(@RequestParam(name = "duration") int duration, @RequestParam(name = "seldate") String seldate, HttpSession session) {
   	ModelAndView mav = new ModelAndView();
   	
   	AccountsVO user = (AccountsVO) session.getAttribute("user");
@@ -482,15 +491,16 @@ public class MainController {
   	
   	int a_idx = user.getAccounts_idx();
   	
-  	ms.sel_duration(duration, a_idx);
   	
-  	mav.setViewName("redirect:/recommendResult");
+  	ms.sel_duration(duration, a_idx);
+
+  	mav.setViewName("redirect:/recommendResult?seldate=" + seldate);
   	
   	return mav;
   }
   
   @GetMapping("/recommendResult")
-  public ModelAndView recommendResult(HttpSession session) {
+  public ModelAndView recommendResult(@RequestParam(name = "seldate", required = false) String seldate,HttpSession session) {
   	ModelAndView mav = new ModelAndView();
   	
   	AccountsVO user = (AccountsVO) session.getAttribute("user");
@@ -505,9 +515,11 @@ public class MainController {
   	SelPlaceVO result = ms.getSelPlace(a_idx);
   	
   	mav.addObject("result", result);
+  	mav.addObject("seldate", seldate);
   	mav.addObject("place", ms.getPlaces(result));
   	
   	return mav;
   }
+
   
 }

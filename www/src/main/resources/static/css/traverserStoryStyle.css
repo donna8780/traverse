@@ -1,0 +1,186 @@
+@charset "UTF-8";
+
+.contents h1 {
+	position: absolute;
+	top: -100px;
+	left: -300px;
+}
+
+.search {
+  display: inline-block;
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.search input[type="text"] {
+  width: 400px;
+  padding: 15px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  font-size: 1.3em;
+}
+
+.search button[type="submit"] {
+  background-color: #2A3854;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 15px 30px;
+  border-radius: 30px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  right: 0px;
+  transition: .5s ease;
+  font-size: 1.3em;
+}
+
+.search button[type="submit"]:hover {
+  transform: scale(1.1);
+  color: rgb(255, 255, 255);
+  background-color: #F89D4A;
+}
+
+.trending {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.trending span {
+  margin-right: 30px;
+}
+
+.trending span:last-child {
+  margin-right: 0; /* 마지막 span의 오른쪽에는 간격을 추가하지 않음 */
+}
+
+.box-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  padding: 0 10%;
+  position: relative; /* 부모 컨테이너를 상대 위치로 설정 */
+  height: 500px; /* 컨테이너 높이 설정 */
+}
+
+.box {
+  width: 270px;
+  height: 270px;
+  background-color: #B898F4;
+  margin: 0 10px;
+  position: absolute;
+}
+
+.container .contents {
+  text-align: center;
+}
+
+.box1 {
+  top: 200px;
+  left: 5px;
+}
+
+.box2 {
+  top: 350px;
+  left: 305px;
+}
+
+.box3 {
+  top: 200px;
+  left: 605px;
+}
+
+.box4 {
+  top: 350px;
+  left: 905px;
+}
+
+.inner-box {
+  position: absolute;
+  background-color: #B898F4;
+  border: 1px solid black; /* 검정색 테두리 추가 */
+  overflow: hidden;
+  padding: 10px;
+}
+
+.inner-box img {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  object-position: center;
+}
+
+.top-left {
+  width: 50%;
+  height: 50%;
+  top: 0;
+  left: 0;
+}
+
+.top-right {
+  width: 50%;
+  height: 60%;
+  top: 0;
+  left: 50%;
+}
+
+.top {
+  width: 100%;
+  height: 60%;
+  top: 0;
+  left: 0;
+}
+
+.bottom {
+  width: 100%;
+  height: 40%;
+  bottom: 0;
+  left: 0;
+  text-align: left; /* 텍스트를 왼쪽 정렬 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.text-line {
+  margin: 5px 0; /* 각 줄 사이에 약간의 간격 추가 */
+}
+
+.line1 {
+  position: relative;
+  top: 5px; /* 첫 번째 줄 위치 */
+  left: 90px;
+}
+
+.line2 {
+  position: relative;
+  top: 10px; /* 두 번째 줄 위치 */
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.line3 {
+  position: relative;
+  top: 5px; /* 세 번째 줄 위치 */
+}
+
+.center {
+  width: 70px;
+  height: 70px;
+  top: 55%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  background-color: #B898F4;
+  border-radius: 50%;
+}

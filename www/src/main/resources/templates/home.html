@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>traverse</title>
   
+  <link href="/css/mainStyle.css" rel="stylesheet">
   <link href="/css/homeStyle.css" rel="stylesheet">
 </head>
 <body>
@@ -32,31 +33,103 @@
 	
 	<div class="sidebar sidebar-left">
     <span class="area_desc">
-      여기에 날씨 띄우기
+          <!-- 왼쪽 사이드바 (날씨 정보) -->
+    <div class="sidebar">
+        <h1>[[${city}]]</h1>
+        
+
+<select id="weather-select" name="city" onchange="this.form.submit()">
+    <option value="">지역 선택</option>
+    <option value="Seoul">Seoul</option>
+    <option value="Busan">Busan</option>
+    <option value="Jeju">Jeju</option>
+    <option value="Ulsan">Ulsan</option>
+    <option value="Gwangju">Gwangju</option>
+    <option value="Gangneung">Gangneung</option>
+</select>
+
+        <div class="weather-info">
+            <!-- 온도 변환: K -> ℃ (소수점 한 자리) -->
+            <div>온도: [[${#numbers.formatDecimal(weather.main.temp - 273.15, 0, 1)}]] ℃</div>
+            
+            <!-- 체감 온도 변환: K -> ℃ (소수점 한 자리) -->
+            <div>체감 온도: [[${#numbers.formatDecimal(weather.main.feels_like - 273.15, 0, 1)}]] ℃</div>
+            
+            <!-- 날씨 설명 -->
+            <div>날씨: [[${weather.weather[0].description}]]</div>
+            
+            <!-- 풍속 변환: m/s -> km/h (소수점 한 자리) -->
+            <div>바람: [[${#numbers.formatDecimal(weather.wind.speed * 3.6, 0, 1)}]] km/h</div>
+            
+            <!-- 습도 그대로 출력 -->
+            <div>습도: [[${weather.main.humidity}]]%</div>
+        </div>
+    </div>
+    
+    <script>
+    document.getElementById('weather-select').addEventListener('change', function() {
+        var selectedCity = this.value;
+        window.location.href = '/?city=' + encodeURIComponent(selectedCity);
+    });
+</script>
     </span>
   </div>
 	
 	<div class="container">
 		<div class="contents">
 			<span class="area_desc">
-				<img class="mapimg" th:src="@{/image/map1.png}">
-				<a href="/gyeonggi" style="top: 26%; left: 35%">경기</a>
-				<a href="/gangwon" style="top: 20%; left: 58%">강원</a>
-				<a href="/chungbuk" style="top: 35%; left: 45%">충북</a>
-				<a href="/chungnam" style="top: 40%; left: 26%">충남</a>
-				<a href="/gyeongbuk" style="top: 45%; left: 63%">경북</a>
-				<a href="/gyeongnam" style="top: 65%; left: 56%">경남</a>
-				<a href="/jeonbuk" style="top: 58%; left: 32%">전북</a>
-				<a href="/jeonnam" style="top: 75%; left: 30%">전남</a>
-				<a href="/duration?areaCode=1" style="top: 21%; left: 30%">서울</a>
-				<a href="/duration?areaCode=2" style="top: 22%; left: 24%">인천</a>
-				<a href="/duration?areaCode=8" style="top: 41%; left: 36%">세종</a>
-				<a href="/duration?areaCode=3" style="top: 46%; left: 38%">대전</a>
-				<a href="/duration?areaCode=4" style="top: 56%; left: 61%">대구</a>
-				<a href="/duration?areaCode=7" style="top: 61%; left: 73%">울산</a>
-				<a href="/duration?areaCode=6" style="top: 69%; left: 70%">부산</a>
-				<a href="/duration?areaCode=5" style="top: 70%; left: 27%">광주</a>
-				<a href="/duration?areaCode=39" style="top: 94%; left: 30%">제주</a>
+				<img id="mapImage" class="mapimg" th:src="@{/image/map0.png}">
+				<a href="/gyeonggi" style="top: 26%; left: 39%"
+					onmouseover="changeImage('경기.png')"
+					onmouseout="resetImage()">경기</a>
+				<a href="/gangwon" style="top: 18%; left: 60%"
+					onmouseover="changeImage('강원.png')"
+					onmouseout="resetImage()">강원</a>
+				<a href="/chungbuk" style="top: 36%; left: 48%"
+					onmouseover="changeImage('충북.png')"
+					onmouseout="resetImage()">충북</a>
+				<a href="/chungnam" style="top: 42%; left: 28%"
+					onmouseover="changeImage('충남.png')"
+					onmouseout="resetImage()">충남</a>
+				<a href="/gyeongbuk" style="top: 45%; left: 69%"
+					onmouseover="changeImage('경북.png')"
+					onmouseout="resetImage()">경북</a>
+				<a href="/gyeongnam" style="top: 65%; left: 59%"
+					onmouseover="changeImage('경남.png')"
+					onmouseout="resetImage()">경남</a>
+				<a href="/jeonbuk" style="top: 58%; left: 35%"
+					onmouseover="changeImage('전북.png')"
+					onmouseout="resetImage()">전북</a>
+				<a href="/jeonnam" style="top: 74%; left: 32%"
+					onmouseover="changeImage('전남.png')"
+					onmouseout="resetImage()">전남</a>
+				<a href="/duration?areaCode=1" style="top: 22%; left: 31%"
+					onmouseover="changeImage('서울.png')"
+					onmouseout="resetImage()">서울</a>
+				<a href="/duration?areaCode=2" style="top: 23%; left: 23%"
+					onmouseover="changeImage('인천.png')"
+					onmouseout="resetImage()">인천</a>
+				<a href="/duration?areaCode=8" style="top: 41%; left: 37%"
+					onmouseover="changeImage('세종.png')"
+					onmouseout="resetImage()">세종</a>
+				<a href="/duration?areaCode=3" style="top: 46%; left: 40%"
+					onmouseover="changeImage('대전.png')"
+					onmouseout="resetImage()">대전</a>
+				<a href="/duration?areaCode=4" style="top: 55%; left: 67%"
+					onmouseover="changeImage('대구.png')"
+					onmouseout="resetImage()">대구</a>
+				<a href="/duration?areaCode=7" style="top: 61%; left: 82%"
+					onmouseover="changeImage('울산.png')"
+					onmouseout="resetImage()">울산</a>
+				<a href="/duration?areaCode=6" style="top: 68%; left: 78%"
+					onmouseover="changeImage('부산.png')"
+					onmouseout="resetImage()">부산</a>
+				<a href="/duration?areaCode=5" style="top: 69%; left: 28%"
+					onmouseover="changeImage('광주.png')"
+					onmouseout="resetImage()">광주</a>
+				<a href="/duration?areaCode=39" style="top: 95%; left: 23%"
+					onmouseover="changeImage('제주.png')"
+					onmouseout="resetImage()">제주</a>
 			</span>
 		</div>
 		<div class="sidebar">
@@ -72,7 +145,11 @@
 			  <a href="/member/like">like</a><br>
 			  <a href="/place/mapAPI">mapAPI</a><br>
         <a href="/member/customer">customer</a><br>
-        <a href="/member/detail">상세페이지</a>
+        <a href="/place/travelplan">여행계획</a><br>        
+        <a href="/member/accommodation">숙박</a><br>
+        <a href="/member/location">길찾기</a><br>
+        <a href="/place/traverserStory">Traverser's Story</a>
+
 			</span>
 		</div>
 	</div>
@@ -84,7 +161,15 @@
 		<div>회사소개  |  이용약관  |  등등...</div>
 	</footer>
 
+  <script>
+    function changeImage(imageName) {
+      document.getElementById("mapImage").src = "/image/" + imageName;
+    }
 
+    function resetImage() {
+      document.getElementById("mapImage").src = "/image/map0.png";
+    }
+  </script>
 
 
 
