@@ -30,7 +30,11 @@ public class LikeService {
 	public int likeDel(int likeIdx) {
 		return dao.likeDel(likeIdx);
 	}
-
-
-
+  
+	public void insertLike(LikeVO likeVO) {
+    dao.insert(likeVO);  // DAO를 통해 데이터베이스에 삽입
 }
+}
+
+
+

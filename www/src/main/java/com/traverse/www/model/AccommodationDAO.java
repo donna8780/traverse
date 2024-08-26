@@ -14,5 +14,10 @@ public interface AccommodationDAO {
 	
   @Select("select * from accommodation where title LIKE CONCAT('%', #{title}, '%')")
   List<PlaceVO> selectByTitle(String title);
+  
+  @Select("select * from accommodation where areacode = #{areacode}")
+  List<PlaceVO> selectByAreaCode(String areaCode);
 	
+  @Select("select DISTINCT areacode from accommodation order by areacode")
+  List<String> selectAllAreaCodes();
 }

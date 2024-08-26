@@ -2,10 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link rel="stylesheet" href="/css/csboardStyle.css">
+<link href="/css/mainStyle.css" rel="stylesheet">
     <meta charset="UTF-8">
     <title>글쓰기</title>
 </head>
 <body>
+<th:block th:replace="/fragment::header"></th:block>
     <h1>QnA</h1>
     <form method="post">
         <div>
@@ -21,5 +23,6 @@
             <button type="submit">저장</button>
         </div>
     </form>
+        <th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

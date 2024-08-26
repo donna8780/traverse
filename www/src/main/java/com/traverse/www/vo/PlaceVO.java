@@ -18,7 +18,7 @@ package com.traverse.www.vo;
  */
 
 public class PlaceVO {
-	private int idx, areacode, contenttypeid, sigungucode,a_idx;
+	private int idx, areacode, contenttypeid, sigungucode,a_idx,day;
 	private String cat1, cat2, cat3, firstimage, firstimage2, tel, title, addr1,seledate;
 	private double mapx, mapy;
 	
@@ -118,5 +118,12 @@ public class PlaceVO {
 	public void setSeledate(String seledate) {
 		this.seledate = seledate;
 	}
+	public int getDay() {
+		return day;
+	}
+	public void setDay(int day) {
+		this.day = day;
+	}
+	
 	
 }
