@@ -15,9 +15,9 @@ public class TravelplanService {
 	private TravelplanDAO dao;
 
 	public int planadd(int p_idx, int a_idx, int areaCode, int sigunguCode1,
-			int sigunguCode2, int sigunguCode3, int duration, String seldate,int day) {
+			int duration, String seldate,int day) {
 		
-		return dao.insert(p_idx,a_idx,areaCode,sigunguCode1,sigunguCode2,sigunguCode3,duration,seldate,day);
+		return dao.insert(p_idx,a_idx,areaCode,sigunguCode1,duration,seldate,day);
 	}
 
 	public List<TravelplanVO> getPlace(int accounts_idx) {

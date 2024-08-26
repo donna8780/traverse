@@ -113,7 +113,7 @@
 </form>
 
 <script>
-  const maxSelections = 3;
+  const maxSelections = 1;
 
   document.querySelectorAll('.checkbox-button').forEach((button, index) => {
     const checkbox = document.getElementById(`checkbox${index + 1}`);
@@ -142,7 +142,7 @@
     }
 
     if (checkedCheckboxes > maxSelections) {
-      alert('최대 3개 항목만 선택할 수 있습니다.');
+      alert('최대 1개 항목만 선택할 수 있습니다.');
       return false;
     }
 

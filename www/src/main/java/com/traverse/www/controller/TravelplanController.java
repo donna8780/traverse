@@ -46,8 +46,6 @@ public class TravelplanController {
 	                            @RequestParam("a_idx") int a_idx,
 	                            @RequestParam("areaCode") int areaCode,
 	                            @RequestParam("sigunguCode1") int sigunguCode1,
-	                            @RequestParam("sigunguCode2") int sigunguCode2,
-	                            @RequestParam("sigunguCode3") int sigunguCode3,
 	                            @RequestParam("sel_idx") int sel_idx,
 	                            @RequestParam("duration") int duration,
 	                            @RequestParam("seldate")String seldate,
@@ -60,12 +58,10 @@ public class TravelplanController {
 	    result.setA_idx(a_idx);
 	    result.setAreaCode(areaCode);
 	    result.setSigunguCode1(sigunguCode1);
-	    result.setSigunguCode2(sigunguCode2);
-	    result.setSigunguCode3(sigunguCode3);
 	    result.setDuration(duration1);
 	    result.setDay(day);
 	    
-	    ts.planadd(p_idx,a_idx,areaCode,sigunguCode1,sigunguCode2,sigunguCode3,duration1,seldate,day);
+	    ts.planadd(p_idx,a_idx,areaCode,sigunguCode1,duration1,seldate,day);
 	    
 	    mav.setViewName("redirect:/recommendResult?seldate="+seldate);
 	    return mav;
