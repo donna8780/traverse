@@ -64,7 +64,5 @@ public class LikeController {
   	 return "redirect:/member/like";
    }
 
-   
-   
 
 }

@@ -4,8 +4,13 @@
 <meta charset="UTF-8">
 <title>Location Selector</title>
 <link href="/css/likeStyle.css" rel="stylesheet">
+<link href="/css/mainStyle.css" rel="stylesheet">
+
 </head>
 <body>
+<th:block th:replace="/fragment::header"></th:block>
+<div id="like">
+
 
     <div class="container">
         <div class="left">
@@ -21,7 +26,7 @@
             <div class="scrollable-content">
                 <div class="location-item" th:each="row : ${mapAPI}">
                     <div class="image-box">
-                        <img id="place_img" th:src="@{/image/{placeImg}(placeImg=${row.place_img})}" />
+                        <img id="place_img" th:src="${row.place_img}" />
                     </div>
                     <div class="text-box">
                         <div class="location-name" th:text="${row.place_name}"></div>
@@ -182,7 +187,12 @@ function closeOverlay(key) {
         overlays[key].setMap(null);     
     }
 }
+
+
     </script>
 
+
+</div>
+<th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>
