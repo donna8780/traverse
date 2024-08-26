@@ -10,34 +10,15 @@
 </head>
 <body>
 
-	<input type="checkbox" id="menuicon">
-	<header>
-		<div>
-			<ul class="navi">
-				<li><a href="/"><img class="logo" th:src="@{/image/logo_w.png}"></a></li>
-				<li th:if="${session.user == null}">
-					<a href="/member/login">login</a>
-				</li>
-				<li th:if="${session.user != null}">
-					<a href="/member/myPage">myPage</a>
-				</li>
-		  </ul>
-		  
-		  <label for="menuicon" class="menubtn">
-		  	<span></span>
-		  	<span></span>
-		  	<span></span>
-		  </label>
-		</div>
-	</header>
-	
+	<th:block th:replace="/fragment::header"></th:block>
+
 	<div class="container">
-		<div class="contents">
-			<h1>Traverser's Story</h1>
+		<div class="contents" style="min-height: 650px;">
 		
-			<form action="POST">
+			<form method="POST">
     	<div class="search">
-        <input placeholder="Search..." type="text">
+			<h1>Traverser's Story</h1>
+        <input name="search" placeholder="Search..." type="text">
         <button type="submit">Go</button>
       </div>
       </form>
@@ -50,33 +31,76 @@
       <span><a href="/">Jeonju</a></span>
       <span>...</span>
 			</div>
+			
+		<div class="box-container">
+		
+		 <div class="box box1">
+			<div class="inner-box top-left">
+				<img src="/image/d1.jpg">
+			</div>
+			<div class="inner-box top-right">
+				<img src="/image/d2.jpg">
+			</div>
+			<div class="inner-box bottom">
+				<div class="text-line line1">도리(닉네임)</div>
+    		<div class="text-line line2">도리 도리 여행(제목)</div>
+    		<div class="text-line line3"># 부산, 2박 3일(여행지, 기간)</div>
+			</div>
+			<div class="inner-box center">
+				<img src="/image/d0.jpg">
+			</div>
+		 </div>
+		 
+		 <div class="box box2">
+		 <div class="inner-box top-left">
+				<img src="/image/s1.jpg">
+			</div>
+			<div class="inner-box top-right">
+				<img src="/image/s2.jpg">
+			</div>
+			<div class="inner-box bottom">
+				<div class="text-line line1">소백돌이</div>
+    		<div class="text-line line2">진해 나들이</div>
+    		<div class="text-line line3"># 창원, 1박 2일</div>
+			</div>
+			<div class="inner-box center">
+				<img src="/image/s0.jpg">
+			</div>
+		 </div>
+		 
+		 <div class="box box3">
+			<div class="inner-box top">
+				<img src="/image/l1.jpg">
+			</div>
+			<div class="inner-box bottom">
+				<div class="text-line line1">새박사</div>
+    		<div class="text-line line2">로또당첨</div>
+    		<div class="text-line line3"># 춘천, 2박 3일</div>
+			</div>
+			<div class="inner-box center">
+				<img src="/image/l0.jpg">
+			</div>
+		 </div>
+		 
+		 <div class="box box4">
+		 	<div class="inner-box top-left">
+				<img src="/image/b1.jpg">
+			</div>
+			<div class="inner-box top-right">
+				<img src="/image/b2.jpg">
+			</div>
+			<div class="inner-box bottom">
+				<div class="text-line line1">받킨지</div>
+    		<div class="text-line line2">베베랑 콩이랑~~</div>
+    		<div class="text-line line3"># 제주, 2박 3일</div>
+			</div>
+			<div class="inner-box center">
+				<img src="/image/b0.jpg">
+			</div>
+		 </div>
+    </div>
 
-		</div>
-		<div class="sidebar">
-			<span class="area_desc">
-			  <a href="/member/signUp">signUp</a><br>
-			  <th:block th:if="${session.user == null}">
-			  	<a href="/member/login">login</a><br>
-			  </th:block>
-			  <th:block th:if="${session.user != null}">
-			  	<a href="/member/logout">logout</a><br>
-			  	<a href="/member/myPage">myPage</a><br>
-			  </th:block>
-			  <a href="/member/like">like</a><br>
-			  <a href="/place/mapAPI">mapAPI</a><br>
-        <a href="/member/customer">customer</a><br>
-        <a href="/member/detail">상세페이지</a><br>
-        <a href="/place/traverserStory">Traverser's Story</a>
-			</span>
-		</div>
-	</div>
+		<th:block th:replace="/fragment::footer"></th:block>
 	
-	
-	
-	<footer>
-		<hr>
-		<div>회사소개  |  이용약관  |  등등...</div>
-	</footer>
-
 </body>
 </html>

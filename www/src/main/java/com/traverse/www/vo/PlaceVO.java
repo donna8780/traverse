@@ -18,8 +18,8 @@ package com.traverse.www.vo;
  */
 
 public class PlaceVO {
-	private int idx, areacode, contenttypeid, sigungucode;
-	private String cat1, cat2, cat3, firstimage, firstimage2, tel, title, addr1;
+	private int idx, areacode, contenttypeid, sigungucode,a_idx;
+	private String cat1, cat2, cat3, firstimage, firstimage2, tel, title, addr1,seledate;
 	private double mapx, mapy;
 	
 	public int getIdx() {
@@ -106,4 +106,17 @@ public class PlaceVO {
 	public void setMapy(double mapy) {
 		this.mapy = mapy;
 	}
+	public int getA_idx() {
+		return a_idx;
+	}
+	public void setA_idx(int a_idx) {
+		this.a_idx = a_idx;
+	}
+	public String getSeledate() {
+		return seledate;
+	}
+	public void setSeledate(String seledate) {
+		this.seledate = seledate;
+	}
+	
 }
