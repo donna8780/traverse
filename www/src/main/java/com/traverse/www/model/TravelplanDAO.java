@@ -16,13 +16,11 @@ import com.traverse.www.vo.TravelplanVO;
 @Mapper
 public interface TravelplanDAO {
 	
-	@Insert("insert into travelplan(p_idx,a_idx,areaCode,sigunguCode1,sigunguCode2,sigunguCode3,duration,seldate,day) values(#{p_idx},#{a_idx},#{areaCode},#{sigunguCode1},#{sigunguCode2},#{sigunguCode3},#{duration},#{seldate},#{day})")
+	@Insert("insert into travelplan(p_idx,a_idx,areaCode,sigunguCode1,duration,seldate,day) values(#{p_idx},#{a_idx},#{areaCode},#{sigunguCode1},#{duration},#{seldate},#{day})")
 	int insert(@Param("p_idx") int p_idx, 
       @Param("a_idx") int a_idx, 
       @Param("areaCode") int areaCode, 
       @Param("sigunguCode1") int sigunguCode1,
-      @Param("sigunguCode2") int sigunguCode2, 
-      @Param("sigunguCode3") int sigunguCode3, 
       @Param("duration") int duration,
       @Param("seldate") String seldate,
       @Param("day") int day);
