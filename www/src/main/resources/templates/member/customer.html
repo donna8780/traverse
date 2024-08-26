@@ -67,11 +67,11 @@
 		</ul>
 		<!-- 관리자가 아니면 글쓰기 활성화 안됨 -->
 		<div th:if="${session.user != null and session.user.nick == '관리자'}">
-			<button>
+			<a href="/member/write"><button>
 				<span class="span-mother"> <span>글</span> <span>쓰</span> <span>기</span>
 				</span> <span class="span-mother2"> <span>글</span> <span>쓰</span> <span>기</span>
 				</span>
-			</button>
+			</button></a>
 		</div>
 	</section>
 
