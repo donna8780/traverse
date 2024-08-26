@@ -19,6 +19,7 @@ public class AccommodationController {
     @GetMapping("/accommodation")
     public ModelAndView accomlist() {
         ModelAndView mav = new ModelAndView();
+        mav.addObject("areaCodes", acs.getAllAreaCodes()); // areaCodes를 모델에 추가
         mav.setViewName("member/accommodation");
         return mav;
     }
@@ -30,4 +31,14 @@ public class AccommodationController {
         mav.setViewName("member/accommodation");
         return mav;
     }
+    
+    @GetMapping("/accommodation/area")
+    public ModelAndView searchByAreaCode(@RequestParam("areaCode") String areaCode) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("accommodationList", acs.searchByAreaCode(areaCode));
+        mav.addObject("areaCodes", acs.getAllAreaCodes()); // areaCodes를 추가
+        mav.setViewName("member/accommodation");
+        return mav;
+    }
+
 }

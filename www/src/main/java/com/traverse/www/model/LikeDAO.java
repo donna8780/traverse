@@ -3,6 +3,7 @@ package com.traverse.www.model;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -21,4 +22,8 @@ public interface LikeDAO {
 
    @Delete("delete from like_place where like_idx=#{likeIdx}")
 	int likeDel(int likeIdx);
+
+   @Insert("INSERT INTO like_place (a_idx, title, addr1, firstimage, mapx, mapy) " +
+       "VALUES (#{a_idx}, #{title}, #{addr1}, #{firstimage}, #{mapx}, #{mapy})")
+   void insert(LikeVO likeVO);
 }

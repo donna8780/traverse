@@ -10,28 +10,28 @@
 </head>
 <body>
 
-	<input type="checkbox" id="menuicon">
-	<header>
-		<div>
-			<ul class="navi">
-				<li><a href="/"><img class="logo" th:src="@{/image/logo_w.png}"></a></li>
-				<li th:if="${session.user == null}">
-					<a href="/member/login">login</a>
-				</li>
-				<li th:if="${session.user != null}">
-					<a href="/member/myPage">myPage</a>
-				</li>
-		  </ul>
-		  
-		  <label for="menuicon" class="menubtn">
-		  	<span></span>
-		  	<span></span>
-		  	<span></span>
-		  </label>
-		</div>
-	</header>
-	
-	<div class="sidebar sidebar-left">
+  <input type="checkbox" id="menuicon">
+  <header>
+    <div>
+      <ul class="navi">
+        <li><a href="/"><img class="logo" th:src="@{/image/logo_w.png}"></a></li>
+        <li th:if="${session.user == null}">
+          <a href="/member/login">login</a>
+        </li>
+        <li th:if="${session.user != null}">
+          <a href="/member/myPage">myPage</a>
+        </li>
+      </ul>
+      
+      <label for="menuicon" class="menubtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
+  </header>
+  
+  <div class="sidebar-left">
     <span class="area_desc">
           <!-- 왼쪽 사이드바 (날씨 정보) -->
     <div class="sidebar">
@@ -49,6 +49,7 @@
 </select>
 
         <div class="weather-info">
+           <img id="weather-icon" src="http://openweathermap.org/img/wn/[[${weather.weather[0].icon}]]@2x.png" alt="Weather Icon"> <!-- 날씨 아이콘 URL 예시 -->
             <!-- 온도 변환: K -> ℃ (소수점 한 자리) -->
             <div>온도: [[${#numbers.formatDecimal(weather.main.temp - 273.15, 0, 1)}]] ℃</div>
             
@@ -66,100 +67,112 @@
         </div>
     </div>
     
-    <script>
+        <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+    var weatherIcon = document.getElementById('weather-icon');
+
+    // 날씨 아이콘 코드에 따라 이미지 경로를 설정
+    var weatherData = {
+        icon: '[[${weather.weather[0].icon}]]' // 서버에서 전달받은 아이콘 코드
+    };
+
+    // 아이콘 URL을 동적으로 설정
+    weatherIcon.src = 'http://openweathermap.org/img/wn/' + weatherData.icon + '@2x.png';
+});
     document.getElementById('weather-select').addEventListener('change', function() {
         var selectedCity = this.value;
         window.location.href = '/?city=' + encodeURIComponent(selectedCity);
     });
-</script>
+
+    </script>
     </span>
   </div>
-	
-	<div class="container">
-		<div class="contents">
-			<span class="area_desc">
-				<img id="mapImage" class="mapimg" th:src="@{/image/map0.png}">
-				<a href="/gyeonggi" style="top: 26%; left: 39%"
-					onmouseover="changeImage('경기.png')"
-					onmouseout="resetImage()">경기</a>
-				<a href="/gangwon" style="top: 18%; left: 60%"
-					onmouseover="changeImage('강원.png')"
-					onmouseout="resetImage()">강원</a>
-				<a href="/chungbuk" style="top: 36%; left: 48%"
-					onmouseover="changeImage('충북.png')"
-					onmouseout="resetImage()">충북</a>
-				<a href="/chungnam" style="top: 42%; left: 28%"
-					onmouseover="changeImage('충남.png')"
-					onmouseout="resetImage()">충남</a>
-				<a href="/gyeongbuk" style="top: 45%; left: 69%"
-					onmouseover="changeImage('경북.png')"
-					onmouseout="resetImage()">경북</a>
-				<a href="/gyeongnam" style="top: 65%; left: 59%"
-					onmouseover="changeImage('경남.png')"
-					onmouseout="resetImage()">경남</a>
-				<a href="/jeonbuk" style="top: 58%; left: 35%"
-					onmouseover="changeImage('전북.png')"
-					onmouseout="resetImage()">전북</a>
-				<a href="/jeonnam" style="top: 74%; left: 32%"
-					onmouseover="changeImage('전남.png')"
-					onmouseout="resetImage()">전남</a>
-				<a href="/duration?areaCode=1" style="top: 22%; left: 31%"
-					onmouseover="changeImage('서울.png')"
-					onmouseout="resetImage()">서울</a>
-				<a href="/duration?areaCode=2" style="top: 23%; left: 23%"
-					onmouseover="changeImage('인천.png')"
-					onmouseout="resetImage()">인천</a>
-				<a href="/duration?areaCode=8" style="top: 41%; left: 37%"
-					onmouseover="changeImage('세종.png')"
-					onmouseout="resetImage()">세종</a>
-				<a href="/duration?areaCode=3" style="top: 46%; left: 40%"
-					onmouseover="changeImage('대전.png')"
-					onmouseout="resetImage()">대전</a>
-				<a href="/duration?areaCode=4" style="top: 55%; left: 67%"
-					onmouseover="changeImage('대구.png')"
-					onmouseout="resetImage()">대구</a>
-				<a href="/duration?areaCode=7" style="top: 61%; left: 82%"
-					onmouseover="changeImage('울산.png')"
-					onmouseout="resetImage()">울산</a>
-				<a href="/duration?areaCode=6" style="top: 68%; left: 78%"
-					onmouseover="changeImage('부산.png')"
-					onmouseout="resetImage()">부산</a>
-				<a href="/duration?areaCode=5" style="top: 69%; left: 28%"
-					onmouseover="changeImage('광주.png')"
-					onmouseout="resetImage()">광주</a>
-				<a href="/duration?areaCode=39" style="top: 95%; left: 23%"
-					onmouseover="changeImage('제주.png')"
-					onmouseout="resetImage()">제주</a>
-			</span>
-		</div>
-		<div class="sidebar">
-			<span class="area_desc">
-			  <a href="/member/signUp">signUp</a><br>
-			  <th:block th:if="${session.user == null}">
-			  	<a href="/member/login">login</a><br>
-			  </th:block>
-			  <th:block th:if="${session.user != null}">
-			  	<a href="/member/logout">logout</a><br>
-			  	<a href="/member/myPage">myPage</a><br>
-			  </th:block>
-			  <a href="/member/like">like</a><br>
-			  <a href="/place/mapAPI">mapAPI</a><br>
+  
+  <div class="container">
+    <div class="contents">
+      <span class="area_desc">
+        <img id="mapImage" class="mapimg" th:src="@{/image/map0.png}">
+        <a href="/gyeonggi" style="top: 26%; left: 39%"
+          onmouseover="changeImage('경기.png')"
+          onmouseout="resetImage()">경기</a>
+        <a href="/gangwon" style="top: 18%; left: 60%"
+          onmouseover="changeImage('강원.png')"
+          onmouseout="resetImage()">강원</a>
+        <a href="/chungbuk" style="top: 36%; left: 48%"
+          onmouseover="changeImage('충북.png')"
+          onmouseout="resetImage()">충북</a>
+        <a href="/chungnam" style="top: 42%; left: 28%"
+          onmouseover="changeImage('충남.png')"
+          onmouseout="resetImage()">충남</a>
+        <a href="/gyeongbuk" style="top: 45%; left: 69%"
+          onmouseover="changeImage('경북.png')"
+          onmouseout="resetImage()">경북</a>
+        <a href="/gyeongnam" style="top: 65%; left: 59%"
+          onmouseover="changeImage('경남.png')"
+          onmouseout="resetImage()">경남</a>
+        <a href="/jeonbuk" style="top: 58%; left: 35%"
+          onmouseover="changeImage('전북.png')"
+          onmouseout="resetImage()">전북</a>
+        <a href="/jeonnam" style="top: 74%; left: 32%"
+          onmouseover="changeImage('전남.png')"
+          onmouseout="resetImage()">전남</a>
+        <a href="/duration?areaCode=1" style="top: 22%; left: 31%"
+          onmouseover="changeImage('서울.png')"
+          onmouseout="resetImage()">서울</a>
+        <a href="/duration?areaCode=2" style="top: 23%; left: 23%"
+          onmouseover="changeImage('인천.png')"
+          onmouseout="resetImage()">인천</a>
+        <a href="/duration?areaCode=8" style="top: 41%; left: 37%"
+          onmouseover="changeImage('세종.png')"
+          onmouseout="resetImage()">세종</a>
+        <a href="/duration?areaCode=3" style="top: 46%; left: 40%"
+          onmouseover="changeImage('대전.png')"
+          onmouseout="resetImage()">대전</a>
+        <a href="/duration?areaCode=4" style="top: 55%; left: 67%"
+          onmouseover="changeImage('대구.png')"
+          onmouseout="resetImage()">대구</a>
+        <a href="/duration?areaCode=7" style="top: 61%; left: 82%"
+          onmouseover="changeImage('울산.png')"
+          onmouseout="resetImage()">울산</a>
+        <a href="/duration?areaCode=6" style="top: 68%; left: 78%"
+          onmouseover="changeImage('부산.png')"
+          onmouseout="resetImage()">부산</a>
+        <a href="/duration?areaCode=5" style="top: 69%; left: 28%"
+          onmouseover="changeImage('광주.png')"
+          onmouseout="resetImage()">광주</a>
+        <a href="/duration?areaCode=39" style="top: 95%; left: 23%"
+          onmouseover="changeImage('제주.png')"
+          onmouseout="resetImage()">제주</a>
+      </span>
+    </div>
+    <div class="sidebar">
+      <span class="area_desc">
+        <a href="/member/signUp">signUp</a><br>
+        <th:block th:if="${session.user == null}">
+          <a href="/member/login">login</a><br>
+        </th:block>
+        <th:block th:if="${session.user != null}">
+          <a href="/member/logout">logout</a><br>
+          <a href="/member/myPage">myPage</a><br>
+        </th:block>
+        <a href="/member/like">like</a><br>
+        <a href="/place/mapAPI">mapAPI</a><br>
         <a href="/member/customer">customer</a><br>
         <a href="/place/travelplan">여행계획</a><br>        
         <a href="/member/accommodation">숙박</a><br>
         <a href="/member/index">길찾기</a><br>
         <a href="/place/traverserStory">Traverser's Story</a>
 
-			</span>
-		</div>
-	</div>
-	
-	
-	
-	<footer>
-		<hr>
-		<div>회사소개  |  이용약관  |  등등...</div>
-	</footer>
+      </span>
+    </div>
+  </div>
+  
+  
+  
+  <footer>
+    <hr>
+    <div>회사소개  |  이용약관  |  등등...</div>
+  </footer>
 
   <script>
     function changeImage(imageName) {
@@ -174,37 +187,37 @@
 
 
 <!-- 
-	<ul>
-  	<li><a href="/member/signUp">signUp</a></li>
-  	<th:block th:if="${session.user == null}">
-  	<li><a href="/member/login">login</a></li>
-  	</th:block>
-  	<th:block th:if="${session.user != null}">
+  <ul>
+    <li><a href="/member/signUp">signUp</a></li>
+    <th:block th:if="${session.user == null}">
+    <li><a href="/member/login">login</a></li>
+    </th:block>
+    <th:block th:if="${session.user != null}">
     <li><a href="/member/logout">logout</a></li>
     </th:block>
-  	<li><a href="/member/myPage">myPage</a></li>
-  	<li><a href="/member/like">like</a></li>
-  	<li><a href="/member/announcement">announcement</a></li>
-  	<li><a href="/place/mapAPI">mapAPI</a></li>
-  	<li><a href="/member/customer">customer</a></li>
+    <li><a href="/member/myPage">myPage</a></li>
+    <li><a href="/member/like">like</a></li>
+    <li><a href="/member/announcement">announcement</a></li>
+    <li><a href="/place/mapAPI">mapAPI</a></li>
+    <li><a href="/member/customer">customer</a></li>
   </ul>
   
   <hr>
   
   <table>
-  	<tr>
-  		<th>idx</th>
-  		<th>userid</th>
-  		<th>userpw</th>
-  		<th>nick</th>
-  	</tr>
-  	
-  	<tr th:each="row : ${test}">
-  		<td th:text="${row.accounts_idx}"></td>
-  		<td th:text="${row.userid}"></td>
-  		<td th:text="${row.userpw}"></td>
-  		<td th:text="${row.nick}"></td>
-  	</tr>
+    <tr>
+      <th>idx</th>
+      <th>userid</th>
+      <th>userpw</th>
+      <th>nick</th>
+    </tr>
+    
+    <tr th:each="row : ${test}">
+      <td th:text="${row.accounts_idx}"></td>
+      <td th:text="${row.userid}"></td>
+      <td th:text="${row.userpw}"></td>
+      <td th:text="${row.nick}"></td>
+    </tr>
   </table>
   
   

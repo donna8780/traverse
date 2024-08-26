@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title th:text="${row.title}">게시글 보기</title>
     <link rel="stylesheet" href="/css/viewStyle.css"> <!-- 스타일을 위한 CSS 파일 경로 -->
+    <link href="/css/mainStyle.css" rel="stylesheet">
 </head>
 <body>
+<th:block th:replace="/fragment::header"></th:block>
     <div class="post-container">
         <h1 th:text="${row.title}">게시글 제목</h1>
         <p><strong>작성자:</strong> <span th:text="${row.nick}">작성자</span></p>
@@ -35,5 +37,6 @@
       location.href = '/member/ann_delete/[[${row.announcement_idx}]]';
     };
   </script>
+    <th:block th:replace="/fragment::footer"></th:block>
   
 </html>
