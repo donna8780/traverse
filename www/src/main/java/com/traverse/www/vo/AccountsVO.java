@@ -1,6 +1,8 @@
 package com.traverse.www.vo;
 
-import java.sql.Date;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /*
 	accounts_idx	int
@@ -16,8 +18,11 @@ import java.sql.Date;
 
 public class AccountsVO {
 	private int accounts_idx;
-	private String userid, userpw, nick, email, name, phone, profile;
-	private Date birth;
+	private String userid, userpw, nick, email, name, phone, profile1;
+
+	 @DateTimeFormat(pattern = "yyyy.MM.dd")
+	    private LocalDate birth;
+	
 	public int getAccounts_idx() {
 		return accounts_idx;
 	}
@@ -66,10 +71,10 @@ public class AccountsVO {
 	public void setProfile(String profile1) {
 		this.profile = profile1;
 	}
-	public Date getBirth() {
+	public LocalDate getBirth() {
 		return birth;
 	}
-	public void setBirth(Date birth) {
+	public void setBirth(LocalDate birth) {
 		this.birth = birth;
 	}
 	
