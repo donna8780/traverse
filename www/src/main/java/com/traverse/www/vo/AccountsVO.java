@@ -65,11 +65,11 @@ public class AccountsVO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getProfile1() {
-		return profile1;
+	public String getProfile() {
+		return profile;
 	}
-	public void setProfile1(String profile1) {
-		this.profile1 = profile1;
+	public void setProfile(String profile1) {
+		this.profile = profile1;
 	}
 	public LocalDate getBirth() {
 		return birth;

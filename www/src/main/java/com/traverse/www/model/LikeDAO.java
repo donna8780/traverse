@@ -26,4 +26,7 @@ public interface LikeDAO {
    @Insert("INSERT INTO like_place (a_idx, title, addr1, firstimage, mapx, mapy) " +
        "VALUES (#{a_idx}, #{title}, #{addr1}, #{firstimage}, #{mapx}, #{mapy})")
    void insert(LikeVO likeVO);
+   
+   @Delete("DELETE FROM like_place WHERE a_idx = #{a_idx} AND title = #{title}")
+   void deletelike(LikeVO likeVO);
 }
