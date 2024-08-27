@@ -21,4 +21,7 @@ public class TraverserStoryController {
 		
 		return mav;
 	}
+	
+	@GetMapping("/place/reviews")
+	public void reviews() {}
 }

@@ -4,9 +4,14 @@
 <meta charset="UTF-8">
 <title>Location Selector</title>
 <link href="/css/likeStyle.css" rel="stylesheet">
+<link href="/css/mainStyle.css" rel="stylesheet">
 </head>
 <body>
 
+	<th:block th:replace="/fragment::header"></th:block>
+
+	<div id="like">
+		
     <div class="container">
         <div class="left">
             <!-- 전체 선택 체크박스와 <hr> 태그를 포함하는 고정 헤더 -->
@@ -80,7 +85,7 @@ function toggleMarker(check, x, y) {
 
     if (check.checked) {
         var marker = new kakao.maps.Marker({
-            position: new kakao.maps.LatLng(x, y),
+            position: new kakao.maps.LatLng(y, x),
             map: map
         });
         markers[key] = marker; 
@@ -183,6 +188,11 @@ function closeOverlay(key) {
     }
 }
     </script>
+		
+	
+	</div>
+	
+	<th:block th:replace="/fragment::footer"></th:block>
 
 </body>
 </html>

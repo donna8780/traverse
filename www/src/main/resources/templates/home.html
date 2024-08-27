@@ -10,70 +10,9 @@
 </head>
 <body>
 
-	<input type="checkbox" id="menuicon">
-	<header>
-		<div>
-			<ul class="navi">
-				<li><a href="/"><img class="logo" th:src="@{/image/logo_w.png}"></a></li>
-				<li th:if="${session.user == null}">
-					<a href="/member/login">login</a>
-				</li>
-				<li th:if="${session.user != null}">
-					<a href="/member/myPage">myPage</a>
-				</li>
-		  </ul>
-		  
-		  <label for="menuicon" class="menubtn">
-		  	<span></span>
-		  	<span></span>
-		  	<span></span>
-		  </label>
-		</div>
-	</header>
+	<th:block th:replace="/fragment::header"></th:block>
 	
-	<div class="sidebar sidebar-left">
-    <span class="area_desc">
-          <!-- 왼쪽 사이드바 (날씨 정보) -->
-    <div class="sidebar">
-        <h1>[[${city}]]</h1>
-        
-
-<select id="weather-select" name="city" onchange="this.form.submit()">
-    <option value="">지역 선택</option>
-    <option value="Seoul">Seoul</option>
-    <option value="Busan">Busan</option>
-    <option value="Jeju">Jeju</option>
-    <option value="Ulsan">Ulsan</option>
-    <option value="Gwangju">Gwangju</option>
-    <option value="Gangneung">Gangneung</option>
-</select>
-
-        <div class="weather-info">
-            <!-- 온도 변환: K -> ℃ (소수점 한 자리) -->
-            <div>온도: [[${#numbers.formatDecimal(weather.main.temp - 273.15, 0, 1)}]] ℃</div>
-            
-            <!-- 체감 온도 변환: K -> ℃ (소수점 한 자리) -->
-            <div>체감 온도: [[${#numbers.formatDecimal(weather.main.feels_like - 273.15, 0, 1)}]] ℃</div>
-            
-            <!-- 날씨 설명 -->
-            <div>날씨: [[${weather.weather[0].description}]]</div>
-            
-            <!-- 풍속 변환: m/s -> km/h (소수점 한 자리) -->
-            <div>바람: [[${#numbers.formatDecimal(weather.wind.speed * 3.6, 0, 1)}]] km/h</div>
-            
-            <!-- 습도 그대로 출력 -->
-            <div>습도: [[${weather.main.humidity}]]%</div>
-        </div>
-    </div>
-    
-    <script>
-    document.getElementById('weather-select').addEventListener('change', function() {
-        var selectedCity = this.value;
-        window.location.href = '/?city=' + encodeURIComponent(selectedCity);
-    });
-</script>
-    </span>
-  </div>
+	
 	
 	<div class="container">
 		<div class="contents">
@@ -132,34 +71,8 @@
 					onmouseout="resetImage()">제주</a>
 			</span>
 		</div>
-		<div class="sidebar">
-			<span class="area_desc">
-			  <a href="/member/signUp">signUp</a><br>
-			  <th:block th:if="${session.user == null}">
-			  	<a href="/member/login">login</a><br>
-			  </th:block>
-			  <th:block th:if="${session.user != null}">
-			  	<a href="/member/logout">logout</a><br>
-			  	<a href="/member/myPage">myPage</a><br>
-			  </th:block>
-			  <a href="/member/like">like</a><br>
-			  <a href="/place/mapAPI">mapAPI</a><br>
-        <a href="/member/customer">customer</a><br>
-        <a href="/place/travelplan">여행계획</a><br>        
-        <a href="/member/accommodation">숙박</a><br>
-        <a href="/member/location">길찾기</a><br>
-        <a href="/place/traverserStory">Traverser's Story</a>
-
-			</span>
-		</div>
 	</div>
 	
-	
-	
-	<footer>
-		<hr>
-		<div>회사소개  |  이용약관  |  등등...</div>
-	</footer>
 
   <script>
     function changeImage(imageName) {
@@ -171,70 +84,7 @@
     }
   </script>
 
-
-
-<!-- 
-	<ul>
-  	<li><a href="/member/signUp">signUp</a></li>
-  	<th:block th:if="${session.user == null}">
-  	<li><a href="/member/login">login</a></li>
-  	</th:block>
-  	<th:block th:if="${session.user != null}">
-    <li><a href="/member/logout">logout</a></li>
-    </th:block>
-  	<li><a href="/member/myPage">myPage</a></li>
-  	<li><a href="/member/like">like</a></li>
-  	<li><a href="/member/announcement">announcement</a></li>
-  	<li><a href="/place/mapAPI">mapAPI</a></li>
-  	<li><a href="/member/customer">customer</a></li>
-  </ul>
-  
-  <hr>
-  
-  <table>
-  	<tr>
-  		<th>idx</th>
-  		<th>userid</th>
-  		<th>userpw</th>
-  		<th>nick</th>
-  	</tr>
-  	
-  	<tr th:each="row : ${test}">
-  		<td th:text="${row.accounts_idx}"></td>
-  		<td th:text="${row.userid}"></td>
-  		<td th:text="${row.userpw}"></td>
-  		<td th:text="${row.nick}"></td>
-  	</tr>
-  </table>
-  
-  
-  <div id="map" style="width:500px; height:400px;"></div>
-  
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7717c2c3bc1327ef51412b55ac5ef"></script>
-  <script>
-     const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-     let options = { //지도를 생성할 때 필요한 기본 옵션
-        center: new kakao.maps.LatLng(35.1192845,128.7915767), //지도의 중심좌표.
-        level: 3 //지도의 레벨(확대, 축소 정도)
-     };
-     let map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-     
-     
-      // 마커가 표시될 위치입니다 
-     var markerPosition  = new kakao.maps.LatLng(35.1192845,128.7915767); 
-
-     // 마커를 생성합니다
-     var marker = new kakao.maps.Marker({
-         position: markerPosition
-     });
-
-     // 마커가 지도 위에 표시되도록 설정합니다
-     marker.setMap(map);
-
-  </script>
-  
-  <img th:src="@{/image/map.png}">
- -->
+<th:block th:replace="/fragment::footer"></th:block>
 
 </body>
 </html>
