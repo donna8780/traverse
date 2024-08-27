@@ -37,5 +37,8 @@ public interface AnnouncementDAO {
 	
 	@Select("select count(*) from announcement")
 	int totalBoard();
+	
+	@Update("UPDATE announcement SET v_count = v_count + 1 WHERE announcement_idx = #{announcement_idx}")
+	int incrementViewCount(int announcement_idx);
 
 }
