@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-body {
+#signup {
   margin: 0;
   padding: 0;
   display: flex;
@@ -10,7 +10,7 @@ body {
   background-color: #f0f0f0;
 }
 
-.container {
+#signup .container {
   font-family: Arial, sans-serif;
   font-size: 24px;
   outline: dashed 1px black;
@@ -21,7 +21,7 @@ body {
   position: relative;
 }
 
-.form {
+#signup .form {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -32,7 +32,7 @@ body {
   position: relative;
 }
 
-.title {
+#signup .title {
   font-size: 28px;
   color: royalblue;
   font-weight: 600;
@@ -43,8 +43,8 @@ body {
   padding-left: 30px;
 }
 
-.title::before,
-.title::after {
+#signup .title::before,
+#signup .title::after {
   position: absolute;
   content: "";
   height: 16px;
@@ -54,49 +54,49 @@ body {
   background-color: royalblue;
 }
 
-.title::before {
+#signup .title::before {
   width: 18px;
   height: 18px;
   background-color: royalblue;
 }
 
-.title::after {
+#signup .title::after {
   width: 18px;
   height: 18px;
   animation: pulse 1s linear infinite;
 }
 
-.message,
-.signin {
+#signup .message,
+#signup .signin {
   color: rgba(88, 87, 87, 0.822);
   font-size: 14px;
 }
 
-.signin {
+#signup .signin {
   text-align: center;
 }
 
-.signin a {
+#signup .signin a {
   color: royalblue;
 }
 
-.signin a:hover {
+#signup .signin a:hover {
   text-decoration: underline royalblue;
 }
 
-.flex {
+#signup .flex {
   display: flex;
   width: 100%;
   gap: 10px;
-  align-items: center; /* 입력 필드와 버튼을 수직으로 정렬 */
+  align-items: center;
 }
 
-.form label {
+#signup .form label {
   position: relative;
-  flex: 1; /* 모든 입력 필드가 동일한 너비를 가지도록 설정 */
+  flex: 1;
 }
 
-.form .input {
+#signup .input {
   width: 100%;
   padding: 10px 10px 20px 10px;
   outline: 0;
@@ -105,7 +105,7 @@ body {
   box-sizing: border-box;
 }
 
-.form .input + span {
+#signup .input + span {
   position: absolute;
   left: 10px;
   top: 15px;
@@ -115,23 +115,23 @@ body {
   transition: 0.3s ease;
 }
 
-.form .input:placeholder-shown + span {
+#signup .input:placeholder-shown + span {
   top: 15px;
   font-size: 0.9em;
 }
 
-.form .input:focus + span,
-.form .input:valid + span {
+#signup .input:focus + span,
+#signup .input:valid + span {
   top: 30px;
   font-size: 0.7em;
   font-weight: 600;
 }
 
-.form .input:valid + span {
+#signup .input:valid + span {
   color: green;
 }
 
-.check-btn {
+#signup .check-btn {
   padding: 10px 15px;
   border: none;
   background-color: royalblue;
@@ -140,14 +140,14 @@ body {
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s ease;
-  height: 100%; /* 버튼이 입력 필드와 동일한 높이를 가지도록 설정 */
+  height: 100%;
 }
 
-.check-btn:hover {
+#signup .check-btn:hover {
   background-color: rgb(56, 90, 194);
 }
 
-.submit {
+#signup .submit {
   border: none;
   outline: none;
   background-color: royalblue;
@@ -158,10 +158,28 @@ body {
   transform: .3s ease;
 }
 
-.submit:hover {
+#signup .submit:hover {
   background-color: rgb(56, 90, 194);
 }
+.flex {
+  position: relative;
+}
 
+#togglePassword {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  padding: 0;
+}
+
+#togglePassword img {
+  width: 24px;
+  height: 24px;
+}
 @keyframes pulse {
   from {
     transform: scale(0.9);
