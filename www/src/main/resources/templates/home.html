@@ -10,26 +10,10 @@
 </head>
 <body>
 
-  <input type="checkbox" id="menuicon">
-  <header>
-    <div>
-      <ul class="navi">
-        <li><a href="/"><img class="logo" th:src="@{/image/logo_w.png}"></a></li>
-        <li th:if="${session.user == null}">
-          <a href="/member/login">login</a>
-        </li>
-        <li th:if="${session.user != null}">
-          <a href="/member/myPage">myPage</a>
-        </li>
-      </ul>
-      
-      <label for="menuicon" class="menubtn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
-    </div>
-  </header>
+
+	<th:block th:replace="/fragment::header"></th:block>
+	
+
   
   <div class="sidebar-left">
     <span class="area_desc">
@@ -89,90 +73,63 @@
   </div>
   
   <div class="container">
-    <div class="contents">
-      <span class="area_desc">
-        <img id="mapImage" class="mapimg" th:src="@{/image/map0.png}">
-        <a href="/gyeonggi" style="top: 26%; left: 39%"
-          onmouseover="changeImage('경기.png')"
-          onmouseout="resetImage()">경기</a>
-        <a href="/gangwon" style="top: 18%; left: 60%"
-          onmouseover="changeImage('강원.png')"
-          onmouseout="resetImage()">강원</a>
-        <a href="/chungbuk" style="top: 36%; left: 48%"
-          onmouseover="changeImage('충북.png')"
-          onmouseout="resetImage()">충북</a>
-        <a href="/chungnam" style="top: 42%; left: 28%"
-          onmouseover="changeImage('충남.png')"
-          onmouseout="resetImage()">충남</a>
-        <a href="/gyeongbuk" style="top: 45%; left: 69%"
-          onmouseover="changeImage('경북.png')"
-          onmouseout="resetImage()">경북</a>
-        <a href="/gyeongnam" style="top: 65%; left: 59%"
-          onmouseover="changeImage('경남.png')"
-          onmouseout="resetImage()">경남</a>
-        <a href="/jeonbuk" style="top: 58%; left: 35%"
-          onmouseover="changeImage('전북.png')"
-          onmouseout="resetImage()">전북</a>
-        <a href="/jeonnam" style="top: 74%; left: 32%"
-          onmouseover="changeImage('전남.png')"
-          onmouseout="resetImage()">전남</a>
-        <a href="/duration?areaCode=1" style="top: 22%; left: 31%"
-          onmouseover="changeImage('서울.png')"
-          onmouseout="resetImage()">서울</a>
-        <a href="/duration?areaCode=2" style="top: 23%; left: 23%"
-          onmouseover="changeImage('인천.png')"
-          onmouseout="resetImage()">인천</a>
-        <a href="/duration?areaCode=8" style="top: 41%; left: 37%"
-          onmouseover="changeImage('세종.png')"
-          onmouseout="resetImage()">세종</a>
-        <a href="/duration?areaCode=3" style="top: 46%; left: 40%"
-          onmouseover="changeImage('대전.png')"
-          onmouseout="resetImage()">대전</a>
-        <a href="/duration?areaCode=4" style="top: 55%; left: 67%"
-          onmouseover="changeImage('대구.png')"
-          onmouseout="resetImage()">대구</a>
-        <a href="/duration?areaCode=7" style="top: 61%; left: 82%"
-          onmouseover="changeImage('울산.png')"
-          onmouseout="resetImage()">울산</a>
-        <a href="/duration?areaCode=6" style="top: 68%; left: 78%"
-          onmouseover="changeImage('부산.png')"
-          onmouseout="resetImage()">부산</a>
-        <a href="/duration?areaCode=5" style="top: 69%; left: 28%"
-          onmouseover="changeImage('광주.png')"
-          onmouseout="resetImage()">광주</a>
-        <a href="/duration?areaCode=39" style="top: 95%; left: 23%"
-          onmouseover="changeImage('제주.png')"
-          onmouseout="resetImage()">제주</a>
-      </span>
-    </div>
-    <div class="sidebar">
-      <span class="area_desc">
-        <a href="/member/signUp">signUp</a><br>
-        <th:block th:if="${session.user == null}">
-          <a href="/member/login">login</a><br>
-        </th:block>
-        <th:block th:if="${session.user != null}">
-          <a href="/member/logout">logout</a><br>
-          <a href="/member/myPage">myPage</a><br>
-        </th:block>
-        <a href="/member/like">like</a><br>
-        <a href="/place/mapAPI">mapAPI</a><br>
-        <a href="/member/customer">customer</a><br>
-        <a href="/place/travelplan">여행계획</a><br>        
-        <a href="/member/accommodation">숙박</a><br>
-        <a href="/member/index">길찾기</a><br>
-        <a href="/place/traverserStory">Traverser's Story</a>
-
-      </span>
-    </div>
-  </div>
-  
-  
-  
-  <footer>
-    <hr>
-    <div>회사소개  |  이용약관  |  등등...</div>
-  </footer>
+		<div class="contents">
+			<span class="area_desc">
+				<img id="mapImage" class="mapimg" th:src="@{/image/map0.png}">
+				<a href="/gyeonggi" style="top: 26%; left: 39%"
+					onmouseover="changeImage('경기.png')"
+					onmouseout="resetImage()">경기</a>
+				<a href="/gangwon" style="top: 18%; left: 60%"
+					onmouseover="changeImage('강원.png')"
+					onmouseout="resetImage()">강원</a>
+				<a href="/chungbuk" style="top: 36%; left: 48%"
+					onmouseover="changeImage('충북.png')"
+					onmouseout="resetImage()">충북</a>
+				<a href="/chungnam" style="top: 42%; left: 28%"
+					onmouseover="changeImage('충남.png')"
+					onmouseout="resetImage()">충남</a>
+				<a href="/gyeongbuk" style="top: 45%; left: 69%"
+					onmouseover="changeImage('경북.png')"
+					onmouseout="resetImage()">경북</a>
+				<a href="/gyeongnam" style="top: 65%; left: 59%"
+					onmouseover="changeImage('경남.png')"
+					onmouseout="resetImage()">경남</a>
+				<a href="/jeonbuk" style="top: 58%; left: 35%"
+					onmouseover="changeImage('전북.png')"
+					onmouseout="resetImage()">전북</a>
+				<a href="/jeonnam" style="top: 74%; left: 32%"
+					onmouseover="changeImage('전남.png')"
+					onmouseout="resetImage()">전남</a>
+				<a href="/duration?areaCode=1" style="top: 22%; left: 31%"
+					onmouseover="changeImage('서울.png')"
+					onmouseout="resetImage()">서울</a>
+				<a href="/duration?areaCode=2" style="top: 23%; left: 23%"
+					onmouseover="changeImage('인천.png')"
+					onmouseout="resetImage()">인천</a>
+				<a href="/duration?areaCode=8" style="top: 41%; left: 37%"
+					onmouseover="changeImage('세종.png')"
+					onmouseout="resetImage()">세종</a>
+				<a href="/duration?areaCode=3" style="top: 46%; left: 40%"
+					onmouseover="changeImage('대전.png')"
+					onmouseout="resetImage()">대전</a>
+				<a href="/duration?areaCode=4" style="top: 55%; left: 67%"
+					onmouseover="changeImage('대구.png')"
+					onmouseout="resetImage()">대구</a>
+				<a href="/duration?areaCode=7" style="top: 61%; left: 82%"
+					onmouseover="changeImage('울산.png')"
+					onmouseout="resetImage()">울산</a>
+				<a href="/duration?areaCode=6" style="top: 68%; left: 78%"
+					onmouseover="changeImage('부산.png')"
+					onmouseout="resetImage()">부산</a>
+				<a href="/duration?areaCode=5" style="top: 69%; left: 28%"
+					onmouseover="changeImage('광주.png')"
+					onmouseout="resetImage()">광주</a>
+				<a href="/duration?areaCode=39" style="top: 95%; left: 23%"
+					onmouseover="changeImage('제주.png')"
+					onmouseout="resetImage()">제주</a>
+			</span>
+		</div>
+	</div>
 
   <script>
     function changeImage(imageName) {
@@ -185,69 +142,8 @@
   </script>
 
 
+<th:block th:replace="/fragment::footer"></th:block>
 
-<!-- 
-  <ul>
-    <li><a href="/member/signUp">signUp</a></li>
-    <th:block th:if="${session.user == null}">
-    <li><a href="/member/login">login</a></li>
-    </th:block>
-    <th:block th:if="${session.user != null}">
-    <li><a href="/member/logout">logout</a></li>
-    </th:block>
-    <li><a href="/member/myPage">myPage</a></li>
-    <li><a href="/member/like">like</a></li>
-    <li><a href="/member/announcement">announcement</a></li>
-    <li><a href="/place/mapAPI">mapAPI</a></li>
-    <li><a href="/member/customer">customer</a></li>
-  </ul>
-  
-  <hr>
-  
-  <table>
-    <tr>
-      <th>idx</th>
-      <th>userid</th>
-      <th>userpw</th>
-      <th>nick</th>
-    </tr>
-    
-    <tr th:each="row : ${test}">
-      <td th:text="${row.accounts_idx}"></td>
-      <td th:text="${row.userid}"></td>
-      <td th:text="${row.userpw}"></td>
-      <td th:text="${row.nick}"></td>
-    </tr>
-  </table>
-  
-  
-  <div id="map" style="width:500px; height:400px;"></div>
-  
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7717c2c3bc1327ef51412b55ac5ef"></script>
-  <script>
-     const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-     let options = { //지도를 생성할 때 필요한 기본 옵션
-        center: new kakao.maps.LatLng(35.1192845,128.7915767), //지도의 중심좌표.
-        level: 3 //지도의 레벨(확대, 축소 정도)
-     };
-     let map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-     
-     
-      // 마커가 표시될 위치입니다 
-     var markerPosition  = new kakao.maps.LatLng(35.1192845,128.7915767); 
-
-     // 마커를 생성합니다
-     var marker = new kakao.maps.Marker({
-         position: markerPosition
-     });
-
-     // 마커가 지도 위에 표시되도록 설정합니다
-     marker.setMap(map);
-
-  </script>
-  
-  <img th:src="@{/image/map.png}">
- -->
 
 </body>
 </html>

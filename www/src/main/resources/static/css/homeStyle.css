@@ -240,7 +240,7 @@
 
 
   /* 제목 스타일 */
-  .title {
+.title {
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -248,21 +248,22 @@
   }
 
   /* 슬라이드 컨테이너 */
-  .slider-container {
+.slider-container {
     position: relative;
-    width: 100%;
+    width: 80%;
     height: 450px;
     overflow: hidden;
+    margin: 0 auto;
   }
 
   /* 각 슬라이드 이미지 */
-  .slide {
+.slide {
     position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    animation: slideUp 16s infinite;
+    animation: slideUp 18s infinite;
   }
   
     /* 이미지 애니메이션 */
@@ -275,13 +276,20 @@
   }
 
   /* 각 이미지에 다른 타이밍으로 애니메이션 시작 */
-  .slide:nth-child(1) { animation-delay: 0s; }
-  .slide:nth-child(2) { animation-delay: 4s; }
-  .slide:nth-child(3) { animation-delay: 8s; }
-  .slide:nth-child(4) { animation-delay: 12s; }
+.slide:nth-child(1) { animation-delay: 0s; }
+.slide:nth-child(2) { animation-delay: 3s; }
+.slide:nth-child(3) { animation-delay: 6s; }
+.slide:nth-child(4) { animation-delay: 9s; }
+.slide:nth-child(5) { animation-delay: 12s; }
+.slide:nth-child(6) { animation-delay: 15s; }
+
+#checkboxForm {
+	width: 80%;
+	margin: 0 auto;
+}
 
   /* 버튼 스타일 */
-  .checkbox-button {
+.checkbox-button {
     display: inline-block;
     padding: 10px 30px;
     background-color: #2A3854;
@@ -290,18 +298,23 @@
     cursor: pointer;
     border-radius: 30px;
     transition: background-color 0.3s;
-    margin: 5px 10px;
+    margin: 5px 18px;
     font-size: 18px;
     font-weight: bold;
   }
 
+.ggcheck .checkbox-button {
+	padding: 8px 25px;
+	margin: 4px 12px;
+}
+
   /* 체크박스가 체크되었을 때 버튼 스타일 */
-  .checked {
+.checked {
     background-color: #E27D24;
   }
   
    /* 제출 버튼 스타일 */
-  .submit-button {
+.submit-button {
     display: inline-block;
     padding: 10px 20px;
     background-color: #007bff;
