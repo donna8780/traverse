@@ -2,6 +2,7 @@
 body {
   margin: 0;
   padding: 0;
+    box-sizing: border-box;
 }
 
 .logo {
@@ -170,4 +171,33 @@ footer {
    width: 1200px;
    margin: 0 auto;
    min-height: 60px;
+    padding: 20px;
+    text-align: center;
+}
+
+footer hr {
+    border: none;
+    border-top: 1px solid #ccc; /* 구분선 스타일 */
+    margin-bottom: 20px;
+    width: 1250px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; /* 수직 가운데 정렬 */
+    flex-wrap: wrap; /* 화면 크기에 따라 항목들이 여러 줄로 배치되도록 설정 */
+    gap: 10px; /* 항목 사이의 간격 */
+}
+
+.footer-container a {
+	color: black;
+}
+
+.footer-container span {
+    font-size: 14px; /* 텍스트 크기 */
+}
+
+.footer-container span:first-child {
+    font-weight: bold; /* 첫 번째 항목(TRAVERSE)의 텍스트 굵게 */
 }

@@ -37,8 +37,8 @@
     </div>
     <div class="sidebar">
       <span class="area_desc">
-        <a href="/member/signUp">signUp</a><br>
         <th:block th:if="${session.user == null}">
+        <a href="/member/signUp">signUp</a><br>
           <a href="/member/login">login</a><br>
         </th:block>
         <th:block th:if="${session.user != null}">
@@ -57,7 +57,17 @@
   
    <footer>
     <hr>
-    <div>회사소개  |  이용약관  |  등등...</div>
+    <div class="footer-container">
+    	<span>TRAVERSE</span>
+    	<span>|</span>
+    	<span><a href="/member/customer">회사소개</a></span>
+    	<span>|</span>
+    	<span><a href="/termsOfService">이용약관</a></span>
+    	<span>|</span>
+    	<span><a href="/privacyPolicy">개인정보보호방침</a></span>
+    	<span>|</span>
+    	<span>© traverse2024</span>
+    </div>
   </footer>
   </th:block>
 </body>

@@ -157,14 +157,14 @@
     const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
     
     if (checkedCheckboxes === 0) {
-      alert('최소 1개 이상의 항목을 선택해주세요.');
-      return false;
-    }
+        alert('여행할 지역을 선택해주세요.');
+        return false;
+      }
 
-    if (checkedCheckboxes > maxSelections) {
-      alert('최대 1개 항목만 선택할 수 있습니다.');
-      return false;
-    }
+      if (checkedCheckboxes > maxSelections) {
+        alert('하나의 지역만 선택할 수 있습니다.');
+        return false;
+      }
 
     return true;
   }

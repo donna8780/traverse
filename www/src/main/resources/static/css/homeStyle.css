@@ -46,9 +46,9 @@
     top: 30%; /* 로고 밑으로 내리기 위해 top 값을 조정 */
     left: 25px;
     transform: translateY(0); /* translateY(-50%) 제거 */
-    background-color: rgba(0, 0, 255, 0.3); /* 배경색을 약간 더 밝게 */
+    background-color: rgba(173, 216, 230, 0.5);
     border-right: 1px solid #ccc;
-    padding: 20px; /* 패딩을 늘려서 여유 공간 확보 */
+    padding: 15px; /* 패딩을 늘려서 여유 공간 확보 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 사이드바에 그림자 추가 */
     border-radius: 10px; /* 모서리를 둥글게 처리 */
     z-index: 1000;
