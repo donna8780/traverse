@@ -36,9 +36,25 @@
         </label>
       </div>
 
-      <label> <input name="userpw" required placeholder=""
-        type="password" class="input"> <span>비밀번호</span>
-      </label>
+      <div class="flex">
+    <label class="input-label" style="position: relative; display: block;">
+        <input id="password" name="password" required placeholder="" type="password" class="input" style="padding-right: 30px;">
+        <span>비밀번호</span>
+        <button type="button" id="togglePassword" onclick="togglePasswordVisibility('password', 'togglePassword')" style="background: none; border: none; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); padding: 0; margin: 0;">
+            <img src="/image/eye_closed_icon.png" alt="Toggle visibility" style="width: 20px; height: 20px;">
+        </button>
+    </label>
+</div>
+
+<div class="flex">
+    <label class="input-label" style="position: relative; display: block;">
+        <input id="confirmPassword" name="confirmPassword" required placeholder="" type="password" class="input" style="padding-right: 30px;">
+        <span>비밀번호 확인</span>
+        <button type="button" id="toggleConfirmPassword" onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword')" style="background: none; border: none; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); padding: 0; margin: 0;">
+            <img src="/image/eye_closed_icon.png" alt="Toggle visibility" style="width: 20px; height: 20px;">
+        </button>
+    </label>
+</div>
 
       <div class="flex">
         <label class="input-label"> <input id="phone" name="phone"

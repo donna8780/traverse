@@ -43,10 +43,10 @@
     width: 12%;
     height: 400px; /* 사이드바 높이를 콘텐츠에 맞게 조정 */
     position: absolute;
-    top: 40%;
+    top: 30%; /* 로고 밑으로 내리기 위해 top 값을 조정 */
     left: 25px;
-    transform: translateY(-50%);
-    background-color: #f9f9f9; /* 배경색을 약간 더 밝게 */
+    transform: translateY(0); /* translateY(-50%) 제거 */
+    background-color: rgba(0, 0, 255, 0.3); /* 배경색을 약간 더 밝게 */
     border-right: 1px solid #ccc;
     padding: 20px; /* 패딩을 늘려서 여유 공간 확보 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 사이드바에 그림자 추가 */
@@ -57,6 +57,7 @@
     font-size: 15px;
     color: #333; /* 글씨 색상을 어두운 회색으로 설정 */
 }
+
 
 .sidebar-left .weather-info {
     font-size: 13px; /* 날씨 정보의 글자 크기 조정 */
