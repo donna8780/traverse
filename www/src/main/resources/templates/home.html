@@ -10,11 +10,69 @@
 </head>
 <body>
 
+
 	<th:block th:replace="/fragment::header"></th:block>
 	
-	
-	
-	<div class="container">
+
+  
+  <div class="sidebar-left">
+    <span class="area_desc">
+          <!-- 왼쪽 사이드바 (날씨 정보) -->
+    <div class="sidebar">
+        <h1>[[${city}]]</h1>
+        
+
+<select id="weather-select" name="city" onchange="this.form.submit()">
+    <option value="">지역 선택</option>
+    <option value="Seoul">Seoul</option>
+    <option value="Busan">Busan</option>
+    <option value="Jeju">Jeju</option>
+    <option value="Ulsan">Ulsan</option>
+    <option value="Gwangju">Gwangju</option>
+    <option value="Gangneung">Gangneung</option>
+</select>
+
+        <div class="weather-info">
+           <img id="weather-icon" src="http://openweathermap.org/img/wn/[[${weather.weather[0].icon}]]@2x.png" alt="Weather Icon"> <!-- 날씨 아이콘 URL 예시 -->
+            <!-- 온도 변환: K -> ℃ (소수점 한 자리) -->
+            <div>온도: [[${#numbers.formatDecimal(weather.main.temp - 273.15, 0, 1)}]] ℃</div>
+            
+            <!-- 체감 온도 변환: K -> ℃ (소수점 한 자리) -->
+            <div>체감 온도: [[${#numbers.formatDecimal(weather.main.feels_like - 273.15, 0, 1)}]] ℃</div>
+            
+            <!-- 날씨 설명 -->
+            <div>날씨: [[${weather.weather[0].description}]]</div>
+            
+            <!-- 풍속 변환: m/s -> km/h (소수점 한 자리) -->
+            <div>바람: [[${#numbers.formatDecimal(weather.wind.speed * 3.6, 0, 1)}]] km/h</div>
+            
+            <!-- 습도 그대로 출력 -->
+            <div>습도: [[${weather.main.humidity}]]%</div>
+        </div>
+    </div>
+    
+        <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+    var weatherIcon = document.getElementById('weather-icon');
+
+    // 날씨 아이콘 코드에 따라 이미지 경로를 설정
+    var weatherData = {
+        icon: '[[${weather.weather[0].icon}]]' // 서버에서 전달받은 아이콘 코드
+    };
+
+    // 아이콘 URL을 동적으로 설정
+    weatherIcon.src = 'http://openweathermap.org/img/wn/' + weatherData.icon + '@2x.png';
+});
+    document.getElementById('weather-select').addEventListener('change', function() {
+        var selectedCity = this.value;
+        window.location.href = '/?city=' + encodeURIComponent(selectedCity);
+    });
+
+    </script>
+    </span>
+  </div>
+  
+  <div class="container">
 		<div class="contents">
 			<span class="area_desc">
 				<img id="mapImage" class="mapimg" th:src="@{/image/map0.png}">
@@ -72,7 +130,6 @@
 			</span>
 		</div>
 	</div>
-	
 
   <script>
     function changeImage(imageName) {
@@ -84,7 +141,9 @@
     }
   </script>
 
+
 <th:block th:replace="/fragment::footer"></th:block>
+
 
 </body>
 </html>

@@ -5,8 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>고객지원</title>
 <link rel="stylesheet" href="/css/Customerstyle.css">
+<link rel="stylesheet" href="/css/mainStyle.css">
 </head>
 <body>
+<th:block th:replace="/fragment::header"></th:block>
+	<div id="customer">
 	<header>
 		<nav>
 			<ul>
@@ -67,11 +70,11 @@
 		</ul>
 		<!-- 관리자가 아니면 글쓰기 활성화 안됨 -->
 		<div th:if="${session.user != null and session.user.nick == '관리자'}">
-			<button>
+			<a href="/member/write"><button>
 				<span class="span-mother"> <span>글</span> <span>쓰</span> <span>기</span>
 				</span> <span class="span-mother2"> <span>글</span> <span>쓰</span> <span>기</span>
 				</span>
-			</button>
+			</button></a>
 		</div>
 	</section>
 
@@ -115,47 +118,48 @@
 			</table>
 			<br>
 			<ul class="pagemenu"><!-- 페이지네이션 메뉴의 컨테이너 역할 -->
+
         <!-- 타임리프의 반복문을 위한 속성으로 html코드 동적으로 생성 i는 반복분에서 인텍스를 나타내고 pg.begin에서 pg.end까지 
         숫자 시퀀스를 생성 예를 들어, 1,10이면 pg.begin에서 pg.end까지 숫자에 대해 li태그를 생성 -->
-				<li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}"><a
-					th:href="@{customer(idx=${i})} + '#qna'"><!-- 동적 링크 생성 --> <span
-						th:text="${i}"></span>
-				</a></li>
-			</ul>
-			<!-- pg.begin에서 pg.end까지 숫자에 해당하는 페이지 번호를 순서대로 li와 a태그로 감싸서 페이지네이션 링크를 만든다.
-			이 링크는 사용자가 각 페이지 번호를 클릭할 수 있도록 하며 클릭 시 특정 페이지로 이동한다. a태그에 #qna가 붙어있으므로
-			페이지 이동 후에도 페이지의 특정 위치로 스크롤된다. -->			
-		</div>
+        <li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}"><a
+          th:href="@{customer(idx=${i})} + '#qna'"><!-- 동적 링크 생성 --> <span
+            th:text="${i}"></span>
+        </a></li>
+      </ul>
+      <!-- pg.begin에서 pg.end까지 숫자에 해당하는 페이지 번호를 순서대로 li와 a태그로 감싸서 페이지네이션 링크를 만든다.
+      이 링크는 사용자가 각 페이지 번호를 클릭할 수 있도록 하며 클릭 시 특정 페이지로 이동한다. a태그에 #qna가 붙어있으므로
+      페이지 이동 후에도 페이지의 특정 위치로 스크롤된다. -->     
+    </div>
 
-		<a href="/member/cswrite"><button>글쓰기</button></a>
-	</section>
+    <a href="/member/cswrite"><button>글쓰기</button></a>
+  </section>
 
-	<script>
-	//세션에서 로그인 상태 가져옴
-	let userlogin = sessionStorage.getItem('userlogin') === 'true';
-	
+  <script>
+  //세션에서 로그인 상태 가져옴
+  let userlogin = sessionStorage.getItem('userlogin') === 'true';
+  
   function showSection(sectionId) {
-  	//섹션 클래스를 가진 요소중 특정 섹션만 보여줌
+    //섹션 클래스를 가진 요소중 특정 섹션만 보여줌
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => {
-    	if (section.id === sectionId) {
-      	section.style.display = 'block';
+      if (section.id === sectionId) {
+        section.style.display = 'block';
       } else {
           section.style.display = 'none';
       }
-		});
-	}
+    });
+  }
 
- 	let button = document.querySelectorAll('button');
+  let button = document.querySelectorAll('button');
     
 
   function loginSuccess() {
-	  userlogin = true;
-	  sessionStorage.setItem('userlogin', true);
-	  //세션 스토리지에 로그인 상태 저장
-	}
+    userlogin = true;
+    sessionStorage.setItem('userlogin', true);
+    //세션 스토리지에 로그인 상태 저장
+  }
 
-		    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
         if (window.location.hash === '#notice') {
             showSection('notice');
             document.getElementById('notice').scrollIntoView();
@@ -164,6 +168,8 @@
 
     
     </script>
-
+	
+	</div>
+<th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

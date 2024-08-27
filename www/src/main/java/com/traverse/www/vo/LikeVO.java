@@ -1,32 +1,19 @@
 package com.traverse.www.vo;
 
-/*
-   like_idx  	 	int
-   a_idx   			int
-   place_name   varchar(30)
-   place_add  	varchar(150)
-   place_x   		double
-   place_y   		double
-   place_img   	varchar(50)
-   p_idx   			int
- */
-/*
-accounts_idx	int
-userid	varchar(30)
-userpw	varchar(30)
-nick	varchar(30)
-email	varchar(30)
-name	varchar(30)
-phone	varchar(30)
-birth	date
-profile1	varchar(30)
+/*'like_idx', 'int', 'NO', '', '0', ''
+'a_idx', 'int', 'YES', '', NULL, ''
+'firstimage', 'text', 'YES', '', NULL, ''
+'title', 'text', 'YES', '', NULL, ''
+'addr1', 'text', 'YES', '', NULL, ''
+'mapx', 'double', 'YES', '', NULL, ''
+'mapy', 'double', 'YES', '', NULL, ''
+'nick', 'varchar(30)', 'NO', '', NULL, ''
 */
 
 public class LikeVO {
-   private int like_idx, a_idx, p_idx;
-   private String place_name, place_add, place_img,nick;
-   private double place_x, place_y;
-   
+	private int like_idx, a_idx;
+	private String firstimage, title, addr1, nick;
+	private double mapx, mapy;
 	public int getLike_idx() {
 		return like_idx;
 	}
@@ -39,41 +26,23 @@ public class LikeVO {
 	public void setA_idx(int a_idx) {
 		this.a_idx = a_idx;
 	}
-	public int getP_idx() {
-		return p_idx;
+	public String getFirstimage() {
+		return firstimage;
 	}
-	public void setP_idx(int p_idx) {
-		this.p_idx = p_idx;
+	public void setFirstimage(String firstimage) {
+		this.firstimage = firstimage;
 	}
-	public String getPlace_name() {
-		return place_name;
+	public String getTitle() {
+		return title;
 	}
-	public void setPlace_name(String place_name) {
-		this.place_name = place_name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getPlace_add() {
-		return place_add;
+	public String getAddr1() {
+		return addr1;
 	}
-	public void setPlace_add(String place_add) {
-		this.place_add = place_add;
-	}
-	public String getPlace_img() {
-		return place_img;
-	}
-	public void setPlace_img(String place_img) {
-		this.place_img = place_img;
-	}
-	public double getPlace_x() {
-		return place_x;
-	}
-	public void setPlace_x(double place_x) {
-		this.place_x = place_x;
-	}
-	public double getPlace_y() {
-		return place_y;
-	}
-	public void setPlace_y(double place_y) {
-		this.place_y = place_y;
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
 	}
 	public String getNick() {
 		return nick;
@@ -81,5 +50,16 @@ public class LikeVO {
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
-	
+	public double getMapx() {
+		return mapx;
+	}
+	public void setMapx(double mapx) {
+		this.mapx = mapx;
+	}
+	public double getMapy() {
+		return mapy;
+	}
+	public void setMapy(double mapy) {
+		this.mapy = mapy;
+	}
 }
