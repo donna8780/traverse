@@ -86,7 +86,7 @@ public class MypageController {
            }
 
                // 새 파일을 저장할 경로 설정
-               String uploadDir = "C:/Users/hajim/OneDrive/바탕 화면/새 폴더 (3)/";
+               String uploadDir = "C:/profile/";
                String fileName = user.getAccounts_idx() + "_" + file.getOriginalFilename();
                Path filePath = Paths.get(uploadDir, fileName);
 

@@ -18,7 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class AccountsVO {
 	private int accounts_idx;
-	private String userid, userpw, nick, email, name, phone, profile1;
+	private String userid, userpw, nick, email, name, phone, profile;
 
 	 @DateTimeFormat(pattern = "yyyy.MM.dd")
 	    private LocalDate birth;
