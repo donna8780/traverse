@@ -11,7 +11,7 @@ package com.traverse.www.vo;
 */
 
 public class LikeVO {
-	private int like_idx, a_idx;
+	private int like_idx, a_idx, idx,p_idx;
 	private String firstimage, title, addr1, nick;
 	private double mapx, mapy;
 	public int getLike_idx() {
@@ -19,6 +19,12 @@ public class LikeVO {
 	}
 	public void setLike_idx(int like_idx) {
 		this.like_idx = like_idx;
+	}
+	public int getIdx() {
+		return idx;
+	}
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	public int getA_idx() {
 		return a_idx;
@@ -62,4 +68,11 @@ public class LikeVO {
 	public void setMapy(double mapy) {
 		this.mapy = mapy;
 	}
+	public int getP_idx() {
+		return p_idx;
+	}
+	public void setP_idx(int p_idx) {
+		this.p_idx = p_idx;
+	}
+	
 }
