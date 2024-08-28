@@ -30,5 +30,8 @@ public interface TravelplanDAO {
 	
 	@Select("select * from place_a_idx where a_idx = #{user_idx} and seldate = #{seldate}")
 	List<PlaceVO> getPlanplace(@Param("user_idx") int user_idx, @Param("seldate") String seldate);
+
+	@Select("select * from place_a_idx where a_idx = #{user_idx} and seldate = #{seldate} and day = #{day}")
+	List<PlaceVO> getdayplan(@Param("user_idx") int user_idx, @Param("day") int day, @Param("seldate") String seldate);
 	
 }

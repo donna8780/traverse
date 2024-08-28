@@ -10,9 +10,9 @@
 
 <body>
 <th:block th:replace="/fragment::header"></th:block>
-	<div id="signup">
-	
-	<div class="mid">
+  <div id="signup">
+  
+<div class="mid">
     <form class="form" method="post">
       <p class="title">Membership Register</p>
 
@@ -36,19 +36,49 @@
         </label>
       </div>
 
-      <label> <input name="userpw" required placeholder=""
-        type="password" class="input"> <span>비밀번호</span>
-      </label>
+<div class="flex">
+
+    <label class="input-label" style="position: relative; display: block;">
+        <input id="password" name="password" required placeholder="" type="password" class="input" style="padding-right: 30px;">
+        <span>비밀번호</span>
+        <button type="button" id="togglePassword" onclick="togglePasswordVisibility('password', 'togglePassword')" style="background: none; border: none; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); padding: 0; margin: 0;">
+            <img src="/image/eye_closed_icon.png" alt="Toggle visibility" style="width: 20px; height: 20px;">
+        </button>
+    </label>
+</div>
+
+<div class="flex">
+    <label class="input-label" style="position: relative; display: block;">
+        <input id="confirmPassword" name="confirmPassword" required placeholder="" type="password" class="input" style="padding-right: 30px;">
+        <span>비밀번호 확인</span>
+        <button type="button" id="toggleConfirmPassword" onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword')" style="background: none; border: none; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); padding: 0; margin: 0;">
+            <img src="/image/eye_closed_icon.png" alt="Toggle visibility" style="width: 20px; height: 20px;">
+        </button>
+    </label>
+</div>
+      <div id="error-message" style="color: red; display: none;">비밀번호가
+        일치하지 않습니다.</div>
+
+      <button type="submit" onclick="validatePasswords()">제출</button>
 
       <div class="flex">
         <label class="input-label"> <input id="phone" name="phone"
           required placeholder="" type="text" class="input"
+          oninput="formatPhoneNumber(this)" maxlength="13"
           onblur="checkUserPhone()"> <span>전화번호</span>
         </label>
       </div>
-      <label> <input name="birth" required placeholder=""
-        type="date" class="input"> <span>생년월일</span>
-      </label> <label> <input name="email" required placeholder=""
+
+<div class="flex">
+        <label class="input-label"> <input id="birth" name="birth"
+          required placeholder="" type="text" class="input"
+          oninput="validateAndFormatBirth()" maxlength="8"
+          > <span>생년월일 8자리</span>
+        </label>
+      </div>
+
+
+      <label> <input name="email" required placeholder=""
         type="email" class="input"> <span>E-mail</span>
       </label>
 
@@ -56,8 +86,7 @@
     </form>
 
     <script>//서버 통신 코드
-    
-   
+
       function checkUserid() {
         let alertUseridShown = false; //아이디 알림창 떴는지 추적변수
         //'#userid'라는 HTML 입력 요소를 찾아서 그 값을 userid에 저장
@@ -87,9 +116,7 @@
             })
         }
      }
-      
-      
-     
+
       function checkUserNick(){
         let alertNickShown = false;
         let userNick = document.querySelector("#nick").value.trim();
@@ -106,10 +133,6 @@
           })
        } 
     }
-      
-      
-      
-      
       
        function checkUserPhone(){
         let alertPhoneShown = false; 
@@ -128,11 +151,75 @@
           })
       }  
   }
+       
+       function validateAndFormatBirth() {
+         var input = document.getElementById("birth");
+         var value = input.value.replace(/[^0-9]/g, ''); // 숫자만 입력 가능
+
+         if (value.length === 8) {
+             var year = parseInt(value.substring(0, 4));
+             var month = parseInt(value.substring(4, 6));
+             var day = parseInt(value.substring(6, 8));
+
+             // 유효성 검사: 연도, 월, 일이 범위 내에 있는지 확인
+             if (year >= 1900 && year <= 2099 && month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+                 input.value = year + '.' + (month < 10 ? '0' : '') + month + '.' + (day < 10 ? '0' : '') + day;
+             } else {
+                 alert("잘못된 날짜입니다. 연도는 1900년부터 2099년까지, 월은 1~12월, 일은 1~31일까지만 입력할 수 있습니다.");
+                 input.value = ''; // 잘못된 입력 초기화
+             }
+         } else {
+             input.value = value; // 8자리 이하일 때는 숫자만 유지
+         }
+     }
+
+
+
+       function formatPhoneNumber(input) {
+          // 숫자만 남기고 모든 비숫자 문자는 제거
+          var value = input.value.replace(/[^0-9]/g, '');
+
+          if (value.length > 3 && value.length <= 7) {
+              // 3자리 이후 4자리 형식
+              input.value = value.substring(0, 3) + '-' + value.substring(3);
+          } else if (value.length > 7) {
+              // 3자리-4자리-4자리 형식
+              input.value = value.substring(0, 3) + '-' + value.substring(3, 7) + '-' + value.substring(7, 11);
+          } else {
+              input.value = value;
+          }
+      }
+
+       function togglePasswordVisibility(passwordFieldId, toggleButtonId) {
+          var passwordField = document.getElementById(passwordFieldId);
+          var toggleButton = document.getElementById(toggleButtonId);
+          
+          if (passwordField.type === "password") {
+              passwordField.type = "text";
+              toggleButton.children[0].src = "/image/eye_icon.png";
+          } else {
+              passwordField.type = "password";
+              toggleButton.children[0].src = "/image/eye_closed_icon.png";
+          }
+      }
+       function validatePasswords() {
+          var password = document.getElementById('password').value;
+          var confirmPassword = document.getElementById('confirmPassword').value;
+          var errorMessage = document.getElementById('error-message');
+
+          if (password !== confirmPassword) {
+              errorMessage.style.display = 'block';
+              return false; // 폼 제출을 막음
+          } else {
+              errorMessage.style.display = 'none';
+              return true; // 폼 제출을 허용함
+          }
+      } 
     </script>
 
   </div>
-	</div>
-	<th:block th:replace="/fragment::footer"></th:block>
+  </div>
+  <th:block th:replace="/fragment::footer"></th:block>
 </body>
 
 </html>

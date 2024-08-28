@@ -15,7 +15,10 @@
           <a href="/member/login">login</a>
         </li>
         <li th:if="${session.user != null}">
-          <a href="/member/myPage">myPage</a>
+        <div th:if="${session.user.profile}" class="userprofile">
+        	<a href="/member/myPage"><img th:src="@{'/image/' + ${session.user.profile}}" /></a>
+				</div>
+        <a href="/member/myPage" th:text="${session.user.nick + '님'}">myPage</a>
         </li>
       </ul>
       
@@ -37,28 +40,40 @@
     </div>
     <div class="sidebar">
       <span class="area_desc">
-        <a href="/member/signUp">signUp</a><br>
+        
         <th:block th:if="${session.user == null}">
-          <a href="/member/login">login</a><br>
+        <a href="/member/signUp">회원가입</a><br>
+          <a href="/member/login">로그인</a><br>
         </th:block>
         <th:block th:if="${session.user != null}">
-          <a href="/member/logout">logout</a><br>
-          <a href="/member/myPage">myPage</a><br>
+          <a href="/member/logout">로그아웃</a><br>
+          <a href="/member/myPage">마이페이지</a><br>
         </th:block>
         <a href="/member/like">like</a><br>
-        <a href="/place/mapAPI">mapAPI</a><br>
         <a href="/member/customer">customer</a><br>
         <a href="/place/travelplan">여행계획</a><br>        
         <a href="/member/accommodation">숙박</a><br>
-        <a href="/member/location">길찾기</a><br>
+        <a href="/member/index">길찾기</a><br>
         <a href="/place/traverserStory">Traverser's Story</a>
       </span>
+      <label for="menuicon"></label>
     </div>
   </div>
+    <label for="menuicon" class="background"></label>
   
    <footer>
     <hr>
-    <div>회사소개  |  이용약관  |  등등...</div>
+    <div class="footer-container">
+    	<span>TRAVERSE</span>
+    	<span>|</span>
+    	<span><a href="/member/customer">회사소개</a></span>
+    	<span>|</span>
+    	<span><a href="/termsOfService">이용약관</a></span>
+    	<span>|</span>
+    	<span><a href="/privacyPolicy">개인정보보호방침</a></span>
+    	<span>|</span>
+    	<span>© traverse2024</span>
+    </div>
   </footer>
   </th:block>
 </body>

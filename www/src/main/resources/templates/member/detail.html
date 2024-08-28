@@ -186,8 +186,9 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelector('#' + formId).style.display = "block";
     }
 
-    function handleLike() {
+function handleLike() {
     const checkbox = document.getElementById('Give-It-An-Id');
+
     if (checkbox.checked) {
         // 데이터를 서버로 전송
         const data = {
@@ -200,6 +201,8 @@ document.addEventListener("DOMContentLoaded", function() {
     p_idx: [[${detail.idx}]]
 };
 
+    if (checkbox.checked) {
+        // 하트가 체크된 경우 데이터 삽입 요청을 보냄
         fetch('/member/like', {
             method: 'POST',
             headers: {
@@ -209,9 +212,29 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(response => {
             if (response.ok) {
-                alert('Liked!');
+                alert('좋아요 추가 완료!');
             } else {
                 alert('Failed to like this place.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        });
+    } else {
+        // 하트가 해제된 경우 데이터 삭제 요청을 보냄
+        fetch('/member/like', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('좋아요 삭제 완료!');
+            } else {
+                alert('Failed to unlike this place.');
             }
         })
         .catch(error => {
