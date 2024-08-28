@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.traverse.www.advice.DuplicateUserException;
 import com.traverse.www.service.SignUpSercive;
 import com.traverse.www.vo.AccountsVO;
 
@@ -19,21 +21,35 @@ import com.traverse.www.vo.AccountsVO;
 @RequestMapping("/member")
 public class SignUpController {
 	
+
 	@Autowired
 	private SignUpSercive ss;
 	
-	//회원가입 폼
+	//회원가입 페이지를 보여줌
 	@GetMapping("/signUp")
-		public void signUp() {
+		public String signUp() {
+			return "member/signUp";
 		}
 	
 	//회원가입 입력
 	@PostMapping("/signUp")
-	public String signUp(AccountsVO input) throws NoSuchAlgorithmException {
-		
+	public String signUp(AccountsVO input, RedirectAttributes redirectAttributes) throws NoSuchAlgorithmException {
+		try {
 		ss.addAccount(input);
-		return "redirect:/";
+		return "redirect:/";//회원가입 성공 시 메인 페이지로 리다이렉트
+	} catch (NoSuchAlgorithmException e) {
+        redirectAttributes.addFlashAttribute("errorMessage", "서버에서 문제가 발생했습니다. 다시 시도해 주세요.");
+        return "member/signupError"; // 에러 페이지로 리다이렉트
+    }
+		catch(DuplicateUserException e) {
+			redirectAttributes.addFlashAttribute("에러 메세지", e.getMessage());
+			return "member/signupError";//예외 발생 시 에러 페이지로 리다이렉트
+		}
 	}
+	@GetMapping("/signupError")
+    public String signUpError() {
+        return "member/signupError"; // 에러 페이지 템플릿
+    }
 	/*서비스의 checkUserid메서드가 이 경로로 들어오는 HTTP GET요청을 처리
 	사용자가 웹 브라우저에서 URL로 GET요청을 보내면 이 메서드 호출 
 	*/
@@ -86,7 +102,4 @@ public class SignUpController {
 		result.put("phone", msg);
 		return result;
 	}
-	
-	
-	
 }				

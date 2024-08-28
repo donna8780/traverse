@@ -10,292 +10,169 @@
 </head>
 <body>
 
-	<input type="checkbox" id="menuicon">
-	<header>
-		<div>
-			<ul class="navi">
-				<li><a href="/"><img class="logo" th:src="@{/image/logo_w.png}"></a></li>
-				<li th:if="${session.user == null}">
-					<a href="/member/login">login</a>
-				</li>
-				<li th:if="${session.user != null}">
-					<a href="/member/myPage">myPage</a>
-				</li>
-		  </ul>
-		  
-		  <label for="menuicon" class="menubtn">
-		  	<span></span>
-		  	<span></span>
-		  	<span></span>
-		  </label>
-		</div>
-	</header>
+	<th:block th:replace="/fragment::header"></th:block>
 	
 	<div class="container">
 		<div class="contents">
-			<span class="area_desc">
-				<img class="regionimg" th:src="@{/image/gyeonggi1.png}">
 				
-				<form id="locationForm" method="POST" onsubmit="return validateForm()">
+				<div class="title">【경기】</div>
 				
-				<label class="container1" style="top: 40%; left: 16%;">
-					<div id="displayText1" class="display-text" style="display: none;">김포</div>
-				  <input type="checkbox" id="checkbox1" name="gyeonggi" value="8">
-				  <div class="checkmark1"></div>
-				</label>
+				<div class="slider-container">
+				  <img th:src="@{/image/region/경기 대표이미지1.jpg}" class="slide">
+				  <img th:src="@{/image/region/경기 대표이미지2.jpg}" class="slide">
+				  <img th:src="@{/image/region/경기 대표이미지3.jpg}" class="slide">
+				  <img th:src="@{/image/region/경기 대표이미지4.jpg}" class="slide">
+				  <img th:src="@{/image/region/경기 대표이미지5.jpg}" class="slide">
+				  <img th:src="@{/image/region/경기 대표이미지6.jpg}" class="slide">
+				</div>
 				
-				<label class="container1" style="top: 31%; left: 26%;">
-					<div id="displayText2" class="display-text" style="display: none;">파주</div>
-				  <input type="checkbox" id="checkbox2" name="gyeonggi" value="27">
-				  <div class="checkmark1"></div>
-				</label>
+				<br>
 				
-				<label class="container1" style="top: 18%; left: 38%;">
-					<div id="displayText3" class="display-text" style="display: none;">연천</div>
-				  <input type="checkbox" id="checkbox3" name="gyeonggi" value="21">
-				  <div class="checkmark1"></div>
-				</label>
+<!-- 폼 시작 -->
+<form id="checkboxForm" method="post" onsubmit="return validateForm()" class="ggcheck">
+  <!-- 첫 번째 버튼과 체크박스 -->
+  <input name="gyeonggi" value="1" type="checkbox" id="checkbox1" style="display:none;">
+  <button type="button" id="button1" class="checkbox-button">가평</button>
+
+  <!-- 두 번째 버튼과 체크박스 -->
+  <input name="gyeonggi" value="2" type="checkbox" id="checkbox2" style="display:none;">
+  <button type="button" id="button2" class="checkbox-button">고양</button>
+
+  <!-- 세 번째 버튼과 체크박스 -->
+  <input name="gyeonggi" value="3" type="checkbox" id="checkbox3" style="display:none;">
+  <button type="button" id="button3" class="checkbox-button">과천</button>
+
+  <!-- 네 번째 버튼과 체크박스 -->
+  <input name="gyeonggi" value="4" type="checkbox" id="checkbox4" style="display:none;">
+  <button type="button" id="button4" class="checkbox-button">광명</button>
+
+  <!-- 다섯 번째 버튼과 체크박스 -->
+  <input name="gyeonggi" value="5" type="checkbox" id="checkbox5" style="display:none;">
+  <button type="button" id="button5" class="checkbox-button">광주</button>
+ 
+  <input name="gyeonggi" value="6" type="checkbox" id="checkbox6" style="display:none;">
+  <button type="button" id="button6" class="checkbox-button">구리</button>
+
+  <input name="gyeonggi" value="7" type="checkbox" id="checkbox7" style="display:none;">
+  <button type="button" id="button7" class="checkbox-button">군포</button>
+
+  <input name="gyeonggi" value="8" type="checkbox" id="checkbox8" style="display:none;">
+  <button type="button" id="button8" class="checkbox-button">김포</button>
+
+  <input name="gyeonggi" value="11" type="checkbox" id="checkbox9" style="display:none;">
+  <button type="button" id="button9" class="checkbox-button">부천</button>
+
+  <input name="gyeonggi" value="12" type="checkbox" id="checkbox10" style="display:none;">
+  <button type="button" id="button10" class="checkbox-button">성남</button>
+
+  <input name="gyeonggi" value="13" type="checkbox" id="checkbox11" style="display:none;">
+  <button type="button" id="button11" class="checkbox-button">수원</button>
+
+  <input name="gyeonggi" value="14" type="checkbox" id="checkbox12" style="display:none;">
+  <button type="button" id="button12" class="checkbox-button">시흥</button>
+
+  <input name="gyeonggi" value="15" type="checkbox" id="checkbox13" style="display:none;">
+  <button type="button" id="button13" class="checkbox-button">안산</button>
+  
+  <input name="gyeonggi" value="16" type="checkbox" id="checkbox14" style="display:none;">
+  <button type="button" id="button14" class="checkbox-button">안성</button>
+
+  <input name="gyeonggi" value="17" type="checkbox" id="checkbox15" style="display:none;">
+  <button type="button" id="button15" class="checkbox-button">안양</button>
+
+  <input name="gyeonggi" value="18" type="checkbox" id="checkbox16" style="display:none;">
+  <button type="button" id="button16" class="checkbox-button">양주</button>
+  
+  <input name="gyeonggi" value="19" type="checkbox" id="checkbox17" style="display:none;">
+  <button type="button" id="button17" class="checkbox-button">양평</button>
+
+  <input name="gyeonggi" value="20" type="checkbox" id="checkbox18" style="display:none;">
+  <button type="button" id="button18" class="checkbox-button">여주</button>
+  
+  <input name="gyeonggi" value="21" type="checkbox" id="checkbox19" style="display:none;">
+  <button type="button" id="button19" class="checkbox-button">연천</button>
+
+  <input name="gyeonggi" value="22" type="checkbox" id="checkbox20" style="display:none;">
+  <button type="button" id="button20" class="checkbox-button">오산</button>
+
+  <input name="gyeonggi" value="23" type="checkbox" id="checkbox21" style="display:none;">
+  <button type="button" id="button21" class="checkbox-button">용인</button>
+
+  <input name="gyeonggi" value="24" type="checkbox" id="checkbox22" style="display:none;">
+  <button type="button" id="button22" class="checkbox-button">의왕</button>
+ 
+  <input name="gyeonggi" value="26" type="checkbox" id="checkbox23" style="display:none;">
+  <button type="button" id="button23" class="checkbox-button">이천</button>
+
+  <input name="gyeonggi" value="27" type="checkbox" id="checkbox24" style="display:none;">
+  <button type="button" id="button24" class="checkbox-button">파주</button>
+
+  <input name="gyeonggi" value="28" type="checkbox" id="checkbox25" style="display:none;">
+  <button type="button" id="button25" class="checkbox-button">평택</button>
+
+  <input name="gyeonggi" value="29" type="checkbox" id="checkbox26" style="display:none;">
+  <button type="button" id="button26" class="checkbox-button">포천</button>
+
+  <input name="gyeonggi" value="30" type="checkbox" id="checkbox27" style="display:none;">
+  <button type="button" id="button27" class="checkbox-button">하남</button>
+
+  <input name="gyeonggi" value="31" type="checkbox" id="checkbox28" style="display:none;">
+  <button type="button" id="button28" class="checkbox-button">화성</button>
+  
+  <input name="gyeonggi" value="9" type="checkbox" id="checkbox29" style="display:none;">
+  <button type="button" id="button29" class="checkbox-button">남양주</button>
+
+  <input name="gyeonggi" value="10" type="checkbox" id="checkbox30" style="display:none;">
+  <button type="button" id="button30" class="checkbox-button">동두천</button>
+
+	<input name="gyeonggi" value="25" type="checkbox" id="checkbox31" style="display:none;">
+  <button type="button" id="button31" class="checkbox-button">의정부</button>
+
+  <!-- 폼 제출 버튼 -->
+    <button type="submit" class="submit-button">Submit</button>
+</form>
+
+<script>
+  const maxSelections = 1;
+
+  document.querySelectorAll('.checkbox-button').forEach((button, index) => {
+    const checkbox = document.getElementById(`checkbox${index + 1}`);
+
+    button.addEventListener('click', function() {
+      const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
+
+      // 체크박스 상태를 반전시킴
+      checkbox.checked = !checkbox.checked;
+
+      // 체크박스 상태에 따라 버튼 스타일 변경
+      if (checkbox.checked) {
+        button.classList.add('checked');
+      } else {
+        button.classList.remove('checked');
+      }
+    });
+  });
+
+  function validateForm() {
+    const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    
+    if (checkedCheckboxes === 0) {
+        alert('여행할 지역을 선택해주세요.');
+        return false;
+      }
+
+      if (checkedCheckboxes > maxSelections) {
+        alert('하나의 지역만 선택할 수 있습니다.');
+        return false;
+      }
+
+    return true;
+  }
+</script>
 				
-				<label class="container1" style="top: 26%; left: 50%;">
-					<div id="displayText4" class="display-text" style="display: none;">포천</div>
-				  <input type="checkbox" id="checkbox4" name="gyeonggi" value="29">
-				  <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 34%; left: 63%;">
-					<div id="displayText5" class="display-text" style="display: none;">가평</div>
-			    <input type="checkbox" id="checkbox5" name="gyeonggi" value="1">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 42%; left: 28%;">
-					<div id="displayText6" class="display-text" style="display: none;">고양</div>
-			    <input type="checkbox" id="checkbox6" name="gyeonggi" value="2">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 33%; left: 36%;">
-					<div id="displayText7" class="display-text" style="display: none;">양주</div>
-			    <input type="checkbox" id="checkbox7" name="gyeonggi" value="18">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 27%; left: 41%;">
-					<div id="displayText8" class="display-text" style="display: none;">동두천</div>
-			    <input type="checkbox" id="checkbox8" name="gyeonggi" value="10">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 38%; left: 40%;">
-					<div id="displayText9" class="display-text" style="display: none;">의정부</div>
-			    <input type="checkbox" id="checkbox9" name="gyeonggi" value="25">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top:42%; left: 51%;">
-					<div id="displayText10" class="display-text" style="display: none;">남양주</div>
-			    <input type="checkbox" id="checkbox10" name="gyeonggi" value="9">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 46%; left: 46%;">
-					<div id="displayText11" class="display-text" style="display: none;">구리</div>
-			    <input type="checkbox" id="checkbox11" name="gyeonggi" value="6">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 51%; left: 50%;">
-					<div id="displayText12" class="display-text" style="display: none;">하남</div>
-			    <input type="checkbox" id="checkbox12" name="gyeonggi" value="30">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 51%; left: 70%;">
-					<div id="displayText13" class="display-text" style="display: none;">양평</div>
-			    <input type="checkbox" id="checkbox13" name="gyeonggi" value="19">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 58%; left: 54%;">
-					<div id="displayText14" class="display-text" style="display: none;">광주</div>
-			    <input type="checkbox" id="checkbox14" name="gyeonggi" value="5">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 64%; left: 74%;">
-					<div id="displayText15" class="display-text" style="display: none;">여주</div>
-			    <input type="checkbox" id="checkbox15" name="gyeonggi" value="20">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 51%; left: 25%;">
-					<div id="displayText16" class="display-text" style="display: none;">부천</div>
-				  <input type="checkbox" id="checkbox16" name="gyeonggi" value="11">
-				  <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 55%; left: 29%;">
-					<div id="displayText17" class="display-text" style="display: none;">광명</div>
-				  <input type="checkbox" id="checkbox17" name="gyeonggi" value="4">
-				  <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 57%; left: 33%;">
-					<div id="displayText18" class="display-text" style="display: none;">안양</div>
-				  <input type="checkbox" id="checkbox18" name="gyeonggi" value="17">
-				  <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 56%; left: 38%;">
-					<div id="displayText19" class="display-text" style="display: none;">과천</div>
-				  <input type="checkbox" id="checkbox19" name="gyeonggi" value="3">
-				  <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 58%; left: 43%;">
-					<div id="displayText20" class="display-text" style="display: none;">성남</div>
-			    <input type="checkbox" id="checkbox20" name="gyeonggi" value="12">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 58%; left: 24%;">
-					<div id="displayText21" class="display-text" style="display: none;">시흥</div>
-			    <input type="checkbox" id="checkbox21" name="gyeonggi" value="14">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 62%; left: 26%;">
-					<div id="displayText22" class="display-text" style="display: none;">안산</div>
-			    <input type="checkbox" id="checkbox22" name="gyeonggi" value="15">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 61%; left: 31%;">
-					<div id="displayText23" class="display-text" style="display: none;">군포</div>
-			    <input type="checkbox" id="checkbox23" name="gyeonggi" value="7">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 60%; left: 36%;">
-					<div id="displayText24" class="display-text" style="display: none;">의왕</div>
-			    <input type="checkbox" id="checkbox24" name="gyeonggi" value="24">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 65%; left: 36%;">
-					<div id="displayText25" class="display-text" style="display: none;">수원</div>
-			    <input type="checkbox" id="checkbox25" name="gyeonggi" value="13">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 71%; left: 30%;">
-					<div id="displayText26" class="display-text" style="display: none;">화성</div>
-			    <input type="checkbox" id="checkbox26" name="gyeonggi" value="31">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 72%; left: 39%;">
-					<div id="displayText27" class="display-text" style="display: none;">오산</div>
-			    <input type="checkbox" id="checkbox27" name="gyeonggi" value="22">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 68%; left: 49%;">
-					<div id="displayText28" class="display-text" style="display: none;">용인</div>
-			    <input type="checkbox" id="checkbox28" name="gyeonggi" value="23">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 69%; left: 64%;">
-					<div id="displayText29" class="display-text" style="display: none;">이천</div>
-			    <input type="checkbox" id="checkbox29" name="gyeonggi" value="26">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 82%; left: 35%;">
-					<div id="displayText30" class="display-text" style="display: none;">평택</div>
-			    <input type="checkbox" id="checkbox30" name="gyeonggi" value="28">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 81%; left: 54%;">
-					<div id="displayText31" class="display-text" style="display: none;">안성</div>
-			    <input type="checkbox" id="checkbox31" name="gyeonggi" value="16">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<button class="container1" style="bottom: 5%; right: 0%;" type="reset" onclick="resetDisplayTexts()">
-					reset
-				</button>
-				
-				<button class="container1" style="bottom: 0%; right: 0%;">
-					submit
-				</button>
-				
-				</form>
-				
-			</span>
-		</div>
-		<div class="sidebar">
-			<span class="area_desc">
-			  <a href="/member/signUp">signUp</a><br>
-			  <th:block th:if="${session.user == null}">
-			  	<a href="/member/login">login</a><br>
-			  </th:block>
-			  <th:block th:if="${session.user != null}">
-			  	<a href="/member/logout">logout</a><br>
-			  	<a href="/member/myPage">myPage</a><br>
-			  </th:block>
-			  <a href="/member/like">like</a><br>
-			  <a href="/place/mapAPI">mapAPI</a><br>
-        <a href="/member/customer">customer</a><br>
-        <a href="/member/detail">상세페이지</a>
-			</span>
 		</div>
 	</div>
 	
-	<footer>
-		<hr>
-		<div>회사소개  |  이용약관  |  등등...</div>
-	</footer>
-	
-	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-	  	var checkboxes = document.querySelectorAll('.container1 input[type="checkbox"]');
-	
-	    checkboxes.forEach(function(checkbox, index) {
-	    	var displayText = document.getElementById('displayText' + (index + 1));
-	
-	      checkbox.addEventListener('change', function() {
-	      	if (checkbox.checked) {
-	        	displayText.style.display = 'block';
-	        }
-	      	else {
-	        	displayText.style.display = 'none';
-	        }
-	      });
-	    });
-		});
-		
-		function resetDisplayTexts() {
-			const displayTexts = document.querySelectorAll('.display-text');
-		  displayTexts.forEach(text => {
-		  	text.style.display = 'none';
-		  });
-		}
-		function validateForm() {
-			var checkboxes = document.querySelectorAll('.container1 input[type="checkbox"]:checked');
-			if (checkboxes.length === 0) {
-				alert("최소 1개 이상의 항목을 선택해주세요.");
-				return false;
-			}
-			else if (checkboxes.length > 3) {
-				alert("최대 3개 항목만 선택할 수 있습니다.");
-				return false;
-			}
-			return true;
-		}
-	</script>
-	
+<th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>
