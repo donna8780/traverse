@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -76,6 +77,16 @@ public class LikeController {
        } catch (Exception e) {
            e.printStackTrace();  // 오류 로그를 출력합니다.
            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while liking place.");
+       }
+   }
+   @DeleteMapping("/member/like")
+   public ResponseEntity<String> unlikePlace(@RequestBody LikeVO likeVO) {
+       try {
+           like.deleteLike(likeVO);  // 서비스에서 데이터 삭제
+           return ResponseEntity.ok("Unliked");
+       } catch (Exception e) {
+           e.printStackTrace();  // 오류 로그를 출력합니다.
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while unliking place.");
        }
    }
 

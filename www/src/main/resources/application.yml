@@ -25,4 +25,3 @@ server:
     session:
       tracking-modes: cookie
       
-        

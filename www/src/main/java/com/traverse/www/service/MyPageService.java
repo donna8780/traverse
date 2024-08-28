@@ -20,5 +20,10 @@ public class MyPageService {
 		
 		return dao.delete(idx);
 	}
+	
+  public int updateProfile(AccountsVO user) {
+    return dao.updateProfile(user);
+}
+	
 
 }

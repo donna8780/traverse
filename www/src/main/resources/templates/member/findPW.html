@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="/css/mainStyle.css" rel="stylesheet">
-  <link href="/css/LoginStyle.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>PW 찾기</title>
+    <link href="/css/mainStyle.css" rel="stylesheet">
+    <link href="/css/LoginStyle.css" rel="stylesheet">
 </head>
 <body>
-<th:block th:replace="/fragment::header"></th:block>
-<fieldset>
-  <legend>PW찾기</legend>
- 
-  <form method="post">
-  <p><input name="userid" placeholder="ID" required></p>
-  <p><input name="name" placeholder="이름" required></p>
-  <p><input name="email" placeholder="email" type="email" required></p>
-  <button>PW찾기</button>
-  </form>
-  
-</fieldset>
-<th:block th:replace="/fragment::footer"></th:block>
+    <th:block th:replace="/fragment::header"></th:block>
+
+    <div class="form-container">
+        <form method="post" class="form">
+            <span class="input-span">
+                <label for="userid" class="label">ID</label>
+                <input name="userid" placeholder="ID" type="text" required id="userid"/>
+            </span>
+            
+            <span class="input-span">
+                <label for="name" class="label">Name</label>
+                <input name="name" placeholder="NAME" type="text" required id="name"/>
+            </span>
+            
+            <span class="input-span">
+                <label for="email" class="label">Email</label>
+                <input name="email" placeholder="EMAIL" type="email" required id="email"/>
+            </span>
+            
+            <input class="submit" type="submit" value="PW 찾기" />
+        </form>
+    </div>
+
+    <th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

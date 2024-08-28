@@ -13,28 +13,46 @@
     
 
   <div class="mypage">
-    <table>
-      <tr>
-        <th>회원번호</th>
-        <td th:text="${session.user.accounts_idx}"></td>
-      </tr>
-      <tr>
-        <th>아이디</th>
-        <td th:text="${session.user.userid}"></td>
-      </tr>
-      <tr>
-        <th>닉네임</th>
-        <td th:text="${session.user.nick}"></td>
-      </tr>
-      <tr>
-        <th>이메일</th>
-        <td th:text="${session.user.email}"></td>
-      </tr>
-      <tr>
-        <th>생년월일</th>
-        <td th:text="${session.user.birth}"></td>
-      </tr>
-    </table>
+      <table>
+
+        <tr>
+          <th>회원번호</th>
+          <td th:text="${session.user.accounts_idx}"></td>
+        </tr>
+        <tr>
+          <th>아이디</th>
+          <td th:text="${session.user.userid}"></td>
+        </tr>
+        <tr>
+          <th>닉네임</th>
+          <td th:text="${session.user.nick}"></td>
+        </tr>
+        <tr>
+          <th>이메일</th>
+          <td th:text="${session.user.email}"></td>
+        </tr>
+        <tr>
+          <th>생년월일</th>
+          <td th:text="${session.user.birth}"></td>
+        </tr>
+        <tr>
+                <th>프로필 사진</th>
+                <td>
+                    <!-- 이미지 업로드 폼 -->
+                    <form method="POST" enctype="multipart/form-data" th:action="@{/member/uploadProfile}">
+                        <input type="file" name="profileImage" accept="image/*" />
+                        <button type="submit">업로드</button>
+                    </form>
+                    <!-- 업로드된 프로필 사진 표시 -->
+                    <div th:if="${session.user.profile}">
+                        <img th:src="@{'/image/' + ${session.user.profile}}" alt="Profile Image" style="width: 150px; height: 150px;" />
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+      
 
     <button>수정</button>
     <button>탈퇴</button>
