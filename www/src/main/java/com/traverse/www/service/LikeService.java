@@ -13,6 +13,7 @@ import com.traverse.www.vo.LikeVO;
 @Service
 public class LikeService {
    
+	
    @Autowired
    private LikeDAO dao;
    
@@ -34,6 +35,8 @@ public class LikeService {
 	public void insertLike(LikeVO likeVO) {
     dao.insert(likeVO);  // DAO를 통해 데이터베이스에 삽입
 }
+
+	
 }
 
 

@@ -23,7 +23,7 @@ public interface LikeDAO {
    @Delete("delete from like_place where like_idx=#{likeIdx}")
 	int likeDel(int likeIdx);
 
-   @Insert("INSERT INTO like_place (a_idx, title, addr1, firstimage, mapx, mapy) " +
-       "VALUES (#{a_idx}, #{title}, #{addr1}, #{firstimage}, #{mapx}, #{mapy})")
+   @Insert("INSERT INTO like_place (a_idx, title, addr1, firstimage, mapx, mapy,p_idx) " +
+       "VALUES (#{a_idx}, #{title}, #{addr1}, #{firstimage}, #{mapx}, #{mapy}, #{p_idx})")
    void insert(LikeVO likeVO);
 }
