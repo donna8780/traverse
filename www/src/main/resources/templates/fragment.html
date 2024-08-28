@@ -37,20 +37,21 @@
     </div>
     <div class="sidebar">
       <span class="area_desc">
-        <a href="/member/signUp">signUp</a><br>
+        
         <th:block th:if="${session.user == null}">
-          <a href="/member/login">login</a><br>
+        <a href="/member/signUp">회원가입</a><br>
+          <a href="/member/login">로그인</a><br>
         </th:block>
         <th:block th:if="${session.user != null}">
-          <a href="/member/logout">logout</a><br>
-          <a href="/member/myPage">myPage</a><br>
+          <a href="/member/logout">로그아웃</a><br>
+          <a href="/member/myPage">마이페이지</a><br>
         </th:block>
-        <a href="/member/like">like</a><br>
+        <a href="/member/like">찜</a><br>
         <a href="/place/mapAPI">mapAPI</a><br>
         <a href="/member/customer">customer</a><br>
         <a href="/place/travelplan">여행계획</a><br>        
         <a href="/member/accommodation">숙박</a><br>
-        <a href="/member/location">길찾기</a><br>
+        <a href="/member/index">길찾기</a><br>
         <a href="/place/traverserStory">Traverser's Story</a>
       </span>
     </div>

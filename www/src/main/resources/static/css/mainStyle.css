@@ -149,6 +149,11 @@ input[id="menuicon"]:checked ~ .container .sidebar {
   text-decoration: none;
 }
 
+.sidebar .area_desc a:hover {
+  color: #4BB958;
+  text-decoration: underline;
+}
+
 .checkbox {
     position: absolute;
     transform: translate(-50%, -50%);

@@ -21,5 +21,12 @@ public class AccommodationService {
   public List<PlaceVO> searchByTitle(String title) {
     return dao.selectByTitle(title);
 }
+  
+  public List<PlaceVO> searchByAreaCode(String areaCode) {
+    return dao.selectByAreaCode(areaCode);
+}
+  public List<String> getAllAreaCodes() {
+    return dao.selectAllAreaCodes();
+}
 
 }
