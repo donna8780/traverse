@@ -41,7 +41,7 @@
 
 .sidebar-left {
     width: 12%;
-    height: 400px; /* 사이드바 높이를 콘텐츠에 맞게 조정 */
+    height: 370px; /* 사이드바 높이를 콘텐츠에 맞게 조정 */
     position: absolute;
     top: 30%; /* 로고 밑으로 내리기 위해 top 값을 조정 */
     left: 25px;
