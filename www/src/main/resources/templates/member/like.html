@@ -26,17 +26,15 @@
             <div class="scrollable-content">
                 <div class="location-item" th:each="row : ${mapAPI}">
                     <div class="image-box">
-                        <img id="place_img" th:src="${row.place_img}" />
+                        <img id="place_img" th:src="${row.firstimage}" />
                     </div>
                     <div class="text-box">
-                        <div class="location-name" th:text="${row.place_name}"></div>
-                        <div class="location-detail" th:text="${row.place_add}"></div>
+                        <div class="location-name" th:text="${row.title}"></div>
+                        <div class="location-detail" th:text="${row.addr1}"></div>
                     </div>
                     <div class="con-like">
                         <input class="like" type="checkbox" title="like"
-                            th:onclick="|toggleMarker(this,${row.place_x},${row.place_y})|">
-                 
-                            
+                            th:onclick="|toggleMarker(this,${row.mapx},${row.mapy})|">
                         <div class="checkmark">
                             <!-- 하트 아이콘 -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="outline" viewBox="0 0 24 24">
@@ -80,12 +78,13 @@ var overlays = {}; // 커스텀 오버레이를 저장하는 객체
 var selectedMarker = null; // 현재 선택된 마커를 저장
 
 function toggleMarker(check, x, y) {
+
     var key = x + ',' + y; 
     var locationItem = check.closest('.location-item');
 
     if (check.checked) {
         var marker = new kakao.maps.Marker({
-            position: new kakao.maps.LatLng(x, y),
+            position: new kakao.maps.LatLng(y, x),
             map: map
         });
         markers[key] = marker; 

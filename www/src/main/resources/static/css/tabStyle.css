@@ -1,0 +1,57 @@
+@charset "UTF-8";
+.tab-menu {
+            display: flex;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .tab-menu button {
+            background-color: #f1f1f1;
+            border: none;
+            padding: 14px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .tab-menu button:hover {
+            background-color: #ddd;
+        }
+
+        .tab-menu button.active {
+            background-color: #4CAF50; /* 클릭된 탭의 색상 */
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+        .planimg{
+          width: 250px;
+          height: 150px
+        }
+        .planimg img{
+          width: 100%;
+          height: 100%;
+        }
+        .placetable{
+          width: 100%;
+        }
+        .placetable tr:nth-child(1) {
+          height: 70px;
+        }
+        
+        .placetable th:nth-child(4) {
+          width: 70px;
+        }
+        .placetable th,td{
+          padding: 20px;
+        }
+        .placetable td:nth-child(1) {
+          padding: 0;
+        }
