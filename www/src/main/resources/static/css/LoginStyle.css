@@ -85,3 +85,7 @@
 .span a {
   color: #4BB958;
 }
+
+.span a:hover {
+	font-weight: bold;
+}

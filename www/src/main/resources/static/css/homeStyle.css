@@ -46,12 +46,12 @@
     top: 30%; /* 로고 밑으로 내리기 위해 top 값을 조정 */
     left: 25px;
     transform: translateY(0); /* translateY(-50%) 제거 */
-    background-color: rgba(173, 216, 230, 0.5);
+    background-color: #E8F0FE;
     border-right: 1px solid #ccc;
     padding: 15px; /* 패딩을 늘려서 여유 공간 확보 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 사이드바에 그림자 추가 */
     border-radius: 10px; /* 모서리를 둥글게 처리 */
-    z-index: 1000;
+    z-index: 19;
     min-width: 150px; /* 최소 너비를 조정 */
     max-width: 300px; /* 최대 너비 설정 */
     font-size: 15px;
