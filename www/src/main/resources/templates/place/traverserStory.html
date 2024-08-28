@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>traverse</title>
+  
+  <link href="/css/mainStyle.css" rel="stylesheet">
+  <link href="/css/traverserStoryStyle.css" rel="stylesheet">
+</head>
+<body>
+
+	<th:block th:replace="/fragment::header"></th:block>
+
+	<div class="container">
+		<div class="contents" style="min-height: 650px;">
+		
+			<form method="POST">
+    	<div class="search">
+			<h1>Traverser's Story</h1>
+        <input name="search" placeholder="Search..." type="text">
+        <button type="submit">Go</button>
+      </div>
+      </form>
+      
+      <div class="trending">
+      <span>Trending Searches :</span>
+      <span><a href="/">Seoul</a></span>
+      <span><a href="/">Jeju</a></span>
+      <span><a href="/">Busan</a></span>
+      <span><a href="/">Jeonju</a></span>
+      <span>...</span>
+			</div>
+			
+		<div class="box-container">
+		
+		 <div class="box box1">
+			<div class="inner-box top-left">
+				<img src="/image/d1.jpg">
+			</div>
+			<div class="inner-box top-right">
+				<img src="/image/d2.jpg">
+			</div>
+			<div class="inner-box bottom">
+				<div class="text-line line1">도리(닉네임)</div>
+    		<div class="text-line line2">도리 도리 여행(제목)</div>
+    		<div class="text-line line3"># 부산, 2박 3일(여행지, 기간)</div>
+			</div>
+			<div class="inner-box center">
+				<img src="/image/d0.jpg">
+			</div>
+		 </div>
+		 
+		 <div class="box box2">
+		 <div class="inner-box top-left">
+				<img src="/image/s1.jpg">
+			</div>
+			<div class="inner-box top-right">
+				<img src="/image/s2.jpg">
+			</div>
+			<div class="inner-box bottom">
+				<div class="text-line line1">소백돌이</div>
+    		<div class="text-line line2">진해 나들이</div>
+    		<div class="text-line line3"># 창원, 1박 2일</div>
+			</div>
+			<div class="inner-box center">
+				<img src="/image/s0.jpg">
+			</div>
+		 </div>
+		 
+		 <div class="box box3">
+			<div class="inner-box top">
+				<img src="/image/l1.jpg">
+			</div>
+			<div class="inner-box bottom">
+				<div class="text-line line1">새박사</div>
+    		<div class="text-line line2">로또당첨</div>
+    		<div class="text-line line3"># 춘천, 2박 3일</div>
+			</div>
+			<div class="inner-box center">
+				<img src="/image/l0.jpg">
+			</div>
+		 </div>
+		 
+		 <div class="box box4">
+		 	<div class="inner-box top-left">
+				<img src="/image/b1.jpg">
+			</div>
+			<div class="inner-box top-right">
+				<img src="/image/b2.jpg">
+			</div>
+			<div class="inner-box bottom">
+				<div class="text-line line1">받킨지</div>
+    		<div class="text-line line2">베베랑 콩이랑~~</div>
+    		<div class="text-line line3"># 제주, 2박 3일</div>
+			</div>
+			<div class="inner-box center">
+				<img src="/image/b0.jpg">
+			</div>
+		 </div>
+    </div>
+
+		<th:block th:replace="/fragment::footer"></th:block>
+	
+</body>
+</html>

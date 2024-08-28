@@ -1,107 +1,214 @@
 <!DOCTYPE html>
-<html xmlns:th="htts://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Location Selector</title>
 <link href="/css/likeStyle.css" rel="stylesheet">
+<link href="/css/mainStyle.css" rel="stylesheet">
+
 </head>
 <body>
-
-	<div class="container">
-
-		<div class="left">
-			<div class="all">전체선택</div>
-			<br>
-			<div class="location-item" th:each="row : ${mapAPI}">
-				<div class="image-box">
-					<img id="place_img"
-						th:src="@{/image/{placeImg}(placeImg=${row.place_img})}" />
-				</div>
-				<div class="text-box">
-					<div class="location-name" th:text="${row.place_name}"></div>
-					<div class="location-detail" th:text="${row.place_add}"></div>
-				</div>
-
-				<div>
-        	<input type="checkbox" th:onclick="'updateMapCoordinates(' + ${row.place_x} + ', ' + ${row.place_y} + ')'">
-
-				</div>
-			</div>
-		</div>
-	</div>
+<th:block th:replace="/fragment::header"></th:block>
+<div id="like">
 
 
-	<hr>
+    <div class="container">
+        <div class="left">
+            <!-- 전체 선택 체크박스와 <hr> 태그를 포함하는 고정 헤더 -->
+            <div class="sticky-header">
+                <label> 
+                    <input type="checkbox" id="selectAllLikes" onclick="toggleSelectAllLikes(this)"> 전체 선택
+                </label>
+                <hr>
+            </div>
 
-	<div class="right">
-		<div id="map" style="width: 900px; height: 800px;"></div>
-	</div>
+            <!-- 스크롤 가능한 내용 -->
+            <div class="scrollable-content">
+                <div class="location-item" th:each="row : ${mapAPI}">
+                    <div class="image-box">
+                        
+                        
+            <!-- 이미지가 있을 때 -->
+            <img id="place_img" th:if="${row.firstimage != null and !row.firstimage.isEmpty()}"
+                 th:src="${row.firstimage}" alt="Image" />
 
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7717c2c3bc1327ef51412b55ac5ef"></script>
 
-	<script>
-        // 초기 좌표
-        let centerLat = 35.1192845;
-        let centerLng = 128.7915767;
-        let markerLat = 35.1192845;
-        let markerLng = 128.7915767;
 
-        // 지도 생성
-        const container = document.getElementById('map');
-        let map = new kakao.maps.Map(container, {
-            center: new kakao.maps.LatLng(centerLat, centerLng),
-            level: 3
+            <!-- 이미지가 없을 때 -->
+            <img id="place_img" th:if="${row.firstimage == null or row.firstimage.isEmpty()}"
+                 th:src="@{/image/logo_w.png}" alt="Default Image" />
+                        
+                    </div>
+                    <div class="text-box">
+                    
+                        <div class="location-name">
+                        	<a th:href="@{/member/detail/{idx}(idx=${row.p_idx})}" th:text="${row.title}"></a>
+                        </div>
+                    
+                        <div class="location-detail" th:text="${row.addr1}"></div>
+          
+                    </div>
+                    <div class="con-like">
+                        <input class="like" type="checkbox" title="like"
+                            th:onclick="|toggleMarker(this,${row.mapx},${row.mapy})|">
+                 
+                            
+                        <div class="checkmark">
+                            <!-- 하트 아이콘 -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="outline" viewBox="0 0 24 24">
+                                <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="filled" viewBox="0 0 24 24">
+                                <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" class="celebrate">
+                                <polygon class="poly" points="10,10 20,20"></polygon>
+                                <polygon class="poly" points="10,50 20,50"></polygon>
+                                <polygon class="poly" points="20,80 30,70"></polygon>
+                                <polygon class="poly" points="90,10 80,20"></polygon>
+                                <polygon class="poly" points="90,50 80,50"></polygon>
+                                <polygon class="poly" points="80,80 70,70"></polygon>
+                            </svg>
+                        </div>
+                        <!-- 삭제 버튼 추가 -->
+                        <a th:href="@{/member/likeDel/{likeIdx}(likeIdx=${row.like_idx})}"><button>삭제</button></a>
+                    </div>
+                </div>
+            </div> <!-- scrollable-content 종료 -->
+        </div> <!-- left 종료 -->
+    </div> <!-- container 종료 -->
+
+    <div id="map" style="width: 800px; height: 900px;"></div>
+
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7717c2c3bc1327ef51412b55ac5ef"></script>
+
+    <script>
+  var mapContainer = document.getElementById('map'), 
+    mapOption = {
+        center: new kakao.maps.LatLng(36.6194188,128.0093991), 
+        level: 13 //지도 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+var markers = {}; 
+var overlays = {}; // 커스텀 오버레이를 저장하는 객체
+var selectedMarker = null; // 현재 선택된 마커를 저장
+
+function toggleMarker(check, x, y) {
+    var key = x + ',' + y; 
+    var locationItem = check.closest('.location-item');
+
+    if (check.checked) {
+        var marker = new kakao.maps.Marker({
+            position: new kakao.maps.LatLng(y, x),
+            map: map
         });
-
-        // 마커 생성
-        let marker = new kakao.maps.Marker({
-            position: new kakao.maps.LatLng(markerLat, markerLng)
-        });
-        marker.setMap(map);
-
-        // 좌표 업데이트 함수
-        function updateMapCoordinates(newCenterLat, newCenterLng) {
-            // 새로운 좌표로 지도 중심 업데이트
-            map.setCenter(new kakao.maps.LatLng(newCenterLat, newCenterLng));
-
-            // 마커 위치 업데이트
-            marker.setPosition(new kakao.maps.LatLng(newCenterLat, newCenterLng));
-
-            // 변수 업데이트
-            centerLat = newCenterLat;
-            centerLng = newCenterLng;
-            markerLat = newCenterLat;
-            markerLng = newCenterLng;
+        markers[key] = marker; 
+        addMarkerClickEvent(marker, key, locationItem);
+        locationItem.classList.add('selected'); // 체크되면 회색 처리
+    } else {
+        if (markers[key]) {
+            markers[key].setMap(null); 
+            delete markers[key]; 
         }
+        if (overlays[key]) {
+            overlays[key].setMap(null); 
+            delete overlays[key];
+        }
+        locationItem.classList.remove('selected'); // 체크 해제 시 회색 해제
+    }
+}
 
-       // 체크박스 클릭 시 좌표 업데이트 함수
-        function updateMapCoordinatesFromCheckbox(checkbox) {
-            var x = checkbox.getAttribute('data-x');
-            var y = checkbox.getAttribute('data-y');
-            console.log('Updating map coordinates to:', x, y);
-            if (x && y) {
-                updateMapCoordinates(parseFloat(y), parseFloat(x));  // y가 위도, x가 경도로 사용
-            } else {
-                console.error('Invalid coordinates:', x, y);
+function toggleSelectAllLikes(selectAllCheckbox) {
+    var likeCheckboxes = document.querySelectorAll('.like');
+     
+    // 전체 선택 상태일 때
+    if (selectAllCheckbox.checked) {
+        likeCheckboxes.forEach(function(checkbox) {
+            if (!checkbox.checked) {
+                checkbox.checked = true;
+                checkbox.dispatchEvent(new Event('click')); // 체크 안된 항목 체크 후 클릭 이벤트 발생
             }
+        });
+    } 
+    // 전체 선택 해제 상태일 때
+    else {
+        likeCheckboxes.forEach(function(checkbox) {
+            if (checkbox.checked) {
+                checkbox.checked = false;
+                checkbox.dispatchEvent(new Event('click')); // 체크된 항목 해제 후 클릭 이벤트 발생
+            }
+        });
+    }
+
+    // 전체 선택 또는 해제 후 모든 항목의 selected 클래스를 업데이트
+    likeCheckboxes.forEach(function(checkbox) {
+        var locationItem = checkbox.closest('.location-item');
+        if (selectAllCheckbox.checked) {
+            locationItem.classList.add('selected');
+        } else {
+            locationItem.classList.remove('selected');
         }
+    });
+
+    selectedMarker = null; // 전체 선택/해제 후 특정 마커 선택 해제
+}
+
+function addMarkerClickEvent(marker, key, locationItem) {
+    kakao.maps.event.addListener(marker, 'click', function() {
+        // 기존에 표시된 오버레이를 닫습니다
+        if (selectedMarker && overlays[selectedMarker]) {
+            overlays[selectedMarker].setMap(null);
+        }
+
+        // 선택된 마커에 대한 커스텀 오버레이를 표시합니다
+        if (!overlays[key]) {
+            var content = '<div class="wrap">' + 
+                          '    <div class="info">' + 
+                          '        <div class="title">' + 
+                          '            ' + locationItem.querySelector('.location-name').innerText + 
+                          '            <div class="close" onclick="closeOverlay(\'' + key + '\')" title="닫기"></div>' + 
+                          '        </div>' + 
+                          '        <div class="body">' + 
+                          '            <div class="img">' +
+                          '                <img src="' + locationItem.querySelector('#place_img').src + '" width="73" height="70">' +
+                          '           </div>' + 
+                          '            <div class="desc">' + 
+                          '                <div class="ellipsis">' + locationItem.querySelector('.location-detail').innerText + '</div>' + 
+                          '            </div>' + 
+                          '        </div>' + 
+                          '    </div>' +    
+                          '</div>';
+
+            overlays[key] = new kakao.maps.CustomOverlay({
+                content: content,
+                map: map,
+                position: marker.getPosition(),
+                yAnchor: 1.2
+            });
+        }
+
+        overlays[key].setMap(map);
+        selectedMarker = key;
+
+        // 지도가 해당 위치로 이동
+        map.panTo(marker.getPosition());
+    });
+}
+
+// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+function closeOverlay(key) {
+    if (overlays[key]) {
+        overlays[key].setMap(null);     
+    }
+}
+
 
     </script>
 
 
-	<!-- <script>
-$(document).ready(function() {
-$("input:checkbox").on('click', function() {
-      if ( $(this).prop('checked') ) {
-        $(this).parent().addClass("selected");
-      } else {
-        $(this).parent().removeClass("selected");
-      }
-    });
-});
-</script> -->
-
-
+</div>
+<th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

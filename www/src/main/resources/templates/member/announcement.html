@@ -18,7 +18,7 @@
 					<th>작성일</th>
 					<th>조회수</th>
 				</tr>
-				<tr th:each="row : ${test}">
+				<tr th:each="row : ${announce}">
 					<td th:text="${row.announcement_idx}"></td>
 					<td>
 						<a th:href="@{/member/view/{announcement_idx}(announcement_idx=${row.announcement_idx})}" th:text="${row.title}"></a>
@@ -29,11 +29,12 @@
 				</tr>
 			</tbody>
 		</table>
+
 	</div>
 
 	<br>
-
-
+<!-- 관리자가 아니면 글쓰기 활성화 안됨 -->
+<div th:if="${session.user != null and session.user.nick == '관리자'}">
 <button>
   <span class="span-mother">
     <span>글</span>
@@ -46,6 +47,7 @@
     <span>기</span>
   </span>
 </button>
+</div>
 
 	
 	<script>

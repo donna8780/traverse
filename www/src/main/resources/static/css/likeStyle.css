@@ -1,76 +1,282 @@
 @charset "UTF-8";
 
-body {
-	font-family: Arial, sans-serif;
-	margin: 20px;
-	background-color: #f9f9f9;
-	display: flex;
-	height: 100vh;
+#like .sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 10px;
+  background-color: white;
 }
 
-.container {
-	display: flex;
-	flex-grow: 1;
+#like .scrollable-content {
+    max-height: 80vh; /* 전체 높이의 80%만큼 제한 */
+    padding-right: 10px; /* 스크롤바를 고려한 패딩 */
 }
 
-.table-container {
-	flex: 0 0 20%; /* 테이블 컨테이너를 화면의 30%만 차지하도록 설정 */
-	overflow-y: auto;
-	margin-right: 10px; /* 테이블과 지도 사이의 간격을 줄임 */
-	background-color: #ffffff;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-	padding: 20px;
-	border-radius: 8px;
+#like{
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    margin-top: 0px;
+    padding-top: 0px;
+    display: flex;
+    height: 100vh;
+    width: 1200px;
+  	overflow: hidden;
+  	overflow-y: auto; /* 수직 스크롤만 허용 */
+  	justify-content: center;
+    align-items: flex-start;
+    padding: 0;
 }
 
-.map-container {
-	flex: 0 0 80%; /* 지도 컨테이너를 화면의 70% 차지 */
-	border: 2px solid #ddd;
-	border-radius: 8px;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+#like .container {
+  position: relative; /* 하트 올릴 부모 코드(relative) */
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-start; /* 왼쪽부터 요소들이 시작되도록 설정 */
+    align-items: flex-start; /* 요소들을 위쪽으로 정렬 */
+    gap: 0; /* 요소들 사이의 간격을 완전히 없앰 */
+    margin-top: 0px;
+    padding-top: 0px;
+    max-height: 90vh;
+    max-width: 400px;
+    overflow-y: auto;
 }
 
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-bottom: 20px;
+#like .left {
+    width: 375px; /* 왼쪽 영역의 고정 너비를 설정 */
+    overflow-y: auto; /* 세로 스크롤을 추가 */
+    max-height: 870px; /* 최대 높이를 설정하여 스크롤이 생기도록 함 */
+    margin-right: 0; /* 오른쪽 여백 제거 */
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    height: 100%;
 }
 
-th, td {
-	padding: 12px;
-	text-align: left;
-	border-bottom: 1px solid #ddd;
+/* 스크롤바 스타일링 */
+#like .left::-webkit-scrollbar {
+    width: 8px;
 }
 
-th {
-	background-color: #4CAF50;
-	color: white;
+#like .left::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* 스크롤바 색상 */
+    border-radius: 4px;
 }
 
-tr:hover {
-	background-color: #f1f1f1;
+#like .left::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* 스크롤바 배경색 */
 }
 
-button {
-	background-color: #4CAF50;
-	color: white;
-	padding: 10px 20px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
+#like .map-container {
+    flex-grow: 1;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 10px; /* 왼쪽 margin 제거 */
+    width: calc(100% - 200px); /* 지도 영역이 남은 모든 공간을 차지하도록 설정 */
+    height: 100%;
 }
 
-button:hover {
-	background-color: #45a049;
+#like .location-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; /* 항목 사이의 간격 조정 */
 }
 
-#map {
-	width: 100%;
-	height: 100%;
+#like .image-box {
+    margin-right: 5px; /* 이미지와 텍스트 사이의 간격 최소화 */
 }
 
-#place_img {
-	width: 150px;
-	height: 150px;
+#like .image-box img {
+    width: 100px; /* 이미지 크기를 줄여 공간 절약 */
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
 }
+
+#like .text-box {
+    flex-grow: 1;
+}
+
+#like .location-name {
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 3px;
+}
+
+#like .location-detail {
+    color: #555;
+    font-size: 0.9em;
+}
+
+#like .checkbox-container {
+    margin-left: 5px; /* 체크박스와 텍스트 사이의 간격 최소화 */
+}
+
+#like button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 13px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+   	margin-top:34px;
+}
+#like .delete-button {
+    margin-top: 10px; /* 버튼을 아래로 내리기 위해 상단 여백 조정 */
+}
+
+
+#like button:hover {
+    background-color: #45a049;
+}
+
+#like #map {
+    width: 100%;
+    height: 100%;
+    margin-top: 0px; /* 여기서 20px의 상단 여백을 추가 */
+}
+
+/* From Uiverse.io by waleedlh10 */
+#like .con-like {
+    --red: rgb(255, 50, 50);
+    position: relative;
+    width: 50px;
+    height: 50px;
+    top: -30px;
+}
+
+#like .con-like .like {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 20;
+    cursor: pointer;
+}
+
+#like .con-like .checkmark {
+    width: 50px; /* 고정된 너비 */
+    height: 50px; /* 고정된 높이 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#like .con-like .outline,
+#like .con-like .filled,
+#like .con-like .celebrate {
+    width: 30px; /* 고정된 너비 */
+    height: 30px; /* 고정된 높이 */
+    fill: var(--red);
+    position: absolute;
+}
+
+#like .con-like .filled {
+    animation: kfr-filled 0.5s;
+    display: none;
+}
+
+#like .con-like .celebrate {
+    animation: kfr-celebrate 0.5s;
+    animation-fill-mode: forwards;
+    display: none;
+}
+
+#like .con-like .poly {
+    stroke: var(--red);
+    fill: var(--red);
+}
+
+#like .con-like .like:checked ~ .checkmark .filled {
+    display: block;
+}
+
+#like .con-like .like:checked ~ .checkmark .celebrate {
+    display: block;
+}
+
+@keyframes kfr-filled {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+@keyframes kfr-celebrate {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+    display: none;
+  }
+}
+
+
+
+ #like  .wrap {
+    position: relative;
+    width: 320px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white; /* 배경색 추가 */
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+    font-family: 'Arial', sans-serif;
+    border: 1px solid #ccc; /* 경계선 추가 */
+  }
+  
+ #like    .info {
+    padding: 20px;
+  }
+  
+ #like    .title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+ #like   .close {
+    background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png") no-repeat;
+    background-size: cover;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+  
+  #like   .desc {
+    flex: 1;
+  }
+  
+#like   .desc .ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 5px;
+    font-size: 12px;
+  }
+  
+#like   .desc .jibun {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 5px;
+  }
+  
+#like   .desc .link {
+    color: #0096ff;
+    text-decoration: none;
+  }

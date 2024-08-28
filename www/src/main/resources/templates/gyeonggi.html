@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>traverse</title>
+  
+  <link href="/css/mainStyle.css" rel="stylesheet">
+  <link href="/css/homeStyle.css" rel="stylesheet">
+</head>
+<body>
+
+	<input type="checkbox" id="menuicon">
+	<header>
+		<div>
+			<ul class="navi">
+				<li><a href="/"><img class="logo" th:src="@{/image/logo_w.png}"></a></li>
+				<li th:if="${session.user == null}">
+					<a href="/member/login">login</a>
+				</li>
+				<li th:if="${session.user != null}">
+					<a href="/member/myPage">myPage</a>
+				</li>
+		  </ul>
+		  
+		  <label for="menuicon" class="menubtn">
+		  	<span></span>
+		  	<span></span>
+		  	<span></span>
+		  </label>
+		</div>
+	</header>
+	
+	<div class="container">
+		<div class="contents">
+			<span class="area_desc">
+				<img class="regionimg" th:src="@{/image/gyeonggi1.png}">
+				
+				<form id="locationForm" method="POST" onsubmit="return validateForm()">
+				
+				<label class="container1" style="top: 40%; left: 16%;">
+					<div id="displayText1" class="display-text" style="display: none;">김포</div>
+				  <input type="checkbox" id="checkbox1" name="gyeonggi" value="8">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 31%; left: 26%;">
+					<div id="displayText2" class="display-text" style="display: none;">파주</div>
+				  <input type="checkbox" id="checkbox2" name="gyeonggi" value="27">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 18%; left: 38%;">
+					<div id="displayText3" class="display-text" style="display: none;">연천</div>
+				  <input type="checkbox" id="checkbox3" name="gyeonggi" value="21">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 26%; left: 50%;">
+					<div id="displayText4" class="display-text" style="display: none;">포천</div>
+				  <input type="checkbox" id="checkbox4" name="gyeonggi" value="29">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 34%; left: 63%;">
+					<div id="displayText5" class="display-text" style="display: none;">가평</div>
+			    <input type="checkbox" id="checkbox5" name="gyeonggi" value="1">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 42%; left: 28%;">
+					<div id="displayText6" class="display-text" style="display: none;">고양</div>
+			    <input type="checkbox" id="checkbox6" name="gyeonggi" value="2">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 33%; left: 36%;">
+					<div id="displayText7" class="display-text" style="display: none;">양주</div>
+			    <input type="checkbox" id="checkbox7" name="gyeonggi" value="18">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 27%; left: 41%;">
+					<div id="displayText8" class="display-text" style="display: none;">동두천</div>
+			    <input type="checkbox" id="checkbox8" name="gyeonggi" value="10">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 38%; left: 40%;">
+					<div id="displayText9" class="display-text" style="display: none;">의정부</div>
+			    <input type="checkbox" id="checkbox9" name="gyeonggi" value="25">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top:42%; left: 51%;">
+					<div id="displayText10" class="display-text" style="display: none;">남양주</div>
+			    <input type="checkbox" id="checkbox10" name="gyeonggi" value="9">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 46%; left: 46%;">
+					<div id="displayText11" class="display-text" style="display: none;">구리</div>
+			    <input type="checkbox" id="checkbox11" name="gyeonggi" value="6">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 51%; left: 50%;">
+					<div id="displayText12" class="display-text" style="display: none;">하남</div>
+			    <input type="checkbox" id="checkbox12" name="gyeonggi" value="30">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 51%; left: 70%;">
+					<div id="displayText13" class="display-text" style="display: none;">양평</div>
+			    <input type="checkbox" id="checkbox13" name="gyeonggi" value="19">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 58%; left: 54%;">
+					<div id="displayText14" class="display-text" style="display: none;">광주</div>
+			    <input type="checkbox" id="checkbox14" name="gyeonggi" value="5">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 64%; left: 74%;">
+					<div id="displayText15" class="display-text" style="display: none;">여주</div>
+			    <input type="checkbox" id="checkbox15" name="gyeonggi" value="20">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 51%; left: 25%;">
+					<div id="displayText16" class="display-text" style="display: none;">부천</div>
+				  <input type="checkbox" id="checkbox16" name="gyeonggi" value="11">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 55%; left: 29%;">
+					<div id="displayText17" class="display-text" style="display: none;">광명</div>
+				  <input type="checkbox" id="checkbox17" name="gyeonggi" value="4">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 57%; left: 33%;">
+					<div id="displayText18" class="display-text" style="display: none;">안양</div>
+				  <input type="checkbox" id="checkbox18" name="gyeonggi" value="17">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 56%; left: 38%;">
+					<div id="displayText19" class="display-text" style="display: none;">과천</div>
+				  <input type="checkbox" id="checkbox19" name="gyeonggi" value="3">
+				  <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 58%; left: 43%;">
+					<div id="displayText20" class="display-text" style="display: none;">성남</div>
+			    <input type="checkbox" id="checkbox20" name="gyeonggi" value="12">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 58%; left: 24%;">
+					<div id="displayText21" class="display-text" style="display: none;">시흥</div>
+			    <input type="checkbox" id="checkbox21" name="gyeonggi" value="14">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 62%; left: 26%;">
+					<div id="displayText22" class="display-text" style="display: none;">안산</div>
+			    <input type="checkbox" id="checkbox22" name="gyeonggi" value="15">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 61%; left: 31%;">
+					<div id="displayText23" class="display-text" style="display: none;">군포</div>
+			    <input type="checkbox" id="checkbox23" name="gyeonggi" value="7">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 60%; left: 36%;">
+					<div id="displayText24" class="display-text" style="display: none;">의왕</div>
+			    <input type="checkbox" id="checkbox24" name="gyeonggi" value="24">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 65%; left: 36%;">
+					<div id="displayText25" class="display-text" style="display: none;">수원</div>
+			    <input type="checkbox" id="checkbox25" name="gyeonggi" value="13">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 71%; left: 30%;">
+					<div id="displayText26" class="display-text" style="display: none;">화성</div>
+			    <input type="checkbox" id="checkbox26" name="gyeonggi" value="31">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 72%; left: 39%;">
+					<div id="displayText27" class="display-text" style="display: none;">오산</div>
+			    <input type="checkbox" id="checkbox27" name="gyeonggi" value="22">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 68%; left: 49%;">
+					<div id="displayText28" class="display-text" style="display: none;">용인</div>
+			    <input type="checkbox" id="checkbox28" name="gyeonggi" value="23">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 69%; left: 64%;">
+					<div id="displayText29" class="display-text" style="display: none;">이천</div>
+			    <input type="checkbox" id="checkbox29" name="gyeonggi" value="26">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 82%; left: 35%;">
+					<div id="displayText30" class="display-text" style="display: none;">평택</div>
+			    <input type="checkbox" id="checkbox30" name="gyeonggi" value="28">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<label class="container1" style="top: 81%; left: 54%;">
+					<div id="displayText31" class="display-text" style="display: none;">안성</div>
+			    <input type="checkbox" id="checkbox31" name="gyeonggi" value="16">
+			    <div class="checkmark1"></div>
+				</label>
+				
+				<button class="container1" style="bottom: 5%; right: 0%;" type="reset" onclick="resetDisplayTexts()">
+					reset
+				</button>
+				
+				<button class="container1" style="bottom: 0%; right: 0%;">
+					submit
+				</button>
+				
+				</form>
+				
+			</span>
+		</div>
+		<div class="sidebar">
+			<span class="area_desc">
+			  <a href="/member/signUp">signUp</a><br>
+			  <th:block th:if="${session.user == null}">
+			  	<a href="/member/login">login</a><br>
+			  </th:block>
+			  <th:block th:if="${session.user != null}">
+			  	<a href="/member/logout">logout</a><br>
+			  	<a href="/member/myPage">myPage</a><br>
+			  </th:block>
+			  <a href="/member/like">like</a><br>
+			  <a href="/place/mapAPI">mapAPI</a><br>
+        <a href="/member/customer">customer</a><br>
+        <a href="/member/detail">상세페이지</a>
+			</span>
+		</div>
+	</div>
+	
+	<footer>
+		<hr>
+		<div>회사소개  |  이용약관  |  등등...</div>
+	</footer>
+	
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+	  	var checkboxes = document.querySelectorAll('.container1 input[type="checkbox"]');
+	
+	    checkboxes.forEach(function(checkbox, index) {
+	    	var displayText = document.getElementById('displayText' + (index + 1));
+	
+	      checkbox.addEventListener('change', function() {
+	      	if (checkbox.checked) {
+	        	displayText.style.display = 'block';
+	        }
+	      	else {
+	        	displayText.style.display = 'none';
+	        }
+	      });
+	    });
+		});
+		
+		function resetDisplayTexts() {
+			const displayTexts = document.querySelectorAll('.display-text');
+		  displayTexts.forEach(text => {
+		  	text.style.display = 'none';
+		  });
+		}
+		function validateForm() {
+			var checkboxes = document.querySelectorAll('.container1 input[type="checkbox"]:checked');
+			if (checkboxes.length === 0) {
+				alert("최소 1개 이상의 항목을 선택해주세요.");
+				return false;
+			}
+			else if (checkboxes.length > 3) {
+				alert("최대 3개 항목만 선택할 수 있습니다.");
+				return false;
+			}
+			return true;
+		}
+	</script>
+	
+</body>
+</html>
