@@ -18,10 +18,23 @@ package com.traverse.www.vo;
  */
 
 public class PlaceVO {
-	private int idx, areacode, contenttypeid, sigungucode,a_idx,day,duration;
-	private String cat1, cat2, cat3, firstimage, firstimage2, tel, title, addr1,seldate;
+	private int idx, areacode, contenttypeid, sigungucode,a_idx,day,duration, areaCode;
+	private String cat1, cat2, cat3, firstimage, firstimage2, tel, title, addr1,seldate, areaName;
 	private double mapx, mapy;
 	
+	
+	public int getAreaCode() {
+		return areaCode;
+	}
+	public void setAreaCode(int areaCode) {
+		this.areaCode = areaCode;
+	}
+	public String getAreaName() {
+		return areaName;
+	}
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}	
 	public int getIdx() {
 		return idx;
 	}
