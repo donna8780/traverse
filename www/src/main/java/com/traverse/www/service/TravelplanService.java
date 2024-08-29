@@ -9,6 +9,7 @@ import com.traverse.www.model.TravelplanDAO;
 import com.traverse.www.vo.PlaceVO;
 import com.traverse.www.vo.TravelplanVO;
 
+
 @Service
 public class TravelplanService {
 	@Autowired
@@ -29,5 +30,10 @@ public class TravelplanService {
 		return dao.getPlanplace(user_idx,seldate);
 	}
 
+	public List<PlaceVO> getdayplan(int user_idx, int day, String seldate) {
+		
+		return dao.getdayplan(user_idx,day,seldate);
+	}
+	
 
 }

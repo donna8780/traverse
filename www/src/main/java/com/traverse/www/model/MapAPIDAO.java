@@ -9,6 +9,7 @@ import com.traverse.www.vo.AccountsVO;
 import com.traverse.www.vo.LikeVO;
 import com.traverse.www.vo.MapAPIVO;
 
+
 @Mapper
 public interface MapAPIDAO {
 

@@ -521,5 +521,10 @@ public class MainController {
   	return mav;
   }
 
+  @GetMapping("/termsOfService")
+  public void termsOfService() {}
+  
+  @GetMapping("/privacyPolicy")
+  public void privacyPolicy() {}
   
 }
