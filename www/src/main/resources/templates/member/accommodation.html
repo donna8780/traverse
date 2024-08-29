@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Places by AreaCode</title>
+    <link href="/css/mainStyle.css" rel="stylesheet">
+    <link href="/css/accomStyle.css" rel="stylesheet">
+</head>
+<body>
+
+    <th:block th:replace="/fragment::header"></th:block>
+    
+    <h1>Search Places by AreaCode</h1>
+    
+        <!-- 검색 폼 -->
+    <form th:action="@{/member/accommodation/search}" method="get">
+        <input type="text" name="title" placeholder="숙소 이름을 검색해주세요" />
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- 검색 결과가 있을 때만 ul을 표시 -->
+    <ul th:if="${accommodation != null and !#lists.isEmpty(accommodation)}">
+        <li th:each="accommodation : ${accommodation}">
+            <p>Areacode: <span th:text="${accommodation.areacode}"></span></p>
+            <p>Title: 
+                <!-- 타이틀 클릭 시 외부 링크로 이동 -->
+                <a th:href="'https://www.yanolja.com/search/' + ${accommodation.addr1}" th:text="${accommodation.title}"></a>
+            </p>
+            <p>Address: <span th:text="${accommodation.addr1}"></span></p>
+            <p>Tel: <span th:text="${accommodation.tel}"></span></p>
+            <p>Map Coordinates: (<span th:text="${accommodation.mapx}"></span>, <span th:text="${accommodation.mapy}"></span>)</p>
+            <!-- 이미지가 있을 때 -->
+            <img th:if="${accommodation.firstimage != null and !accommodation.firstimage.isEmpty()}"
+                 th:src="${accommodation.firstimage}" alt="Image" />
+
+            <!-- 이미지가 없을 때 -->
+            <img th:if="${accommodation.firstimage == null or accommodation.firstimage.isEmpty()}"
+                 th:src="@{/image/logo_w.png}" alt="Default Image" />
+        </li>
+    </ul>
+
+	<div>
+    <button th:each="areaCode : ${areaCodes}" 
+            th:text="'AreaCode: ' + ${areaCode}"
+            th:attr="onclick=|location.href='/member/accommodation/area?areaCode=' + '${areaCode}'|">
+    </button>
+</div>
+
+    <!-- 선택된 AreaCode의 accommodation 정보 표시 -->
+    <ul th:if="${accommodationList != null and !#lists.isEmpty(accommodationList)}">
+        <li th:each="accommodation : ${accommodationList}">
+            <p>Title: 
+                <a th:href="'https://www.yanolja.com/search/' + ${accommodation.addr1}" th:text="${accommodation.title}"></a>
+            </p>
+            <p>Address: <span th:text="${accommodation.addr1}"></span></p>
+            <p>Tel: <span th:text="${accommodation.tel}"></span></p>
+            <p>Map Coordinates: (<span th:text="${accommodation.mapx}"></span>, <span th:text="${accommodation.mapy}"></span>)</p>
+            <!-- 이미지가 있을 때 -->
+            <img th:if="${accommodation.firstimage != null and !accommodation.firstimage.isEmpty()}"
+                 th:src="${accommodation.firstimage}" alt="Image" />
+
+            <!-- 이미지가 없을 때 -->
+            <img th:if="${accommodation.firstimage == null or accommodation.firstimage.isEmpty()}"
+                 th:src="@{/image/logo_w.png}" alt="Default Image" />
+        </li>
+    </ul>
+
+    <!-- 검색 결과가 없을 때 메시지 표시 -->
+    <p th:if="${accommodationList != null and #lists.isEmpty(accommodationList)}">No results found.</p>
+
+    <th:block th:replace="/fragment::footer"></th:block>
+</body>
+</html>

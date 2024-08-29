@@ -1,0 +1,196 @@
+@charset "UTF-8";
+
+#mypage body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f4f8; /* 배경 흰색 계열 */
+    font-family: 'Arial', sans-serif;
+    color: #333333;
+}
+
+#mypage .mypage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #ffffff; /* 컨테이너 배경 흰색 */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+}
+
+#mypage .logo {
+    width: 120px; /* 로고 크기 */
+    height: auto;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease; /* 호버 시 확대 애니메이션 */
+}
+
+#mypage .logo:hover {
+    transform: scale(1.05); /* 로고 확대 */
+}
+
+#mypage table {
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+    background-color: #ffffff; /* 테이블 배경 흰색 */
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 테이블 그림자 */
+}
+
+#mypage th, td {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #333333;
+}
+
+#mypage th {
+    background-color: #4caf50; /* 헤더 배경 초록색 */
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#mypage td {
+    background-color: #f9f9f9; /* 테이블 셀 배경 밝은 회색 */
+}
+
+#mypage button {
+    background-color: #4caf50; /* 버튼 배경 초록색 */
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+    transition: all 0.3s ease;
+}
+
+#mypage button:hover {
+    background-color: #45a049; /* 호버 시 조금 더 어두운 초록색 */
+    transform: scale(1.05); /* 버튼 확대 */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+#mypage .menubtn {
+  display: block;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+#mypage .menubtn span {
+  display: block;
+  position: absolute;
+  width: 80%;
+  height: 5px;
+  border-radius: 30px;
+  background: #2A3854;
+  transition: all .35s;
+}
+
+#mypage .menubtn span:nth-child(1) {
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#mypage .menubtn span:nth-child(2) {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#mypage .menubtn span:nth-child(3) {
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#mypage .sidebar .area_desc a {
+  display: block;
+  line-height: 2;
+  margin-bottom: 10px;
+  color: black;
+  text-decoration: none;
+}
+
+#mypage input[id="menuicon"]:checked ~ header .menubtn {
+  z-index: 50;
+}
+
+#mypage input[id="menuicon"]:checked ~ header .menubtn span:nth-child(1) {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(135deg);
+}
+
+#mypage input[id="menuicon"]:checked ~ header .menubtn span:nth-child(2) {
+  left: 50%;
+  transform: translate(-50%, -50%) scale(2);
+  opacity: 0;
+}
+
+#mypage input[id="menuicon"]:checked ~ header .menubtn span:nth-child(3) {
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%) rotate(-135deg);
+}
+
+#mypage input[id="menuicon"]:checked ~ .container .sidebar {
+  right: 0;
+}
+
+#mypage .container {
+  width: 100%;
+  position: relative;
+}
+
+#mypage .container .sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100%;
+  /*background: #4BB958;
+  border: 1px solid #2A3854;*/
+  z-index: 30;
+  transition: .35s;
+}
+
+#mypage input[id="menuicon"] {
+  display: none;
+}
+
+#mypage header {
+  width: 100%;
+  /*background: #F89D4A;*/
+}
+
+#mypage header > div {
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+#mypage .area_desc {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}

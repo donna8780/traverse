@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Plan</title>
+    <link href="/css/mainStyle.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <th:block th:replace="/fragment::header"></th:block>
+
+    <div id="plan">
+    <span class="area_desc">
+        <ul th:each="place : ${place}">
+            <li>
+                <a th:text="${place.seldate} + '  ' + ${place.areaName} + '  ' + (${place.sigunguName} ?: '')"
+                   th:href="@{/place/travelplandetail?(seldate=${place.seldate})}"></a>
+            </li>
+        </ul>
+    </span>
+    </div>
+
+    <th:block th:replace="/fragment::footer"></th:block>
+    
+</body>
+</html>

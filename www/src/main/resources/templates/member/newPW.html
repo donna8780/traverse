@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/css/mainStyle.css" rel="stylesheet">
+  <link href="/css/LoginStyle.css" rel="stylesheet">
+</head>
+<body>
+<th:block th:replace="/fragment::header"></th:block>
+<fieldset>
+  <legend>PW 변경</legend>
+  
+  <form action="newPW" method="post">
+  
+  <p><input name="userpw" type="password" placeholder="새 비밀번호" required></p>
+  <p><input name="check" type="password" placeholder="비밀번호 확인" required></p>
+  <p><input name="accounts_idx" type="hidden" th:value="${accounts_idx}"></p>
+  <button>PW 변경</button>
+  </form>
+  
+  <script>
+    let inputs = document.querySelectorAll('input');
+    let button = document.querySelector('button');
+    
+    
+    
+    button.onclick = () =>{
+      let userpw = inputs[1].value;
+      let check = inputs[2].value;
+      
+      if(userpw !== check){
+        alert('패스워드가 일치하지 않습니다');
+        
+        inputs[1].value = '';
+        inputs[2].value = '';
+        
+        inputs[1].focus();
+      }else{
+        alert('비밀번호가 변경 되었습니다');
+      }
+    }
+    
+  </script>
+  
+  
+</fieldset>
+
+<th:block th:replace="/fragment::footer"></th:block>
+</body>
+</html>

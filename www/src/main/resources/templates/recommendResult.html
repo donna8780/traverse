@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>traverse</title>
+    <link href="/css/mainStyle.css" rel="stylesheet">
+    <link href="/css/tabStyle.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <th:block th:replace="/fragment::header"></th:block>
+    <div class="tab-menu">
+        <button th:each="i : ${#numbers.sequence(1, result.duration/5)}"
+                th:text="'Day ' + ${i}"
+                th:onclick="'openTab(event, \'tab' + ${i} + '\')'"
+                class="tab-link">
+        </button>
+    </div>
+    <div th:each="i : ${#numbers.sequence(1, result.duration/5)}"
+         th:id="'tab' + ${i}"
+         class="tab-content">
+             <h3 th:text="'Day ' + ${i}"></h3>
+                <table class="placetable">
+                    <tr>
+                        <th>사진</th>
+                        <th>장소</th>
+                        <th>주소</th>
+                        <th></th>
+                    </tr>
+                    <!-- place 목록을 표시하는 테이블 -->
+                    <tr th:each="row : ${place}">
+                    
+                        <td class="planimg">
+                          <img th:if="${row.firstimage != null and !row.firstimage.isEmpty()}"
+						                 th:src="${row.firstimage}" alt="Image" />
+						
+							            <!-- 이미지가 없을 때 -->
+							            <img th:if="${row.firstimage == null or row.firstimage.isEmpty()}"
+						                 th:src="@{/image/logo_w.png}" alt="Default Image" />
+                        </td>
+                        <td class="normal">
+                            <a th:href="@{/member/detail/{idx}(idx=${row.idx})}" th:text="${row.title}"></a>
+                        </td>
+                        <td th:text="${row.addr1}"></td>
+                        <th>
+                            <a th:href="@{/place/planadd(
+                                    p_idx=${row.idx},
+                                    a_idx=${result.a_idx},
+                                    areaCode=${result.areaCode},
+                                    sigunguCode1=${result.sigunguCode1},
+                                    sel_idx=${result.sel_idx},
+                                    duration=${result.duration},
+                                    seldate=${seldate},
+                                    day=${i})}">
+                                    +
+                                </a>
+                        </th>
+                    </tr>
+                </table>
+    </div>
+    
+    
+  <script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            tabcontent[i].classList.remove("active");
+        }
+
+        tablinks = document.getElementsByClassName("tab-link");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+
+        document.getElementById(tabName).style.display = "block";
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector(".tab-menu button").click();
+    });
+</script>
+    
+    <th:block th:replace="/fragment::footer"></th:block>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>ID 찾기</title>
+	<link href="/css/mainStyle.css" rel="stylesheet">
+	<link href="/css/LoginStyle.css" rel="stylesheet">
+</head>
+<body>
+  <th:block th:replace="/fragment::header"></th:block>
+
+<div class="form-container">
+  <form method="post" class="form">
+  
+	  <span class="input-span">
+	    <label for="name" class="label">ID</label>
+	    <input name="name" placeholder="NAME" type="text" required id="name"/>
+	  </span>
+	  
+	  <span class="input-span">
+    <label for="email" class="label">Password</label>
+    <input name="email" placeholder="EMAIL" type="email" required id="email"/>
+  	</span>
+  	
+  	<input class="submit" type="submit" value="ID 찾기" />
+  
+  </form>
+  </div>
+  
+
+<th:block th:replace="/fragment::footer"></th:block>
+</body>
+</html>

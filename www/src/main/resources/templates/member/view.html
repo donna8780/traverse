@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${row.title}">게시글 보기</title>
+    <link rel="stylesheet" href="/css/viewStyle.css"> <!-- 스타일을 위한 CSS 파일 경로 -->
+    <link href="/css/mainStyle.css" rel="stylesheet">
+</head>
+<body>
+<th:block th:replace="/fragment::header"></th:block>
+    <div class="post-container">
+        <h1 th:text="${row.title}">게시글 제목</h1>
+        <p><strong>작성자:</strong> <span th:text="${row.nick}">작성자</span></p>
+        <hr/>
+        <div class="post-content">
+            <p th:text="${row.contents}">게시글 내용</p>
+        </div>
+    </div>
+  
+  <!-- 글쓴 본인만 수정 삭제 버튼 활성화 -->
+  <div th:if="${session.user != null and (session.user.nick == row.nick or session.user.nick == '관리자')}">
+    <button>수정</button>
+    <button>삭제</button>
+  </div>
+  
+  <script th:inline="javascript">
+    let btns = document.querySelectorAll('button');
+    
+    // 수정 버튼
+    btns[0].onclick = () => {
+      location.href = '/member/ann_update/[[${row.announcement_idx}]]';
+    };
+    
+    // 삭제 버튼
+    btns[1].onclick = () => {
+      
+      location.href = '/member/ann_delete/[[${row.announcement_idx}]]';
+    };
+  </script>
+    <th:block th:replace="/fragment::footer"></th:block>
+  
+</html>

@@ -1,0 +1,279 @@
+@charset "UTF-8";
+body {
+  margin: 0;
+  padding: 0;
+    box-sizing: border-box;
+}
+
+.logo {
+   width: 150px;
+}
+
+.table-container {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.container .contents {
+   width: 1200px;
+   margin: 0 auto;
+   min-height: 700px;
+}
+
+.container .sidebar {
+   position: fixed;
+   top: 0;
+   right: -300px;
+   width: 300px;
+   height: 100%;
+   z-index: 30;
+   transition: .35s;
+}
+
+input[id="menuicon"] {
+   display: none;
+}
+
+header {
+   width: 100%;
+   position: relative;
+   z-index: 4;
+}
+
+header > div {
+   position: relative;
+   width: 1200px;
+   margin: 0 auto;
+}
+
+header > div ul.navi {
+   font-size: 0;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding-right: 100px;
+}
+
+header > div ul.navi > li {
+   font-size: 12px;
+   display: inline-block;
+   display: flex; /* 플렉스박스 사용 */
+   align-items: center; /* 세로 가운데 정렬 */
+}
+
+header > div ul.navi > li > a {
+   display: block;
+   width: auto;
+   padding: 20px;
+}
+
+.navi a {
+	font-size: 16px;
+}
+
+.area_desc {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   font-size: 20px;
+}
+
+.menubtn {
+   display: block;
+   width: 50px;
+   height: 50px;
+   position: absolute;
+   top: 50%;
+   right: 10px;
+   transform: translateY(-50%);
+   cursor: pointer;
+}
+
+.menubtn span {
+   display: block;
+   position: absolute;
+   width: 80%;
+   height: 5px;
+   border-radius: 30px;
+   background: #2A3854;
+   transition: all .35s;
+}
+
+.menubtn span:nth-child(1) {
+   top: 20%;
+   left: 50%;
+   transform: translateX(-50%);
+}
+
+.menubtn span:nth-child(2) {
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+.menubtn span:nth-child(3) {
+   bottom: 20%;
+   left: 50%;
+   transform: translateX(-50%);
+}
+
+.container {
+   width: 100%;
+   position: relative;
+   display: inline-block;
+}
+
+input[id="menuicon"]:checked ~ header .menubtn {
+   z-index: 50;
+}
+
+input[id="menuicon"]:checked ~ header .menubtn span:nth-child(1) {
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%) rotate(135deg);
+}
+
+input[id="menuicon"]:checked ~ header .menubtn span:nth-child(2) {
+   left: 50%;
+   transform: translate(-50%, -50%) scale(2);
+   opacity: 0;
+}
+
+input[id="menuicon"]:checked ~ header .menubtn span:nth-child(3) {
+   bottom: 50%;
+   left: 50%;
+   transform: translate(-50%, 50%) rotate(-135deg);
+}
+
+input[id="menuicon"]:checked ~ .container .sidebar {
+   right: 0;
+}
+
+.sidebar .area_desc a {
+   display: block;
+  line-height: 2;
+  margin-bottom: 10px;
+  color: black;
+  text-decoration: none;
+}
+
+.sidebar .area_desc a:hover {
+  color: #4BB958;
+  text-decoration: underline;
+}
+
+.checkbox {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid black;
+	padding: 5px 10px;
+}
+
+
+.sidebar {
+	position: fixed;
+	top: 0;
+	right: -3000px;
+	width: 300px;
+	height: 100%;
+	background: #E2E2E2;
+	transition: all .35s;
+	z-index: 50;
+}
+
+.sidebar label[for*='menuicon'] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	/* 요소가 없는 부분을 클릭하면 메뉴버튼 닫기 */
+}
+
+.background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .5);
+	transition: all .35s;
+	opacity: 0;
+	visibility: hidden;
+	z-index: 20;
+}
+
+input#menuicon:checked ~ header label {
+	background-position: -24px 0;
+}
+
+input#menuicon:checked ~ .sidebar {
+	right: 0;
+}
+
+input#menuicon:checked ~ .background {
+	opacity: 1;
+	visibility: visible;
+}
+
+.sidebar a:hover {
+	text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+	transition: all 0.3s ease;
+}
+
+.userprofile img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	object-fit: cover; /* 이미지가 비율을 유지하면서 컨테이너에 맞춰짐 */
+    object-position: center; /* 이미지의 중앙 부분이 표시되도록 설정 */
+	
+}
+
+
+footer {
+   width: 1200px;
+   margin: 0 auto;
+   min-height: 50px;
+    padding: 10px 10px 0 10px;
+    text-align: center;
+}
+
+footer hr {
+    border: none;
+    border-top: 1px solid #ccc; /* 구분선 스타일 */
+    margin-bottom: 10px;
+    width: 1200px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; /* 수직 가운데 정렬 */
+    flex-wrap: wrap; /* 화면 크기에 따라 항목들이 여러 줄로 배치되도록 설정 */
+    gap: 10px; /* 항목 사이의 간격 */
+}
+
+.footer-container a {
+	color: black;
+}
+
+.footer-container span {
+    font-size: 14px; /* 텍스트 크기 */
+}
+
+.footer-container span:first-child {
+    font-weight: bold; /* 첫 번째 항목(TRAVERSE)의 텍스트 굵게 */
+}

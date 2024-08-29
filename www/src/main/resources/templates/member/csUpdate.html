@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/mainStyle.css">
+</head>
+<body>
+<th:block th:replace="/fragment::header"></th:block>
+  <form method="POST">
+    <table>
+       <tr>
+          <td><input name="title" placeholder="제목"></td>
+       </tr>
+       <tr>
+          <td><textarea name="content" placeholder="글 내용"></textarea></td>
+       </tr>
+    </table>
+    
+    <br>
+    
+    <input name="a_idx" type="hidden" th:value="${session.user.accounts_idx}">
+    <button>수정</button>
+  </form>
+  <th:block th:replace="/fragment::footer"></th:block>
+</body>
+</html>

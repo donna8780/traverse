@@ -1,41 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
+<link href="/css/myPageStyle00.css" rel="stylesheet">
+  <link href="/css/mainStyle.css" rel="stylesheet">
 </head>
 <body>
 
-<table>
-  <tr>
-     <th>회원번호</th>
-     <td>idx</td>
-  </tr>
-  <tr>
-     <th>아이디</th>
-     <td>userid</td>
-  </tr>
-  <tr>
-     <th>닉네임</th>
-     <td>nick</td>
-  </tr>
-  <tr>
-     <th>이메일</th>
-     <td>email</td>
-  </tr>
-  <tr>
-     <th>가입일</th>
-     <td>join_date</td>
-  </tr>
-</table>
+  <th:block th:replace="/fragment::header"></th:block>
+    <div id="mypage">
+    
+    <h2 class="mypage-title">마이페이지</h2>
 
-<br>
-<a href="/member/update">
-  <button>수정</button>
-</a>
+  <div class="mypage">
+      <table>
 
-<a></a>
-<button>탈퇴</button>
+        <tr>
+          <th>회원번호</th>
+          <td th:text="${session.user.accounts_idx}"></td>
+        </tr>
+        <tr>
+          <th>아이디</th>
+          <td th:text="${session.user.userid}"></td>
+        </tr>
+        <tr>
+          <th>닉네임</th>
+          <td th:text="${session.user.nick}"></td>
+        </tr>
+        <tr>
+          <th>이메일</th>
+          <td th:text="${session.user.email}"></td>
+        </tr>
+        <tr>
+          <th>생년월일</th>
+          <td th:text="${session.user.birth}"></td>
+        </tr>
+        <tr>
+                <th>프로필 사진</th>
+                <td>
+                <!-- 업로드된 프로필 사진 표시 -->
+                    <div th:if="${session.user.profile}">
+                        <img th:src="@{'/image/' + ${session.user.profile}}" alt="Profile Image" style="width: 150px; height: 150px;" />
 
+                    </div>
+                    <!-- 이미지 업로드 폼 -->
+                    <form method="POST" enctype="multipart/form-data" th:action="@{/member/uploadProfile}">
+                        <input type="file" name="profileImage" accept="image/*" />
+                        <button type="submit">업로드</button>
+                    </form>
+                    
+                </td>
+            </tr>
+        </table>
+
+      
+
+    <a href="/member/delete/[[${session.user.accounts_idx}]]"><button class="submit">탈퇴</button></a>
+    <a href="/member/update"><button class="submit">수정</button></a>
+  </div>
+
+
+  
+    </div>
+
+
+  <th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

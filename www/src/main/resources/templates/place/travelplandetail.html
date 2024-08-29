@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Plan Detail</title>
+    <link href="/css/mainStyle.css" rel="stylesheet">
+    <link href="/css/tabStyle.css" rel="stylesheet">
+</head>
+<body>
+
+<th:block th:replace="/fragment::header"></th:block>
+
+<div th:if="${Planplace.size() > 0}">
+    <div class="tab-menu">
+        <button th:each="i : ${#numbers.sequence(1, Planplace[0].duration)}"
+                th:text="'Day ' + ${i}"
+                th:onclick="'openTab(event, \'tab' + ${i} + '\', '+ ${i} +', this.getAttribute(\'data-seldate\'))'"
+                th:data-seldate="${Planplace[0].seldate}"
+                class="tab-link">
+        </button>
+    </div>
+
+    <div th:each="i : ${#numbers.sequence(1, Planplace[0].duration)}"
+         th:id="'tab' + ${i}"
+         class="tab-content">
+         
+    </div>
+</div>
+
+
+
+<script>
+    function openTab(evt, tabName,day,seldate) {
+        var i, tabcontent, tablinks;
+        // 모든 탭 콘텐츠 숨기기
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            tabcontent[i].classList.remove("active");
+        }
+
+        // 모든 탭 링크에서 active 클래스 제거
+        tablinks = document.getElementsByClassName("tab-link");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+
+        // 현재 탭 콘텐츠 표시
+        document.getElementById(tabName).style.display = "block";
+        document.getElementById(tabName).classList.add("active");
+
+        // 현재 탭 링크에 active 클래스 추가
+        evt.currentTarget.classList.add("active");
+        
+        fetch("http://localhost:8080/place/dayplan?day=" + day + "&seldate="+seldate, {method:"get"})
+        .then(response => response.json())
+        .then()
+        .then(data => {
+
+        var tabContentElement = document.getElementById(tabName);
+        tabContentElement.innerHTML = `<h4>Day ${day}</h4>`;
+
+        if (Array.isArray(data)) {
+
+            data.forEach(place => {
+                tabContentElement.innerHTML += `
+                    <div>
+                        ${place.firstimage ? `<img src="${place.firstimage}" width="150px" height="100px">` : `<img src="/image/logo_w.png" width="150px" height="100px">`}
+                        <p>장소: ${place.title}</p>
+                        <p>주소: ${place.addr1}</p>
+                    </div>
+                `;
+            });
+        } else {
+            tabContentElement.innerHTML += `<p>No places available for this day.</p>`;
+        }
+    })
+        
+    }
+
+    // 첫 번째 탭을 기본적으로 열기
+    document.addEventListener("DOMContentLoaded", function() {
+        var firstTab = document.querySelector(".tab-menu button");
+        if (firstTab) {
+            firstTab.click();
+        }
+    });
+</script>
+<th:block th:replace="/fragment::footer"></th:block>
+</body>
+</html>
