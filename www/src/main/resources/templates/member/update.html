@@ -8,6 +8,9 @@
 </head>
 <body>
 <th:block th:replace="/fragment::header"></th:block>
+
+	<div class="page-content">
+    <h2 class="page-title">마이페이지 정보 수정</h2>
    <form method="POST">
       <table>
          <tr>
@@ -16,8 +19,9 @@
          </tr>
          <tr>
             <th>NICK</th>
-            <td><input name="nick" th:value="${session.user.nick}" required></td>
-         </tr><tr>
+            <td><input name="nick" type="text" th:value="${session.user.nick}" required></td>
+         </tr>
+         <tr>
             <th>PW</th>
             <td><input name="userpw" type="password" required></td>
          </tr>
@@ -31,6 +35,7 @@
       
       <button>modify</button>
    </form>
+    
     <div th:if="${session.user.profile}">
      <img th:src="@{'/image/' + ${session.user.profile}}" alt="Profile Image" style="width: 150px; height: 150px;" />
     </div>  

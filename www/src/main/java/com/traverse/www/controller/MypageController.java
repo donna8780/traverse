@@ -58,9 +58,9 @@ public class MypageController {
    
    // 삭제
    @GetMapping("/delete/{accounts_idx}")
-   public String delete(AccountsVO idx) {
- 		
- 		ms.deleteAccount(idx);
+   public String delete(@PathVariable("accounts_idx") int idx) {
+  	 
+  	 ms.deleteAccount(idx);
  		
  		return "redirect:/member/logout";
  	}
