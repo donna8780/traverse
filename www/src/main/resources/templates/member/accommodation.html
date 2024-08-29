@@ -39,10 +39,11 @@
     </ul>
 
 	<div>
-    <button th:each="areaCode : ${areaCodes}" 
-            th:text="'AreaCode: ' + ${areaCode}"
-            th:attr="onclick=|location.href='/member/accommodation/area?areaCode=' + '${areaCode}'|">
-    </button>
+    <!-- areaCodes를 순회하여 버튼 생성 -->
+        <button th:each="areaCode : ${areaCodes}" 
+                th:text="${areaCode.name}" 
+                th:attr="onclick=|location.href='/member/accommodation/area?areaCode=' + ${areaCode.code}|">
+        </button>
 </div>
 
     <!-- 선택된 AreaCode의 accommodation 정보 표시 -->
