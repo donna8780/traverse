@@ -8,7 +8,7 @@
   <link href="/css/reviewsStyle.css" rel="stylesheet">
 </head>
 <body>
-
+<th:block th:replace="/fragment::header"></th:block>
   
   <div class="content-container">
     <div class="story-details">
@@ -23,44 +23,49 @@
   
     <div class="slider-container">
       <div class="slider">
-        <!-- 이미지가 null이 아닌 경우에만 렌더링 -->
-        <div th:if="${story.imge1 != null}">
-          <img th:src="@{/story/{fileName}(fileName=${story.imge1})}" alt="Slide 1" class="slide" onclick="openModal(this.src)">
+        <!-- 이미지가 하나라도 있는 경우 슬라이더 렌더링 -->
+        <div th:if="${story.imge1 != null or story.imge2 != null or story.imge3 != null or story.imge4 != null or story.imge5 != null or story.imge6 != null or story.imge7 != null or story.imge8 != null or story.imge9 != null or story.imge10 != null}">
+          <div th:if="${story.imge1 != null}">
+            <img th:src="@{/story/{fileName}(fileName=${story.imge1})}" alt="Slide 1" class="slide" onclick="openModal(this.src)">
+          </div>
+          <div th:if="${story.imge2 != null}">
+            <img th:src="@{/story/{fileName}(fileName=${story.imge2})}" alt="Slide 2" class="slide" onclick="openModal(this.src)">
+          </div>
+          <div th:if="${story.imge3 != null}">
+            <img th:src="@{/story/{fileName}(fileName=${story.imge3})}" alt="Slide 3" class="slide" onclick="openModal(this.src)">
+          </div>
+          <div th:if="${story.imge4 != null}">
+            <img th:src="@{/story/{fileName}(fileName=${story.imge4})}" alt="Slide 4" class="slide" onclick="openModal(this.src)">
+          </div>
+          <div th:if="${story.imge5 != null}">
+            <img th:src="@{/story/{fileName}(fileName=${story.imge5})}" alt="Slide 5" class="slide" onclick="openModal(this.src)">
+          </div>
+          <div th:if="${story.imge6 != null}">
+            <img th:src="@{/story/{fileName}(fileName=${story.imge6})}" alt="Slide 6" class="slide" onclick="openModal(this.src)">
+          </div>
+          <div th:if="${story.imge7 != null}">
+            <img th:src="@{/story/{fileName}(fileName=${story.imge7})}" alt="Slide 7" class="slide" onclick="openModal(this.src)">
+          </div>
+          <div th:if="${story.imge8 != null}">
+            <img th:src="@{/story/{fileName}(fileName=${story.imge8})}" alt="Slide 8" class="slide" onclick="openModal(this.src)">
+          </div>
+          <div th:if="${story.imge9 != null}">
+            <img th:src="@{/story/{fileName}(fileName=${story.imge9})}" alt="Slide 9" class="slide" onclick="openModal(this.src)">
+          </div>
+          <div th:if="${story.imge10 != null}">
+            <img th:src="@{/story/{fileName}(fileName=${story.imge10})}" alt="Slide 10" class="slide" onclick="openModal(this.src)">
+          </div>
         </div>
-        <div th:if="${story.imge2 != null}">
-          <img th:src="@{/story/{fileName}(fileName=${story.imge2})}" alt="Slide 2" class="slide" onclick="openModal(this.src)">
-        </div>
-        <div th:if="${story.imge3 != null}">
-          <img th:src="@{/story/{fileName}(fileName=${story.imge3})}" alt="Slide 3" class="slide" onclick="openModal(this.src)">
-        </div>
-        <div th:if="${story.imge4 != null}">
-          <img th:src="@{/story/{fileName}(fileName=${story.imge4})}" alt="Slide 4" class="slide" onclick="openModal(this.src)">
-        </div>
-        <div th:if="${story.imge5 != null}">
-          <img th:src="@{/story/{fileName}(fileName=${story.imge5})}" alt="Slide 5" class="slide" onclick="openModal(this.src)">
-        </div>
-        <div th:if="${story.imge6 != null}">
-          <img th:src="@{/story/{fileName}(fileName=${story.imge6})}" alt="Slide 6" class="slide" onclick="openModal(this.src)">
-        </div>
-        <div th:if="${story.imge7 != null}">
-          <img th:src="@{/story/{fileName}(fileName=${story.imge7})}" alt="Slide 7" class="slide" onclick="openModal(this.src)">
-        </div>
-        <div th:if="${story.imge8 != null}">
-          <img th:src="@{/story/{fileName}(fileName=${story.imge8})}" alt="Slide 8" class="slide" onclick="openModal(this.src)">
-        </div>
-        <div th:if="${story.imge9 != null}">
-          <img th:src="@{/story/{fileName}(fileName=${story.imge9})}" alt="Slide 9" class="slide" onclick="openModal(this.src)">
-        </div>
-        <div th:if="${story.imge10 != null}">
-          <img th:src="@{/story/{fileName}(fileName=${story.imge10})}" alt="Slide 10" class="slide" onclick="openModal(this.src)">
+        <!-- 이미지가 하나도 없을 경우 대체 이미지 표시 -->
+        <div th:unless="${story.imge1 != null or story.imge2 != null or story.imge3 != null or story.imge4 != null or story.imge5 != null or story.imge6 != null or story.imge7 != null or story.imge8 != null or story.imge9 != null or story.imge10 != null}">
+          <img src="/image/logo_w.png" alt="Default Image" class="slide" onclick="openModal(this.src)">
         </div>
       </div>
-      <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-      <button class="next" onclick="changeSlide(1)">&#10095;</button>
+      
     </div>
     <div class="story-details">
       <div th:if="${session.user.profile}">
-        <img th:src="@{'/image/' + ${session.user.profile}}" alt="Profile Image" style="width: 150px; height: 150px;" />
+        <img th:src="@{'/image/' + ${session.user.profile}}" alt="Profile Image" class="profile-image" />
       </div>
       <div class="info">
         <div class="nickname" th:text="${story.nick}"></div>
@@ -69,10 +74,14 @@
           <span>|</span>
           <span th:text="'조회수 : ' + ${story.v_count}"></span>
         </div>
+        <div th:if="${session.user.nick == story.nick or session.user.nick == '관리자'}">
+            <a th:href="@{'/place/story_update/' + ${story.idx}}" class="edit-btn">수정</a>
+            <a th:href="@{'/place/story_delete/' + ${story.idx}}" class="delete-btn" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
+        </div>
       </div>
     </div>
     <div class="review-display">
-      <pre th:text="${story.contents}"></pre>
+      <p th:text="${story.contents}"></p>
     </div>
   </div>
   
@@ -121,6 +130,6 @@
     }
   </script>
 
-  
+    <th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>
