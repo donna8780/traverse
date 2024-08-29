@@ -40,13 +40,14 @@
     </div>
     <div class="sidebar">
       <span class="area_desc">
+        
         <th:block th:if="${session.user == null}">
-        <a href="/member/signUp">signUp</a><br>
-          <a href="/member/login">login</a><br>
+        <a href="/member/signUp">회원가입</a><br>
+          <a href="/member/login">로그인</a><br>
         </th:block>
         <th:block th:if="${session.user != null}">
-          <a href="/member/logout">logout</a><br>
-          <a href="/member/myPage">myPage</a><br>
+          <a href="/member/logout">로그아웃</a><br>
+          <a href="/member/myPage">마이페이지</a><br>
         </th:block>
         <a href="/member/like">like</a><br>
         <a href="/member/customer">customer</a><br>

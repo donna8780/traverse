@@ -95,7 +95,12 @@
     object-position: center; /* 이미지의 중앙 부분이 표시되도록 설정 */
     margin-right: 10px;
 }
-
+.profile-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%; /*이미지가 둥글게 변함*/
+      object-fit: cover;
+}
 .info {
     display: flex;
     flex-direction: column;
@@ -170,9 +175,10 @@
     margin-top: 10px;
     width: 800px;
     margin: 0 auto;
+    height: 60px;
 }
 
-pre {
+p {
     width: 100%;
     padding: 10px;
     font-size: 1em;

@@ -28,8 +28,7 @@
             <!-- 스크롤 가능한 내용 -->
             <div class="scrollable-content">
                 <div class="location-item" th:each="row : ${mapAPI}">
-                    <div class="image-box">
-                        
+                    <div class="image-box">              
                         
             <!-- 이미지가 있을 때 -->
             <img id="place_img" th:if="${row.firstimage != null and !row.firstimage.isEmpty()}"
@@ -43,14 +42,18 @@
                         
                     </div>
                     <div class="text-box">
-                        <div class="location-name" th:text="${row.title}"></div>
+                    
+                        <div class="location-name">
+                        	<a th:href="@{/member/detail/{idx}(idx=${row.p_idx})}" th:text="${row.title}"></a>
+                        </div>
+                    
                         <div class="location-detail" th:text="${row.addr1}"></div>
+          
                     </div>
                     <div class="con-like">
                         <input class="like" type="checkbox" title="like"
                             th:onclick="|toggleMarker(this,${row.mapx},${row.mapy})|">
-                 
-                            
+
                         <div class="checkmark">
                             <!-- 하트 아이콘 -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="outline" viewBox="0 0 24 24">
@@ -94,6 +97,7 @@ var overlays = {}; // 커스텀 오버레이를 저장하는 객체
 var selectedMarker = null; // 현재 선택된 마커를 저장
 
 function toggleMarker(check, x, y) {
+
     var key = x + ',' + y; 
     var locationItem = check.closest('.location-item');
 
