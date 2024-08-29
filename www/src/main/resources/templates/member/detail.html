@@ -188,21 +188,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function handleLike() {
     const checkbox = document.getElementById('Give-It-An-Id');
+    const data = {
+        a_idx: [[${session.user.accounts_idx}]],  
+        title: "[[${detail.title}]]",
+        addr1: "[[${detail.addr1}]]",
+        firstimage: "[[${detail.firstimage}]]",
+        mapx: [[${detail.mapx}]],
+        mapy: [[${detail.mapy}]],
+        p_idx: [[${detail.idx}]]
+    };
 
     if (checkbox.checked) {
-        // 데이터를 서버로 전송
-        const data = {
-    a_idx: [[${session.user.accounts_idx}]],  // JavaScript에서 사용할 수 있도록 직접 삽입
-    title: "[[${detail.title}]]",
-    addr1: "[[${detail.addr1}]]",
-    firstimage: "[[${detail.firstimage}]]",
-    mapx: [[${detail.mapx}]],
-    mapy: [[${detail.mapy}]],
-    p_idx: [[${detail.idx}]]
-};
-
-    if (checkbox.checked) {
-        // 하트가 체크된 경우 데이터 삽입 요청을 보냄
         fetch('/member/like', {
             method: 'POST',
             headers: {
@@ -222,7 +218,6 @@ function handleLike() {
             alert('An error occurred. Please try again.');
         });
     } else {
-        // 하트가 해제된 경우 데이터 삭제 요청을 보냄
         fetch('/member/like', {
             method: 'DELETE',
             headers: {
@@ -243,6 +238,7 @@ function handleLike() {
         });
     }
 }
+
   </script>
 
     <th:block th:replace="/fragment::footer"></th:block>
