@@ -41,17 +41,17 @@
 
 .sidebar-left {
     width: 12%;
-    height: 400px; /* 사이드바 높이를 콘텐츠에 맞게 조정 */
+    height: 370px; /* 사이드바 높이를 콘텐츠에 맞게 조정 */
     position: absolute;
     top: 30%; /* 로고 밑으로 내리기 위해 top 값을 조정 */
     left: 25px;
     transform: translateY(0); /* translateY(-50%) 제거 */
-    background-color: rgba(173, 216, 230, 0.5);
+    background-color: #E8F0FE;
     border-right: 1px solid #ccc;
     padding: 15px; /* 패딩을 늘려서 여유 공간 확보 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 사이드바에 그림자 추가 */
     border-radius: 10px; /* 모서리를 둥글게 처리 */
-    z-index: 1000;
+    z-index: 19;
     min-width: 150px; /* 최소 너비를 조정 */
     max-width: 300px; /* 최대 너비 설정 */
     font-size: 15px;
@@ -102,100 +102,6 @@
     text-align: left; /* 날씨 정보 텍스트를 왼쪽 정렬 */
 }
 
-
-
-/* checkbox css */
-.container1 input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-.container1 {
-  display: block;
-  position: absolute;
-  cursor: pointer;
-  font-size: 20px;
-  user-select: none;
-  animation: jello-horizontal 0.9s both;
-}
-
-.checkmark1:hover {
-  animation: jello-horizontal 0.9s both;
-}
-
-.checkmark1 {
-  position: relative;
-  top: 0;
-  left: 0;
-  height: 0.8em;
-  width: 0.8em;
-  border-radius: 50%;
-  background-color: #eee;
-}
-
-.container1 input:checked ~ .checkmark1 {
-  background-color: #F89D4A;
-}
-
-.checkmark1:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-.container1 input:checked ~ .checkmark1:after {
-  display: block;
-}
-
-.container1 .checkmark1:after {
-  left: 0.25em;
-  top: 0.08em;
-  width: 0.2em;
-  height: 0.4em;
-  border: solid white;
-  border-width: 0 0.15em 0.15em 0;
-  transform: rotate(45deg);
-}
-
-@keyframes jello-horizontal {
-  0% {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-  }
-
-  30% {
-    -webkit-transform: scale3d(1.25, 0.75, 1);
-    transform: scale3d(1.25, 0.75, 1);
-  }
-
-  40% {
-    -webkit-transform: scale3d(0.75, 1.25, 1);
-    transform: scale3d(0.75, 1.25, 1);
-  }
-
-  50% {
-    -webkit-transform: scale3d(1.15, 0.85, 1);
-    transform: scale3d(1.15, 0.85, 1);
-  }
-
-  65% {
-    -webkit-transform: scale3d(0.95, 1.05, 1);
-    transform: scale3d(0.95, 1.05, 1);
-  }
-
-  75% {
-    -webkit-transform: scale3d(1.05, 0.95, 1);
-    transform: scale3d(1.05, 0.95, 1);
-  }
-
-  100% {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-  }
-}
 
 .display-text {
   position: absolute;

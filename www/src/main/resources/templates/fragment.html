@@ -15,7 +15,10 @@
           <a href="/member/login">login</a>
         </li>
         <li th:if="${session.user != null}">
-          <a href="/member/myPage">myPage</a>
+        <div th:if="${session.user.profile}" class="userprofile">
+        	<a href="/member/myPage"><img th:src="@{'/image/' + ${session.user.profile}}" /></a>
+				</div>
+        <a href="/member/myPage" th:text="${session.user.nick + '님'}">myPage</a>
         </li>
       </ul>
       
@@ -37,13 +40,14 @@
     </div>
     <div class="sidebar">
       <span class="area_desc">
+        
         <th:block th:if="${session.user == null}">
-        <a href="/member/signUp">signUp</a><br>
-          <a href="/member/login">login</a><br>
+        <a href="/member/signUp">회원가입</a><br>
+          <a href="/member/login">로그인</a><br>
         </th:block>
         <th:block th:if="${session.user != null}">
-          <a href="/member/logout">logout</a><br>
-          <a href="/member/myPage">myPage</a><br>
+          <a href="/member/logout">로그아웃</a><br>
+          <a href="/member/myPage">마이페이지</a><br>
         </th:block>
         <a href="/member/like">like</a><br>
         <a href="/member/customer">customer</a><br>
@@ -52,8 +56,10 @@
         <a href="/member/index">길찾기</a><br>
         <a href="/place/traverserStory">Traverser's Story</a>
       </span>
+      <label for="menuicon"></label>
     </div>
   </div>
+    <label for="menuicon" class="background"></label>
   
    <footer>
     <hr>

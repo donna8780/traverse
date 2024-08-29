@@ -3,27 +3,29 @@
 #like .sticky-header {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 10;
   padding: 10px;
   background-color: white;
 }
 
 #like .scrollable-content {
-    max-height: 80vh; /* 전체 높이의 80%만큼 제한 */
+    max-height: 640px;
     padding-right: 10px; /* 스크롤바를 고려한 패딩 */
+    width: 365px;
 }
 
 #like{
     font-family: Arial, sans-serif;
     margin: 0 auto;
     background-color: #f9f9f9;
-    padding-top: 60px; /* 여기서 20px의 상단 여백을 추가 */
+    margin-top: 0px;
+    padding-top: 0px;
     display: flex;
-    height: 100vh;
+    height: 700px;
     width: 1200px;
-  overflow: hidden;
-  overflow-y: auto; /* 수직 스크롤만 허용 */
-  justify-content: center;
+  	overflow: hidden;
+  	overflow-y: auto; /* 수직 스크롤만 허용 */
+  	justify-content: center;
     align-items: flex-start;
     padding: 0;
 }
@@ -35,21 +37,21 @@
     justify-content: flex-start; /* 왼쪽부터 요소들이 시작되도록 설정 */
     align-items: flex-start; /* 요소들을 위쪽으로 정렬 */
     gap: 0; /* 요소들 사이의 간격을 완전히 없앰 */
-    margin-top: 60px; /* 여기서 20px의 상단 여백을 추가 */
+    margin-top: 0px;
+    padding-top: 0px;
     max-height: 90vh;
     max-width: 400px;
     overflow-y: auto;
 }
 
 #like .left {
-    width: 375px; /* 왼쪽 영역의 고정 너비를 설정 */
+    width: 390px; /* 왼쪽 영역의 고정 너비를 설정 */
     overflow-y: auto; /* 세로 스크롤을 추가 */
-    max-height: 870px; /* 최대 높이를 설정하여 스크롤이 생기도록 함 */
     margin-right: 0; /* 오른쪽 여백 제거 */
     background-color: #ffffff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    height: 100%;
+    height: 700px;
 }
 
 /* 스크롤바 스타일링 */
@@ -115,12 +117,18 @@
 #like button {
     background-color: #4CAF50;
     color: white;
-    padding: 10px 20px;
+    padding: 8px 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+   	margin-top:55px;
+   	width: 60px;
 }
+#like .delete-button {
+    margin-top: 10px; /* 버튼을 아래로 내리기 위해 상단 여백 조정 */
+}
+
 
 #like button:hover {
     background-color: #45a049;
@@ -129,7 +137,7 @@
 #like #map {
     width: 100%;
     height: 100%;
-    margin-top: 60px; /* 여기서 20px의 상단 여백을 추가 */
+    margin-top: 0px; /* 여기서 20px의 상단 여백을 추가 */
 }
 
 /* From Uiverse.io by waleedlh10 */
@@ -156,6 +164,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.checkmark {
+	position: absolute;
+	top: 5px;
+	left: 5px;
 }
 
 #like .con-like .outline,
@@ -222,7 +236,7 @@
 
  #like  .wrap {
     position: relative;
-    width: 250px;
+    width: 320px;
     border-radius: 10px;
     overflow: hidden;
     background: white; /* 배경색 추가 */
