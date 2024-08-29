@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.traverse.www.model.AccommodationDAO;
+import com.traverse.www.vo.AreaVO;
 import com.traverse.www.vo.PlaceVO;
 
 @Service
@@ -25,7 +26,7 @@ public class AccommodationService {
   public List<PlaceVO> searchByAreaCode(String areaCode) {
     return dao.selectByAreaCode(areaCode);
 }
-  public List<String> getAllAreaCodes() {
+  public List<AreaVO> getAllAreaCodes() {
     return dao.selectAllAreaCodes();
 }
 
