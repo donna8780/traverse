@@ -67,4 +67,9 @@ public class TraverserStoryService {
       return imagePaths;
   }
 
+public List<TraverserStoryVO>resultSearch(String search) {
+	
+	return dao.selectSearch(search);
+}
+
 }
