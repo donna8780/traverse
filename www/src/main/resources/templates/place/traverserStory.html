@@ -18,6 +18,7 @@
 			<form method="POST">
     	<div class="search">
 			<h1>Traverser's Story</h1>
+			<!-- 인풋태그에 검색어 입력 -->
         <input name="search" placeholder="Search..." type="text">
         <button type="submit">Go</button>
       </div>
@@ -132,8 +133,8 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr th:each="story : ${stories}">
-                      <td><a th:href="@{/place/story/{idx}(idx=${story.idx})}" th:text="${story.title}"></a></td>
+                  <tr th:each="story : ${stories}">}(idx=${story.idx})}" th:text="${story.title}"></a></td>
+                      <td><a th:href="@{/place/story/{idx
                       <td th:text="${story.regin}"></td>
                       <td th:text="${story.seldate + ' - ' + story.enddate}"></td>
                       <td th:text="${story.v_count}"></td>

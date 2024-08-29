@@ -38,10 +38,12 @@ public class TraverserStoryController {
         return mav;
     }
 
+    //requestParam으로 값을 받아서 "search" 받는다.
     @PostMapping("/place/traverserStory")
     public ModelAndView traverserStory(@RequestParam("search") String search) {
         ModelAndView mav = new ModelAndView();
 
+        mav.addObject("result", tss.resultSearch(search));
         mav.addObject("search", search);
         mav.setViewName("/place/tsResult");
         

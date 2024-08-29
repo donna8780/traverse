@@ -28,4 +28,9 @@ public class TraverserStoryService {
     return dao.selectStoryById(idx);
 }
 
+public List<TraverserStoryVO>resultSearch(String search) {
+	
+	return dao.selectSearch(search);
+}
+
 }

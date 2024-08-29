@@ -17,10 +17,13 @@ public interface TraverserStoryDAO {
       "VALUES (#{title}, #{contents}, #{regin}, #{seldate}, #{enddate}, #{a_idx}, #{imge1}, #{imge2}, #{imge3}, #{imge4}, #{imge5}, #{imge6}, #{imge7}, #{imge8}, #{imge9}, #{imge10})")
 int insert(TraverserStoryVO input);
   
-  // 모든 게시글을 선택하는 메서드 추가
+  //게시글 4개로 제한하는 구문
   @Select("SELECT * FROM story_view")
   List<TraverserStoryVO> selectAllStories();
   
   @Select("SELECT * FROM story_view WHERE idx = #{idx}")
   TraverserStoryVO selectStoryById(int idx);
+
+  @Select("SELECT * FROM story_view where regin like #{search} or title like #{search}")
+  List<TraverserStoryVO> selectSearch(String search);
 }
