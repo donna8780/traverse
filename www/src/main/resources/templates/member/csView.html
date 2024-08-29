@@ -3,82 +3,81 @@
 <head>
 <meta charset="UTF-8">
 <title th:text="${row.title}">Q&A 게시글</title>
-<link rel="stylesheet" href="/css/viewStyle.css">
+<link rel="stylesheet" href="/css/viewStyle00.css">
 <link rel="stylesheet" href="/css/mainStyle.css">
-<!-- 스타일을 위한 CSS 파일 경로 -->
+
 </head>
 <body>
 <th:block th:replace="/fragment::header"></th:block>
-	<div id="csview">
+
+	<div id="notice-inner">
 	<div class="post-container">
     <h1 th:text="${row.title}">Q&A 제목</h1>
-    <p>
-      <strong>작성자:</strong> <span th:text="${row.nick}">작성자</span>
-    </p>
-    <hr />
+    <div class="post-info">
+            <p><strong>작성자:</strong> <span th:text="${row.nick}">작성자</span></p>
+            <p><strong>작성일:</strong> <span th:text="${row.create_at}">작성일</span></p>
+        </div>
+    <hr>
     <div class="post-content">
       <p th:text="${row.content}">Q&A 내용</p>
     </div>
+  </div>
+  
+    <!-- 글쓴 본인만 수정 삭제 버튼 활성화 -->
+  <div
+    th:if="${session.user != null and (session.user.nick == row.nick or session.user.nick == '관리자')}">
+    <a
+      th:href="@{/member/csUpdate/{board_idx}(board_idx=${row.board_idx})}"><button class="modify">수정</button></a>
+    <a
+      th:href="@{/member/csdelete/{board_idx}(board_idx=${row.board_idx})}"><button>삭제</button></a>
   </div>
 
   <!-- 댓글 작성 폼 -->
   <div th:if="${session.user != null}">
     <form method="POST">
-      <p>
-        <textarea name="contents" placeholder="댓글을 입력해 주세요"></textarea>
-      </p>
-      <p>
-        <input name="a_idx" type="hidden"
-          th:value="${session.user.accounts_idx}">
-      </p>
-
-      <button>작성</button>
+        <p>댓글쓰기</p>
+        <div style="display: flex; align-items: center;">
+            <textarea name="contents" placeholder="댓글을 입력해 주세요" required></textarea>
+            <button type="submit">작성</button>
+        </div>
+        <input name="a_idx" type="hidden" th:value="${session.user.accounts_idx}">
     </form>
   </div>
 
   <br>
 
   <fieldset th:each="rep : ${replys}">
-    <h5 th:text="${rep.nick}">|</h5>
-    <h5 th:text="${rep.w_date}">|</h5>
-
-    <div id="replyContent_${rep.rep_idx}">
-      <pre th:text="${rep.contents}"></pre>
+    <div class="reply-header">
+        <h5 class="nickname" th:text="${rep.nick}">작성자</h5>
+        <h5 class="date" th:text="${rep.w_date}">작성일</h5>
     </div>
+    
+    <div class="reply-content" id="replyContent_${rep.rep_idx}">
+        <pre th:text="${rep.contents}"></pre>
+    </div>
+
     <!-- 댓글 쓴 본인만 수정 삭제 버튼 활성화 -->
-
-    <div
-      th:if="${session.user != null and session.user.accounts_idx == rep.a_idx}">
-      <button th:onclick="|fn_update('${rep.rep_idx}')|"
-        th:classid="editBtn_" type="button">댓글 수정</button>
-      <a
-        th:href="@{/member/csView/delete(rep_idx=${rep.rep_idx}, c_idx=${rep.c_idx})}">
-        <button type="button">삭제</button>
-      </a>
+    <div class="reply-buttons"
+        th:if="${session.user != null and session.user.accounts_idx == rep.a_idx}">
+        <button th:onclick="|fn_update('${rep.rep_idx}')|">댓글 수정</button>
+        <a th:href="@{/member/csView/delete(rep_idx=${rep.rep_idx}, c_idx=${rep.c_idx})}">
+            <button type="button">삭제</button>
+        </a>
     </div>
-
 
     <!-- 댓글 수정 폼 (기본적으로 숨김 처리)-->
-    <div th:id="'editForm_' + ${rep.rep_idx}" style="display: none">
-      <form action="/member/repUpdate" method="POST">
-        <input type="hidden" name="rep_idx" th:value="${rep.rep_idx}">
-        <input type="hidden" name="c_idx" th:value="${rep.c_idx}">
-        <textarea name="contents" th:text="${rep.contents}"></textarea>
-        <button type="submit">수정 완료</button>
-      </form>
+    <div class="edit-form" th:id="'editForm_' + ${rep.rep_idx}" style="display: none">
+        <form action="/member/repUpdate" method="POST">
+            <input type="hidden" name="rep_idx" th:value="${rep.rep_idx}">
+            <input type="hidden" name="c_idx" th:value="${rep.c_idx}">
+            <textarea name="contents" th:text="${rep.contents}"></textarea>
+            <button type="submit">수정 완료</button>
+        </form>
     </div>
+</fieldset>
 
-  </fieldset>
 
 
-  <!-- 글쓴 본인만 수정 삭제 버튼 활성화 -->
-  <div
-    th:if="${session.user != null and (session.user.nick == row.nick or session.user.nick == '관리자')}">
-    <a
-      th:href="@{/member/csUpdate/{board_idx}(board_idx=${row.board_idx})}"><button>수정</button></a>
-    <a
-      th:href="@{/member/csdelete/{board_idx}(board_idx=${row.board_idx})}"><button>삭제</button></a>
-  </div>
 
   <script>
   

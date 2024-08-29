@@ -16,7 +16,7 @@ public class MyPageService {
       return dao.update(input);
    }
 
-	public int deleteAccount(AccountsVO idx) {
+	public int deleteAccount(int idx) {
 		
 		return dao.delete(idx);
 	}
