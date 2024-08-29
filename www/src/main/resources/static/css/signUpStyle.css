@@ -161,7 +161,25 @@
 #signup .submit:hover {
   background-color: rgb(56, 90, 194);
 }
+.flex {
+  position: relative;
+}
 
+#togglePassword {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  padding: 0;
+}
+
+#togglePassword img {
+  width: 24px;
+  height: 24px;
+}
 @keyframes pulse {
   from {
     transform: scale(0.9);

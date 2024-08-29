@@ -38,7 +38,8 @@ public class AnnouncementService {
 	}
 
 	public AnnouncementVO getBoardOne(int idx) {
-		
+    // 조회수를 먼저 증가시킵니다.
+    dao.incrementViewCount(idx);		
 		return dao.selectOne(idx);
 	}
 
@@ -51,6 +52,7 @@ public class AnnouncementService {
 		return dao.update(input);
 		
 	}
+
 
 
 

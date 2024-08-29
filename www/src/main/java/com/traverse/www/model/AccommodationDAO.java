@@ -9,15 +9,15 @@ import com.traverse.www.vo.PlaceVO;
 
 @Mapper
 public interface AccommodationDAO {
-	@Select("select * from accommodation order by areacode")
+	@Select("select * from accomm order by areacode")
 	List<PlaceVO> selectAll();
 	
-  @Select("select * from accommodation where title LIKE CONCAT('%', #{title}, '%')")
+  @Select("select * from accomm where title LIKE CONCAT('%', #{title}, '%')")
   List<PlaceVO> selectByTitle(String title);
   
-  @Select("select * from accommodation where areacode = #{areacode}")
+  @Select("select * from accomm where areacode = #{areacode}")
   List<PlaceVO> selectByAreaCode(String areaCode);
 	
-  @Select("select DISTINCT areacode from accommodation order by areacode")
+  @Select("select DISTINCT areacode from accomm order by areacode")
   List<String> selectAllAreaCodes();
 }

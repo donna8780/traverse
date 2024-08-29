@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link href="/css/mainStyle.css" rel="stylesheet">
+<link href="/css/reviewsStyle.css" rel="stylesheet">
+</head>
+<body>
+	<th:block th:replace="/fragment::header"></th:block>
+	
+	<div class="content-container">
+		<div class="story-details">
+            <div class="details">
+                <span class="title">🏖️</span>
+                <span class="title">부산</span>
+                <span class="title"> | </span>
+                <span class="title">📅</span>
+                <span class="title">8.23 ~ 8.27 (5일)</span>
+            </div>
+        </div>
+	
+        <div class="slider-container">
+            <div class="slider">
+                <img src="/image/d1.jpg" alt="Slide 1" class="slide" onclick="openModal(this.src)">
+                <img src="/image/d2.jpg" alt="Slide 2" class="slide" onclick="openModal(this.src)">
+                <img src="/image/d3.jpg" alt="Slide 3" class="slide" onclick="openModal(this.src)">
+            </div>
+            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="next" onclick="changeSlide(1)">&#10095;</button>
+        </div>
+        <div class="story-details">
+      <div class="profile">
+                <img src="/image/d0.jpg" alt="Profile Picture">
+            </div>
+            <div class="info">
+                <div class="nickname">도리(닉네임)</div>
+                <div class="meta">
+                    <span>작성일 : 2023-08-26</span>
+                    <span>|</span>
+                    <span>조회수 : 150</span>
+                </div>
+            </div>
+        </div>
+<div class="review-display">
+    <pre>
+부산에 갔다.
+아아주 재미있었다.
+    </pre>
+</div>
+
+    </div>
+    
+    <!-- Modal for large image view -->
+	<div id="myModal" class="modal">
+		<span class="close" onclick="closeModal()">&times;</span>
+		<img class="modal-content" id="img01">
+	</div>
+
+    <script>
+        let slideIndex = 0;
+        showSlides(slideIndex);
+
+        function changeSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("slide");
+            if (n >= slides.length) {
+                slideIndex = 0;
+            }
+            if (n < 0) {
+                slideIndex = slides.length - 1;
+            }
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex].style.display = "block";
+        }
+
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000); // 5초마다 슬라이드 변경
+        
+     // Modal functions
+        function openModal(src) {
+            document.getElementById("myModal").style.display = "block";
+            document.getElementById("img01").src = src;
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+        
+       
+    </script>
+
+	<th:block th:replace="/fragment::footer"></th:block>
+</body>
+</html>

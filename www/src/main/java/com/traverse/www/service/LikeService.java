@@ -36,7 +36,10 @@ public class LikeService {
     dao.insert(likeVO);  // DAO를 통해 데이터베이스에 삽입
 }
 
-	
+  public void deleteLike(LikeVO likeVO) {
+    dao.deletelike(likeVO);  // DAO를 통해 데이터베이스에서 삭제
+}
+
 }
 
 

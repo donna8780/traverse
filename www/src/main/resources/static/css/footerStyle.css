@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+
+.footer {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #E2E2E2;
+    color: #333;
+}
+
+h2 {
+	 position: relative; /* 부모 요소에 대해 상대 위치 */
+    left: 50%; /* 부모의 50% 위치 */
+    transform: translateX(-50%); /* 자기 자신의 너비의 50%만큼 왼쪽으로 이동 */
+    text-align: center;
+    background-color: #2A3854; /* 배경색: 로그인 버튼의 배경색과 동일 */
+    color: #E8F0FE; /* 텍스트 색상 */
+    padding: 15px 30px; /* 로그인 버튼과 비슷한 패딩 */
+    border-radius: 3rem; /* 둥근 모서리 */
+    font-weight: 600; /* 두껍게 설정 */
+    font-size: 1.5rem; /* 적절한 크기 설정 */
+    margin-top: 10px;
+    margin-bottom: 10px; /* 하단 마진 */
+    display: inline-block; /* 중앙 정렬을 위해 인라인 블록 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가 */
+}
+
+ol {
+    list-style: none;
+    counter-reset: section;
+    padding: 0;
+}
+
+ol > li {
+    counter-increment: section;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ol > li::before {
+    content: counter(section) ". ";
+    font-weight: bold;
+    font-size: 18px;
+    color: #2A3854;
+    margin-right: 10px;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.footer div {
+    margin-top: 10px;
+    padding-left: 20px;
+    color: #555;
+}
+

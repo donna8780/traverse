@@ -29,5 +29,10 @@ public class TravelplanService {
 		return dao.getPlanplace(user_idx,seldate);
 	}
 
+	public List<PlaceVO> getdayplan(int user_idx, int day, String seldate) {
+		
+		return dao.getdayplan(user_idx,day,seldate);
+	}
+	
 
 }
