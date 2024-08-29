@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.traverse.www.service.DetailService;
 import com.traverse.www.service.ReviewService;
 
+
 @Controller
 @RequestMapping("/member")
 public class DetailController {
