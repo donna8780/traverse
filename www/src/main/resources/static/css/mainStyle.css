@@ -160,7 +160,6 @@ input[id="menuicon"]:checked ~ .container .sidebar {
 
 .sidebar .area_desc a:hover {
   color: black;
-  text-decoration: underline;
 }
 
 .checkbox {
@@ -241,6 +240,17 @@ input#menuicon:checked ~ .background {
 	object-fit: cover; /* 이미지가 비율을 유지하면서 컨테이너에 맞춰짐 */
     object-position: center; /* 이미지의 중앙 부분이 표시되도록 설정 */
 	
+}
+
+.navi #nick {
+	font-size: 20px;
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.navi #nick:hover {
+	text-decoration: underline;
 }
 
 
