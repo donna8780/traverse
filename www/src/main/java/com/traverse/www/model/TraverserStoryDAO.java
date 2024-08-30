@@ -12,6 +12,8 @@ import com.traverse.www.vo.TraverserStoryVO;
 
 
 
+
+
 @Mapper
 public interface TraverserStoryDAO {
 
@@ -36,7 +38,11 @@ int insert(TraverserStoryVO input);
 		
 	@Delete("DELETE FROM Travelreviews WHERE idx = #{idx}")
 	int delete(int idx);
-
+	
 	@Update("UPDATE Travelreviews SET v_count = v_count + 1 WHERE idx = #{idx}")
-	int incrementViewCount(int idx);
+  int updateViewCount(int idx);
+
+
+	@Select("select * from story_view order by rand() limit 4")
+	List<TraverserStoryVO> getRand();
 }

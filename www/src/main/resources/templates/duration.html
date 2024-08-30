@@ -6,34 +6,13 @@
   <title>traverse</title>
   
   <link href="/css/mainStyle.css" rel="stylesheet">
+  <link href="/css/durationStyle.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
-
-  <input type="checkbox" id="menuicon">
-  <header>
-    <div>
-      <ul class="navi">
-        <li><a href="/"><img class="logo" th:src="@{/image/logo_w.png}"></a></li>
-        <li th:if="${session.user == null}">
-          <a href="/member/login">login</a>
-        </li>
-        <li th:if="${session.user != null}">
-          <a href="/member/myPage">myPage</a>
-        </li>
-      </ul>
-      
-      <label for="menuicon" class="menubtn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
-    </div>
-  </header>
-  
-  <div class="container">
-    <div class="contents">
-      <span class="area_desc">
+ <th:block th:replace="/fragment::header"></th:block>
+      <div id="duration">
+        <span class="area_desc">
         <form method="POST">
           <legend>여행 기간 선택</legend><br>
           
@@ -44,34 +23,12 @@
           <label for="selected-dates-display">선택한 날짜:</label>
           <input name="seldate" type="text" id="selected-dates-display" readonly> <!-- 선택한 날짜를 표시할 input -->
 
-          <button type="submit">Submit</button>
+          <button type="submit">선택</button>
         </form>
       </span>
-    </div>
-    <div class="sidebar">
-      <span class="area_desc">
-        <a href="/member/signUp">signUp</a><br>
-        <th:block th:if="${session.user == null}">
-          <a href="/member/login">login</a><br>
-        </th:block>
-        <th:block th:if="${session.user != null}">
-          <a href="/member/logout">logout</a><br>
-          <a href="/member/myPage">myPage</a><br>
-        </th:block>
-        <a href="/member/like">like</a><br>
-        <a href="/place/mapAPI">mapAPI</a><br>
-        <a href="/member/customer">customer</a><br>
-        <a href="/member/detail">상세페이지</a>
-      </span>
-    </div>
-  </div>
+    
   
-  <footer>
-    <hr>
-    <div>회사소개  |  이용약관  |  등등...</div>
-  </footer>
-  
-  <!-- Flatpickr JS -->
+
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     
     <!-- Flatpickr 초기화 스크립트 -->
@@ -107,6 +64,7 @@
             });
         });
     </script>
-
+      </div>
+<th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

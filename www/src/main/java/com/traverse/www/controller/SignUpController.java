@@ -20,6 +20,7 @@ import com.traverse.www.advice.ValidationException;
 import com.traverse.www.service.SignUpSercive;
 import com.traverse.www.vo.AccountsVO;
 
+
 // 회원가입 관련 요청을 처리
 @Controller
 @RequestMapping("/member") // '/member'로 시작하는 URL 요청을 처리
