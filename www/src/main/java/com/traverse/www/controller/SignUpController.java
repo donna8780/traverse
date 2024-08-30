@@ -48,15 +48,18 @@ public class SignUpController {
         } catch (NoSuchAlgorithmException e) {
             logger.error("Password hashing failed", e); // 올바른 로그 호출
             redirectAttributes.addFlashAttribute("errorMessage", "서버에서 문제가 발생했습니다. 다시 시도해 주세요.");
-            return "redirect:/member/signupError"; // 에러 발생 시 에러 페이지로 리다이렉트
+            return "redirect:/member/serverError"; // 에러 발생 시 에러 페이지로 리다이렉트
+            
         } catch (DuplicateUserException e) {
             logger.warn("Duplicate user information: " + input.toString(), e); // 올바른 로그 호출
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/member/signupError"; // 중복된 정보로 인한 에러 페이지로 리다이렉트
+            
         } catch (ValidationException e) {
             logger.warn("Validation failed for input: " + input.toString(), e); // 올바른 로그 호출
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/member/signUp"; // 검증 실패 시 회원가입 페이지로 다시 리다이렉트
+            
         } catch (Exception e) {
             logger.error("Unexpected error occurred during signup", e); // 올바른 로그 호출
             redirectAttributes.addFlashAttribute("errorMessage", "예기치 않은 오류가 발생했습니다. 다시 시도해 주세요.");
