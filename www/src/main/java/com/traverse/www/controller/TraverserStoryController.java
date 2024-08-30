@@ -2,6 +2,9 @@ package com.traverse.www.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,6 +37,73 @@ public class TraverserStoryController {
         List<TraverserStoryVO> stories = tss.getAllStories();
         mav.addObject("stories", stories);
         mav.setViewName("/place/traverserStory");
+        
+        List<TraverserStoryVO> randomItems = tss.getRand();
+      
+        
+     // 각각의 행을 변수에 저장
+        TraverserStoryVO rand1 = randomItems.get(0);
+        TraverserStoryVO rand2 = randomItems.get(1);
+        TraverserStoryVO rand3 = randomItems.get(2);
+        TraverserStoryVO rand4 = randomItems.get(3);
+        
+       
+        // 날짜가 "yyyy-MM-dd" 형식의 문자열이라고 가정합니다.
+        String selDateString1 = rand1.getSeldate(); // "2024-07-03"
+        String endDateString1 = rand1.getEnddate(); // "2024-07-05"
+
+        // 문자열을 LocalDate로 변환 (기본 ISO_LOCAL_DATE 형식 사용)
+        LocalDate selDate1 = LocalDate.parse(selDateString1, DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate endDate1 = LocalDate.parse(endDateString1, DateTimeFormatter.ISO_LOCAL_DATE);
+
+        // 날짜 사이의 일수 계산
+        long daysBetween1 = ChronoUnit.DAYS.between(selDate1, endDate1) + 1;
+        
+
+     // 날짜가 "yyyy-MM-dd" 형식의 문자열이라고 가정합니다.
+        String selDateString2 = rand2.getSeldate(); // "2024-07-03"
+        String endDateString2 = rand2.getEnddate(); // "2024-07-05"
+
+        // 문자열을 LocalDate로 변환 (기본 ISO_LOCAL_DATE 형식 사용)
+        LocalDate selDate2 = LocalDate.parse(selDateString2, DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate endDate2 = LocalDate.parse(endDateString2, DateTimeFormatter.ISO_LOCAL_DATE);
+
+        // 날짜 사이의 일수 계산
+        long daysBetween2 = ChronoUnit.DAYS.between(selDate2, endDate2) + 1;
+
+     // 날짜가 "yyyy-MM-dd" 형식의 문자열이라고 가정합니다.
+        String selDateString3 = rand3.getSeldate(); // "2024-07-03"
+        String endDateString3 = rand3.getEnddate(); // "2024-07-05"
+
+        // 문자열을 LocalDate로 변환 (기본 ISO_LOCAL_DATE 형식 사용)
+        LocalDate selDate3 = LocalDate.parse(selDateString3, DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate endDate3 = LocalDate.parse(endDateString3, DateTimeFormatter.ISO_LOCAL_DATE);
+
+        // 날짜 사이의 일수 계산
+        long daysBetween3 = ChronoUnit.DAYS.between(selDate3, endDate3) + 1;
+
+     // 날짜가 "yyyy-MM-dd" 형식의 문자열이라고 가정합니다.
+        String selDateString4 = rand4.getSeldate(); // "2024-07-03"
+        String endDateString4 = rand4.getEnddate(); // "2024-07-05"
+
+        // 문자열을 LocalDate로 변환 (기본 ISO_LOCAL_DATE 형식 사용)
+        LocalDate selDate4 = LocalDate.parse(selDateString4, DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate endDate4 = LocalDate.parse(endDateString4, DateTimeFormatter.ISO_LOCAL_DATE);
+
+        // 날짜 사이의 일수 계산
+        long daysBetween4 = ChronoUnit.DAYS.between(selDate4, endDate4) + 1;
+
+        // 각각의 계산된 일수를 뷰에 전달
+        mav.addObject("daysBetween1", daysBetween1);
+        mav.addObject("daysBetween2", daysBetween2);
+        mav.addObject("daysBetween3", daysBetween3);
+        mav.addObject("daysBetween4", daysBetween4);
+        
+        
+        mav.addObject("rand1", rand1);
+        mav.addObject("rand2", rand2);
+        mav.addObject("rand3", rand3);
+        mav.addObject("rand4", rand4);
 
         return mav;
     }

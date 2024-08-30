@@ -159,7 +159,7 @@ input[id="menuicon"]:checked ~ .container .sidebar {
 }
 
 .sidebar .area_desc a:hover {
-  color: #4BB958;
+  color: black;
   text-decoration: underline;
 }
 

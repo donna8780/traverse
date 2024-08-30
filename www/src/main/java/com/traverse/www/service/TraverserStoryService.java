@@ -72,4 +72,8 @@ public List<TraverserStoryVO>resultSearch(String search) {
 	return dao.selectSearch(search);
 }
 
+public List<TraverserStoryVO> getRand() {
+	return dao.getRand();
+}
+
 }
