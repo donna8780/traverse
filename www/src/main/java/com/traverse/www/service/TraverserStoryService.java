@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.traverse.www.model.TraverserStoryDAO;
 import com.traverse.www.vo.TraverserStoryVO;
 
+
 @Service
 public class TraverserStoryService {
 	
@@ -29,7 +30,7 @@ public class TraverserStoryService {
   }
   
   public TraverserStoryVO getStoryById(int idx) {
-  	dao.incrementViewCount(idx);
+
     return dao.selectStoryById(idx);
 }
   
@@ -66,5 +67,20 @@ public class TraverserStoryService {
       }
       return imagePaths;
   }
+
+public List<TraverserStoryVO>resultSearch(String search) {
+	
+	return dao.selectSearch(search);
+}
+
+public List<TraverserStoryVO> getRand() {
+	return dao.getRand();
+}
+
+// 조회수 증가	
+public void incrementViewCount(int idx) {
+  dao.updateViewCount(idx);
+}
+
 
 }

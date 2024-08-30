@@ -178,7 +178,7 @@
     height: 60px;
 }
 
-p {
+.review-display p {
     width: 100%;
     padding: 10px;
     font-size: 1em;
@@ -189,6 +189,6 @@ p {
     word-wrap: break-word; /* 단어가 길면 자동으로 줄바꿈 */
     background-color: #f9f9f9;
     color: #333;
-    overflow: hidden;
-    max-height: 4em; /* 2줄 정도의 높이만큼 설정 */
+    max-height: 80px; /* 최대 높이를 지정 */
+    overflow-y: auto;
 }
