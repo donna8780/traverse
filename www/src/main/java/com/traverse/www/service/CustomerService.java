@@ -46,8 +46,10 @@ public class CustomerService {
 		return dao.delete(idx);
 		
 	}
-	
-
+	public List <CustomerVO>qna_result_Search(String qna_search) {
+		
+		return dao.qnaselectSearch(qna_search);
+	}
 
 
 }
