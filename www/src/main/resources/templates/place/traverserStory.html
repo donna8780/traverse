@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>traverse</title>
-  
-  <link href="/css/mainStyle.css" rel="stylesheet">
-  <link href="/css/traverserStoryStyle.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>traverse</title>
+
+<link href="/css/mainStyle.css" rel="stylesheet">
+<link href="/css/traverserStoryStyle.css" rel="stylesheet">
 </head>
 <body>
 
@@ -14,140 +14,138 @@
 
 	<div class="container">
 		<div class="contents" style="min-height: 650px;">
-		
+<!-- 사용자가 입력한 데이터를 서버로 전송 -->
 			<form method="POST">
-    	<div class="search">
-			<h1>Traverser's Story</h1>
-			<!-- 인풋태그에 검색어 입력 -->
-        <input name="search" placeholder="Search..." type="text">
-        <button type="submit">Go</button>
-      </div>
-      </form>
-      
-      <div style="text-align: right; margin: 10px 0;">
-          <a href="/place/story_write">
-              <button type="button" style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer;">
-                  Write a Story
-              </button>
-          </a>
-      </div>
-      
-      <div class="trending">
-      <span>Trending Searches :</span>
-      <span><a href="/">Seoul</a></span>
-      <span><a href="/">Jeju</a></span>
-      <span><a href="/">Busan</a></span>
-      <span><a href="/">Jeonju</a></span>
-      <span>...</span>
+			<!-- 검색 -->
+				<div class="search">
+					<h1>Traverser's Story</h1>
+					<!-- 인풋태그에 검색어 입력 -->
+					<input name="search" placeholder="Search..." type="text">
+					<button type="submit">Go</button>
+				</div>
+			</form>
+
+			<div style="text-align: right; margin: 10px 0;">
+				<a href="/place/story_write">
+					<button type="button"
+						style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer;">
+						Write a Story</button>
+				</a>
 			</div>
-			
-<div class="box-container">
-      
-      <a href="/place/reviews">
-       <div class="box box1">
-         <div class="inner-box top-left">
-            <img src="/image/d1.jpg">
-         </div>
-         <div class="inner-box top-right">
-            <img src="/image/d2.jpg">
-         </div>
-         <div class="inner-box bottom">
-            <div class="text-line line1">도리(닉네임)</div>
-          <div class="text-line line2">도리 도리 여행(제목)</div>
-          <div class="text-line line3"># 부산, 2박 3일(여행지, 기간)</div>
-         </div>
-         <div class="inner-box center">
-            <img src="/image/d0.jpg">
-         </div>
-       </div>
-       </a>
-       
-       <a href="/">
-       <div class="box box2">
-       <div class="inner-box top-left">
-            <img src="/image/s1.jpg">
-         </div>
-         <div class="inner-box top-right">
-            <img src="/image/s2.jpg">
-         </div>
-         <div class="inner-box bottom">
-            <div class="text-line line1">소백돌이</div>
-          <div class="text-line line2">진해 나들이</div>
-          <div class="text-line line3"># 창원, 1박 2일</div>
-         </div>
-         <div class="inner-box center">
-            <img src="/image/s0.jpg">
-         </div>
-       </div>
-       </a>
-       
-       <a href="/">
-       <div class="box box3">
-         <div class="inner-box top">
-            <img src="/image/l1.jpg">
-         </div>
-         <div class="inner-box bottom">
-            <div class="text-line line1">새박사</div>
-          <div class="text-line line2">로또당첨</div>
-          <div class="text-line line3"># 춘천, 2박 3일</div>
-         </div>
-         <div class="inner-box center">
-            <img src="/image/l0.jpg">
-         </div>
-       </div>
-       </a>
-       
-       <a href="/">
-       <div class="box box4">
-          <div class="inner-box top-left">
-            <img src="/image/b1.jpg">
-         </div>
-         <div class="inner-box top-right">
-            <img src="/image/b2.jpg">
-         </div>
-         <div class="inner-box bottom">
-            <div class="text-line line1">받킨지</div>
-          <div class="text-line line2">베베랑 콩이랑~~</div>
-          <div class="text-line line3"># 제주, 2박 3일</div>
-         </div>
-         <div class="inner-box center">
-            <img src="/image/b4.jpg">
-         </div>
-       </div>
-       </a>
+			<!-- 인기 검색어 -->
+			<div class="trending">
+				<span>Trending Searches :</span> <span><a href="/">Seoul</a></span>
+				<span><a href="/">Jeju</a></span> <span><a href="/">Busan</a></span>
+				<span><a href="/">Jeonju</a></span> <span>...</span>
+			</div>
+  
+      <!--이야기 미리보기 박스들 -->
+			<div class="box-container">
 
-		
-    
-</div>
-<!-- 테이블 형식으로 게시글 목록을 표시 -->
-      <div class="table-container" style="margin-top: 50px;">
-          <h2>Story List</h2>
-          <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; text-align: left;">
-              <thead>
-                  <tr>
-                      <th>Title</th>
-                      <th>Region</th>
-                      <th>Dates</th>
-                      <th>Views</th>
-                      <th>Author</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr th:each="story : ${stories}">}(idx=${story.idx})}" th:text="${story.title}"></a></td>
-                      <td><a th:href="@{/place/story/{idx
-                      <td th:text="${story.regin}"></td>
-                      <td th:text="${story.seldate + ' - ' + story.enddate}"></td>
-                      <td th:text="${story.v_count}"></td>
-                      <td th:text="${story.nick}"></td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
+				<a href="/place/reviews">
+					<div class="box box1">
+						<div class="inner-box top-left">
+							<img src="/image/d1.jpg">
+						</div>
+						<div class="inner-box top-right">
+							<img src="/image/d2.jpg">
+						</div>
+						<!-- 박스 안 텍스트들 -->
+						<div class="inner-box bottom">
+							<div class="text-line line1">도리(닉네임)</div>
+							<div class="text-line line2">도리 도리 여행(제목)</div>
+							<div class="text-line line3"># 부산, 2박 3일(여행지, 기간)</div>
+						</div>
+						<div class="inner-box center">
+							<img src="/image/d0.jpg">
+						</div>
+					</div>
+				</a> <a href="/">
+					<div class="box box2">
+						<div class="inner-box top-left">
+							<img src="/image/s1.jpg">
+						</div>
+						<div class="inner-box top-right">
+							<img src="/image/s2.jpg">
+						</div>
+						<div class="inner-box bottom">
+							<div class="text-line line1">소백돌이</div>
+							<div class="text-line line2">진해 나들이</div>
+							<div class="text-line line3"># 창원, 1박 2일</div>
+						</div>
+						<div class="inner-box center">
+							<img src="/image/s0.jpg">
+						</div>
+					</div>
+				</a> <a href="/">
+					<div class="box box3">
+						<div class="inner-box top">
+							<img src="/image/l1.jpg">
+						</div>
+						<div class="inner-box bottom">
+							<div class="text-line line1">새박사</div>
+							<div class="text-line line2">로또당첨</div>
+							<div class="text-line line3"># 춘천, 2박 3일</div>
+						</div>
+						<div class="inner-box center">
+							<img src="/image/l0.jpg">
+						</div>
+					</div>
+				</a> <a href="/">
+					<div class="box box4">
+						<div class="inner-box top-left">
+							<img src="/image/b1.jpg">
+						</div>
+						<div class="inner-box top-right">
+							<img src="/image/b2.jpg">
+						</div>
+						<div class="inner-box bottom">
+							<div class="text-line line1">받킨지</div>
+							<div class="text-line line2">베베랑 콩이랑~~</div>
+							<div class="text-line line3"># 제주, 2박 3일</div>
+						</div>
+						<div class="inner-box center">
+							<img src="/image/b4.jpg">
+						</div>
+					</div>
+				</a>
 
-</div>
+
+
+			</div>
+			<!-- 테이블 형식으로 이야기 목록을 표시 -->
+			<div class="table-container" style="margin-top: 50px;">
+				<h2>Story List</h2>
+				<table border="1" cellpadding="10" cellspacing="0"
+					style="width: 100%; text-align: left;">
+					<thead>
+						<tr><!-- 테이블의 한 줄을 나타냄 -->
+							<th>Title</th>
+							<th>Region</th>
+							<th>Dates</th>
+							<th>Views</th>
+							<th>Author</th>
+						</tr>
+					</thead>
+					<tbody>
+					  <!-- 각 이야기를 하나의 행으로 표시, th:each는 타임리프의 반복문 -->
+						<tr th:each="story : ${stories}">
+						<!-- 각 이야기의 제목을 링크로 표시하고, 
+						이 링크를 클릭하면 해당 이야기의 상세 페이지로 이동.
+						 th:href는 URL을 동적으로 생성하며, th:text는 링크의 텍스트를 설정 -->
+							<td><a th:href="@{/place/story/{idx}(idx=${story.idx})}"
+								th:text="${story.title}"></a></td>
+							<td th:text="${story.regin}"></td>
+							<td th:text="${story.seldate + ' - ' + story.enddate}"></td>
+							<td th:text="${story.v_count}"></td>
+							<td th:text="${story.nick}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 
 
 		<th:block th:replace="/fragment::footer"></th:block>
-	
 </body>
 </html>

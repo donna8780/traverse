@@ -122,7 +122,7 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정
 						<th>No</th>
 						<th>제목</th>
 						<th>닉네임</th>
-						<th>내용</th>
+						<th>조회수</th>
 						<th>작성시간</th>
 					</tr>
 					<tr th:each="row : ${qna}">
@@ -131,8 +131,7 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정
 							th:href="@{/member/csView/{board_idx}(board_idx=${row.board_idx})}"
 							th:text="${row.title}"></a></td>
 						<td th:text="${row.nick}"></td>
-						<td th:text="${row.title}"></td>
-						<td th:text="${row.content}"></td>
+						<td th:text="${row.v_count}"></td>
 						<td th:text="${row.create_at}"></td>
 					</tr>
 				</tbody>
@@ -150,10 +149,29 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정
       <!-- pg.begin에서 pg.end까지 숫자에 해당하는 페이지 번호를 순서대로 li와 a태그로 감싸서 페이지네이션 링크를 만든다.
       이 링크는 사용자가 각 페이지 번호를 클릭할 수 있도록 하며 클릭 시 특정 페이지로 이동한다. a태그에 #qna가 붙어있으므로
       페이지 이동 후에도 페이지의 특정 위치로 스크롤된다. -->     
-    </div>
-
+      
+        
     <a href="/member/cswrite"><button>글쓰기</button></a>
+    
+    <form method="POST">
+      <!-- 검색 -->
+        <div class="search">
+          <!-- 인풋태그에 검색어 입력 -->
+          <input name="qna_search" placeholder="궁금한 점을 검색하세요." type="text">
+          <button type="submit">검색</button>
+        </div>
+      </form>
+        <!-- 테이블 형식으로 이야기 목록을 표시 -->
+    
+
+
+      </div>
+    </div>
+  
+  
+  
   </section>
+  
 
   <script>
   //세션에서 로그인 상태 가져옴

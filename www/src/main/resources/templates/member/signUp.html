@@ -109,7 +109,7 @@
 
                 function checkUserNick() {
                     let userNick = document.querySelector("#nick").value.trim();
-
+                    // 널 값이 아니고  alertNickShown이 false가 아니라면
                     if (userNick !== "" && !alertNickShown) {
                         fetch("http://localhost:8080/member/checkUserNick?userNick=" + userNick, {method:"get"})
                         .then(response => response.json())
