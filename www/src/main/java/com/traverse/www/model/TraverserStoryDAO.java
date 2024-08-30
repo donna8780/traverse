@@ -39,4 +39,7 @@ int insert(TraverserStoryVO input);
 
 	@Update("UPDATE Travelreviews SET v_count = v_count + 1 WHERE idx = #{idx}")
 	int incrementViewCount(int idx);
+
+	@Select("select * from story_view order by rand() limit 4")
+	List<TraverserStoryVO> getRand();
 }
