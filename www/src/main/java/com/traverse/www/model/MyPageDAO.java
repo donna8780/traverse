@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Update;
 
 import com.traverse.www.vo.AccountsVO;
 
+
+
 @Mapper
 public interface MyPageDAO {
 

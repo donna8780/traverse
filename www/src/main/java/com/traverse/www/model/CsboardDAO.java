@@ -36,6 +36,8 @@ public interface CsboardDAO {
 	@Select("select count(*) from customer_board")
 	int totalQna();
 	
+	@Update("UPDATE customer_board SET v_count = v_count + 1 WHERE board_idx = #{board_idx}")
+  int updateViewCount(int idx);
 	
 
 }

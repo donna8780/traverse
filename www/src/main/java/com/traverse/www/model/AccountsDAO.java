@@ -13,6 +13,7 @@ import com.traverse.www.vo.PlaceVO;
 import com.traverse.www.vo.SelPlaceVO;
 
 
+
 @Mapper
 public interface AccountsDAO {
 

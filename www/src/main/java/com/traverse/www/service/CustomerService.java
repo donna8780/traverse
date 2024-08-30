@@ -35,7 +35,7 @@ public class CustomerService {
 		
 	}
 	public CustomerVO getCsBoardOne(int idx) {
-		
+		dao.updateViewCount(idx);
 		return dao.selectOne(idx);
 	}
 	public int update(CustomerVO input) {
@@ -46,6 +46,8 @@ public class CustomerService {
 		return dao.delete(idx);
 		
 	}
+	
+
 
 
 }

@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,6 +49,12 @@ public class TraverserStoryController {
         TraverserStoryVO rand3 = randomItems.get(2);
         TraverserStoryVO rand4 = randomItems.get(3);
         
+     // 각각의 프로필 이미지 경로를 사용 가능
+        String profile1 = rand1.getProfile();
+        String profile2 = rand2.getProfile();
+        String profile3 = rand3.getProfile();
+        String profile4 = rand4.getProfile();
+        
        
         // 날짜가 "yyyy-MM-dd" 형식의 문자열이라고 가정합니다.
         String selDateString1 = rand1.getSeldate(); // "2024-07-03"
@@ -63,6 +71,7 @@ public class TraverserStoryController {
      // 날짜가 "yyyy-MM-dd" 형식의 문자열이라고 가정합니다.
         String selDateString2 = rand2.getSeldate(); // "2024-07-03"
         String endDateString2 = rand2.getEnddate(); // "2024-07-05"
+        
 
         // 문자열을 LocalDate로 변환 (기본 ISO_LOCAL_DATE 형식 사용)
         LocalDate selDate2 = LocalDate.parse(selDateString2, DateTimeFormatter.ISO_LOCAL_DATE);
@@ -195,6 +204,9 @@ public class TraverserStoryController {
     @GetMapping("/place/story/{idx}")
     public ModelAndView viewStory(@PathVariable("idx") int idx) {
         ModelAndView mav = new ModelAndView();
+        
+        // 조회수 증가
+        tss.incrementViewCount(idx);
 
         // 특정 idx를 가진 게시글을 가져옵니다
         TraverserStoryVO story = tss.getStoryById(idx);
@@ -265,4 +277,5 @@ public class TraverserStoryController {
         tss.deleteStory(idx);
         return "redirect:/place/traverserStory";
     }
+ 
 }

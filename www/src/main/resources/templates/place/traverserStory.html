@@ -45,73 +45,70 @@
       
       <a th:href="@{/place/story/{idx}(idx=${rand1.idx})}">
        <div class="box box1">
-         <div class="inner-box top-left">
-            <img th:src="@{'/story/' + ${rand1.imge1}}">
+         <div class="inner-box top">
+            <img th:src="${#strings.isEmpty(rand1.imge1) ? '/story/logo_w.png' : '/story/' + rand1.imge1}">
          </div>
-         <div class="inner-box top-right">
-            <img th:src="@{'/story/' + ${rand1.imge2}}">
-         </div>
+         <!-- <div class="inner-box top-right">
+            <img th:src="${#strings.isEmpty(rand1.imge2) ? '/story/logo_w.png' : '/story/' + rand1.imge2}">
+         </div> -->
          <div class="inner-box bottom">
             <div class="text-line line1" th:text="${rand1.nick}">nick</div>
           <div class="text-line line2" th:text="${rand1.title}">title</div>
           <div class="text-line line3" th:text="${'# ' + rand1.regin + ', ' + daysBetween1 + '일'}"># 부산, 2박 3일(여행지, 기간)</div>
          </div>
          <div class="inner-box center">
-            <img src="/image/d0.jpg">
+            <img th:src="${#strings.isEmpty(rand1.profile) ? '/image/default_profile.png' : '/image/' + rand1.profile}">
          </div>
        </div>
        </a>
        
        <a th:href="@{/place/story/{idx}(idx=${rand2.idx})}">
        <div class="box box2">
-       <div class="inner-box top-left">
-            <img th:src="@{'/story/' + ${rand2.imge1}}">
+       <div class="inner-box top">
+            <img th:src="${#strings.isEmpty(rand2.imge1) ? '/story/logo_w.png' : '/story/' + rand2.imge1}">
          </div>
-         <div class="inner-box top-right">
-            <img th:src="@{'/story/' + ${rand2.imge2}}">
-         </div>
+         
          <div class="inner-box bottom">
             <div class="text-line line1" th:text="${rand2.nick}">소백돌이</div>
           <div class="text-line line2" th:text="${rand2.title}">진해 나들이</div>
           <div class="text-line line3" th:text="${'# ' + rand2.regin + ', ' + daysBetween2 + '일'}"># 창원, 1박 2일</div>
          </div>
          <div class="inner-box center">
-            <img src="/image/s0.jpg">
+            <img th:src="${#strings.isEmpty(rand2.profile) ? '/image/default_profile.png' : '/image/' + rand2.profile}">
          </div>
        </div>
        </a>
        
        <a th:href="@{/place/story/{idx}(idx=${rand3.idx})}">
        <div class="box box3">
-         <div class="inner-box top">
-            <img th:src="@{'/story/' + ${rand3.imge1}}">
+        <div class="inner-box top">
+            <img th:src="${#strings.isEmpty(rand3.imge1) ? '/story/logo_w.png' : '/story/' + rand3.imge1}">
          </div>
+        
          <div class="inner-box bottom">
             <div class="text-line line1" th:text="${rand3.nick}">새박사</div>
           <div class="text-line line2" th:text="${rand3.title}">로또당첨</div>
           <div class="text-line line3" th:text="${'# ' + rand3.regin + ', ' + daysBetween3 + '일'}"># 춘천, 2박 3일</div>
          </div>
          <div class="inner-box center">
-            <img src="/image/l0.jpg">
+            <img th:src="${#strings.isEmpty(rand3.profile) ? '/image/default_profile.png' : '/image/' + rand3.profile}">
          </div>
        </div>
        </a>
        
        <a th:href="@{/place/story/{idx}(idx=${rand4.idx})}">
        <div class="box box4">
-          <div class="inner-box top-left">
-            <img th:src="@{'/story/' + ${rand4.imge1}}">
+          <div class="inner-box top">
+            <img th:src="${#strings.isEmpty(rand4.imge1) ? '/story/logo_w.png' : '/story/' + rand4.imge1}">
          </div>
-         <div class="inner-box top-right">
-            <img th:src="@{'/story/' + ${rand4.imge2}}">
-         </div>
+         
          <div class="inner-box bottom">
             <div class="text-line line1" th:text="${rand4.nick}">받킨지</div>
           <div class="text-line line2" th:text="${rand4.title}">베베랑 콩이랑~~</div>
           <div class="text-line line3" th:text="${'# ' + rand4.regin + ', ' + daysBetween4 + '일'}"># 제주, 2박 3일</div>
          </div>
          <div class="inner-box center">
-            <img src="/image/b4.jpg">
+            <img th:src="${#strings.isEmpty(rand4.profile) ? '/image/default_profile.png' : '/image/' + rand4.profile}">
          </div>
        </div>
        </a>

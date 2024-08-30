@@ -79,6 +79,9 @@ public class CustomerController {
 	public ModelAndView csview(@PathVariable("board_idx")int idx) {
 		ModelAndView mav = new ModelAndView();
 		
+	// 조회수 증가
+    // cs.incrementViewCount(idx);
+		
 		mav.addObject("row", cs.getCsBoardOne(idx));
 		mav.addObject("replys", rs.getReplys(idx));
 		mav.setViewName("member/csView");
