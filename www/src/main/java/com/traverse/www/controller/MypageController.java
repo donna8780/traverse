@@ -116,7 +116,7 @@ public class MypageController {
            }
        }
 
-       return "redirect:/";
+       return "redirect:/member/logout";
    }
 
 

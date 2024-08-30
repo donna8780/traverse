@@ -1,0 +1,167 @@
+@charset "UTF-8";
+
+#duration body, #duration h1, #duration h2, #duration h3, #duration h4, #duration h5, #duration h6, #duration p, #duration ul, #duration li, #duration form, #duration fieldset, #duration legend, #duration label {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#duration body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header 스타일 */
+#duration header {
+    background-color: #2A3854;
+    padding: 10px 0;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#duration header > div {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#duration header .navi {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+#duration header .navi li {
+    margin-left: 20px;
+}
+
+#duration header .navi li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+#duration header .navi li a:hover {
+    background-color: #4BB958;
+}
+
+#duration header .logo {
+    width: 150px;
+}
+
+#duration .menubtn {
+    display: none;
+}
+
+#duration input[type="checkbox"] {
+    display: none;
+}
+
+/* Container 스타일 */
+#duration .container {
+    display: flex;
+    width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Content 영역 스타일 */
+#duration .contents {
+    flex: 1;
+    padding-right: 20px;
+}
+
+#duration .area_desc form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#duration .area_desc legend {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2A3854;
+}
+
+#duration #inline-calendar {
+    width: 100%;
+    max-width: 300px;
+}
+
+#duration #selected-dates-display {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+}
+
+#duration button[type="submit"] {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #2A3854;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#duration button[type="submit"]:hover {
+    background-color: #4BB958;
+}
+
+/* Sidebar 스타일 */
+#duration .sidebar {
+    width: 250px;
+    padding-left: 20px;
+    border-left: 1px solid #ddd;
+    background-color: #f8f8f8;
+    border-radius: 0 10px 10px 0;
+}
+
+#duration .sidebar .area_desc a {
+    display: block;
+    margin-bottom: 10px;
+    color: #2A3854;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+#duration .sidebar .area_desc a:hover {
+    color: #4BB958;
+}
+
+/* Footer 스타일 */
+#duration footer {
+    margin-top: 20px;
+    padding: 10px 0;
+    background-color: #2A3854;
+    color: white;
+    text-align: center;
+}
+
+#duration footer hr {
+    border: 0;
+    border-top: 1px solid #4BB958;
+    margin: 10px 0;
+}
+
+#duration footer div {
+    font-size: 14px;
+}
