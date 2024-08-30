@@ -27,12 +27,18 @@ import java.sql.Date;
 
 
 public class TraverserStoryVO {
-	private String imge1, imge2, imge3, imge4, imge5, imge6, imge7, imge8, imge9 ,imge10;
+	private String imge1, imge2, imge3, imge4, imge5, imge6, imge7, imge8, imge9 ,imge10, profile;
 	private String regin, seldate, title, contents, enddate, nick;
 	private int idx, a_idx, v_count;
 	private Date w_date;
 	
 	
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
 	public String getNick() {
 		return nick;
 	}
