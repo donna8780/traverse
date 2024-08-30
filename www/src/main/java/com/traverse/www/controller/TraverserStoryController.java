@@ -136,4 +136,66 @@ public class TraverserStoryController {
 
         return mav;
     }
+    
+ // 게시글 수정 페이지로 이동
+    @GetMapping("/place/story_update/{idx}")
+    public ModelAndView editStory(@PathVariable("idx") int idx, HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+
+        // 게시글 가져오기
+        TraverserStoryVO story = tss.getStoryById(idx);
+        AccountsVO user = (AccountsVO) session.getAttribute("user");
+
+
+        mav.addObject("story", story);
+        mav.setViewName("/place/story_update");
+        return mav;
+    }
+
+    // 게시글 수정 처리
+    @PostMapping("/place/story/{idx}")
+    public String updateStory(@PathVariable("idx") int idx,
+                              @RequestParam("title") String title,
+                              @RequestParam("regin") String regin,
+                              @RequestParam("enddate") String enddate,
+                              @RequestParam("seldate") String seldate,
+                              @RequestParam("contents") String contents,
+                              @RequestParam("images") MultipartFile[] images) {
+
+        TraverserStoryVO story = tss.getStoryById(idx);
+
+        // 기존 이미지 유지 또는 업데이트
+        String[] imagePaths = tss.updateImages(images, story);
+
+        story.setTitle(title);
+        story.setRegin(regin);
+        story.setSeldate(seldate);
+        story.setEnddate(enddate);
+        story.setContents(contents);
+        story.setImge1(imagePaths[0]);
+        story.setImge2(imagePaths[1]);
+        story.setImge3(imagePaths[2]);
+        story.setImge4(imagePaths[3]);
+        story.setImge5(imagePaths[4]);
+        story.setImge6(imagePaths[5]);
+        story.setImge7(imagePaths[6]);
+        story.setImge8(imagePaths[7]);
+        story.setImge9(imagePaths[8]);
+        story.setImge10(imagePaths[9]);
+        
+        tss.updateStory(story);
+
+        return "redirect:/place/story/" + idx;
+    }
+
+    // 게시글 삭제 처리
+    @GetMapping("/place/story_delete/{idx}")
+    public String deleteStory(@PathVariable("idx") int idx, HttpSession session) {
+        AccountsVO user = (AccountsVO) session.getAttribute("user");
+        TraverserStoryVO story = tss.getStoryById(idx);
+
+
+        tss.deleteStory(idx);
+        return "redirect:/place/traverserStory";
+    }
 }
