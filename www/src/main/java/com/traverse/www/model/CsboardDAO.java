@@ -36,8 +36,9 @@ public interface CsboardDAO {
 	@Select("select count(*) from customer_board")
 	int totalQna();
 	
+	@Select("SELECT * FROM cus_view where title like concat('%', #{qna_search}, '%')")
+	List<CustomerVO> qnaselectSearch(String qna_search);
+	
 	@Update("UPDATE customer_board SET v_count = v_count + 1 WHERE board_idx = #{board_idx}")
   int updateViewCount(int idx);
-	
-
 }

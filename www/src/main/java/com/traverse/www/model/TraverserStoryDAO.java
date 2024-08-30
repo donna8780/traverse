@@ -28,7 +28,7 @@ int insert(TraverserStoryVO input);
   @Select("SELECT * FROM story_view WHERE idx = #{idx}")
   TraverserStoryVO selectStoryById(int idx);
 
-  @Select("SELECT * FROM story_view where regin like #{search} or title like #{search}")
+  @Select("SELECT * FROM story_view WHERE regin LIKE CONCAT('%', #{search}, '%') OR title LIKE CONCAT('%', #{search}, '%')")
   List<TraverserStoryVO> selectSearch(String search);
 
   @Update("UPDATE Travelreviews SET title = #{title}, contents = #{contents}, regin = #{regin}, seldate = #{seldate}, enddate = #{enddate}, " +
