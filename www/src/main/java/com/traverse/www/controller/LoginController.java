@@ -1,6 +1,8 @@
 package com.traverse.www.controller;
 
 
+import java.security.NoSuchAlgorithmException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +27,7 @@ public class LoginController {
 	public void login() {}
 	
 	@PostMapping("login")
-	public String login(AccountsVO input,HttpSession session) throws LoginException {
+	public String login(AccountsVO input,HttpSession session) throws LoginException, NoSuchAlgorithmException {
 		
 		session.setAttribute("user", ls.getAccounts(input));	
 		return "redirect:/";
@@ -71,7 +73,7 @@ public class LoginController {
 	
 	
 	@PostMapping("newPW")
-	public ModelAndView newPW(AccountsVO input) {
+	public ModelAndView newPW(AccountsVO input) throws NoSuchAlgorithmException {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("newPW", ls.newPW(input));

@@ -8,12 +8,12 @@
 </head>
 <body>
   <th:block th:replace="/fragment::header"></th:block>
-	<header>
-		<div class="navbar">
-			<div class="navbar-left">
-				<h1 th:text="${detail.title}">이름</h1>
-			</div>
-			<div class="navbar-right">
+   <header>
+      <div class="navbar">
+         <div class="navbar-left">
+            <h1 th:text="${detail.title}">이름</h1>
+         </div>
+         <div class="navbar-right">
         <div class="heart-container" title="Like">
             <input type="checkbox" class="checkbox" id="Give-It-An-Id" th:onclick="handleLike()">
             <div class="svg-container">
@@ -35,131 +35,131 @@
                 </svg>
             </div>
         </div>
-			</div>
-		</div>
-	</header>
+         </div>
+      </div>
+   </header>
 
-	<section class="slider">
-		<div class="slide">
-			<img th:src="${detail.firstimage}" alt="Image 1">
-		</div>
-		<div class="slide">
-			<img th:src="${detail.firstimage2}" alt="Image 2">
-		</div>
-	</section>
+   <section class="slider">
+      <div class="slide">
+         <img th:src="${detail.firstimage}" alt="Image 1">
+      </div>
+      <div class="slide">
+         <img th:src="${detail.firstimage2}" alt="Image 2">
+      </div>
+   </section>
 
-	<section class="description">
-		<h2>장소명</h2>
-		<table>
-			<tr>
-				<td>Title:</td>
-				<td th:text="${detail.title}"></td>
-			</tr>
-			<tr>
-				<td>Address:</td>
-				<td th:text="${detail.addr1}"></td>
-			</tr>
-			<tr>
-				<td>전화번호:</td>
-				<td th:text="${detail.tel}"></td>
-			</tr>
-		</table>
-	</section>
+   <section class="description">
+      <h2>장소명</h2>
+      <table>
+         <tr>
+            <td>Title:</td>
+            <td th:text="${detail.title}"></td>
+         </tr>
+         <tr>
+            <td>Address:</td>
+            <td th:text="${detail.addr1}"></td>
+         </tr>
+         <tr>
+            <td>전화번호:</td>
+            <td th:text="${detail.tel}"></td>
+         </tr>
+      </table>
+   </section>
 
-	<section class="features">
-		<h2>지도 좌표</h2>
-		<table>
-			<tr>
-				<td>Map X:</td>
-				<td th:text="${detail.mapx}"></td>
-			</tr>
-			<tr>
-				<td>Map Y:</td>
-				<td th:text="${detail.mapy}"></td>
-			</tr>
-		</table>
-	</section>
+   <section class="features">
+      <h2>지도 좌표</h2>
+      <table>
+         <tr>
+            <td>Map X:</td>
+            <td th:text="${detail.mapx}"></td>
+         </tr>
+         <tr>
+            <td>Map Y:</td>
+            <td th:text="${detail.mapy}"></td>
+         </tr>
+      </table>
+   </section>
 
-	<!-- 별점 및 후기 섹션 -->
-	<section class="reviews">
-		<h2>후기 및 별점</h2>
-		<div>
-			<span>평균 별점: <strong id="average-rating">0</strong></span> / 5
-		</div>
+   <!-- 별점 및 후기 섹션 -->
+   <section class="reviews">
+      <h2>후기 및 별점</h2>
+      <div>
+         <span>평균 별점: <strong id="average-rating">0</strong></span> / 5
+      </div>
 
-		<!-- 기존 리뷰들 출력 -->
-		<div th:each="review : ${reviews}" class="review-item">
-			<p>
-				<strong th:text="${review.nick}"></strong>: <span class="rating"
-					th:each="i : ${#numbers.sequence(1, review.rating)}">⭐</span> <span
-					th:text="${review.contents}"></span> <em th:text="${review.w_date}"></em>
-				<!-- 리뷰별 별점 값을 표시하는 숨겨진 span 추가 -->
-				<span class="rating-value" th:text="${review.rating}"
-					style="display: none;"></span>
-			</p>
-			<!-- 수정 및 삭제 버튼 (본인 또는 관리자만) -->
-			<div
-				th:if="${review.a_idx == session.user.accounts_idx or session.user.role == 'ADMIN'}">
-				<button th:onclick="|fn_update('${review.drep_idx}')|"
-					th:classid="editBtn_" type="button">수정</button>
-				<form
-					th:action="@{/member/review/delete/{id}(id=${review.drep_idx})}"
-					method="post" style="display: inline;">
-					<!-- p_idx를 히든 필드로 추가 -->
-					<input type="hidden" name="p_idx" th:value="${review.p_idx}">
-					<button type="submit">삭제</button>
-				</form>
-			</div>
+      <!-- 기존 리뷰들 출력 -->
+      <div th:each="review : ${reviews}" class="review-item">
+         <p>
+            <strong th:text="${review.nick}"></strong>: <span class="rating"
+               th:each="i : ${#numbers.sequence(1, review.rating)}">⭐</span> <span
+               th:text="${review.contents}"></span> <em th:text="${review.w_date}"></em>
+            <!-- 리뷰별 별점 값을 표시하는 숨겨진 span 추가 -->
+            <span class="rating-value" th:text="${review.rating}"
+               style="display: none;"></span>
+         </p>
+         <!-- 수정 및 삭제 버튼 (본인 또는 관리자만) -->
+         <div
+            th:if="${review.a_idx == session.user.accounts_idx or session.user.role == 'ADMIN'}">
+            <button th:onclick="|fn_update('${review.drep_idx}')|"
+               th:classid="editBtn_" type="button">수정</button>
+            <form
+               th:action="@{/member/review/delete/{id}(id=${review.drep_idx})}"
+               method="post" style="display: inline;">
+               <!-- p_idx를 히든 필드로 추가 -->
+               <input type="hidden" name="p_idx" th:value="${review.p_idx}">
+               <button type="submit">삭제</button>
+            </form>
+         </div>
 
-			<!-- 수정 폼 (기본적으로 숨김) -->
-			<div th:id="'editForm_' + ${review.drep_idx}" style="display: none">
-				<form method="POST" th:action="@{/member/review/edit}">
-					<div class="rating">
-						<label> <input type="radio" name="rating" value="1"
-							th:checked="${review.rating == 1}"> 1
-						</label> <label> <input type="radio" name="rating" value="2"
-							th:checked="${review.rating == 2}"> 2
-						</label> <label> <input type="radio" name="rating" value="3"
-							th:checked="${review.rating == 3}"> 3
-						</label> <label> <input type="radio" name="rating" value="4"
-							th:checked="${review.rating == 4}"> 4
-						</label> <label> <input type="radio" name="rating" value="5"
-							th:checked="${review.rating == 5}"> 5
-						</label>
-					</div>
-					<textarea name="contents" th:text="${review.contents}"></textarea>
-					<button type="submit">수정 완료</button>
-					<input name="drep_idx" type="hidden" th:value="${review.drep_idx}">
-					<input name="p_idx" type="hidden" th:value="${review.p_idx}">
-				</form>
-			</div>
-		</div>
+         <!-- 수정 폼 (기본적으로 숨김) -->
+         <div th:id="'editForm_' + ${review.drep_idx}" style="display: none">
+            <form method="POST" th:action="@{/member/review/edit}">
+               <div class="rating">
+                  <label> <input type="radio" name="rating" value="1"
+                     th:checked="${review.rating == 1}"> 1
+                  </label> <label> <input type="radio" name="rating" value="2"
+                     th:checked="${review.rating == 2}"> 2
+                  </label> <label> <input type="radio" name="rating" value="3"
+                     th:checked="${review.rating == 3}"> 3
+                  </label> <label> <input type="radio" name="rating" value="4"
+                     th:checked="${review.rating == 4}"> 4
+                  </label> <label> <input type="radio" name="rating" value="5"
+                     th:checked="${review.rating == 5}"> 5
+                  </label>
+               </div>
+               <textarea name="contents" th:text="${review.contents}"></textarea>
+               <button type="submit">수정 완료</button>
+               <input name="drep_idx" type="hidden" th:value="${review.drep_idx}">
+               <input name="p_idx" type="hidden" th:value="${review.p_idx}">
+            </form>
+         </div>
+      </div>
 
 
-		<!-- 후기 작성 폼 -->
-		<form id="reviewForm" method="POST" th:action="@{/member/review}">
-			<div class="rating">
-				<label> <input type="radio" name="rating" value="1">
-					1
-				</label> <label> <input type="radio" name="rating" value="2">
-					2
-				</label> <label> <input type="radio" name="rating" value="3">
-					3
-				</label> <label> <input type="radio" name="rating" value="4">
-					4
-				</label> <label> <input type="radio" name="rating" value="5">
-					5
-				</label>
-			</div>
-			<textarea name="contents" placeholder="후기를 작성하세요"></textarea>
-			<button type="submit">등록</button>
-			<input name="a_idx" type="hidden"
-				th:value="${session.user.accounts_idx}"> <input name="p_idx"
-				type="hidden" th:value="${detail.idx}">
-		</form>
-	</section>
+      <!-- 후기 작성 폼 -->
+      <form id="reviewForm" method="POST" th:action="@{/member/review}">
+         <div class="rating">
+            <label> <input type="radio" name="rating" value="1">
+               1
+            </label> <label> <input type="radio" name="rating" value="2">
+               2
+            </label> <label> <input type="radio" name="rating" value="3">
+               3
+            </label> <label> <input type="radio" name="rating" value="4">
+               4
+            </label> <label> <input type="radio" name="rating" value="5">
+               5
+            </label>
+         </div>
+         <textarea name="contents" placeholder="후기를 작성하세요"></textarea>
+         <button type="submit">등록</button>
+         <input name="a_idx" type="hidden"
+            th:value="${session.user.accounts_idx}"> <input name="p_idx"
+            type="hidden" th:value="${detail.idx}">
+      </form>
+   </section>
 
-	<script type="text/javascript">
+   <script type="text/javascript">
 document.addEventListener("DOMContentLoaded", function() {
     // 리뷰 항목들을 가져옴
     const reviews = document.querySelectorAll('.review-item');
@@ -189,16 +189,16 @@ document.addEventListener("DOMContentLoaded", function() {
 function handleLike() {
     const checkbox = document.getElementById('Give-It-An-Id');
     const data = {
-        a_idx: [[${session.user.accounts_idx}]],  // JavaScript에서 사용할 수 있도록 직접 삽입
+        a_idx: [[${session.user.accounts_idx}]],  
         title: "[[${detail.title}]]",
         addr1: "[[${detail.addr1}]]",
         firstimage: "[[${detail.firstimage}]]",
         mapx: [[${detail.mapx}]],
-        mapy: [[${detail.mapy}]]
+        mapy: [[${detail.mapy}]],
+        p_idx: [[${detail.idx}]]
     };
 
     if (checkbox.checked) {
-        // 하트가 체크된 경우 데이터 삽입 요청을 보냄
         fetch('/member/like', {
             method: 'POST',
             headers: {
@@ -218,7 +218,6 @@ function handleLike() {
             alert('An error occurred. Please try again.');
         });
     } else {
-        // 하트가 해제된 경우 데이터 삭제 요청을 보냄
         fetch('/member/like', {
             method: 'DELETE',
             headers: {
@@ -239,6 +238,7 @@ function handleLike() {
         });
     }
 }
+
   </script>
 
     <th:block th:replace="/fragment::footer"></th:block>

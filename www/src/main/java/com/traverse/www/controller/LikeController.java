@@ -17,6 +17,8 @@ import com.traverse.www.vo.AccountsVO;
 import com.traverse.www.vo.LikeVO;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestParam;
+
 	
 @Controller
 public class LikeController {
@@ -61,6 +63,8 @@ public class LikeController {
    	
    }
    
+
+   
    @GetMapping("/member/likeDel/{likeIdx}")
    public String likeDel(@PathVariable("likeIdx") int likeIdx) {
   	 
@@ -90,4 +94,6 @@ public class LikeController {
        }
    }
 
+
+   
 }

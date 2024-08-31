@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
-<link href="/css/myPageStyle00.css" rel="stylesheet">
+<link href="/css/myPageStyle.css" rel="stylesheet">
   <link href="/css/mainStyle.css" rel="stylesheet">
 </head>
 <body>
@@ -44,19 +44,17 @@
                         <img th:src="@{'/image/' + ${session.user.profile}}" alt="Profile Image" style="width: 150px; height: 150px;" />
 
                     </div>
-                    <!-- 이미지 업로드 폼 -->
+                    <!-- 이미지 업로드 폼 
                     <form method="POST" enctype="multipart/form-data" th:action="@{/member/uploadProfile}">
                         <input type="file" name="profileImage" accept="image/*" />
                         <button type="submit">업로드</button>
-                    </form>
+                    </form>-->
                     
                 </td>
             </tr>
         </table>
 
-      
-
-    <a href="/member/delete/[[${session.user.accounts_idx}]]"><button class="submit">탈퇴</button></a>
+    <a th:href="@{/member/delete/{id}(id=${session.user.accounts_idx})}"><button class="submit">탈퇴</button></a>
     <a href="/member/update"><button class="submit">수정</button></a>
   </div>
 

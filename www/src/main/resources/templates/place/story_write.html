@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>글 작성하기</title>
+    <style>
+        .content-container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 4px 0;
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="file"] {
+            padding: 5px;
+        }
+
+        .form-group button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group .add-image-button {
+            margin-top: 10px;
+            background-color: #28a745;
+        }
+
+        .form-group .add-image-button:hover {
+            background-color: #218838;
+        }
+
+        .form-group .file-inputs {
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function addFileInput() {
+            const fileInputContainer = document.getElementById('file-input-container');
+            const newFileInput = document.createElement('input');
+            newFileInput.type = 'file';
+            newFileInput.name = 'images';
+            newFileInput.accept = 'image/*';
+            fileInputContainer.appendChild(newFileInput);
+        }
+
+    </script>
+</head>
+<body>
+
+<div class="content-container">
+    <h2>글 작성하기</h2>
+    <form action="/place/story_write" method="post" enctype="multipart/form-data">
+        <!-- a_idx 값을 숨겨진 입력 필드로 추가 -->
+        <input type="hidden" name="a_idx" th:value="${session.user.accounts_idx}">
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+
+        <div class="form-group">
+            <label for="regin">지역</label>
+            <input type="text" id="regin" name="regin" required>
+        </div>
+
+        <div class="form-group">
+            <label for="seldate">시작 날짜</label>
+            <input type="date" id="seldate" name="seldate" required>
+        </div>
+        <div class="form-group">
+            <label for="enddate">끝 날짜</label>
+            <input type="date" id="enddate" name="enddate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="contents">내용</label>
+            <textarea id="contents" name="contents" rows="10"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="images">이미지 업로드</label>
+            <div id="file-input-container" class="file-inputs">
+                <input type="file" id="images" name="images" accept="image/*">
+            </div>
+            <button type="button" class="add-image-button" onclick="addFileInput()">이미지 추가</button>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit">게시하기</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>고객지원</title>
-<link rel="stylesheet" href="/css/Customerstyle.css">
+<link rel="stylesheet" href="/css/Customerstyle00.css">
 <link rel="stylesheet" href="/css/mainStyle.css">
 </head>
 <body>
@@ -13,23 +13,26 @@
 	<header>
 		<nav>
 			<ul>
-				<li><a href="#company-intro"
-					onclick="showSection('company-intro')">기업소개</a></li>
-				<li><a href="#notice" onclick="showSection('notice')">공지사항</a></li>
-				<li><a href="#faq" onclick="showSection('faq')">FAQ</a></li>
-				<li><a href="#qna" onclick="showSection('qna')">Q&A</a></li>
+				<li><a href="#company-intro" onclick="showSection('company-intro')">  기업소개  </a></li>
+				<li>|</li>
+				<li><a href="#notice" onclick="showSection('notice')">  공지사항  </a></li>
+				<li>|</li>
+				<li><a href="#faq" onclick="showSection('faq')">  FAQ  </a></li>
+				<li>|</li>
+				<li><a href="#qna" onclick="showSection('qna')">  Q&A  </a></li>
 
 			</ul>
 		</nav>
 	</header>
-
-	<section id="company-intro" class="section">
+	<div id="customer-inner">
+	<section id="company-intro" class="section active">
 		<div class="intro-container">
+				<h2>기업소개</h2>
+		<div class="inner-content">
 			<div class="intro-logo">
-				<img src="/image/traverse.png">
+				<img src="/image/logo_w.png">
 			</div>
 			<div class="intro-text">
-				<h2>기업소개</h2>
 				<pre>
 Traverse는 여행을 사랑하는 모든 사람들에게 영감을 주고, 쉽게 여행을 계획하며, 
 잊지 못할 추억을 남길 수 있도록 도와주는 국내 여행 플랫폼입니다.
@@ -53,29 +56,30 @@ Traverse를 통해 여러분은:
 
 Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정을 떠나세요!
 			</pre></div>
+			</div>
 		</div>
 	</section>
 
 	<section id="notice" class="section" style="display: none;">
 		<h2>공지사항</h2>
-		<p>여기는 공지사항 섹션입니다. 중요한 공지 및 업데이트 정보를 제공합니다.</p>
+		
 		<table class="rwd-table">
 			<tbody>
 				<tr>
-					<th>No</th>
+					<th>No.</th>
 					<th>제목</th>
-					<th>닉네임</th>
+					<th>작성자</th>
 					<th>작성일</th>
 					<th>조회수</th>
 				</tr>
 				<tr th:each="row : ${announce}">
-					<td th:text="${row.announcement_idx}"></td>
+					<td th:text="${row.announcement_idx}" class="td-center"></td>
 					<td><a
 						th:href="@{/member/view/{announcement_idx}(announcement_idx=${row.announcement_idx})}"
 						th:text="${row.title}"></a></td>
-					<td th:text="${row.nick}"></td>
-					<td th:text="${row.w_date}"></td>
-					<td th:text="${row.v_count}"></td>
+					<td th:text="${row.nick}" class="td-center"></td>
+					<td th:text="${row.w_date}" class="td-center"></td>
+					<td th:text="${row.v_count}" class="td-center"></td>
 				</tr>
 			</tbody>
 		</table>
@@ -83,57 +87,135 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정
 
 		<ul class="pagemenu">
 
-			<li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}"><a
-				th:href="@{customer(idx=${i})} + '#notice'"> <span
-					th:text="${i}"></span>
-			</a></li>
+			<li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}">
+				<a th:href="@{customer(idx=${i})} + '#notice'"> 
+				   <span
+					    th:text="${i}">
+					 </span>
+				</a>
+			</li>
 
 		</ul>
 		<!-- 관리자가 아니면 글쓰기 활성화 안됨 -->
 		<div th:if="${session.user != null and session.user.nick == '관리자'}">
-			<a href="/member/write"><button>
-				<span class="span-mother"> <span>글</span> <span>쓰</span> <span>기</span>
-				</span> <span class="span-mother2"> <span>글</span> <span>쓰</span> <span>기</span>
-				</span>
-			</button></a>
+			<a href="/member/write" id="notice-write"><button class="write-button">글쓰기</button></a>
 		</div>
 	</section>
 
 	<section id="faq" class="section" style="display: none;">
 		<h2>FAQ</h2>
-		<div class="faq-item">
-			<h3>Q: 자주 묻는 질문 1</h3>
-			<p>A: 자주 묻는 질문 1에 대한 답변입니다.</p>
-		</div>
-		<div class="faq-item">
-			<h3>Q: 자주 묻는 질문 2</h3>
-			<p>A: 자주 묻는 질문 2에 대한 답변입니다.</p>
-		</div>
+		<div class="faq-item" id="first-faq">
+    	<button class="accordion">
+        <span class="question-text">Q. 자주 묻는 질문 1</span>
+        <span class="toggle-text">더보기 ▽</span>
+    	</button>
+        <div class="panel">
+            <pre>
+A. 자주 묻는 질문 1에 대한 답변입니다.
+dsljfdhlsd
+sldknfweee   lsdkhfsd
+elfhslkdo
+.
+						</pre>
+        </div>
+    </div>
+    <div class="faq-item">
+      <button class="accordion">
+        <span class="question-text">Q. 자주 묻는 질문 2</span>
+        <span class="toggle-text">더보기 ▽</span>
+    	</button>
+        <div class="panel">
+            <pre>
+A. 자주 묻는 질문 2에 대한 답변입니다.
+dsljfdhlsd
+sldknfdfdvlkdo
+.
+						</pre>
+        </div>
+    </div>
+    <div class="faq-item">
+      <button class="accordion">
+        <span class="question-text">Q. 자주 묻는 질문 3</span>
+        <span class="toggle-text">더보기 ▽</span>
+    	</button>
+        <div class="panel">
+            <pre>
+A. 자주 묻는 질문 3에 대한 답변입니다.
+dsljfreffffffffffdhlsd
+sldknfweee   lsdkhfsd
+elfhsffffffffffffffflkdo
+.ffffffffffffff
+						</pre>
+        </div>
+    </div>
+        <div class="faq-item">
+      <button class="accordion">
+        <span class="question-text">Q. 자주 묻는 질문 4</span>
+        <span class="toggle-text">더보기 ▽</span>
+    	</button>
+        <div class="panel">
+            <pre>
+A. 자주 묻는 질문 4에 대한 답변입니다.
+dsljfreffffffffffdhlsd
+sldknfweee   lsdkhfsd
+elfhsffffffffffffffflkdo
+.ffffffffffffff
+						</pre>
+        </div>
+    </div>
+        <div class="faq-item">
+      <button class="accordion">
+        <span class="question-text">Q. 자주 묻는 질문 5</span>
+        <span class="toggle-text">더보기 ▽</span>
+    	</button>
+        <div class="panel">
+            <pre>
+A. 자주 묻는 질문 5에 대한 답변입니다.
+dsljfreffffffffffdhlsd
+sldknfweee   lsdkhfsd
+elfhsffffffffffffffflkdo
+.ffffffffffffff
+						</pre>
+        </div>
+    </div>
+            <div class="faq-item">
+      <button class="accordion">
+        <span class="question-text">Q. 자주 묻는 질문 6</span>
+        <span class="toggle-text">더보기 ▽</span>
+    	</button>
+        <div class="panel">
+            <pre>
+A. 자주 묻는 질문 6에 대한 답변입니다.
+dsljfreffffffffffdhlsd
+sldknfweee   lsdkhfsd
+elfhsffffffffffffffflkdo
+.ffffffffffffff
+						</pre>
+        </div>
+    </div>
 	</section>
 
 	<section id="qna" class="section" style="display: none;">
 		<h2>Q&A</h2>
 		<div class="qna-item">
-			<h3>qna 게시판</h3>
 
-			<table>
+			<table class="rwd-table" id="qna">
 				<tbody>
 					<tr>
-						<th>No</th>
+						<th>No.</th>
 						<th>제목</th>
-						<th>닉네임</th>
-						<th>내용</th>
-						<th>작성시간</th>
+						<th>작성자</th>
+						<th>작성일</th>
+						<th>조회수</th>
 					</tr>
 					<tr th:each="row : ${qna}">
-						<td th:text="${row.board_idx}"></td>
+						<td th:text="${row.board_idx}" class="td-center"></td>
 						<td><a
 							th:href="@{/member/csView/{board_idx}(board_idx=${row.board_idx})}"
 							th:text="${row.title}"></a></td>
-						<td th:text="${row.nick}"></td>
-						<td th:text="${row.title}"></td>
-						<td th:text="${row.content}"></td>
-						<td th:text="${row.create_at}"></td>
+						<td th:text="${row.nick}" class="td-center"></td>
+						<td th:text="${row.create_at}" class="td-center"></td>
+						<td th:text="조회수" class="td-center"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -142,7 +224,7 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정
 
         <!-- 타임리프의 반복문을 위한 속성으로 html코드 동적으로 생성 i는 반복분에서 인텍스를 나타내고 pg.begin에서 pg.end까지 
         숫자 시퀀스를 생성 예를 들어, 1,10이면 pg.begin에서 pg.end까지 숫자에 대해 li태그를 생성 -->
-        <li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}"><a
+        <li th:each="i : ${#numbers.sequence(qnapg.begin, qnapg.end)}"><a
           th:href="@{customer(idx=${i})} + '#qna'"><!-- 동적 링크 생성 --> <span
             th:text="${i}"></span>
         </a></li>
@@ -152,8 +234,9 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정
       페이지 이동 후에도 페이지의 특정 위치로 스크롤된다. -->     
     </div>
 
-    <a href="/member/cswrite"><button>글쓰기</button></a>
+    <a href="/member/cswrite" id="notice-write"><button class="write-button">글쓰기</button></a>
   </section>
+  </div>
 
   <script>
   //세션에서 로그인 상태 가져옴
@@ -187,7 +270,30 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정
         }
         });
 
-    
+     // 페이지 로드 시 해시값에 따라 해당 섹션으로 이동
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash;
+            if (hash) {
+                const sectionId = hash.substring(1); // 해시 값에서 '#' 제거
+                showSection(sectionId);
+            }
+        });
+     
+        document.addEventListener('DOMContentLoaded', function() {
+            var accordions = document.getElementsByClassName("accordion");
+
+            for (var i = 0; i < accordions.length; i++) {
+                accordions[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                    } else {
+                        panel.style.display = "block";
+                    }
+                });
+            }
+        });
     </script>
 	
 	</div>

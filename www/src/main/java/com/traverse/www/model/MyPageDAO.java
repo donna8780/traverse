@@ -17,8 +17,8 @@ public interface MyPageDAO {
                + "where accounts_idx = #{accounts_idx}")
    int update(AccountsVO input);
 
-   @Delete("delete from accounts where accounts_idx = #{accounts_idx}")
-	 int delete(AccountsVO idx);
+   @Delete("delete from accounts where accounts_idx = #{idx}")
+	 int delete(int idx);
    
    @Update("update accounts "
        + "set profile = #{profile} "

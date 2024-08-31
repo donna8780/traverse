@@ -48,9 +48,8 @@ public class CustomerController {
 		mav.addObject("announce", announceMap.get("list"));
 		
 		Map<String, Object> qnaMap = cs.cstest(idx);
-		mav.addObject("qnapg", qnaMap.get("pg"));
+		mav.addObject("qnapg", qnaMap.get("qnapg"));
 		mav.addObject("qna", qnaMap.get("list"));
-
 		
 		return mav;
 	}
