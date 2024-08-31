@@ -87,10 +87,13 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정
 
 		<ul class="pagemenu">
 
-			<li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}"><a
-				th:href="@{customer(idx=${i})} + '#notice'"> <span
-					th:text="${i}"></span>
-			</a></li>
+			<li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}">
+				<a th:href="@{customer(idx=${i})} + '#notice'"> 
+				   <span
+					    th:text="${i}">
+					 </span>
+				</a>
+			</li>
 
 		</ul>
 		<!-- 관리자가 아니면 글쓰기 활성화 안됨 -->
@@ -221,7 +224,7 @@ elfhsffffffffffffffflkdo
 
         <!-- 타임리프의 반복문을 위한 속성으로 html코드 동적으로 생성 i는 반복분에서 인텍스를 나타내고 pg.begin에서 pg.end까지 
         숫자 시퀀스를 생성 예를 들어, 1,10이면 pg.begin에서 pg.end까지 숫자에 대해 li태그를 생성 -->
-        <li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}"><a
+        <li th:each="i : ${#numbers.sequence(qnapg.begin, qnapg.end)}"><a
           th:href="@{customer(idx=${i})} + '#qna'"><!-- 동적 링크 생성 --> <span
             th:text="${i}"></span>
         </a></li>
