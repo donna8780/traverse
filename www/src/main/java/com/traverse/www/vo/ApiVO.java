@@ -1,9 +1,23 @@
 package com.traverse.www.vo;
 
+/*
+	idx	int
+	areacode	int
+	contenttypeid	int
+	contentid	int
+	firstimage	text
+	firstimage2	text
+	sigungucode	int
+	tel	text
+	title	text
+	addr1	text
+	mapx	double
+	mapy	double
+*/
 
 public class ApiVO {
-	private int idx, areacode, sigungucode, contenttypeid;
-	private String title, addr1, cat1, cat2, cat3, firstimage, firstimage2, tel;
+	private int idx, areacode, sigungucode, contenttypeid, contentid;
+	private String title, addr1, firstimage, firstimage2, tel;
 	private double mapx, mapy;
 	
 	public int getIdx() {
@@ -42,24 +56,6 @@ public class ApiVO {
 	public void setContenttypeid(int contenttypeid) {
 		this.contenttypeid = contenttypeid;
 	}
-	public String getCat1() {
-		return cat1;
-	}
-	public void setCat1(String cat1) {
-		this.cat1 = cat1;
-	}
-	public String getCat2() {
-		return cat2;
-	}
-	public void setCat2(String cat2) {
-		this.cat2 = cat2;
-	}
-	public String getCat3() {
-		return cat3;
-	}
-	public void setCat3(String cat3) {
-		this.cat3 = cat3;
-	}
 	public String getFirstimage() {
 		return firstimage;
 	}
@@ -89,6 +85,12 @@ public class ApiVO {
 	}
 	public void setMapy(double mapy) {
 		this.mapy = mapy;
+	}
+	public int getContentid() {
+		return contentid;
+	}
+	public void setContentid(int contentid) {
+		this.contentid = contentid;
 	}
 	
 	
