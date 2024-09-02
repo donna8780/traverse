@@ -19,7 +19,7 @@
 				<li>|</li>
 				<li><a href="#faq" onclick="showSection('faq')">  FAQ  </a></li>
 				<li>|</li>
-				<li><a href="#qna" onclick="showSection('qna')">  Q&A  </a></li>
+				<li><a href="#qna" onclick="showSection('qna')">  자유 게시판  </a></li>
 
 			</ul>
 		</nav>
@@ -78,10 +78,13 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며 잊지 못할 여정�
 
 		<ul class="pagemenu">
 
-			<li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}"><a
-				th:href="@{customer(idx=${i})} + '#notice'"> <span
-					th:text="${i}"></span>
-			</a></li>
+			<li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}">
+				<a th:href="@{customer(idx=${i})} + '#notice'"> 
+				   <span
+					    th:text="${i}">
+					 </span>
+				</a>
+			</li>
 
 		</ul>
 		<!-- 관리자가 아니면 글쓰기 활성화 안됨 -->
@@ -177,7 +180,7 @@ A. "여행 시에는 신분증(주민등록증 또는 운전면허증)과 예약
 	</section>
 
 	<section id="qna" class="section" style="display: none;">
-		<h2>Q&A</h2>
+		<h2>자유 게시판</h2>
 		<div class="qna-item">
 
 			<table class="rwd-table" id="qna">
@@ -196,7 +199,8 @@ A. "여행 시에는 신분증(주민등록증 또는 운전면허증)과 예약
 							th:text="${row.title}"></a></td>
 						<td th:text="${row.nick}" class="td-center"></td>
 						<td th:text="${row.create_at}" class="td-center"></td>
-						<td th:text="조회수" class="td-center"></td>
+						<td th:text="${row.v_count}" class="td-center"></td>
+
 					</tr>
 				</tbody>
 			</table>
@@ -205,7 +209,7 @@ A. "여행 시에는 신분증(주민등록증 또는 운전면허증)과 예약
 
         <!-- 타임리프의 반복문을 위한 속성으로 html코드 동적으로 생성 i는 반복분에서 인텍스를 나타내고 pg.begin에서 pg.end까지 
         숫자 시퀀스를 생성 예를 들어, 1,10이면 pg.begin에서 pg.end까지 숫자에 대해 li태그를 생성 -->
-        <li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}"><a
+        <li th:each="i : ${#numbers.sequence(qnapg.begin, qnapg.end)}"><a
           th:href="@{customer(idx=${i})} + '#qna'"><!-- 동적 링크 생성 --> <span
             th:text="${i}"></span>
         </a></li>
@@ -213,11 +217,31 @@ A. "여행 시에는 신분증(주민등록증 또는 운전면허증)과 예약
       <!-- pg.begin에서 pg.end까지 숫자에 해당하는 페이지 번호를 순서대로 li와 a태그로 감싸서 페이지네이션 링크를 만든다.
       이 링크는 사용자가 각 페이지 번호를 클릭할 수 있도록 하며 클릭 시 특정 페이지로 이동한다. a태그에 #qna가 붙어있으므로
       페이지 이동 후에도 페이지의 특정 위치로 스크롤된다. -->     
-    </div>
-
+      
+        
     <a href="/member/cswrite" id="notice-write"><button class="write-button">글쓰기</button></a>
+    
+    <form method="POST">
+      <!-- 검색 -->
+        <div class="search">
+          <!-- 인풋태그에 검색어 입력 -->
+          <input name="qna_search" placeholder="궁금한 점을 검색하세요." type="text">
+          <button type="submit">검색</button>
+        </div>
+      </form>
+        <!-- 테이블 형식으로 이야기 목록을 표시 -->
+    
+
+
+      </div>
+    </div>
+  
+  
+  
   </section>
-  </div>
+  
+  
+
 
   <script>
   //세션에서 로그인 상태 가져옴

@@ -31,13 +31,18 @@ public class ApiService {
       
       params.put("ServiceKey", "6RkKaXlTQt2IajvJnERjyEHx6pTvNp0n8ZT/iBQPLe4bXmMbm0o8mBSubhyyCBEjYC0Ur+OsD/pNUdrxNp7owQ==");
       //params.put("areaCode", "32");
-      params.put("numOfRows", "500");
-      params.put("pageNo", "1");
+<<<<<<< HEAD
+      params.put("numOfRows", "800");
+      params.put("pageNo", "21");
+=======
+      params.put("numOfRows", "1000");
+      params.put("pageNo", "17");
+>>>>>>> 06c02b73f25e4a0f2306040359eab64bc5d73260
       params.put("MobileOS", "ETC");
       params.put("MobileApp", "AppTest");
       params.put("listYN", "Y");
       params.put("arrange", "A");
-      params.put("contentTypeId", "32");
+      params.put("contentTypeId", "39");
       params.put("_type", "json");
       
       for(String key : params.keySet()) {

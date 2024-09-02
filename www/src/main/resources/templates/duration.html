@@ -6,35 +6,14 @@
   <title>traverse</title>
   
   <link href="/css/mainStyle.css" rel="stylesheet">
+  <link href="/css/durationStyle.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
-
-  <input type="checkbox" id="menuicon">
-  <header>
-    <div>
-      <ul class="navi">
-        <li><a href="/"><img class="logo" th:src="@{/image/logo_w.png}"></a></li>
-        <li th:if="${session.user == null}">
-          <a href="/member/login">login</a>
-        </li>
-        <li th:if="${session.user != null}">
-          <a href="/member/myPage">myPage</a>
-        </li>
-      </ul>
-      
-      <label for="menuicon" class="menubtn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
-    </div>
-  </header>
-  
-  <div class="container">
-    <div class="contents">
-      <span class="area_desc">
-        <form method="POST">
+ <th:block th:replace="/fragment::header"></th:block>
+      <div id="duration">
+        <span class="area_desc">
+        <form method="POST" id="travel-form">
           <legend>여행 기간 선택</legend><br>
           
           <div id="inline-calendar"></div>
@@ -44,45 +23,27 @@
           <label for="selected-dates-display">선택한 날짜:</label>
           <input name="seldate" type="text" id="selected-dates-display" readonly> <!-- 선택한 날짜를 표시할 input -->
 
-          <button type="submit">Submit</button>
+          <button type="submit">선택</button>
         </form>
       </span>
-    </div>
-    <div class="sidebar">
-      <span class="area_desc">
-        <a href="/member/signUp">signUp</a><br>
-        <th:block th:if="${session.user == null}">
-          <a href="/member/login">login</a><br>
-        </th:block>
-        <th:block th:if="${session.user != null}">
-          <a href="/member/logout">logout</a><br>
-          <a href="/member/myPage">myPage</a><br>
-        </th:block>
-        <a href="/member/like">like</a><br>
-        <a href="/place/mapAPI">mapAPI</a><br>
-        <a href="/member/customer">customer</a><br>
-        <a href="/member/detail">상세페이지</a>
-      </span>
-    </div>
-  </div>
+    
   
-  <footer>
-    <hr>
-    <div>회사소개  |  이용약관  |  등등...</div>
-  </footer>
-  
-  <!-- Flatpickr JS -->
+
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     
     <!-- Flatpickr 초기화 스크립트 -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            let selectedDatesCount = 0;
+
             flatpickr("#inline-calendar", {
                 mode: "range",  // 날짜 범위 선택
                 dateFormat: "Y-m-d",  // 날짜 형식 설정
                 minDate: "today",  // 오늘 날짜 이후만 선택 가능
                 inline: true,  // 달력을 인라인으로 고정시킴
                 onChange: function(selectedDates, dateStr, instance) {
+                    selectedDatesCount = selectedDates.length; // 선택된 날짜 개수를 저장
+                    
                     document.getElementById('travel-date').value = dateStr;  // 선택된 날짜를 숨겨진 input에 저장
                     
                     if (selectedDates.length > 0) {
@@ -105,8 +66,17 @@
                     }
                 }
             });
+
+            document.getElementById('travel-form').addEventListener('submit', function(event) {
+                if (selectedDatesCount < 2) {
+                    // 날짜가 2개 선택되지 않았으면 경고하고 폼 제출을 막음
+                    alert('돌아오는 날짜를 선택해 주세요');
+                    event.preventDefault(); //폼 제출 방지
+                }
+            });
         });
     </script>
-
+      </div>
+<th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

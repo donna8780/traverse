@@ -104,7 +104,7 @@ form textarea {
     resize: none;
 }
 
-form button {
+form button, #buttons button {
     background-color: #4BB958;
     color: white;
     padding: 10px 20px;
@@ -116,10 +116,16 @@ form button {
     transition: background-color 0.3s ease;
 }
 
-form button:hover {
+form button:hover, #buttons button:hover {
     background-color: #F89D4A;
     color: #2A3854;
 }
+
+    #buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
 /* 댓글 리스트 스타일 */
 fieldset {
@@ -234,11 +240,11 @@ fieldset .edit-form button:hover {
 
 
 .modify {
-	margin: 10px 10px 10px 750px;
+	margin: 10px 10px 10px 600px;
 }
 
 .re-modify {
-	margin: 10px 10px 10px 700px;
+	margin: 10px 10px 10px 600px;
 }
 
 /*

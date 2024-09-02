@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>traverse</title>
-  
-  <link href="/css/mainStyle.css" rel="stylesheet">
-  <link href="/css/traverserStoryStyle.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>traverse</title>
+
+<link href="/css/mainStyle.css" rel="stylesheet">
+<link href="/css/traverserStoryStyle.css" rel="stylesheet">
 </head>
 <body>
 
@@ -14,31 +14,23 @@
 
 	<div class="container">
 		<div class="contents" style="min-height: 650px;">
-		
+<!-- 사용자가 입력한 데이터를 서버로 전송 -->
 			<form method="POST">
-    	<div class="search">
-			<h1>Traverser's Story</h1>
-			<!-- 인풋태그에 검색어 입력 -->
-        <input name="search" placeholder="Search..." type="text">
-        <button type="submit">Go</button>
-      </div>
-      </form>
-      
-      <div style="text-align: right; margin: 10px 0;">
-          <a href="/place/story_write">
-              <button type="button" style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer;">
-                  Write a Story
-              </button>
-          </a>
-      </div>
-      
-      <div class="trending">
-      <span>Trending Searches :</span>
-      <span><a href="/">Seoul</a></span>
-      <span><a href="/">Jeju</a></span>
-      <span><a href="/">Busan</a></span>
-      <span><a href="/">Jeonju</a></span>
-      <span>...</span>
+			<!-- 검색 -->
+				<div class="search">
+					<h1>Traverser's Story</h1>
+					<!-- 인풋태그에 검색어 입력 -->
+					<input name="search" placeholder="Search..." type="text">
+					<button type="submit">Go</button>
+				</div>
+			</form>
+
+			<div style="text-align: right; margin: 10px 0;">
+				<a href="/place/story_write">
+					<button type="button"
+						style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer;">
+						Write a Story</button>
+				</a>
 			</div>
 			
 <div class="box-container">
@@ -118,10 +110,6 @@
 </div>
 
 
-</div>
-
-
 		<th:block th:replace="/fragment::footer"></th:block>
-	
 </body>
 </html>

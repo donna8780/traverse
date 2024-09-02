@@ -31,11 +31,12 @@ public class TraverserStoryController {
     @Autowired
     private TraverserStoryService tss;
 
+    
     @GetMapping("/place/traverserStory")
     public ModelAndView traverserStory() {
         ModelAndView mav = new ModelAndView();
         
-        // 게시글 목록을 가져옵니다.
+        // 게시글 목록을 가져오기
         List<TraverserStoryVO> stories = tss.getAllStories();
         mav.addObject("stories", stories);
         mav.setViewName("/place/traverserStory");
@@ -117,16 +118,18 @@ public class TraverserStoryController {
         return mav;
     }
 
-    //requestParam으로 값을 받아서 "search" 받는다.
+    //requestParam으로 값을 받아서 "search" 받는다. 검색어 입력
     @PostMapping("/place/traverserStory")
+    //사용자가 입력한 검색어(search)를 요청 파라미터로 받아옴
+    //이 검색어는 이후 데이터베이스에서 검색 결과를 찾는 데 사용
     public ModelAndView traverserStory(@RequestParam("search") String search) {
         ModelAndView mav = new ModelAndView();
-
+    //사용자가 입력한 검색어를 바탕으로 검색 결과를 찾아 result라는 이름으로 모델에 추가
         mav.addObject("result", tss.resultSearch(search));
+    // 검색어 자체도 모델에 추가되어, 검색어가 다시 뷰에서 표시
         mav.addObject("search", search);
+    //검색 결과를 표시할 뷰를 설정
         mav.setViewName("/place/tsResult");
-        
-        
 
         return mav;
     }
@@ -149,7 +152,7 @@ public class TraverserStoryController {
     // 글쓰기 실행
     @PostMapping("/place/story_write")
     public String story_write(@RequestParam("a_idx") int a_idx,
-    													@RequestParam("title") String title,
+    						  @RequestParam("title") String title,
                               @RequestParam("regin") String regin,
                               @RequestParam("enddate") String enddate,
                               @RequestParam("seldate") String seldate,
