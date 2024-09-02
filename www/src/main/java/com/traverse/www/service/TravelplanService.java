@@ -35,6 +35,12 @@ public class TravelplanService {
 		
 		return dao.getdayplan(user_idx,day,seldate);
 	}
+
+	public int travelplandel(int user_idx, String seldate) {
+		
+		return dao.travleplandel(user_idx,seldate);
+		
+	}
 	
 
 }

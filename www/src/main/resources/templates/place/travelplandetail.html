@@ -19,6 +19,7 @@
                 th:data-seldate="${Planplace[0].seldate}"
                 class="tab-link">
         </button>
+        <a th:href="@{travelplandel?(seldate=${Planplace[0].seldate})}"><button>여행계획삭제</button></a>
     </div>
 
     <div th:each="i : ${#numbers.sequence(1, Planplace[0].duration)}"

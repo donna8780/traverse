@@ -22,9 +22,9 @@ public class TestController {
     @GetMapping("/getPlaceDetails")
     public ModelAndView getPlaceDetails(@RequestParam("contentId") String contentId) {
         ModelAndView mav = new ModelAndView();
-        HashMap<String, String> placeDetails = ts.getPlaceDetails(contentId);
+        //HashMap<String, String> placeDetails = ts.getPlaceDetails(contentId);
         
-        mav.addObject("placeDetails", placeDetails);
+       // mav.addObject("placeDetails", placeDetails);
         
         mav.setViewName("placeDetails"); // view name (Thymeleaf template)
         return mav;
