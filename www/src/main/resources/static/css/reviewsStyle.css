@@ -20,6 +20,7 @@
     display: flex;
     position: relative;
     height: 100%;
+    width: 100%;
 }
 
 .slide {
@@ -191,4 +192,34 @@
     color: #333;
     max-height: 80px; /* 최대 높이를 지정 */
     overflow-y: auto;
+}
+.meta {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+    width: 750px;
+}
+
+.left-info {
+    display: flex;
+    align-items: center;
+}
+
+.edit-delete-buttons {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* 수정 및 삭제 버튼을 오른쪽 끝으로 밀어냄 */
+}
+
+.edit-btn, .delete-btn {
+    margin-left: 5px; /* 버튼들 사이에 간격 추가 */
+    color: #007bff; /* 링크 색상 */
+    text-decoration: none; /* 밑줄 제거 */
+    font-weight: bold;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+    text-decoration: underline; /* 호버 시 밑줄 표시 */
 }
