@@ -30,16 +30,19 @@ public class TestService {
         this.rt.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
     }
 
-    public HashMap<String, String> getPlaceDetails(String contentId) {
-        String serviceKey = "6RkKaXlTQt2IajvJnERjyEHx6pTvNp0n8ZT%2FiBQPLe4bXmMbm0o8mBSubhyyCBEjYC0Ur%2BOsD%2FpNUdrxNp7owQ%3D%3D";  // 실제 API 키로 교체하세요
+    public HashMap<String, String> getPlaceDetails(int contenttypeid1,int contentid1) {
+        String serviceKey = "6RkKaXlTQt2IajvJnERjyEHx6pTvNp0n8ZT%2FiBQPLe4bXmMbm0o8mBSubhyyCBEjYC0Ur%2BOsD%2FpNUdrxNp7owQ%3D%3D";
+        String contenttypeid = Integer.toString(contenttypeid1);
+        String contentid = Integer.toString(contentid1);
+        
         String url = String.format(
-            "http://apis.data.go.kr/B551011/KorService1/detailCommon1?ServiceKey=%s&contentTypeId=12&contentId=%s&MobileOS=ETC&MobileApp=AppTest&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y",
-            serviceKey, contentId
+            "http://apis.data.go.kr/B551011/KorService1/detailIntro1?ServiceKey=%s&contentTypeId=%s&contentId=%s&MobileOS=ETC&MobileApp=AppTest",
+            serviceKey,contenttypeid, contentid
         );
 
         try {
             URI uri = new URI(url);  // URL을 URI 객체로 변환
-
+            System.out.println(uri);
             // URI를 사용하여 GET 요청을 보내고, 응답을 String으로 받음
             String responseBody = rt.getForObject(uri, String.class);
 
@@ -56,6 +59,36 @@ public class TestService {
             return null;  // 오류 발생 시 null 반환
         }
     }
+    public HashMap<String, String> getPlace(int contenttypeid1, int contentid1) {
+			String serviceKey = "6RkKaXlTQt2IajvJnERjyEHx6pTvNp0n8ZT%2FiBQPLe4bXmMbm0o8mBSubhyyCBEjYC0Ur%2BOsD%2FpNUdrxNp7owQ%3D%3D";
+      String contenttypeid = Integer.toString(contenttypeid1);
+      String contentid = Integer.toString(contentid1);
+      
+      String url = String.format(
+          "http://apis.data.go.kr/B551011/KorService1/detailCommon1?ServiceKey=%s&contentTypeId=%s&contentId=%s&MobileOS=ETC&MobileApp=AppTest&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y",
+          serviceKey,contenttypeid, contentid
+      );
+
+      try {
+          URI uri = new URI(url);  // URL을 URI 객체로 변환
+          System.out.println(uri);
+          // URI를 사용하여 GET 요청을 보내고, 응답을 String으로 받음
+          String responseBody = rt.getForObject(uri, String.class);
+
+          // 응답을 콘솔에 출력하여 확인
+          System.out.println("Response Body: " + responseBody);
+
+          // HashMap에 데이터를 파싱하고 저장하는 로직을 이어서 작성
+          HashMap<String, String> resultMap = parseXmlToHashMap(responseBody);
+
+          return resultMap;
+
+      } catch (URISyntaxException e) {
+          e.printStackTrace();
+          return null;  // 오류 발생 시 null 반환
+      }
+		}
+    
 
     private HashMap<String, String> parseXmlToHashMap(String responseBody) {
         // XML을 파싱하여 HashMap으로 변환하는 로직 작성
@@ -69,12 +102,50 @@ public class TestService {
 
             XPathFactory xpathFactory = XPathFactory.newInstance();
             XPath xpath = xpathFactory.newXPath();
-
+            // 공통
             resultMap.put("contentid", getTagValueWithXPath(xpath, doc, "//item/contentid"));
             resultMap.put("title", getTagValueWithXPath(xpath, doc, "//item/title"));
             resultMap.put("addr1", getTagValueWithXPath(xpath, doc, "//item/addr1"));
+            resultMap.put("tel", getTagValueWithXPath(xpath, doc, "//item/tel"));
             resultMap.put("overview", getTagValueWithXPath(xpath, doc, "//item/overview"));
             resultMap.put("firstimage", getTagValueWithXPath(xpath, doc, "//item/firstimage"));
+            resultMap.put("mapx", getTagValueWithXPath(xpath, doc, "//item/mapx"));
+            resultMap.put("mapy", getTagValueWithXPath(xpath, doc, "//item/mapy"));
+            resultMap.put("contenttypeid", getTagValueWithXPath(xpath, doc, "//item/contenttypeid"));
+            // 문화시설
+            resultMap.put("restculture", getTagValueWithXPath(xpath, doc, "//item/restdateculture"));
+            resultMap.put("usetimeculture", getTagValueWithXPath(xpath, doc, "//item/usetimeculture"));
+            resultMap.put("usefee", getTagValueWithXPath(xpath, doc, "//item/usefee"));
+            resultMap.put("infocenterculture", getTagValueWithXPath(xpath, doc, "//item/infocenterculture"));
+            resultMap.put("parkingculture", getTagValueWithXPath(xpath, doc, "//item/parkingculture"));
+            resultMap.put("chkbagcarriageculture", getTagValueWithXPath(xpath, doc, "//item/chkcreditcardculture"));
+            // 관광지
+            resultMap.put("info", getTagValueWithXPath(xpath, doc, "//item/infocenter"));
+            resultMap.put("restdate", getTagValueWithXPath(xpath, doc, "//item/restdate"));
+            resultMap.put("expgname", getTagValueWithXPath(xpath, doc, "//item/expagerange"));
+            resultMap.put("parking", getTagValueWithXPath(xpath, doc, "//item/parking"));
+            resultMap.put("usetime", getTagValueWithXPath(xpath, doc, "//item/usetime"));
+            resultMap.put("chkbagcarriage", getTagValueWithXPath(xpath, doc, "//item/chkbabycarriage"));
+            resultMap.put("chkpet", getTagValueWithXPath(xpath, doc, "//item/chkpet"));
+            // 레포츠
+            resultMap.put("restateleports", getTagValueWithXPath(xpath, doc, "//item/restdateleports"));
+            resultMap.put("usetimeleports", getTagValueWithXPath(xpath, doc, "//item/usetimeleports"));
+            resultMap.put("incentreleports", getTagValueWithXPath(xpath, doc, "//item/infocenterleports"));
+            resultMap.put("parkingleports", getTagValueWithXPath(xpath, doc, "//item/parkingleports"));
+            resultMap.put("parkingfeeleports", getTagValueWithXPath(xpath, doc, "//item/parkingfeeleports"));
+            // 숙박
+            resultMap.put("roomtype", getTagValueWithXPath(xpath, doc, "//item/roomtype"));
+            resultMap.put("chkintime", getTagValueWithXPath(xpath, doc, "//item/checkintime"));
+            resultMap.put("chkouttime", getTagValueWithXPath(xpath, doc, "//item/checkouttime"));
+            resultMap.put("cooking", getTagValueWithXPath(xpath, doc, "//item/chkcooking"));
+            resultMap.put("incentrelodging", getTagValueWithXPath(xpath, doc, "//item/infocenterlodging"));
+            resultMap.put("parkinglodging", getTagValueWithXPath(xpath, doc, "//item/parkinglodging"));
+            resultMap.put("reservationurl", getTagValueWithXPath(xpath, doc, "//item/reservationurl"));
+            //음식점
+            resultMap.put("firstmenu", getTagValueWithXPath(xpath, doc, "//item/firstmenu"));
+            resultMap.put("opentimefood", getTagValueWithXPath(xpath, doc, "//item/opentimefood"));
+            resultMap.put("infocenterfood", getTagValueWithXPath(xpath, doc, "//item/infocenterfood"));
+            resultMap.put("restdatefood", getTagValueWithXPath(xpath, doc, "//item/restdatefood"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,6 +163,10 @@ public class TestService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "Tag not found: " + expression;  // 태그를 찾지 못했을 경우 반환
+        return "";  // 태그를 찾지 못했을 경우 반환
     }
+
+		
+
+		
 }
