@@ -13,7 +13,7 @@ public interface AccommodationDAO {
 	@Select("select * from area_view order by areaCode")
 	List<PlaceVO> selectAll();
 	
-  @Select("select * from area_view where title LIKE CONCAT('%', #{title}, '%')")
+  @Select("select * from area_view where title LIKE CONCAT('%', #{title}, '%') OR ADDR1 LIKE CONCAT('%', #{addr1}, '%')")
   List<PlaceVO> selectByTitle(String title);
   
   @Select("select * from area_view where areaCode = #{areaCode}")
