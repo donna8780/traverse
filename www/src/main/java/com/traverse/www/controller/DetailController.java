@@ -14,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.traverse.www.service.DetailService;
 import com.traverse.www.service.ReviewService;
 import com.traverse.www.service.TestService;
+import com.traverse.www.vo.AccountsVO;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -34,9 +37,12 @@ public class DetailController {
     
     public ModelAndView detail(@PathVariable("idx") int idx, 
 											    	   @RequestParam("contenttypeid")int contenttypeid,
-											    		 @RequestParam("contentid")int contentid) {
-        ModelAndView mav = new ModelAndView();
-        HashMap<String, String> place = ts.getPlace(contenttypeid,contentid);
+											    		 @RequestParam("contentid")int contentid,
+											    		 HttpSession session) {
+    		AccountsVO user = (AccountsVO) session.getAttribute("user");
+    		ModelAndView mav = new ModelAndView();
+    		
+    		HashMap<String, String> place = ts.getPlace(contenttypeid,contentid);
         mav.addObject("place", place);
         
         
@@ -46,9 +52,14 @@ public class DetailController {
         
         mav.addObject("detailpage", ds.getDetailById(idx));
         mav.addObject("reviews", rs.getReviewsByPlaceId(idx)); // 리뷰 데이터 추가
-        mav.setViewName("member/detail");  // detail.html 뷰로 연결
-        
-        return mav;
+    		
+        if (user == null) {
+    			mav.setViewName("redirect:/member/login");
+				}else {
+	        mav.setViewName("member/detail");  // detail.html 뷰로 연결 
+				}
+    		
+    			return mav;
     }
     
 }

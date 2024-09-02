@@ -35,6 +35,8 @@ public class AccommodationController {
     @GetMapping("/accommodation/area")
     public ModelAndView searchByAreaCode(@RequestParam("areaCode") String areaCode) {
         ModelAndView mav = new ModelAndView();
+        
+        
         mav.addObject("accommodationList", acs.searchByAreaCode(areaCode));
         mav.addObject("areaCodes", acs.getAllAreaCodes()); // areaCodes를 추가
         mav.setViewName("member/accommodation");

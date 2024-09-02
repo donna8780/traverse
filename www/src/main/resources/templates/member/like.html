@@ -44,7 +44,7 @@
                     <div class="text-box">
                     
                         <div class="location-name">
-                        	<a th:href="@{/member/detail/{idx}(idx=${row.p_idx})}" th:text="${row.title}"></a>
+                        	<a th:href="@{/member/detail/{idx}(idx=${row.p_idx},contenttypeid=${row.contenttypeid},contentid=${row.contentid})}" th:text="${row.title}"></a>
                         </div>
                     
                         <div class="location-detail" th:text="${row.addr1}"></div>
