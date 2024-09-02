@@ -14,6 +14,8 @@ import com.traverse.www.vo.TraverserStoryVO;
 
 
 
+
+
 @Mapper
 public interface TraverserStoryDAO {
 
@@ -45,4 +47,7 @@ int insert(TraverserStoryVO input);
 
 	@Select("select * from story_view order by rand() limit 4")
 	List<TraverserStoryVO> getRand();
+	
+	@Select("SELECT * FROM Travelreviews WHERE a_idx = #{userId}")
+	List<TraverserStoryVO> selectStoriesByUserId(int userId);
 }

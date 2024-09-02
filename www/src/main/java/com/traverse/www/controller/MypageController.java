@@ -74,19 +74,19 @@ public class MypageController {
        }
 
        if (!file.isEmpty()) {
-      	 try {
-           // 기존 파일 경로 확인 및 삭제
-           String oldProfile = user.getProfile();
-           if (oldProfile != null && !oldProfile.isEmpty() && !oldProfile.equals("default.png")) {
-               Path oldFilePath = Paths.get("src/main/resources/static/image/", oldProfile);
-               if (Files.exists(oldFilePath)) {
-                   Files.delete(oldFilePath);
-                   System.out.println("Old profile image deleted: " + oldFilePath.toString());
+           try {
+               // 기존 파일 경로 확인 및 삭제
+               String oldProfile = user.getProfile();
+               if (oldProfile != null && !oldProfile.isEmpty() && !oldProfile.equals("default.png")) {
+                   Path oldFilePath = Paths.get("C:/spring/traverse/www/src/main/resources/static/image/profile/", oldProfile);
+                   if (Files.exists(oldFilePath)) {
+                       Files.delete(oldFilePath);
+                       System.out.println("Old profile image deleted: " + oldFilePath.toString());
+                   }
                }
-           }
 
                // 새 파일을 저장할 경로 설정
-               String uploadDir = "C:/profile/";
+               String uploadDir = "C:/spring/traverse/www/src/main/resources/static/image/profile/";
                String fileName = user.getAccounts_idx() + "_" + file.getOriginalFilename();
                Path filePath = Paths.get(uploadDir, fileName);
 
@@ -105,11 +105,6 @@ public class MypageController {
 
                // 세션 업데이트
                session.setAttribute("user", user);
-               
-               // 정적 리소스 폴더로 파일 복사
-               String destinationDir = "src/main/resources/static/image/";
-               Path destinationPath = Paths.get(destinationDir, fileName);
-               Files.copy(filePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
 
            } catch (IOException e) {
                e.printStackTrace();
@@ -118,6 +113,7 @@ public class MypageController {
 
        return "redirect:/member/logout";
    }
+
 
 
    
