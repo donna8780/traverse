@@ -13,6 +13,7 @@ import com.traverse.www.model.TraverserStoryDAO;
 import com.traverse.www.vo.TraverserStoryVO;
 
 
+
 @Service
 public class TraverserStoryService {
 	
@@ -82,5 +83,8 @@ public void incrementViewCount(int idx) {
   dao.updateViewCount(idx);
 }
 
+public List<TraverserStoryVO> getStoriesByUserId(int userId) {
+  return dao.selectStoriesByUserId(userId);
+}
 
 }
