@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,11 +31,12 @@ public class TraverserStoryController {
     @Autowired
     private TraverserStoryService tss;
 
+    
     @GetMapping("/place/traverserStory")
     public ModelAndView traverserStory() {
         ModelAndView mav = new ModelAndView();
         
-        // 게시글 목록을 가져옵니다.
+        // 게시글 목록을 가져오기
         List<TraverserStoryVO> stories = tss.getAllStories();
         mav.addObject("stories", stories);
         mav.setViewName("/place/traverserStory");
@@ -46,6 +49,12 @@ public class TraverserStoryController {
         TraverserStoryVO rand2 = randomItems.get(1);
         TraverserStoryVO rand3 = randomItems.get(2);
         TraverserStoryVO rand4 = randomItems.get(3);
+        
+     // 각각의 프로필 이미지 경로를 사용 가능
+        String profile1 = rand1.getProfile();
+        String profile2 = rand2.getProfile();
+        String profile3 = rand3.getProfile();
+        String profile4 = rand4.getProfile();
         
        
         // 날짜가 "yyyy-MM-dd" 형식의 문자열이라고 가정합니다.
@@ -63,6 +72,7 @@ public class TraverserStoryController {
      // 날짜가 "yyyy-MM-dd" 형식의 문자열이라고 가정합니다.
         String selDateString2 = rand2.getSeldate(); // "2024-07-03"
         String endDateString2 = rand2.getEnddate(); // "2024-07-05"
+        
 
         // 문자열을 LocalDate로 변환 (기본 ISO_LOCAL_DATE 형식 사용)
         LocalDate selDate2 = LocalDate.parse(selDateString2, DateTimeFormatter.ISO_LOCAL_DATE);
@@ -108,16 +118,18 @@ public class TraverserStoryController {
         return mav;
     }
 
-    //requestParam으로 값을 받아서 "search" 받는다.
+    //requestParam으로 값을 받아서 "search" 받는다. 검색어 입력
     @PostMapping("/place/traverserStory")
+    //사용자가 입력한 검색어(search)를 요청 파라미터로 받아옴
+    //이 검색어는 이후 데이터베이스에서 검색 결과를 찾는 데 사용
     public ModelAndView traverserStory(@RequestParam("search") String search) {
         ModelAndView mav = new ModelAndView();
-
+    //사용자가 입력한 검색어를 바탕으로 검색 결과를 찾아 result라는 이름으로 모델에 추가
         mav.addObject("result", tss.resultSearch(search));
+    // 검색어 자체도 모델에 추가되어, 검색어가 다시 뷰에서 표시
         mav.addObject("search", search);
+    //검색 결과를 표시할 뷰를 설정
         mav.setViewName("/place/tsResult");
-        
-        
 
         return mav;
     }
@@ -140,7 +152,7 @@ public class TraverserStoryController {
     // 글쓰기 실행
     @PostMapping("/place/story_write")
     public String story_write(@RequestParam("a_idx") int a_idx,
-    													@RequestParam("title") String title,
+    						  @RequestParam("title") String title,
                               @RequestParam("regin") String regin,
                               @RequestParam("enddate") String enddate,
                               @RequestParam("seldate") String seldate,
@@ -195,6 +207,9 @@ public class TraverserStoryController {
     @GetMapping("/place/story/{idx}")
     public ModelAndView viewStory(@PathVariable("idx") int idx) {
         ModelAndView mav = new ModelAndView();
+        
+        // 조회수 증가
+        tss.incrementViewCount(idx);
 
         // 특정 idx를 가진 게시글을 가져옵니다
         TraverserStoryVO story = tss.getStoryById(idx);
@@ -265,4 +280,5 @@ public class TraverserStoryController {
         tss.deleteStory(idx);
         return "redirect:/place/traverserStory";
     }
+ 
 }

@@ -5,12 +5,14 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.traverse.www.vo.AccountsVO;
 import com.traverse.www.vo.PlaceVO;
 import com.traverse.www.vo.SelPlaceVO;
+
 
 
 @Mapper
@@ -42,6 +44,13 @@ public interface AccountsDAO {
 			+ "OR (#{areaCode} < 30 AND areacode = #{areaCode}) "
 			+ "order by rand() limit #{duration}")
 	List<PlaceVO> getPlaces(SelPlaceVO result);
+	
+	@Select("select * from place "
+			+ "WHERE ((#{result.areaCode} = 39 AND areacode = #{result.areaCode}) "
+			+ "OR (#{result.areaCode} >= 30 AND (areacode = #{result.areaCode} AND sigungucode IN (#{result.sigunguCode1}, #{result.sigunguCode2}, #{result.sigunguCode3}))) "
+			+ "OR (#{result.areaCode} < 30 AND areacode = #{result.areaCode})) and contenttypeid = #{type} "
+			+ "order by rand() limit #{result.duration}")
+	List<PlaceVO> getPlacesother(@Param("result")SelPlaceVO result,@Param("type")int type);
 
 }
   

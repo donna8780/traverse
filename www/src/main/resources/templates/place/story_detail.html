@@ -58,14 +58,16 @@
         </div>
         <!-- 이미지가 하나도 없을 경우 대체 이미지 표시 -->
         <div th:unless="${story.imge1 != null or story.imge2 != null or story.imge3 != null or story.imge4 != null or story.imge5 != null or story.imge6 != null or story.imge7 != null or story.imge8 != null or story.imge9 != null or story.imge10 != null}">
-          <img src="/image/logo_w.png" alt="Default Image" class="slide" onclick="openModal(this.src)">
+          <img src="/story/logo_w.png" alt="Default Image" class="slide" onclick="openModal(this.src)">
         </div>
+          <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+          <button class="next" onclick="changeSlide(1)">&#10095;</button>
       </div>
       
     </div>
     <div class="story-details">
-      <div th:if="${session.user.profile}">
-        <img th:src="@{'/image/' + ${session.user.profile}}" alt="Profile Image" class="profile-image" />
+      <div th:if="${story.profile}">
+        <img th:src="@{'/image/' + ${story.profile}}" alt="Profile Image" class="profile-image" />
       </div>
       <div class="info">
         <div class="nickname" th:text="${story.nick}"></div>
@@ -74,7 +76,7 @@
           <span>|</span>
           <span th:text="'조회수 : ' + ${story.v_count}"></span>
         </div>
-        <div th:if="${session.user.nick == story.nick or session.user.nick == '관리자'}">
+        <div th:if="${session.user != null and (session.user.nick == story.nick or session.user.nick == '관리자')}">
             <a th:href="@{'/place/story_update/' + ${story.idx}}" class="edit-btn">수정</a>
             <a th:href="@{'/place/story_delete/' + ${story.idx}}" class="delete-btn" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
         </div>

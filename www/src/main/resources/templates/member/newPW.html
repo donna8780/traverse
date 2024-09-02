@@ -8,16 +8,25 @@
 </head>
 <body>
 <th:block th:replace="/fragment::header"></th:block>
-<fieldset>
-  <legend>PW 변경</legend>
+<div class="password-change-container">
   
-  <form action="newPW" method="post">
+    <form action="newPW" method="post">
+    
+    <span class="pwinput-span">
+	    <label for="userpw" class="label">새 비밀번호</label>
+	    <input name="userpw" type="password" placeholder="새 비밀번호" required>
+	  </span>
+	  
+	  <span class="pwinput-span">
+	    <label for="check" class="label">비밀번호 확인</label>
+	    <input name="check" type="password" placeholder="비밀번호 확인" required>
+	  </span>
   
-  <p><input name="userpw" type="password" placeholder="새 비밀번호" required></p>
-  <p><input name="check" type="password" placeholder="비밀번호 확인" required></p>
-  <p><input name="accounts_idx" type="hidden" th:value="${accounts_idx}"></p>
-  <button>PW 변경</button>
-  </form>
+      <input name="accounts_idx" type="hidden" th:value="${accounts_idx}">
+      <button class="submit">PW 변경</button>
+    </form>
+  
+</div>
   
   <script>
     let inputs = document.querySelectorAll('input');

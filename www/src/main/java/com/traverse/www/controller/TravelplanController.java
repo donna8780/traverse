@@ -94,5 +94,14 @@ public class TravelplanController {
 		return dayplan;
 	}
 	
+	@GetMapping("travelplandel")
+	public String travelplandel(@RequestParam("seldate")String seldate,HttpSession session) {
+		AccountsVO user = (AccountsVO) session.getAttribute("user");
+		int user_idx = user.getAccounts_idx();
+		ts.travelplandel(user_idx,seldate);
+		
+		return "redirect:/place/travelplan";
+	}
+	
 
 }
