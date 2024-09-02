@@ -1,0 +1,58 @@
+/* signupErrorStyle.css */
+
+#signup{
+	position: absolute;
+	  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#signup body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+#signup h1 {
+    color: #2A3854; /* 제목 색상을 요청하신 색상으로 설정 */
+    text-align: center;
+    margin-top: 50px;
+}
+
+#signup .error{
+	font-weight: bold;
+}
+
+#signup .button{
+	font-weight: bold;
+}
+
+#signup p {
+    color: #555;
+    text-align: center;
+    font-size: 18px;
+    margin: 20px auto;
+}
+
+#signup a {
+    display: block;
+    width: 200px;
+    margin: 30px auto;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #4BB958; /* 버튼 배경 색상을 요청하신 색상으로 설정 */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+#signup a:hover {
+    background-color: #3aa547; /* 마우스를 올렸을 때 약간 어두운 색상 */
+}
+
+#signup th:block {
+    display: block;
+}

@@ -12,6 +12,9 @@
 <div id="like">
 
 
+
+	<div id="like">
+		
     <div class="container">
         <div class="left">
             <!-- 전체 선택 체크박스와 <hr> 태그를 포함하는 고정 헤더 -->
@@ -25,18 +28,32 @@
             <!-- 스크롤 가능한 내용 -->
             <div class="scrollable-content">
                 <div class="location-item" th:each="row : ${mapAPI}">
-                    <div class="image-box">
-                        <img id="place_img" th:src="${row.place_img}" />
+                    <div class="image-box">              
+                        
+            <!-- 이미지가 있을 때 -->
+            <img id="place_img" th:if="${row.firstimage != null and !row.firstimage.isEmpty()}"
+                 th:src="${row.firstimage}" alt="Image" />
+
+
+
+            <!-- 이미지가 없을 때 -->
+            <img id="place_img" th:if="${row.firstimage == null or row.firstimage.isEmpty()}"
+                 th:src="@{/image/logo_w.png}" alt="Default Image" />
+                        
                     </div>
                     <div class="text-box">
-                        <div class="location-name" th:text="${row.place_name}"></div>
-                        <div class="location-detail" th:text="${row.place_add}"></div>
+                    
+                        <div class="location-name">
+                        	<a th:href="@{/member/detail/{idx}(idx=${row.p_idx},contenttypeid=${row.contenttypeid},contentid=${row.contentid})}" th:text="${row.title}"></a>
+                        </div>
+                    
+                        <div class="location-detail" th:text="${row.addr1}"></div>
+          
                     </div>
                     <div class="con-like">
                         <input class="like" type="checkbox" title="like"
-                            th:onclick="|toggleMarker(this,${row.place_x},${row.place_y})|">
-                 
-                            
+                            th:onclick="|toggleMarker(this,${row.mapx},${row.mapy})|">
+
                         <div class="checkmark">
                             <!-- 하트 아이콘 -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="outline" viewBox="0 0 24 24">
@@ -62,7 +79,7 @@
         </div> <!-- left 종료 -->
     </div> <!-- container 종료 -->
 
-    <div id="map" style="width: 800px; height: 900px;"></div>
+    <div id="map" style="width: 800px; height: 700px;"></div>
 
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7717c2c3bc1327ef51412b55ac5ef"></script>
@@ -70,7 +87,7 @@
     <script>
   var mapContainer = document.getElementById('map'), 
     mapOption = {
-        center: new kakao.maps.LatLng(36.6194188,128.0093991), 
+        center: new kakao.maps.LatLng(36.2194188,128.0093991), 
         level: 13 //지도 확대 레벨
     };
 
@@ -80,12 +97,13 @@ var overlays = {}; // 커스텀 오버레이를 저장하는 객체
 var selectedMarker = null; // 현재 선택된 마커를 저장
 
 function toggleMarker(check, x, y) {
+
     var key = x + ',' + y; 
     var locationItem = check.closest('.location-item');
 
     if (check.checked) {
         var marker = new kakao.maps.Marker({
-            position: new kakao.maps.LatLng(x, y),
+            position: new kakao.maps.LatLng(y, x),
             map: map
         });
         markers[key] = marker; 
@@ -190,6 +208,10 @@ function closeOverlay(key) {
 
 
     </script>
+		
+	
+	</div>
+	
 
 
 </div>

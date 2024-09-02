@@ -43,14 +43,12 @@ public class CustomerController {
 		ModelAndView mav = new ModelAndView();
 		
 		Map<String, Object> announceMap = as.announce(idx);
-
 		mav.addObject("pg", announceMap.get("pg"));
 		mav.addObject("announce", announceMap.get("list"));
 		
 		Map<String, Object> qnaMap = cs.cstest(idx);
-		mav.addObject("qnapg", qnaMap.get("pg"));
+		mav.addObject("qnapg", qnaMap.get("qnapg"));
 		mav.addObject("qna", qnaMap.get("list"));
-
 		
 		return mav;
 	}
@@ -78,6 +76,9 @@ public class CustomerController {
 	@GetMapping("/csView/{board_idx}")
 	public ModelAndView csview(@PathVariable("board_idx")int idx) {
 		ModelAndView mav = new ModelAndView();
+		
+	// 조회수 증가
+    // cs.incrementViewCount(idx);
 		
 		mav.addObject("row", cs.getCsBoardOne(idx));
 		mav.addObject("replys", rs.getReplys(idx));
@@ -127,6 +128,17 @@ public class CustomerController {
 	public String csdelete(CustomerVO idx) {
 		cs.deleteCS(idx);
 		return "redirect:/member/customer#qna";
+	}
+
+	//qna 목록을 가져오기
+	@PostMapping("/customer")
+	public ModelAndView qnaList(@RequestParam("qna_search")String qna_search) {
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("qna_result", cs.qna_result_Search(qna_search));
+		mav.addObject("qna_search",qna_search );
+		mav.setViewName("/member/qnaview");
+		return mav;
 	}
 
 	}

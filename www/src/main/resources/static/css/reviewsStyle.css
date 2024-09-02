@@ -1,0 +1,225 @@
+@charset "UTF-8";
+
+.content-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.slider-container {
+    position: relative;
+    width: 800px;
+    margin: auto;
+    height: 500px;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.slider {
+    display: flex;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    cursor: pointer;
+}
+
+.active-slide {
+    display: block;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    z-index: 10;
+    text-shadow: 
+     -1px -1px 0 black,  
+    1px -1px 0 black,
+    -1px  1px 0 black,
+    1px  1px 0 black;
+    background-color: transparent; /* 배경색을 투명으로 설정 */
+    border: none; /* 테두리를 제거 */
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev {
+    left: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  font-size: 35px;
+}
+
+.story-details {
+	width: 800px;
+	margin: 0 auto;
+    display: flex;
+    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: flex-start; /* 왼쪽 정렬 */
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.profile img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover; /* 이미지가 비율을 유지하면서 컨테이너에 맞춰짐 */
+    object-position: center; /* 이미지의 중앙 부분이 표시되도록 설정 */
+    margin-right: 10px;
+}
+.profile-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%; /*이미지가 둥글게 변함*/
+      object-fit: cover;
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.nickname {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.meta {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+}
+
+.details {
+    text-align: center; /* 가운데 정렬 */
+    flex: 1; /* 남은 공간을 채움 */
+}
+
+.details .title {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80vh; 
+    object-fit: contain; 
+    object-position: center; 
+}
+
+.close {
+    position: absolute;
+    top: 50px;
+    right: 75px;
+    color: #fff;
+    font-size: 50px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.review-display {
+    margin-top: 10px;
+    width: 800px;
+    margin: 0 auto;
+    height: 60px;
+}
+
+.review-display p {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    white-space: pre-wrap; /* 줄바꿈을 허용 */
+    word-wrap: break-word; /* 단어가 길면 자동으로 줄바꿈 */
+    background-color: #f9f9f9;
+    color: #333;
+    max-height: 80px; /* 최대 높이를 지정 */
+    overflow-y: auto;
+}
+.meta {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+    width: 750px;
+}
+
+.left-info {
+    display: flex;
+    align-items: center;
+}
+
+.edit-delete-buttons {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* 수정 및 삭제 버튼을 오른쪽 끝으로 밀어냄 */
+}
+
+.edit-btn, .delete-btn {
+    margin-left: 5px; /* 버튼들 사이에 간격 추가 */
+    color: #007bff; /* 링크 색상 */
+    text-decoration: none; /* 밑줄 제거 */
+    font-weight: bold;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+    text-decoration: underline; /* 호버 시 밑줄 표시 */
+}

@@ -4,9 +4,10 @@ import java.sql.Date;
 
 public class CustomerVO {
 
-	private int board_idx, accounts_idx;
+	private int board_idx, accounts_idx, v_count;
 	private String title, content,nick;
 	private Date create_at;
+	
 	
 	public int getBoard_idx() {
 		return board_idx;
@@ -43,5 +44,11 @@ public class CustomerVO {
 	}
 	public void setCreate_at(Date create_at) {
 		this.create_at = create_at;
+	}
+	public int getV_count() {
+		return v_count;
+	}
+	public void setV_count(int v_count) {
+		this.v_count = v_count;
 	}
 }

@@ -3,6 +3,7 @@ package com.traverse.www.model;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -10,6 +11,8 @@ import org.apache.ibatis.annotations.Select;
 
 import com.traverse.www.vo.PlaceVO;
 import com.traverse.www.vo.TravelplanVO;
+
+
 
 
 
@@ -30,5 +33,11 @@ public interface TravelplanDAO {
 	
 	@Select("select * from place_a_idx where a_idx = #{user_idx} and seldate = #{seldate}")
 	List<PlaceVO> getPlanplace(@Param("user_idx") int user_idx, @Param("seldate") String seldate);
+
+	@Select("select * from place_a_idx where a_idx = #{user_idx} and seldate = #{seldate} and day = #{day}")
+	List<PlaceVO> getdayplan(@Param("user_idx") int user_idx, @Param("day") int day, @Param("seldate") String seldate);
+
+	@Delete("delete from travelplan where a_idx=#{user_idx} and seldate=#{seldate}")
+	int travleplandel(@Param("user_idx") int user_idx, @Param("seldate") String seldate);
 	
 }

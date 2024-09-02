@@ -1,106 +1,113 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>traverse</title>
-  
-  <link href="/css/mainStyle.css" rel="stylesheet">
-  <link href="/css/traverserStoryStyle.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>traverse</title>
+
+<link href="/css/mainStyle.css" rel="stylesheet">
+<link href="/css/traverserStoryStyle.css" rel="stylesheet">
 </head>
 <body>
 
 	<th:block th:replace="/fragment::header"></th:block>
 
-	<div class="container">
-		<div class="contents" style="min-height: 650px;">
-		
+<!-- 사용자가 입력한 데이터를 서버로 전송 -->
 			<form method="POST">
-    	<div class="search">
-			<h1>Traverser's Story</h1>
-        <input name="search" placeholder="Search..." type="text">
-        <button type="submit">Go</button>
-      </div>
-      </form>
-      
-      <div class="trending">
-      <span>Trending Searches :</span>
-      <span><a href="/">Seoul</a></span>
-      <span><a href="/">Jeju</a></span>
-      <span><a href="/">Busan</a></span>
-      <span><a href="/">Jeonju</a></span>
-      <span>...</span>
+			<!-- 검색 -->
+				<div class="search">
+					<h1>Traverser's Story</h1>
+					<!-- 인풋태그에 검색어 입력 -->
+					<input name="search" placeholder="Search..." type="text">
+					<button type="submit">Go</button>
+				</div>
+			</form>
+
+			<div style="text-align: right; margin: 10px 0;">
+				<a href="/place/story_write">
+					<button type="button"
+						style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer;">
+						Write a Story</button>
+				</a>
 			</div>
 			
-		<div class="box-container">
+<div class="box-container">
+      
+      <a th:href="@{/place/story/{idx}(idx=${rand1.idx})}">
+       <div class="box box1">
+         <div class="inner-box top">
+            <img th:src="${#strings.isEmpty(rand1.imge1) ? '/image/story/logo_w.png' : '/image/story/' + rand1.imge1}">
+         </div>
+         <!-- <div class="inner-box top-right">
+            <img th:src="${#strings.isEmpty(rand1.imge2) ? '/story/logo_w.png' : '/story/' + rand1.imge2}">
+         </div> -->
+         <div class="inner-box bottom">
+            <div class="text-line line1" th:text="${rand1.nick}">nick</div>
+          <div class="text-line line2" th:text="${rand1.title}">title</div>
+          <div class="text-line line3" th:text="${'# ' + rand1.regin + ', ' + daysBetween1 + '일'}"># 부산, 2박 3일(여행지, 기간)</div>
+         </div>
+         <div class="inner-box center">
+            <img th:src="${#strings.isEmpty(rand1.profile) ? '/image/default_profile.png' : '/image/profile/' + rand1.profile}">
+         </div>
+       </div>
+       </a>
+       
+       <a th:href="@{/place/story/{idx}(idx=${rand2.idx})}">
+       <div class="box box2">
+       <div class="inner-box top">
+            <img th:src="${#strings.isEmpty(rand2.imge1) ? '/image/story/logo_w.png' : '/image/story/' + rand2.imge1}">
+         </div>
+         
+         <div class="inner-box bottom">
+            <div class="text-line line1" th:text="${rand2.nick}">소백돌이</div>
+          <div class="text-line line2" th:text="${rand2.title}">진해 나들이</div>
+          <div class="text-line line3" th:text="${'# ' + rand2.regin + ', ' + daysBetween2 + '일'}"># 창원, 1박 2일</div>
+         </div>
+         <div class="inner-box center">
+            <img th:src="${#strings.isEmpty(rand2.profile) ? '/image/default_profile.png' : '/image/profile/' + rand2.profile}">
+         </div>
+       </div>
+       </a>
+       
+       <a th:href="@{/place/story/{idx}(idx=${rand3.idx})}">
+       <div class="box box3">
+        <div class="inner-box top">
+            <img th:src="${#strings.isEmpty(rand3.imge1) ? '/image/story/logo_w.png' : '/image/story/' + rand3.imge1}">
+         </div>
+        
+         <div class="inner-box bottom">
+            <div class="text-line line1" th:text="${rand3.nick}">새박사</div>
+          <div class="text-line line2" th:text="${rand3.title}">로또당첨</div>
+          <div class="text-line line3" th:text="${'# ' + rand3.regin + ', ' + daysBetween3 + '일'}"># 춘천, 2박 3일</div>
+         </div>
+         <div class="inner-box center">
+            <img th:src="${#strings.isEmpty(rand3.profile) ? '/image/default_profile.png' : '/image/profile/' + rand3.profile}">
+         </div>
+       </div>
+       </a>
+       
+       <a th:href="@{/place/story/{idx}(idx=${rand4.idx})}">
+       <div class="box box4">
+          <div class="inner-box top">
+            <img th:src="${#strings.isEmpty(rand4.imge1) ? '/image/story/logo_w.png' : '/image/story/' + rand4.imge1}">
+         </div>
+         
+         <div class="inner-box bottom">
+            <div class="text-line line1" th:text="${rand4.nick}">받킨지</div>
+          <div class="text-line line2" th:text="${rand4.title}">베베랑 콩이랑~~</div>
+          <div class="text-line line3" th:text="${'# ' + rand4.regin + ', ' + daysBetween4 + '일'}"># 제주, 2박 3일</div>
+         </div>
+         <div class="inner-box center">
+            <img th:src="${#strings.isEmpty(rand4.profile) ? '/image/default_profile.png' : '/image/profile/' + rand4.profile}">
+         </div>
+       </div>
+       </a>
+
 		
-		 <div class="box box1">
-			<div class="inner-box top-left">
-				<img src="/image/d1.jpg">
-			</div>
-			<div class="inner-box top-right">
-				<img src="/image/d2.jpg">
-			</div>
-			<div class="inner-box bottom">
-				<div class="text-line line1">도리(닉네임)</div>
-    		<div class="text-line line2">도리 도리 여행(제목)</div>
-    		<div class="text-line line3"># 부산, 2박 3일(여행지, 기간)</div>
-			</div>
-			<div class="inner-box center">
-				<img src="/image/d0.jpg">
-			</div>
-		 </div>
-		 
-		 <div class="box box2">
-		 <div class="inner-box top-left">
-				<img src="/image/s1.jpg">
-			</div>
-			<div class="inner-box top-right">
-				<img src="/image/s2.jpg">
-			</div>
-			<div class="inner-box bottom">
-				<div class="text-line line1">소백돌이</div>
-    		<div class="text-line line2">진해 나들이</div>
-    		<div class="text-line line3"># 창원, 1박 2일</div>
-			</div>
-			<div class="inner-box center">
-				<img src="/image/s0.jpg">
-			</div>
-		 </div>
-		 
-		 <div class="box box3">
-			<div class="inner-box top">
-				<img src="/image/l1.jpg">
-			</div>
-			<div class="inner-box bottom">
-				<div class="text-line line1">새박사</div>
-    		<div class="text-line line2">로또당첨</div>
-    		<div class="text-line line3"># 춘천, 2박 3일</div>
-			</div>
-			<div class="inner-box center">
-				<img src="/image/l0.jpg">
-			</div>
-		 </div>
-		 
-		 <div class="box box4">
-		 	<div class="inner-box top-left">
-				<img src="/image/b1.jpg">
-			</div>
-			<div class="inner-box top-right">
-				<img src="/image/b2.jpg">
-			</div>
-			<div class="inner-box bottom">
-				<div class="text-line line1">받킨지</div>
-    		<div class="text-line line2">베베랑 콩이랑~~</div>
-    		<div class="text-line line3"># 제주, 2박 3일</div>
-			</div>
-			<div class="inner-box center">
-				<img src="/image/b0.jpg">
-			</div>
-		 </div>
-    </div>
+    
+</div>
+
 
 		<th:block th:replace="/fragment::footer"></th:block>
-	
 </body>
 </html>

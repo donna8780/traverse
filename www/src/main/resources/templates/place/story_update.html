@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 수정</title>
+    <link href="/css/mainStyle.css" rel="stylesheet">
+    <link href="/css/storyupStyle.css" rel="stylesheet">
+
+    <script>
+        function addFileInput() {
+            const fileInputContainer = document.getElementById('file-input-container');
+            const newFileInput = document.createElement('input');
+            newFileInput.type = 'file';
+            newFileInput.name = 'images';
+            newFileInput.accept = 'image/*';
+            fileInputContainer.appendChild(newFileInput);
+        }
+    </script>
+</head>
+<body>
+<th:block th:replace="/fragment::header"></th:block>
+
+  <div id="stup">
+    <div class="content-container">
+        <h1>게시글 수정</h1>
+        <form th:action="@{'/place/story/' + ${story.idx}}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">제목</label>
+                <input type="text" id="title" name="title" th:value="${story.title}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="regin">지역</label>
+                <input type="text" id="regin" name="regin" th:value="${story.regin}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="seldate">시작 날짜</label>
+                <input type="date" id="seldate" name="seldate" th:value="${story.seldate}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="enddate">종료 날짜</label>
+                <input type="date" id="enddate" name="enddate" th:value="${story.enddate}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contents">내용</label>
+                <textarea id="contents" name="contents" rows="10" required th:text="${story.contents}"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>현재 이미지</label>
+                <div class="current-images">
+                    <div th:if="${story.imge1 != null}">
+                        <img th:src="@{'/image/story/' + ${story.imge1}}" alt="이미지 1" style="max-width: 100px;">
+                    </div>
+                    <div th:if="${story.imge2 != null}">
+                        <img th:src="@{'/image/story/' + ${story.imge2}}" alt="이미지 2" style="max-width: 100px;">
+                    </div>
+                    <div th:if="${story.imge3 != null}">
+                        <img th:src="@{'/image/story/' + ${story.imge3}}" alt="이미지 3" style="max-width: 100px;">
+                    </div>
+                    <div th:if="${story.imge4 != null}">
+                        <img th:src="@{'/image/story/' + ${story.imge4}}" alt="이미지 4" style="max-width: 100px;">
+                    </div>
+                    <div th:if="${story.imge5 != null}">
+                        <img th:src="@{'/image/story/' + ${story.imge5}}" alt="이미지 5" style="max-width: 100px;">
+                    </div>
+                    <div th:if="${story.imge6 != null}">
+                        <img th:src="@{'/image/story/' + ${story.imge6}}" alt="이미지 6" style="max-width: 100px;">
+                    </div>
+                    <div th:if="${story.imge7 != null}">
+                        <img th:src="@{'/image/story/' + ${story.imge7}}" alt="이미지 7" style="max-width: 100px;">
+                    </div>
+                    <div th:if="${story.imge8 != null}">
+                        <img th:src="@{'/image/story/' + ${story.imge8}}" alt="이미지 8" style="max-width: 100px;">
+                    </div>
+                    <div th:if="${story.imge9 != null}">
+                        <img th:src="@{'/image/story/' + ${story.imge9}}" alt="이미지 9" style="max-width: 100px;">
+                    </div>
+                    <div th:if="${story.imge10 != null}">
+                        <img th:src="@{'/image/story/' + ${story.imge10}}" alt="이미지 10" style="max-width: 100px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="images">이미지 변경 (최대 10장)</label>
+                <div id="file-input-container" class="file-inputs">
+                    <input type="file" id="images" name="images" accept="image/*">
+                </div>
+                <button type="button" class="add-image-button" onclick="addFileInput()">이미지 추가</button>
+            </div>
+
+            <button type="submit" class="submit-btn">수정 완료</button>
+        </form>
+    </div>
+    </div>
+    <th:block th:replace="/fragment::footer"></th:block>
+</body>
+</html>

@@ -12,7 +12,7 @@
   top: 120px;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 10;
+  z-index: 4;
 }
 
 .search input[type="text"] {
@@ -50,7 +50,7 @@
   top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 10;
+  z-index: 4;
 }
 
 .trending span {
@@ -88,24 +88,24 @@
 }
 
 .box2 {
-  top: 350px;
+  top: 300px;
   left: 305px;
 }
 
 .box3 {
-  top: 200px;
+  top: 150px;
   left: 605px;
 }
 
 .box4 {
-  top: 350px;
+  top: 300px;
   left: 905px;
 }
 
 .inner-box {
   position: absolute;
-  background-color: #B898F4;
-  border: 1px solid black; /* 검정색 테두리 추가 */
+  background-color: #E2E2E2;
+  /*border: 1px solid black; /* 검정색 테두리 추가 */
   overflow: hidden;
   padding: 10px;
 }
@@ -181,6 +181,6 @@
   top: 55%;
   left: 20%;
   transform: translate(-50%, -50%);
-  background-color: #B898F4;
+  background-color: white;
   border-radius: 50%;
 }

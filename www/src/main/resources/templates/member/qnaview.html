@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/css/mainStyle.css" rel="stylesheet">
+</head>
+<body>
+
+	<th:block th:replace="/fragment::header"></th:block>
+
+	<div class="container">
+		<div class="contents" style="min-height: 680px;">
+
+			<h1>Q&A Results</h1>
+			<p>
+				검색어: <span th:text="${qna_search}"></span>
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th>제목</th>
+						<th>조회수</th>
+						<th>닉네임</th>
+						<th>날짜</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="result : ${qna_result}">
+						<td><a
+							th:href="@{/member/qnaView/{board_idx}(board_idx=${result.board_idx})}"
+							th:text="${result.title}"></a></td>
+						<td th:text="${result.v_count}"></td>
+						<td th:text="${result.nick}"></td>
+						<td th:text="${result.create_at}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+	<th:block th:replace="/fragment::footer"></th:block>
+
+</body>
+</html>

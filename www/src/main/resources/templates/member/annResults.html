@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+    <section id="notice" class="section">
+        <h2>검색 결과</h2>
+        
+        <table class="rwd-table">
+            <tbody>
+                <tr>
+                    <th>No.</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                    <th>조회수</th>
+                </tr>
+                <tr th:each="row : ${ann_search}">
+                    <td th:text="${row.announcement_idx}" class="td-center"></td>
+                    <td><a
+                        th:href="@{/member/view/{announcement_idx}(announcement_idx=${row.announcement_idx})}"
+                        th:text="${row.title}"></a></td>
+                    <td th:text="${row.nick}" class="td-center"></td>
+                    <td th:text="${row.w_date}" class="td-center"></td>
+                    <td th:text="${row.v_count}" class="td-center"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+
+        <ul class="pagemenu">
+            <li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}">
+                <a th:href="@{/member/search(keyword=${keyword}, idx=${i})}">
+                    <span th:text="${i}"></span>
+                </a>
+            </li>
+        </ul>
+    </section>
+</body>
+</html>

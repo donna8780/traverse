@@ -5,173 +5,181 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>traverse</title>
     <link href="/css/mainStyle.css" rel="stylesheet">
-
-    <style>
-        /* 탭 스타일  나중에 분리예정 */
-        .tabs {
-            display: flex;
-            margin-bottom: 20px;
-            cursor: pointer;
-            justify-content: flex-start;
-            gap: 5px; /* 탭 간의 간격을 추가 */
-        }
-
-        .tab {
-            padding: 10px 20px;
-            border-radius: 5px 5px 0 0;
-            border: 1px solid #ccc;
-            background-color: #e0e0e0;
-            color: #333;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .tab:hover {
-            background-color: #d0d0d0;
-        }
-
-        .tab.active {
-            background-color: #ffffff;
-            font-weight: bold;
-            color: #000;
-            border-bottom: 2px solid #000;
-            box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.1); /* 활성화된 탭에 음영 추가 */
-            z-index: 1;
-        }
-
-        .tab-content {
-            display: none;
-            border: 1px solid #ccc;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 0 5px 5px 5px;
-            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-        
-        /* 테이블 스타일 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            font-family: 'Arial', sans-serif;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f4f4f4;
-            color: #333;
-            font-weight: bold;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .add-button {
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            color: #28a745;
-            transition: color 0.3s ease;
-        }
-
-        .add-button:hover {
-            color: #218838;
-        }
-    </style>
+    <link href="/css/tabStyle.css" rel="stylesheet">
 </head>
 <body>
 
     <th:block th:replace="/fragment::header"></th:block>
-    <span class="area_desc"> 추천 결과 보여주는 페이지
-        <div class="table-container">
-            <!-- 탭 메뉴 -->
-            <div class="tabs">
-                <div th:each="i : ${#numbers.sequence(1, result.duration/5)}" th:text="'Day ' + ${i}" th:classappend="${i == 1} ? 'active' : ''" class="tab"></div>
-            </div>
-           
-            <!-- 각 탭에 대한 컨텐츠 -->
-            <div th:each="i : ${#numbers.sequence(1, result.duration/5)}" th:id="'day' + ${i}" th:classappend="${i == 1} ? 'active' : ''" class="tab-content">
+    <div class="tab-menu">
+        <button th:each="i : ${#numbers.sequence(1, result.duration/5)}"
+                th:text="'Day ' + ${i}"
+                th:onclick="'openTab(event, \'tab' + ${i} + '\')'"
+                class="tab-link">
+        </button>
+        <a th:href="@{place/travelplan}"><button>여행계획</button></a>
+    </div>
+    <div th:each="i : ${#numbers.sequence(1, result.duration/5)}"
+         th:id="'tab' + ${i}"
+         class="tab-content">
+        <div class="left-content">
+            <div class="plan">
                 <h3 th:text="'Day ' + ${i}"></h3>
-                <table>
-                    <tr>
-                        
-                        <th>title</th>
-                        <th>address</th>
-                        <th></th>
-                    </tr>
-                    <!-- place 목록을 표시하는 테이블 -->
-                    <tr th:each="row : ${place}">
-                        
-                        <td class="normal">
-                            <!-- 제목을 클릭하면 해당 상세 페이지로 이동 -->
-                            <a th:href="@{/member/detail/{idx}(idx=${row.idx})}" th:text="${row.title}"></a>
-                        </td>
-                        <td th:text="${row.addr1}"></td>
-                        <th>
-                            <a th:href="@{/place/planadd(
-                                    p_idx=${row.idx},
-                                    a_idx=${result.a_idx},
-                                    areaCode=${result.areaCode},
-                                    sigunguCode1=${result.sigunguCode1},
-                                    sel_idx=${result.sel_idx},
-                                    duration=${result.duration},
-                                    seldate=${seldate},
-                                    day=${i})}">
-                                    +
-                                </a>
-                        </th>
-                    </tr>
-                </table>
+                <div class="custom-tab-menu">
+
+                    <div class="custom-tab-row">
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=0)}"><button class="custom-tab-link">전체</button></a>
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=28)}"><button class="custom-tab-link">레포츠</button></a>
+                    </div>
+
+                    <div class="custom-tab-row">
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=14)}"><button class="custom-tab-link">문화시설</button></a>
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=32)}"><button class="custom-tab-link">숙박</button></a>
+                    </div>
+                    
+                     <div class="custom-tab-row">
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=12)}"><button class="custom-tab-link">관광지</button></a>
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=39)}"><button class="custom-tab-link">음식점</button></a>
+                    </div>
+                </div>
+                <div th:each="place : ${place}">
+                    <div><img th:if="${place.firstimage != null and !place.firstimage.isEmpty()}"
+                              th:src="${place.firstimage}" alt="Image" class="placefirstimage" />
+                        <!-- 이미지가 없을 때 -->
+                        <img th:if="${place.firstimage == null or place.firstimage.isEmpty()}"
+                             th:src="@{/image/logo_w.png}" alt="Default Image"  class="placefirstimage"/>
+                    </div>
+                    <div class="plandata">
+                        <div>
+                            <a th:href="@{/member/detail/{idx}(idx=${place.idx},contenttypeid=${place.contenttypeid},contentid=${place.contentid})}" th:text="${place.title}"></a>
+                        </div> 
+                        <div th:text="${place.addr1}"
+                             th:data-mapx="${place.mapx}"
+                             th:data-mapy="${place.mapy}"
+                             th:data-title="${place.title}"
+                             class="map-address">
+                        </div>
+
+                    </div>
+                    <label class="checkbox-container">
+                        <a th:href="@{/place/planadd(
+                            p_idx=${place.idx},
+                            a_idx=${result.a_idx},
+                            areaCode=${result.areaCode},
+                            sigunguCode1=${result.sigunguCode1},
+                            sel_idx=${result.sel_idx},
+                            duration=${result.duration},
+                            seldate=${seldate},
+                            day=${i})}">
+                            +
+                        </a>
+                    </label>
+                </div>
             </div>
         </div>
-        <br>
-        <a th:href="@{place/travelplan}"><button>여행계획</button></a>
-    </span>
+        <div class="right-content">
+            <div th:id="'map' + ${i}" style="width: 100%; height: 100%;"></div> 
+        </div>
+    </div>
 
-    <th:block th:replace="/fragment::footer"></th:block>
-
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7717c2c3bc1327ef51412b55ac5ef"></script>
+    
     <script>
-        // JavaScript로 탭 기능을 구현합니다.
-        document.addEventListener('DOMContentLoaded', function () {
-            const tabs = document.querySelectorAll('.tab');
-            const tabContents = document.querySelectorAll('.tab-content');
+        var map; // 전역 변수로 지도 객체를 저장
 
-            tabs.forEach((tab, index) => {
-                tab.addEventListener('click', () => {
-                    // 모든 탭에서 active 클래스를 제거
-                    tabs.forEach(t => t.classList.remove('active'));
-                    // 모든 탭 컨텐츠에서 active 클래스를 제거
-                    tabContents.forEach(tc => tc.classList.remove('active'));
+        function initMap(mapContainerId, places) {
+            var container = document.getElementById(mapContainerId);
+            var options = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 기본 중심 좌표
+                level: 8 // 지도의 확대 레벨
+            };
+            map = new kakao.maps.Map(container, options);
 
-                    // 클릭된 탭에 active 클래스 추가
-                    tab.classList.add('active');
-                    // 해당하는 탭 컨텐츠에 active 클래스 추가
-                    tabContents[index].classList.add('active');
+            // 첫 번째 마커를 지도 중심으로 설정
+            if (places.length > 0) {
+                var firstPlace = places[0];
+                map.setCenter(new kakao.maps.LatLng(firstPlace.mapy, firstPlace.mapx));
+            }
+
+            // places 배열을 돌며 마커 생성 및 인포윈도우 추가
+            places.forEach(function(place) {
+                var markerPosition = new kakao.maps.LatLng(place.mapy, place.mapx);
+
+                var marker = new kakao.maps.Marker({
+                    position: markerPosition
+                });
+
+                marker.setMap(map);
+
+                // 인포윈도우 생성
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: '<div class="markerstyle">' + place.title + '</div>' // 인포윈도우에 표시될 내용
+                });
+
+                // 마커에 마우스를 올렸을 때 인포윈도우 표시
+                kakao.maps.event.addListener(marker, 'mouseover', function() {
+                    infowindow.open(map, marker);
+                });
+
+                // 마커에서 마우스를 뗐을 때 인포윈도우 닫기
+                kakao.maps.event.addListener(marker, 'mouseout', function() {
+                    infowindow.close();
                 });
             });
+
+            // 지도 중심 이동 이벤트를 주소에 할당
+            var addressElements = document.querySelectorAll('.map-address');
+            addressElements.forEach(function(element) {
+                element.addEventListener('click', function() {
+                    var mapx = parseFloat(element.getAttribute('data-mapx'));
+                    var mapy = parseFloat(element.getAttribute('data-mapy'));
+                    moveMapCenter(mapx, mapy);
+                });
+            });
+        }
+
+        function moveMapCenter(mapx, mapy) {
+            // 클릭된 좌표로 지도 중심 이동
+            var moveLatLon = new kakao.maps.LatLng(mapy, mapx);
+            map.setCenter(moveLatLon);
+        }
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+
+            tablinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).style.display = "flex";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+
+            // 해당 탭의 지도에 마커 표시
+            var places = [];
+            document.querySelectorAll("#" + tabName + " .plan .placefirstimage").forEach(function(placeDiv) {
+                var mapx = placeDiv.parentNode.nextElementSibling.querySelector('[data-mapx]').getAttribute('data-mapx');
+                var mapy = placeDiv.parentNode.nextElementSibling.querySelector('[data-mapy]').getAttribute('data-mapy');
+                var title = placeDiv.parentNode.nextElementSibling.querySelector('[data-title]').getAttribute('data-title');
+
+                places.push({mapx: parseFloat(mapx), mapy: parseFloat(mapy), title: title});
+            });
+
+            initMap('map' + tabName.replace('tab', ''), places);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector(".tab-menu button").click(); // 첫 번째 탭 클릭
         });
+        
+        
     </script>
+    
+    <th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>
