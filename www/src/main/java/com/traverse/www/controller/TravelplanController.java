@@ -67,7 +67,7 @@ public class TravelplanController {
 	    
 	    ts.planadd(p_idx,a_idx,areaCode,sigunguCode1,duration1,seldate,day);
 	    
-	    mav.setViewName("redirect:/recommendResult?seldate="+seldate);
+	    mav.setViewName("redirect:/recommendResult?seldate="+seldate+"&type=0");
 	    return mav;
 	}
 	@GetMapping("travelplandetail")

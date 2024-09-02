@@ -152,7 +152,7 @@ public class TraverserStoryController {
     // 글쓰기 실행
     @PostMapping("/place/story_write")
     public String story_write(@RequestParam("a_idx") int a_idx,
-    						  @RequestParam("title") String title,
+    						  						@RequestParam("title") String title,
                               @RequestParam("regin") String regin,
                               @RequestParam("enddate") String enddate,
                               @RequestParam("seldate") String seldate,
@@ -162,7 +162,7 @@ public class TraverserStoryController {
         String[] imagePaths = new String[10];
         
         // 저장할 경로 설정
-        String uploadDir = "C:/spring/traverse/www/src/main/resources/static/image/story/";
+        String uploadDir = "C:/sts_test/traverse/www/src/main/resources/static/image/story/";
 
         // 업로드된 파일들을 서버에 저장하고 파일 경로를 배열에 저장
         for (int i = 0; i < images.length && i < 10; i++) {
@@ -250,7 +250,7 @@ public class TraverserStoryController {
         String[] imagePaths = tss.updateImages(images, story);
         
      // 저장할 경로 설정
-        String uploadDir = "C:/spring/traverse/www/src/main/resources/static/image/story/";
+        String uploadDir = "C:/sts_test/traverse/www/src/main/resources/static/image/story/";
 
         // 업로드된 파일들을 서버에 저장하고 파일 경로를 배열에 저장
         for (int i = 0; i < images.length && i < 10; i++) {
