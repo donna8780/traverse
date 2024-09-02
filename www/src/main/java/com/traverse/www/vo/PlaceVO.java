@@ -18,7 +18,7 @@ package com.traverse.www.vo;
  */
 
 public class PlaceVO {
-	private int idx, areacode, contenttypeid, sigungucode,a_idx,day,duration, areaCode;
+	private int idx, areacode, contenttypeid, sigungucode,a_idx,day,duration, areaCode, contentid;
 	private String cat1, cat2, cat3, firstimage, firstimage2, tel, title, addr1,seldate, areaName;
 	private double mapx, mapy;
 	
@@ -143,6 +143,12 @@ public class PlaceVO {
 	}
 	public void setDuration(int duration) {
 		this.duration = duration;
+	}
+	public int getContentid() {
+		return contentid;
+	}
+	public void setContentid(int contentid) {
+		this.contentid = contentid;
 	}
 	
 	

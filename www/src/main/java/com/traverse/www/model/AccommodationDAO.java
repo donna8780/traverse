@@ -16,7 +16,7 @@ public interface AccommodationDAO {
   @Select("select * from area_view where title LIKE CONCAT('%', #{title}, '%') OR ADDR1 LIKE CONCAT('%', #{addr1}, '%')")
   List<PlaceVO> selectByTitle(String title);
   
-  @Select("select * from area_view where areaCode = #{areaCode}")
+  @Select("select * from accomm_place where areaCode = #{areaCode}")
   List<PlaceVO> selectByAreaCode(String areaCode);
 	
   @Select("SELECT DISTINCT areaCode, areaName FROM area_view ORDER BY areaCode")

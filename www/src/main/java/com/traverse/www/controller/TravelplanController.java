@@ -67,7 +67,7 @@ public class TravelplanController {
 	    
 	    ts.planadd(p_idx,a_idx,areaCode,sigunguCode1,duration1,seldate,day);
 	    
-	    mav.setViewName("redirect:/recommendResult?seldate="+seldate);
+	    mav.setViewName("redirect:/recommendResult?seldate="+seldate+"&type=0");
 	    return mav;
 	}
 	@GetMapping("travelplandetail")
@@ -92,6 +92,15 @@ public class TravelplanController {
 		List<PlaceVO> dayplan = ts.getdayplan(user_idx,day,seldate);
 		
 		return dayplan;
+	}
+	
+	@GetMapping("travelplandel")
+	public String travelplandel(@RequestParam("seldate")String seldate,HttpSession session) {
+		AccountsVO user = (AccountsVO) session.getAttribute("user");
+		int user_idx = user.getAccounts_idx();
+		ts.travelplandel(user_idx,seldate);
+		
+		return "redirect:/place/travelplan";
 	}
 	
 

@@ -8,12 +8,30 @@
 
 .slider-container {
     position: relative;
-    width: 800px;
-    margin: auto;
+    width: 100%;
+    max-width: 800px;
     height: 500px;
+    margin: auto;
     overflow: hidden;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.slide {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    cursor: pointer;
+
+    /* 중앙 배치 추가 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .slider {
@@ -23,14 +41,6 @@
     width: 100%;
 }
 
-.slide {
-    display: none;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    cursor: pointer;
-}
 
 .active-slide {
     display: block;

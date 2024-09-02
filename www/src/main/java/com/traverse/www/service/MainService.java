@@ -60,4 +60,11 @@ public class MainService {
 		return dao.getPlaces(result);
 	}
 
+	public List<PlaceVO> getPlacesother(SelPlaceVO result,int type) {
+		int d = result.getDuration();
+		result.setDuration(d * 5);
+		
+		return dao.getPlacesother(result,type);
+	}
+
 }
