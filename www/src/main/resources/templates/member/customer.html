@@ -34,27 +34,18 @@
 			</div>
 			<div class="intro-text">
 				<pre>
-Traverse는 여행을 사랑하는 모든 사람들에게 영감을 주고, 쉽게 여행을 계획하며, 
-잊지 못할 추억을 남길 수 있도록 도와주는 국내 여행 플랫폼입니다.
+Traverse는 여행을 사랑하는 모든 이들에게 영감을 주고, 쉽고 간편하게 여행을 계획하며 잊지 못할 추억을 만들어주는 국내 여행 플랫폼입니다.
 
-Traverse는 프랑스어 "traverser"에서 유래하여, '건너다'라는 의미를 지니고 있습니다. 
-이 이름은 경계를 넘고 새로운 장소를 탐험하는 여행의 본질을 잘 담고 있습니다. 
-우리의 목표는 여러분이 일상에서 벗어나 국내의 아름다운 곳곳을 경험하고, 
-새로운 경계를 넘어서는 여정을 즐길 수 있도록 지원하는 것입니다.
+"Traverse"는 프랑스어 "traverser"에서 유래되었으며, '건너다'라는 의미를 담고 있습니다. 이 이름은 경계를 넘고 새로운 장소를 탐험하는 여행의 본질을 잘 표현하고 있습니다. 우리의 목표는 여러분이 일상에서 벗어나 국내의 아름다운 곳곳을 탐험하고 새로운 경계를 넘어서는 여정을 즐길 수 있도록 돕는 것입니다.
 
-Traverse를 통해 여러분은:
+Traverse를 통해 여러분은
 
-여행 추천 받기: 
-	다양한 테마와 목적에 맞는 여행지를 추천받아, 나만의 여행을 시작할 수 있습니다.
-여행 계획 세우기: 
-	추천받은 여행지를 바탕으로 여행 일정을 쉽게 계획하고 관리할 수 있습니다.
-여행 후기와 사진 공유하기: 
-	여행을 마친 후, 간단한 후기와 사진을 공유하여 다른 여행자들과 추억을 나눌 수 있습니다.
+여행 추천 받기: 다양한 테마와 목적에 맞는 여행지를 추천받아 나만의 여행을 시작할 수 있습니다.
+여행 계획 세우기: 추천받은 여행지를 바탕으로 여행 일정을 쉽고 효율적으로 계획하고 관리할 수 있습니다.
+여행 후기와 사진 공유하기: 여행을 마친 후 간단한 후기와 사진을 공유하여 다른 여행자들과 소중한 추억을 나눌 수 있습니다.
+우리는 국내 여행에 초점을 맞추고 있으며, 여러분이 국내의 숨겨진 보석 같은 장소를 발견하고 새로운 경험을 할 수 있도록 지원합니다.
 
-우리의 서비스는 국내 여행에 초점을 맞추고 있습니다. 
-여러분이 국내의 숨겨진 보석 같은 장소들을 발견하고, 새로운 경험을 할 수 있도록 도와줍니다. 
-
-Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정을 떠나세요!
+Traverse와 함께 경계를 넘어 전국을 탐험하며 잊지 못할 여정을 떠나세요!
 			</pre></div>
 			</div>
 		</div>
@@ -100,96 +91,89 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정
 		<div th:if="${session.user != null and session.user.nick == '관리자'}">
 			<a href="/member/write" id="notice-write"><button class="write-button">글쓰기</button></a>
 		</div>
+		
+		
 	</section>
 
 	<section id="faq" class="section" style="display: none;">
 		<h2>FAQ</h2>
 		<div class="faq-item" id="first-faq">
     	<button class="accordion">
-        <span class="question-text">Q. 자주 묻는 질문 1</span>
+        <span class="question-text">Q. 예약은 어떻게 하나요?</span>
         <span class="toggle-text">더보기 ▽</span>
     	</button>
         <div class="panel">
             <pre>
-A. 자주 묻는 질문 1에 대한 답변입니다.
-dsljfdhlsd
-sldknfweee   lsdkhfsd
-elfhslkdo
+A. "예약은 저희 웹사이트에서 쉽게 할 수 있습니다. 
+원하는 여행 상품이나 숙소를 검색하고, 상세 페이지에서 '예약하기' 버튼을 클릭하세요. 이후 안내에 따라 여행 일정을 선택하고, 개인 정보를 입력한 후 결제 과정을 진행하시면 예약이 완료됩니다. 
+예약 확인 이메일이 발송되며, 해당 이메일에서 예약 내역을 확인하실 수 있습니다."
+						</pre>
+        </div>
+    </div>
+    <div class="faq-item">
+      <button class="accordion">
+        <span class="question-text">Q. 결제는 어떻게 하나요?</span>
+        <span class="toggle-text">더보기 ▽</span>
+    	</button>
+        <div class="panel">
+            <pre>
+A. "저희 사이트에서는 다양한 결제 방법을 지원합니다. 신용카드, 체크카드, 그리고 모바일 결제 등이 가능합니다.
+결제 과정에서 카드 정보를 입력하고, 결제 확인을 완료하면 예약이 확정됩니다.
+결제 시 문제가 발생할 경우 고객센터로 문의해 주시면 도움을 드리겠습니다."
 .
 						</pre>
         </div>
     </div>
     <div class="faq-item">
       <button class="accordion">
-        <span class="question-text">Q. 자주 묻는 질문 2</span>
+        <span class="question-text">Q. 환불 정책은 어떻게 되나요?</span>
         <span class="toggle-text">더보기 ▽</span>
     	</button>
         <div class="panel">
             <pre>
-A. 자주 묻는 질문 2에 대한 답변입니다.
-dsljfdhlsd
-sldknfdfdvlkdo
-.
-						</pre>
-        </div>
-    </div>
-    <div class="faq-item">
-      <button class="accordion">
-        <span class="question-text">Q. 자주 묻는 질문 3</span>
-        <span class="toggle-text">더보기 ▽</span>
-    	</button>
-        <div class="panel">
-            <pre>
-A. 자주 묻는 질문 3에 대한 답변입니다.
-dsljfreffffffffffdhlsd
-sldknfweee   lsdkhfsd
-elfhsffffffffffffffflkdo
-.ffffffffffffff
+A. "환불 정책은 예약한 상품의 유형과 조건에 따라 다를 수 있습니다. 
+일반적으로, 여행 시작 7일 전까지 취소하시면 전액 환불이 가능하며, 그 이후 취소 시에는 일정 비율의 취소 수수료가 부과될 수 있습니다.
+자세한 환불 조건은 예약 확인 이메일에 명시된 환불 정책을 참고하시거나, 고객센터에 문의해 주시면 안내해 드리겠습니다."
 						</pre>
         </div>
     </div>
         <div class="faq-item">
       <button class="accordion">
-        <span class="question-text">Q. 자주 묻는 질문 4</span>
+        <span class="question-text">Q. 여행 일정이나 상품에 대한 변경이 가능한가요?</span>
         <span class="toggle-text">더보기 ▽</span>
     	</button>
         <div class="panel">
             <pre>
-A. 자주 묻는 질문 4에 대한 답변입니다.
-dsljfreffffffffffdhlsd
-sldknfweee   lsdkhfsd
-elfhsffffffffffffffflkdo
-.ffffffffffffff
+A. "여행 일정이나 상품 변경은 예약 후 특정 기간 내에 가능합니다. 변경 가능 여부와 추가 비용은 변경 요청 시점에 따라 다를 수 있습니다. 
+변경을 원하실 경우, 고객센터에 연락 주시거나 '내 예약' 페이지에서 변경 요청을 진행해 주세요.
+변경 가능성과 조건에 대해 상세히 안내해 드리겠습니다."
 						</pre>
         </div>
     </div>
         <div class="faq-item">
       <button class="accordion">
-        <span class="question-text">Q. 자주 묻는 질문 5</span>
+        <span class="question-text">Q. 숙소의 체크인/체크아웃 시간은 어떻게 되나요?</span>
         <span class="toggle-text">더보기 ▽</span>
     	</button>
         <div class="panel">
             <pre>
-A. 자주 묻는 질문 5에 대한 답변입니다.
-dsljfreffffffffffdhlsd
-sldknfweee   lsdkhfsd
-elfhsffffffffffffffflkdo
-.ffffffffffffff
+A. "일반적으로 숙소의 체크인 시간은 오후 3시부터 시작되며, 체크아웃 시간은 오전 11시까지입니다. 
+조기 체크인이나 늦은 체크아웃을 원하실 경우, 사전에 숙소와 연락하여 가능 여부를 확인하시기 바랍니다. 
+추가 요금이 발생할 수 있으니, 미리 확인해 주세요."
 						</pre>
         </div>
     </div>
             <div class="faq-item">
       <button class="accordion">
-        <span class="question-text">Q. 자주 묻는 질문 6</span>
+        <span class="question-text">Q. 여행 시 필요한 서류나 준비물이 무엇인가요?</span>
         <span class="toggle-text">더보기 ▽</span>
     	</button>
         <div class="panel">
             <pre>
-A. 자주 묻는 질문 6에 대한 답변입니다.
-dsljfreffffffffffdhlsd
-sldknfweee   lsdkhfsd
-elfhsffffffffffffffflkdo
-.ffffffffffffff
+A. "여행 시에는 신분증(주민등록증 또는 운전면허증)과 예약 확인서가 필요합니다.
+해외여행의 경우 여권이 필요하며, 비자나 기타 여행 서류는 여행지에 따라 달라질 수 있습니다.
+여행 전에 필요한 서류와 준비물을 다시 한 번 확인하고, 모든 서류를 준비해 주세요.
+자세한 정보는 여행 상품 상세 페이지나 고객센터에서 확인하실 수 있습니다."
 						</pre>
         </div>
     </div>

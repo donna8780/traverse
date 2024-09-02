@@ -26,39 +26,39 @@
         <!-- 이미지가 하나라도 있는 경우 슬라이더 렌더링 -->
         <div th:if="${story.imge1 != null or story.imge2 != null or story.imge3 != null or story.imge4 != null or story.imge5 != null or story.imge6 != null or story.imge7 != null or story.imge8 != null or story.imge9 != null or story.imge10 != null}">
           <div th:if="${story.imge1 != null}">
-            <img th:src="@{/story/{fileName}(fileName=${story.imge1})}" alt="Slide 1" class="slide" onclick="openModal(this.src)">
+            <img th:src="@{/image/story/{fileName}(fileName=${story.imge1})}" alt="Slide 1" class="slide" onclick="openModal(this.src)">
           </div>
           <div th:if="${story.imge2 != null}">
-            <img th:src="@{/story/{fileName}(fileName=${story.imge2})}" alt="Slide 2" class="slide" onclick="openModal(this.src)">
+            <img th:src="@{/image/story/{fileName}(fileName=${story.imge2})}" alt="Slide 2" class="slide" onclick="openModal(this.src)">
           </div>
           <div th:if="${story.imge3 != null}">
-            <img th:src="@{/story/{fileName}(fileName=${story.imge3})}" alt="Slide 3" class="slide" onclick="openModal(this.src)">
+            <img th:src="@{/image/story/{fileName}(fileName=${story.imge3})}" alt="Slide 3" class="slide" onclick="openModal(this.src)">
           </div>
           <div th:if="${story.imge4 != null}">
-            <img th:src="@{/story/{fileName}(fileName=${story.imge4})}" alt="Slide 4" class="slide" onclick="openModal(this.src)">
+            <img th:src="@{/image/story/{fileName}(fileName=${story.imge4})}" alt="Slide 4" class="slide" onclick="openModal(this.src)">
           </div>
           <div th:if="${story.imge5 != null}">
-            <img th:src="@{/story/{fileName}(fileName=${story.imge5})}" alt="Slide 5" class="slide" onclick="openModal(this.src)">
+            <img th:src="@{/image/story/{fileName}(fileName=${story.imge5})}" alt="Slide 5" class="slide" onclick="openModal(this.src)">
           </div>
           <div th:if="${story.imge6 != null}">
-            <img th:src="@{/story/{fileName}(fileName=${story.imge6})}" alt="Slide 6" class="slide" onclick="openModal(this.src)">
+            <img th:src="@{/image/story/{fileName}(fileName=${story.imge6})}" alt="Slide 6" class="slide" onclick="openModal(this.src)">
           </div>
           <div th:if="${story.imge7 != null}">
-            <img th:src="@{/story/{fileName}(fileName=${story.imge7})}" alt="Slide 7" class="slide" onclick="openModal(this.src)">
+            <img th:src="@{/image/story/{fileName}(fileName=${story.imge7})}" alt="Slide 7" class="slide" onclick="openModal(this.src)">
           </div>
           <div th:if="${story.imge8 != null}">
-            <img th:src="@{/story/{fileName}(fileName=${story.imge8})}" alt="Slide 8" class="slide" onclick="openModal(this.src)">
+            <img th:src="@{/image/story/{fileName}(fileName=${story.imge8})}" alt="Slide 8" class="slide" onclick="openModal(this.src)">
           </div>
           <div th:if="${story.imge9 != null}">
-            <img th:src="@{/story/{fileName}(fileName=${story.imge9})}" alt="Slide 9" class="slide" onclick="openModal(this.src)">
+            <img th:src="@{/image/story/{fileName}(fileName=${story.imge9})}" alt="Slide 9" class="slide" onclick="openModal(this.src)">
           </div>
           <div th:if="${story.imge10 != null}">
-            <img th:src="@{/story/{fileName}(fileName=${story.imge10})}" alt="Slide 10" class="slide" onclick="openModal(this.src)">
+            <img th:src="@{/image/story/{fileName}(fileName=${story.imge10})}" alt="Slide 10" class="slide" onclick="openModal(this.src)">
           </div>
         </div>
         <!-- 이미지가 하나도 없을 경우 대체 이미지 표시 -->
         <div th:unless="${story.imge1 != null or story.imge2 != null or story.imge3 != null or story.imge4 != null or story.imge5 != null or story.imge6 != null or story.imge7 != null or story.imge8 != null or story.imge9 != null or story.imge10 != null}">
-          <img src="/story/logo_w.png" alt="Default Image" class="slide" onclick="openModal(this.src)">
+          <img src="/image/story/logo_w.png" alt="Default Image" class="slide" onclick="openModal(this.src)">
         </div>
           <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
           <button class="next" onclick="changeSlide(1)">&#10095;</button>
@@ -67,7 +67,7 @@
     </div>
     <div class="story-details">
       <div th:if="${story.profile}">
-        <img th:src="@{'/image/' + ${story.profile}}" alt="Profile Image" class="profile-image" />
+        <img th:src="@{'/image/profile/' + ${story.profile}}" alt="Profile Image" class="profile-image" />
       </div>
       <div class="info">
         <div class="nickname" th:text="${story.nick}"></div>
