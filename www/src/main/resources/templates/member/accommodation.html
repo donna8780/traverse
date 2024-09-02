@@ -3,13 +3,15 @@
 <head>
     <title>Places by AreaCode</title>
     <link href="/css/mainStyle.css" rel="stylesheet">
-    <link href="/css/accomStyle.css" rel="stylesheet">
+    <link href="/css/accomStyle00.css" rel="stylesheet">
 </head>
 <body>
 
     <th:block th:replace="/fragment::header"></th:block>
+    
     <div id="accom">
-    <h1>Search Places by AreaCode</h1>
+    <h1>숙소 검색</h1>
+
     
         <!-- 검색 폼 -->
     <form th:action="@{/member/accommodation/search}" method="get">
@@ -46,6 +48,11 @@
         </button>
 </div>
 
+<div class="box-container">
+    <div class="box"></div>
+    <div class="box"></div>
+</div>
+
     <!-- 선택된 AreaCode의 accommodation 정보 표시 -->
     <ul th:if="${accommodationList != null and !#lists.isEmpty(accommodationList)}">
         <li th:each="accommodation : ${accommodationList}">
@@ -68,6 +75,7 @@
     <!-- 검색 결과가 없을 때 메시지 표시 -->
     <p th:if="${accommodationList != null and #lists.isEmpty(accommodationList)}">No results found.</p>
     </div>
+
     <th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>
