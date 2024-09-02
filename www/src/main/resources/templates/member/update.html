@@ -37,7 +37,7 @@
    </form>
     
     <div th:if="${session.user.profile}">
-     <img th:src="@{'/image/' + ${session.user.profile}}" alt="Profile Image" style="width: 150px; height: 150px;" />
+     <img th:src="@{'/image/profile/' + ${session.user.profile}}" alt="Profile Image" style="width: 150px; height: 150px;" />
     </div>  
    <form method="POST" enctype="multipart/form-data" th:action="@{/member/uploadProfile}">
      <input type="file" name="profileImage" accept="image/*" />

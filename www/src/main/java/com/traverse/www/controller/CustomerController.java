@@ -43,7 +43,6 @@ public class CustomerController {
 		ModelAndView mav = new ModelAndView();
 		
 		Map<String, Object> announceMap = as.announce(idx);
-
 		mav.addObject("pg", announceMap.get("pg"));
 		mav.addObject("announce", announceMap.get("list"));
 		
@@ -131,6 +130,8 @@ public class CustomerController {
 		cs.deleteCS(idx);
 		return "redirect:/member/customer#qna";
 	}
+	
+
 
 	}
 

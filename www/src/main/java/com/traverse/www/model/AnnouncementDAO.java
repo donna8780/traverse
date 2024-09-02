@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -40,5 +41,10 @@ public interface AnnouncementDAO {
 	
 	@Update("UPDATE announcement SET v_count = v_count + 1 WHERE announcement_idx = #{announcement_idx}")
 	int incrementViewCount(int announcement_idx);
+	
+
+  
+  
+
 
 }
