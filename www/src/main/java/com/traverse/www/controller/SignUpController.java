@@ -29,37 +29,40 @@ public class SignUpController {
     @Autowired
     private SignUpSercive ss; // SignUpService를 주입받아 사용
 
-    // 회원가입 페이지를 보여주는 메서드
+    // 회원가입 페이지 요청
     @GetMapping("/signUp")
     public String signUp() {
         return "member/signUp"; // 'member/signUp' 뷰를 반환하여 회원가입 페이지로 이동
     }
 
-    // 회원가입 폼 제출을 처리하는 메서드
+    // 회원가입 폼 제출 처리, 에러메세지를 저장하기 위한 어트리뷰트를 입력값으로 받음
     @PostMapping("/signUp")
     public String signUp(AccountsVO input, RedirectAttributes redirectAttributes) throws DuplicateUserException {
         try {
             // 입력값에 대한 검증 로직 호출
             validateInput(input);
-
-            // 검증 통과 시 서비스 계층의 회원가입 로직 호출
+            // 검증 통과 시 service에서 회원가입 로직 호출
             ss.addAccount(input);
             return "redirect:/"; // 회원가입 성공 시 메인 페이지로 리다이렉트
+
         } catch (NoSuchAlgorithmException e) {
-            logger.error("Password hashing failed", e); // 올바른 로그 호출
+            logger.error("비밀번호 해싱 처리 실패:", e); // 올바른 로그 호출
             redirectAttributes.addFlashAttribute("errorMessage", "서버에서 문제가 발생했습니다. 다시 시도해 주세요.");
             return "redirect:/member/serverError"; // 에러 발생 시 에러 페이지로 리다이렉트
-            
+
         } catch (DuplicateUserException e) {
-            logger.warn("Duplicate user information: " + input.toString(), e); // 올바른 로그 호출
+            logger.warn("중복된 사용자 정보: " + input.toString(), e); // 올바른 로그 호출
+            // 중복된 필드명 추가
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            return "redirect:/member/signupError"; // 중복된 정보로 인한 에러 페이지로 리다이렉트
-            
+            redirectAttributes.addFlashAttribute("duplicateFields", e.getFieldNames()); // 중복된 필드명을 전달
+            return "redirect:/member/duplicateError"; // 중복된 정보로 인한 에러 페이지로 리다이렉트
+
         } catch (ValidationException e) {
-            logger.warn("Validation failed for input: " + input.toString(), e); // 올바른 로그 호출
+            logger.warn("입력값이 유효하지 않음: " + input.toString(), e); // 올바른 로그 호출
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            return "redirect:/member/signUp"; // 검증 실패 시 회원가입 페이지로 다시 리다이렉트
-            
+            return "redirect:/member/validateError"; // 검증 실패 시 회원가입 페이지로 다시 리다이렉트
+
+            //모든 에러를 받음
         } catch (Exception e) {
             logger.error("Unexpected error occurred during signup", e); // 올바른 로그 호출
             redirectAttributes.addFlashAttribute("errorMessage", "예기치 않은 오류가 발생했습니다. 다시 시도해 주세요.");
@@ -67,6 +70,11 @@ public class SignUpController {
         }
     }
 
+
+    @GetMapping("/duplicateError")
+    public String duplicateError() {
+        return "duplicateError"; // duplicateError.html 템플릿을 렌더링
+    }
     // 입력이 비어있을 때 수행하는 메서드
     private void validateInput(AccountsVO input) throws ValidationException {
         if (input.getUserid() == null || input.getUserid().isEmpty()) {
@@ -94,7 +102,7 @@ public class SignUpController {
     // 회원가입 실패 시 에러 페이지를 보여주는 메서드
     @GetMapping("/signupError")
     public String signUpError() {
-        return "member/signupError"; // 'member/signupError' 뷰를 반환하여 에러 페이지로 이동
+        return "member/signupError";
     }
 
     // 아이디 중복 확인을 처리하는 메서드
@@ -126,9 +134,13 @@ public class SignUpController {
     @ResponseBody
     public Map<String, Object> checkUserPhone(@RequestParam(name = "phone") String phone) {
         Map<String, Object> result = new HashMap<>();
-        String check_phone = ss.checkUserPhone(phone); // 전화번호 중복 체크를 서비스에서 수행
+       //대시를 붙여줌
+        String newphone= phone.substring(0,3) + "-" + phone.substring(3,7) + "-" + phone.substring(7,11);
+        String check_phone = ss.checkUserPhone(newphone); // 전화번호 중복 체크를 서비스에서 수행
+       
         // 전화번호 중복 여부에 따라 메시지 설정
         String msg = check_phone == null ? "사용 가능한 전화번호입니다." : check_phone + "는 중복된 전화번호 입니다.";
+        
         result.put("phone", msg); // 메시지를 맵에 저장
         return result; // 맵을 JSON 형식으로 반환
     }
@@ -142,6 +154,8 @@ public class SignUpController {
         // 이메일 중복 여부에 따라 메시지 설정
         String msg = check_email == null ? "사용 가능한 이메일 입니다." : check_email + "는 중복된 이메일 입니다.";
         result.put("email", msg); // 메시지를 맵에 저장
+        System.out.println();
         return result; // 맵을 JSON 형식으로 반환
     }
 }
+

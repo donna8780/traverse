@@ -1,6 +1,8 @@
 package com.traverse.www.service;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,25 +23,35 @@ public class SignUpSercive { // 서비스 클래스: 회원가입 관련 비즈�
 
     // 회원가입 처리 메서드
     public int addAccount(AccountsVO input) throws NoSuchAlgorithmException {
-        // 입력받은 사용자 정보의 중복을 검사합니다.
+        // 중복된 필드를 저장할 리스트
+        List<String> duplicateFields = new ArrayList<>();
 
         // 사용자 ID 중복 검사
         if (checkUserID(input.getUserid()) != null) {
-            throw new DuplicateUserException("User ID " + input.getUserid() + "는 이미 존재하는 아이디입니다.");
+            duplicateFields.add("아이디");
         }
 
         // 사용자 닉네임 중복 검사
         if (checkUserNick(input.getNick()) != null) {
-            throw new DuplicateUserException("User Nick " + input.getNick() + "는 이미 존재하는 닉네임입니다.");
+            duplicateFields.add("닉네임");
         }
 
         // 전화번호 중복 검사
         if (checkUserPhone(input.getPhone()) != null) {
-            throw new DuplicateUserException("User Phone " + input.getPhone() + "는 이미 존재하는 번호입니다.");
+            duplicateFields.add("전화번호");
+        }
+
+        // 이메일 중복 검사
+        if (checkEmail(input.getEmail()) != null) {
+            duplicateFields.add("이메일");
+        }
+
+        // 만약 중복된 필드가 있다면 예외를 발생시킴
+        if (!duplicateFields.isEmpty()) {
+            throw new DuplicateUserException("중복된 필드가 존재합니다.", duplicateFields);
         }
 
         // 비밀번호를 해시 처리합니다.
-        // 원본 비밀번호를 해시하여 저장할 암호화된 비밀번호를 생성합니다.
         String userpw = input.getUserpw(); // 원본 비밀번호
         String hashpw = hash.getHash(userpw); // 해시 처리된 비밀번호
         input.setUserpw(hashpw); // 해시 처리된 비밀번호를 객체에 설정
@@ -65,7 +77,6 @@ public class SignUpSercive { // 서비스 클래스: 회원가입 관련 비즈�
 
     // 사용자 이메일 중복 확인 메서드
     public String checkEmail(String email) {
-        // TODO: 이메일 중복 확인을 구현합니다.
         return dao.select_email(email); // DAO의 select_email 메서드를 호출하여 사용자 이메일의 존재 여부를 확인
     }
 }
