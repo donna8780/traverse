@@ -8,6 +8,7 @@ public class ReviewVO {
     private int rating;
     private String w_date;
     private String nick; // 닉네임 추가
+    private int contenttypeid,contentid;
 
     // Getters and Setters
     public int getDrep_idx() {
@@ -65,4 +66,21 @@ public class ReviewVO {
     public void setNick(String nick) {
         this.nick = nick;
     }
+
+		public int getContenttypeid() {
+			return contenttypeid;
+		}
+
+		public void setContenttypeid(int contenttypeid) {
+			this.contenttypeid = contenttypeid;
+		}
+
+		public int getContentid() {
+			return contentid;
+		}
+
+		public void setContentid(int contentid) {
+			this.contentid = contentid;
+		}
+    
 }

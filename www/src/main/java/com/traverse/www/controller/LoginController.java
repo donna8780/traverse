@@ -47,7 +47,13 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		int row = 1;
 		
-		mav.addObject("data", ls.findID(input));
+		String msg = "회원님의 ID는 "+ls.findID(input)+" 입니다";
+		
+		if(ls.findID(input) == null) {
+			msg = "일치하는 정보가 존재하지 않습니다";
+		}
+		
+		mav.addObject("data", msg);
 	  
 	  Object value = mav.getModel().get("data");
 	  if(value == null) row = 0;
