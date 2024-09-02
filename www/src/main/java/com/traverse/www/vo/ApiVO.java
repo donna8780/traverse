@@ -92,6 +92,4 @@ public class ApiVO {
    public void setContentid(int contentid) {
       this.contentid = contentid;
    }
-   
-   
 }
