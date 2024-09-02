@@ -11,7 +11,7 @@ package com.traverse.www.vo;
 */
 
 public class LikeVO {
-	private int like_idx, a_idx, idx,p_idx;
+	private int like_idx, a_idx, idx,p_idx,contentid,contenttypeid;
 	private String firstimage, title, addr1, nick;
 	private double mapx, mapy;
 	public int getLike_idx() {
@@ -73,6 +73,18 @@ public class LikeVO {
 	}
 	public void setP_idx(int p_idx) {
 		this.p_idx = p_idx;
+	}
+	public int getContentid() {
+		return contentid;
+	}
+	public void setContentid(int contentid) {
+		this.contentid = contentid;
+	}
+	public int getContenttypeid() {
+		return contenttypeid;
+	}
+	public void setContenttypeid(int contenttypeid) {
+		this.contenttypeid = contenttypeid;
 	}
 	
 }
