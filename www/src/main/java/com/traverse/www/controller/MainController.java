@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.traverse.www.service.DetailService;
 import com.traverse.www.service.MainService;
 import com.traverse.www.service.WeatherService;
 import com.traverse.www.vo.AccountsVO;
+import com.traverse.www.vo.LikeVO;
 import com.traverse.www.vo.SelPlaceVO;
 
 import jakarta.servlet.http.HttpSession;
@@ -25,6 +27,9 @@ public class MainController {
 	
 	@Autowired
 	private WeatherService ws;
+	
+	@Autowired
+  private DetailService ds;
 
   @GetMapping("/")
   public ModelAndView home(@RequestParam(name = "city", defaultValue = "Seoul") String city) {
@@ -518,13 +523,14 @@ public class MainController {
   	int a_idx = user.getAccounts_idx();
   	
   	SelPlaceVO result = ms.getSelPlace(a_idx);
+
   	
   	mav.addObject("result", result);
   	mav.addObject("seldate", seldate);
   	if(type == 0) {
-  		mav.addObject("place", ms.getPlaces(result));
+  	mav.addObject("place", ms.getPlaces(result));
   	}else {
-  		mav.addObject("place", ms.getPlacesother(result,type));
+  	mav.addObject("place", ms.getPlacesother(result,type));
   	}
   	return mav;
   }
