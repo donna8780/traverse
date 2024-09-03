@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>입력값 오류</title>
+    <title>회원가입 실패</title>
       <link href="/css/mainStyle.css" rel="stylesheet">
       <link href="/css/signupErrorStyle.css" rel="stylesheet">
 </head>
 <body>
 <th:block th:replace="~{/fragment::header}"></th:block>
-    <h1>회원가입 오류</h1>
+    <h1>회원가입 실패</h1>
     <p>유효하지 않은 입력값으로 인한 문제가 발생했습니다. 다시 시도해 주세요.</p>
     <a href="/member/signUp">다시 시도하기</a>
 <th:block th:replace="~{/fragment::footer}"></th:block></body>
