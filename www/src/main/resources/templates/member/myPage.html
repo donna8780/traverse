@@ -12,16 +12,11 @@
     <div id="mypage">
     
     <h2 class="mypage-title">마이페이지</h2>
-
+    
   <div class="mypage">
-      <table>
-
-        <tr>
-          <th>프로필 사진</th>
-                <td>
-                <!-- 업로드된 프로필 사진 표시 -->
-                    <div th:if="${session.user.profile}">
-                        <img th:src="@{'/image/profile/' + ${session.user.profile}}" alt="Profile Image" style="width: 150px; height: 150px;" />
+  	<div id="userProfile">
+    <div th:if="${session.user.profile}">
+                        <img th:src="@{'/image/profile/' + ${session.user.profile}}" alt="Profile Image" style="width: 200px; height: 200px;" />
 
                     </div>
                     
@@ -29,9 +24,9 @@
                         <input type="file" name="profileImage" accept="image/*" />
                         <button type="submit">업로드</button>
                     </form>
-                    
-                </td>
-        </tr>
+		</div>
+      <table>
+
         <tr>
           <th>아이디</th>
           <td th:text="${session.user.userid}"></td>
@@ -48,8 +43,11 @@
           <th>생년월일</th>
           <td th:text="${session.user.birth}"></td>
         </tr>
+        <tr>
+          <th>히스토리</th>
+          <td><a href="/place/myplace"><button>나의 여행후기</button></a></td>
+        </tr>
         </table>
-    <a href="/place/myplace"><button class="submit">쓴 글</button></a>
     <a th:href="@{/member/delete/{id}(id=${session.user.accounts_idx})}"><button class="submit">탈퇴</button></a>
     <a href="/member/update"><button class="submit">수정</button></a>
   </div>
