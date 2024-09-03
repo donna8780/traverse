@@ -76,7 +76,9 @@ public class LikeController {
    @PostMapping("/member/like")
    public ResponseEntity<String> likePlace(@RequestBody LikeVO likeVO) {
        try {
-           like.insertLike(likeVO);  // 서비스에서 데이터 삽입
+      	 	int idx = likeVO.getP_idx();
+      	 	like.likeupdate(idx,likeVO.getA_idx());
+          like.insertLike(likeVO);  // 서비스에서 데이터 삽입
            return ResponseEntity.ok("Liked");
        } catch (Exception e) {
            e.printStackTrace();  // 오류 로그를 출력합니다.
@@ -87,7 +89,9 @@ public class LikeController {
    @DeleteMapping("/member/like")
    public ResponseEntity<String> unlikePlace(@RequestBody LikeVO likeVO) {
        try {
-           like.deleteLike(likeVO);  // 서비스에서 데이터 삭제
+      	 	int idx = likeVO.getP_idx();
+      	 	like.likeupdatedel(idx,likeVO.getA_idx());
+          like.deleteLike(likeVO);  // 서비스에서 데이터 삭제
            return ResponseEntity.ok("Unliked");
        } catch (Exception e) {
            e.printStackTrace();  // 오류 로그를 출력합니다.

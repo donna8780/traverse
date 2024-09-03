@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.security.NoSuchAlgorithmException;
 import java.net.MalformedURLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class MypageController {
    
    // 수정실행
    @PostMapping("/update")
-   public String update(AccountsVO input) {
+   public String update(AccountsVO input) throws NoSuchAlgorithmException {
       ms.update(input);
       return "redirect:/member/logout";
    }
