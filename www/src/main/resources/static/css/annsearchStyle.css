@@ -17,7 +17,7 @@ body {
 }
 
 #customer-inner {
-	background-color: #e2e2e2;
+  background-color: #e2e2e2;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
@@ -117,7 +117,7 @@ body {
 
 /* 공지사항 테이블 스타일 */
 #notice {
-	padding: 20px;
+  padding: 20px;
 }
 
 .rwd-table {
@@ -182,20 +182,20 @@ body {
 }
 
 #notice-write {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 #notice-write .write-button {
-	margin-left: 88%;
+  margin-left: 88%;
 }
 
 /* FAQ 섹션 스타일 */
 #faq {
-	padding: 20px;
+  padding: 20px;
 }
 
 #first-faq {
-	padding: 0 15px;
+  padding: 0 15px;
 }
 
 .faq-item {
@@ -215,11 +215,11 @@ body {
 
 /* Q&A 섹션 스타일 */
 #qna {
-	padding: 20px;
+  padding: 20px;
 }
 
 .qna h2 {
-	text-align: center;
+  text-align: center;
     font-size: 24px;
     margin-bottom: 20px;
     color: #2A3854;
@@ -244,7 +244,7 @@ body {
 }
 
 #qna th {
-	text-align: center;
+  text-align: center;
 }
 
 .qna-item td a {
@@ -335,5 +335,3 @@ body {
 #customer .section.active {
     display: block;
 }
-
-
