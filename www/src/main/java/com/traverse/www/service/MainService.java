@@ -10,6 +10,8 @@ import com.traverse.www.vo.AccountsVO;
 import com.traverse.www.vo.PlaceVO;
 import com.traverse.www.vo.SelPlaceVO;
 
+
+
 @Service
 public class MainService {
 	
@@ -56,6 +58,13 @@ public class MainService {
 		result.setDuration(d * 5);
 		
 		return dao.getPlaces(result);
+	}
+
+	public List<PlaceVO> getPlacesother(SelPlaceVO result,int type) {
+		int d = result.getDuration();
+		result.setDuration(d * 5);
+		
+		return dao.getPlacesother(result,type);
 	}
 
 }

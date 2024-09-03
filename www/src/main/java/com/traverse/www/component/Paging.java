@@ -15,11 +15,11 @@ public class Paging {
 		offset = (reqPage - 1) * perBoard;
 		
 		totalPage = totalBoard / perBoard;
-		totalPage += (totalPage % totalBoard == 0) ? 0 : 1;
-		
+		totalPage = (totalBoard + perBoard - 1) / perBoard;
+
 		index = (reqPage-1) / perPage;
 		begin = index * 10 + 1;
-		end = (index + 1) * perPage;
+		end = (index +1) * perPage;
 		
 		end = (end < totalPage) ? end : totalPage;
 		if(end == 0) {

@@ -17,7 +17,7 @@ mapy	double
  */
 public class DetailVO {
 
-	private int idx, area_code, sigungucode;
+	private int idx, area_code, sigungucode,p_idx;
 	private String cat0, cat1, cat2, cat3, tel;
 	private String firstimage, firstimage2;
 	private String title, addr1;
@@ -106,6 +106,12 @@ public class DetailVO {
 	}
 	public void setFirstimage(String firstimage) {
 		this.firstimage = firstimage;
+	}
+	public int getP_idx() {
+		return p_idx;
+	}
+	public void setP_idx(int p_idx) {
+		this.p_idx = p_idx;
 	}
 	
 	

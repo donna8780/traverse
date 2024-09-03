@@ -1,12 +1,12 @@
 @charset "UTF-8";
+body {
+  margin: 0;
+  padding: 0;
+    box-sizing: border-box;
+}
 
 .logo {
    width: 150px;
-}
-
-.mapimg {
-   height: 700px;
-   width: 900px;
 }
 
 .table-container {
@@ -36,6 +36,8 @@ input[id="menuicon"] {
 
 header {
    width: 100%;
+   position: relative;
+   z-index: 4;
 }
 
 header > div {
@@ -55,12 +57,18 @@ header > div ul.navi {
 header > div ul.navi > li {
    font-size: 12px;
    display: inline-block;
+   display: flex; /* 플렉스박스 사용 */
+   align-items: center; /* 세로 가운데 정렬 */
 }
 
 header > div ul.navi > li > a {
    display: block;
    width: auto;
    padding: 20px;
+}
+
+.navi a {
+	font-size: 16px;
 }
 
 .area_desc {
@@ -150,6 +158,10 @@ input[id="menuicon"]:checked ~ .container .sidebar {
   text-decoration: none;
 }
 
+.sidebar .area_desc a:hover {
+  color: black;
+}
+
 .checkbox {
     position: absolute;
     transform: translate(-50%, -50%);
@@ -158,8 +170,121 @@ input[id="menuicon"]:checked ~ .container .sidebar {
     cursor: pointer;
 }
 
+table {
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid black;
+	padding: 5px 10px;
+}
+
+
+.sidebar {
+	position: fixed;
+	top: 0;
+	right: -3000px;
+	width: 300px;
+	height: 100%;
+	background: #E2E2E2;
+	transition: all .35s;
+	z-index: 50;
+}
+
+.sidebar label[for*='menuicon'] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	/* 요소가 없는 부분을 클릭하면 메뉴버튼 닫기 */
+}
+
+.background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .5);
+	transition: all .35s;
+	opacity: 0;
+	visibility: hidden;
+	z-index: 20;
+}
+
+input#menuicon:checked ~ header label {
+	background-position: -24px 0;
+}
+
+input#menuicon:checked ~ .sidebar {
+	right: 0;
+}
+
+input#menuicon:checked ~ .background {
+	opacity: 1;
+	visibility: visible;
+}
+
+.sidebar a:hover {
+	color: black;
+	text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+	transition: all 0.3s ease;
+}
+
+.userprofile img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	object-fit: cover; /* 이미지가 비율을 유지하면서 컨테이너에 맞춰짐 */
+    object-position: center; /* 이미지의 중앙 부분이 표시되도록 설정 */
+	
+}
+
+.navi #nick {
+	font-size: 20px;
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.navi #nick:hover {
+	text-decoration: underline;
+}
+
+
 footer {
    width: 1200px;
    margin: 0 auto;
-   min-height: 60px;
+   min-height: 50px;
+    padding: 10px 10px 0 10px;
+    text-align: center;
+}
+
+footer hr {
+    border: none;
+    border-top: 1px solid #ccc; /* 구분선 스타일 */
+    margin-bottom: 10px;
+    width: 1200px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; /* 수직 가운데 정렬 */
+    flex-wrap: wrap; /* 화면 크기에 따라 항목들이 여러 줄로 배치되도록 설정 */
+    gap: 10px; /* 항목 사이의 간격 */
+}
+
+.footer-container a {
+	color: black;
+}
+
+.footer-container span {
+    font-size: 14px; /* 텍스트 크기 */
+}
+
+.footer-container span:first-child {
+    font-weight: bold; /* 첫 번째 항목(TRAVERSE)의 텍스트 굵게 */
 }

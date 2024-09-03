@@ -35,7 +35,7 @@ public class CustomerService {
 		
 	}
 	public CustomerVO getCsBoardOne(int idx) {
-		
+		dao.updateViewCount(idx);
 		return dao.selectOne(idx);
 	}
 	public int update(CustomerVO input) {
@@ -45,6 +45,10 @@ public class CustomerService {
 	public int deleteCS(CustomerVO idx) {
 		return dao.delete(idx);
 		
+	}
+	public List <CustomerVO>qna_result_Search(String qna_search) {
+		
+		return dao.qnaselectSearch(qna_search);
 	}
 
 

@@ -1,15 +1,15 @@
-body {
+#csboard {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
 }
 
-h1 {
+#csboard h1 {
     color: #2A3854;
 }
 
-form {
+#csboard form {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 5px;
@@ -18,15 +18,15 @@ form {
     margin: 0 auto;
 }
 
-label {
+#csboard label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
     color: #333333;
 }
 
-input[type="text"],
-textarea {
+#csboard input[type="text"],
+#csboard textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -35,7 +35,7 @@ textarea {
     font-size: 16px;
 }
 
-button {
+#csboard button {
     background-color: #2A3854;
     color: #ffffff;
     padding: 10px 15px;
@@ -45,6 +45,6 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+#csboard button:hover {
     background-color: #1d2a40;
 }

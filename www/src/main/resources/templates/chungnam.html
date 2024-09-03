@@ -5,200 +5,126 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>traverse</title>
   
+  <link href="/css/mainStyle.css" rel="stylesheet">
   <link href="/css/homeStyle.css" rel="stylesheet">
 </head>
 <body>
 
-	<input type="checkbox" id="menuicon">
-	<header>
-		<div>
-			<ul class="navi">
-				<li><a href="/"><img class="logo" th:src="@{/image/logo_w.png}"></a></li>
-				<li th:if="${session.user == null}">
-					<a href="/member/login">login</a>
-				</li>
-				<li th:if="${session.user != null}">
-					<a href="/member/myPage">myPage</a>
-				</li>
-		  </ul>
-		  
-		  <label for="menuicon" class="menubtn">
-		  	<span></span>
-		  	<span></span>
-		  	<span></span>
-		  </label>
-		</div>
-	</header>
+	<th:block th:replace="/fragment::header"></th:block>
 	
 	<div class="container">
 		<div class="contents">
-			<span class="area_desc">
-				<img class="mapimg" th:src="@{/image/chungnam.png}">
 				
-				<form id="locationForm" method="POST" onsubmit="return validateForm()">
+				<div class="title">【충남】</div>
 				
-				<label class="container1" style="top: 30%; left: 16%;">
-					<div id="displayText1" class="display-text" style="display: none;">태안</div>
-				  <input type="checkbox" id="checkbox1" name="chungnam" value="14">
-				  <div class="checkmark1"></div>
-				</label>
+				<div class="slider-container">
+				  <img th:src="@{/image/region/충남 대표이미지1.jpg}" class="slide">
+				  <img th:src="@{/image/region/충남 대표이미지2.jpg}" class="slide">
+				  <img th:src="@{/image/region/충남 대표이미지3.jpg}" class="slide">
+				  <img th:src="@{/image/region/충남 대표이미지4.jpg}" class="slide">
+				  <img th:src="@{/image/region/충남 대표이미지5.jpg}" class="slide">
+				  <img th:src="@{/image/region/충남 대표이미지6.jpg}" class="slide">
+				</div>
 				
-				<label class="container1" style="top: 31%; left: 27%;">
-					<div id="displayText2" class="display-text" style="display: none;">서산</div>
-				  <input type="checkbox" id="checkbox2" name="chungnam" value="7">
-				  <div class="checkmark1"></div>
-				</label>
+				<br>
 				
-				<label class="container1" style="top: 23%; left: 37%;">
-					<div id="displayText3" class="display-text" style="display: none;">당진</div>
-				  <input type="checkbox" id="checkbox3" name="chungnam" value="4">
-				  <div class="checkmark1"></div>
-				</label>
+<!-- 폼 시작 -->
+<form id="checkboxForm" method="post" onsubmit="return validateForm()">
+  <!-- 첫 번째 버튼과 체크박스 -->
+  <input name="chungnam" value="1" type="checkbox" id="checkbox1" style="display:none;">
+  <button type="button" id="button1" class="checkbox-button">공주</button>
+
+  <!-- 두 번째 버튼과 체크박스 -->
+  <input name="chungnam" value="2" type="checkbox" id="checkbox2" style="display:none;">
+  <button type="button" id="button2" class="checkbox-button">금산</button>
+
+  <!-- 세 번째 버튼과 체크박스 -->
+  <input name="chungnam" value="3" type="checkbox" id="checkbox3" style="display:none;">
+  <button type="button" id="button3" class="checkbox-button">논산</button>
+
+  <!-- 네 번째 버튼과 체크박스 -->
+  <input name="chungnam" value="4" type="checkbox" id="checkbox4" style="display:none;">
+  <button type="button" id="button4" class="checkbox-button">당진</button>
+
+  <!-- 다섯 번째 버튼과 체크박스 -->
+  <input name="chungnam" value="5" type="checkbox" id="checkbox5" style="display:none;">
+  <button type="button" id="button5" class="checkbox-button">보령</button>
+ 
+  <input name="chungnam" value="6" type="checkbox" id="checkbox6" style="display:none;">
+  <button type="button" id="button6" class="checkbox-button">부여</button>
+
+  <input name="chungnam" value="7" type="checkbox" id="checkbox7" style="display:none;">
+  <button type="button" id="button7" class="checkbox-button">서산</button>
+
+  <input name="chungnam" value="8" type="checkbox" id="checkbox8" style="display:none;">
+  <button type="button" id="button8" class="checkbox-button">서천</button>
+
+  <input name="chungnam" value="9" type="checkbox" id="checkbox9" style="display:none;">
+  <button type="button" id="button9" class="checkbox-button">아산</button>
+
+  <input name="chungnam" value="11" type="checkbox" id="checkbox10" style="display:none;">
+  <button type="button" id="button10" class="checkbox-button">예산</button>
+
+  <input name="chungnam" value="12" type="checkbox" id="checkbox11" style="display:none;">
+  <button type="button" id="button11" class="checkbox-button">천안</button>
+
+  <input name="chungnam" value="13" type="checkbox" id="checkbox12" style="display:none;">
+  <button type="button" id="button12" class="checkbox-button">청양</button>
+
+  <input name="chungnam" value="14" type="checkbox" id="checkbox13" style="display:none;">
+  <button type="button" id="button13" class="checkbox-button">태안</button>
+
+  <input name="chungnam" value="15" type="checkbox" id="checkbox14" style="display:none;">
+  <button type="button" id="button14" class="checkbox-button">홍성</button>
+  
+  <input name="chungnam" value="16" type="checkbox" id="checkbox15" style="display:none;">
+  <button type="button" id="button15" class="checkbox-button">계룡</button>
+  
+  <!-- 폼 제출 버튼 -->
+    <button type="submit" class="submit-button">Submit</button>
+</form>
+
+<script>
+  const maxSelections = 1;
+
+  document.querySelectorAll('.checkbox-button').forEach((button, index) => {
+    const checkbox = document.getElementById(`checkbox${index + 1}`);
+
+    button.addEventListener('click', function() {
+      const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
+
+      // 체크박스 상태를 반전시킴
+      checkbox.checked = !checkbox.checked;
+
+      // 체크박스 상태에 따라 버튼 스타일 변경
+      if (checkbox.checked) {
+        button.classList.add('checked');
+      } else {
+        button.classList.remove('checked');
+      }
+    });
+  });
+
+  function validateForm() {
+    const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    
+    if (checkedCheckboxes === 0) {
+        alert('여행할 지역을 선택해주세요.');
+        return false;
+      }
+
+      if (checkedCheckboxes > maxSelections) {
+        alert('하나의 지역만 선택할 수 있습니다.');
+        return false;
+      }
+
+    return true;
+  }
+</script>
 				
-				<label class="container1" style="top: 29%; left: 53%;">
-					<div id="displayText4" class="display-text" style="display: none;">아산</div>
-				  <input type="checkbox" id="checkbox4" name="chungnam" value="9">
-				  <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 28%; left: 66%;">
-					<div id="displayText5" class="display-text" style="display: none;">천안</div>
-			    <input type="checkbox" id="checkbox5" name="chungnam" value="12">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 44%; left: 35%;">
-					<div id="displayText6" class="display-text" style="display: none;">홍성</div>
-			    <input type="checkbox" id="checkbox6" name="chungnam" value="15">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 39%; left: 46%;">
-					<div id="displayText7" class="display-text" style="display: none;">예산</div>
-			    <input type="checkbox" id="checkbox7" name="chungnam" value="11">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 59%; left: 35%;">
-					<div id="displayText8" class="display-text" style="display: none;">보령</div>
-			    <input type="checkbox" id="checkbox8" name="chungnam" value="5">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 54%; left: 46%;">
-					<div id="displayText9" class="display-text" style="display: none;">청양</div>
-			    <input type="checkbox" id="checkbox9" name="chungnam" value="13">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 51%; left: 59%;">
-					<div id="displayText10" class="display-text" style="display: none;">공주</div>
-			    <input type="checkbox" id="checkbox10" name="chungnam" value="1">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 75%; left: 40%;">
-					<div id="displayText11" class="display-text" style="display: none;">서천</div>
-			    <input type="checkbox" id="checkbox11" name="chungnam" value="8">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 67%; left: 47%;">
-					<div id="displayText12" class="display-text" style="display: none;">부여</div>
-			    <input type="checkbox" id="checkbox12" name="chungnam" value="6">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 69%; left: 63%;">
-					<div id="displayText13" class="display-text" style="display: none;">논산</div>
-			    <input type="checkbox" id="checkbox13" name="chungnam" value="3">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 61%; left: 71%;">
-					<div id="displayText14" class="display-text" style="display: none;">계룡</div>
-			    <input type="checkbox" id="checkbox14" name="chungnam" value="16">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<label class="container1" style="top: 74%; left: 80%;">
-					<div id="displayText15" class="display-text" style="display: none;">금산</div>
-			    <input type="checkbox" id="checkbox15" name="chungnam" value="2">
-			    <div class="checkmark1"></div>
-				</label>
-				
-				<button class="container1" style="bottom: 5%; right: 0%;" type="reset" onclick="resetDisplayTexts()">
-					reset
-				</button>
-				
-				<button class="container1" style="bottom: 0%; right: 0%;">
-					submit
-				</button>
-				
-				</form>
-				
-			</span>
-		</div>
-		<div class="sidebar">
-			<span class="area_desc">
-			  <a href="/member/signUp">signUp</a><br>
-			  <th:block th:if="${session.user == null}">
-			  	<a href="/member/login">login</a><br>
-			  </th:block>
-			  <th:block th:if="${session.user != null}">
-			  	<a href="/member/logout">logout</a><br>
-			  	<a href="/member/myPage">myPage</a><br>
-			  </th:block>
-			  <a href="/member/like">like</a><br>
-			  <a href="/place/mapAPI">mapAPI</a><br>
-        <a href="/member/customer">customer</a><br>
-        <a href="/member/detail">상세페이지</a>
-			</span>
 		</div>
 	</div>
 	
-	<footer>
-		<hr>
-		<div>회사소개  |  이용약관  |  등등...</div>
-	</footer>
-	
-	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-	  	var checkboxes = document.querySelectorAll('.container1 input[type="checkbox"]');
-	
-	    checkboxes.forEach(function(checkbox, index) {
-	    	var displayText = document.getElementById('displayText' + (index + 1));
-	
-	      checkbox.addEventListener('change', function() {
-	      	if (checkbox.checked) {
-	        	displayText.style.display = 'block';
-	        }
-	      	else {
-	        	displayText.style.display = 'none';
-	        }
-	      });
-	    });
-		});
-		
-		function resetDisplayTexts() {
-			const displayTexts = document.querySelectorAll('.display-text');
-		  displayTexts.forEach(text => {
-		  	text.style.display = 'none';
-		  });
-		}
-		function validateForm() {
-			var checkboxes = document.querySelectorAll('.container1 input[type="checkbox"]:checked');
-			if (checkboxes.length === 0) {
-				alert("최소 1개 이상의 항목을 선택해주세요.");
-				return false;
-			}
-			else if (checkboxes.length > 3) {
-				alert("최대 3개 항목만 선택할 수 있습니다.");
-				return false;
-			}
-			return true;
-		}
-	</script>
-	
+<th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

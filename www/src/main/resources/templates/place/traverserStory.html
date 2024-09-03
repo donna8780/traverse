@@ -1,82 +1,115 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>traverse</title>
-  
-  <link href="/css/mainStyle.css" rel="stylesheet">
-  <link href="/css/traverserStoryStyle.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>traverse</title>
+
+<link href="/css/mainStyle.css" rel="stylesheet">
+<link href="/css/traverserStoryStyle.css" rel="stylesheet">
 </head>
 <body>
 
-	<input type="checkbox" id="menuicon">
-	<header>
-		<div>
-			<ul class="navi">
-				<li><a href="/"><img class="logo" th:src="@{/image/logo_w.png}"></a></li>
-				<li th:if="${session.user == null}">
-					<a href="/member/login">login</a>
-				</li>
-				<li th:if="${session.user != null}">
-					<a href="/member/myPage">myPage</a>
-				</li>
-		  </ul>
-		  
-		  <label for="menuicon" class="menubtn">
-		  	<span></span>
-		  	<span></span>
-		  	<span></span>
-		  </label>
-		</div>
-	</header>
-	
+	<th:block th:replace="/fragment::header"></th:block>
+
 	<div class="container">
-		<div class="contents">
-			<h1>Traverser's Story</h1>
-		
-			<form action="POST">
-    	<div class="search">
-        <input placeholder="Search..." type="text">
-        <button type="submit">Go</button>
-      </div>
-      </form>
-      
-      <div class="trending">
-      <span>Trending Searches :</span>
-      <span><a href="/">Seoul</a></span>
-      <span><a href="/">Jeju</a></span>
-      <span><a href="/">Busan</a></span>
-      <span><a href="/">Jeonju</a></span>
-      <span>...</span>
+		<div class="contents" style="min-height: 650px;">
+<!-- 사용자가 입력한 데이터를 서버로 전송 -->
+			<form method="POST">
+			<!-- 검색 -->
+				<div class="search">
+					<h1>Traverser's Story</h1>
+					<!-- 인풋태그에 검색어 입력 -->
+					<input name="search" placeholder="Search..." type="text">
+					<button type="submit">Go</button>
+				</div>
+			</form>
+
+			<div style="text-align: right; margin: 10px 0;">
+				<a href="/place/story_write">
+					<button type="button"
+						style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer;">
+						Write a Story</button>
+				</a>
 			</div>
+			
+<div class="box-container">
+      
+      <a th:href="@{/place/story/{idx}(idx=${rand1.idx})}">
+       <div class="box box1">
+         <div class="inner-box top">
+            <img th:src="${#strings.isEmpty(rand1.imge1) ? '/image/story/logo_w.png' : '/image/story/' + rand1.imge1}">
+         </div>
+         <!-- <div class="inner-box top-right">
+            <img th:src="${#strings.isEmpty(rand1.imge2) ? '/story/logo_w.png' : '/story/' + rand1.imge2}">
+         </div> -->
+         <div class="inner-box bottom">
+            <div class="text-line line1" th:text="${rand1.nick}">nick</div>
+          <div class="text-line line2" th:text="${rand1.title}">title</div>
+          <div class="text-line line3" th:text="${'# ' + rand1.regin + ', ' + daysBetween1 + '일'}"># 부산, 2박 3일(여행지, 기간)</div>
+         </div>
+         <div class="inner-box center">
+            <img th:src="${#strings.isEmpty(rand1.profile) ? '/image/default_profile.png' : '/image/profile/' + rand1.profile}">
+         </div>
+       </div>
+       </a>
+       
+       <a th:href="@{/place/story/{idx}(idx=${rand2.idx})}">
+       <div class="box box2">
+       <div class="inner-box top">
+            <img th:src="${#strings.isEmpty(rand2.imge1) ? '/image/story/logo_w.png' : '/image/story/' + rand2.imge1}">
+         </div>
+         
+         <div class="inner-box bottom">
+            <div class="text-line line1" th:text="${rand2.nick}">소백돌이</div>
+          <div class="text-line line2" th:text="${rand2.title}">진해 나들이</div>
+          <div class="text-line line3" th:text="${'# ' + rand2.regin + ', ' + daysBetween2 + '일'}"># 창원, 1박 2일</div>
+         </div>
+         <div class="inner-box center">
+            <img th:src="${#strings.isEmpty(rand2.profile) ? '/image/default_profile.png' : '/image/profile/' + rand2.profile}">
+         </div>
+       </div>
+       </a>
+       
+       <a th:href="@{/place/story/{idx}(idx=${rand3.idx})}">
+       <div class="box box3">
+        <div class="inner-box top">
+            <img th:src="${#strings.isEmpty(rand3.imge1) ? '/image/story/logo_w.png' : '/image/story/' + rand3.imge1}">
+         </div>
+        
+         <div class="inner-box bottom">
+            <div class="text-line line1" th:text="${rand3.nick}">새박사</div>
+          <div class="text-line line2" th:text="${rand3.title}">로또당첨</div>
+          <div class="text-line line3" th:text="${'# ' + rand3.regin + ', ' + daysBetween3 + '일'}"># 춘천, 2박 3일</div>
+         </div>
+         <div class="inner-box center">
+            <img th:src="${#strings.isEmpty(rand3.profile) ? '/image/default_profile.png' : '/image/profile/' + rand3.profile}">
+         </div>
+       </div>
+       </a>
+       
+       <a th:href="@{/place/story/{idx}(idx=${rand4.idx})}">
+       <div class="box box4">
+          <div class="inner-box top">
+            <img th:src="${#strings.isEmpty(rand4.imge1) ? '/image/story/logo_w.png' : '/image/story/' + rand4.imge1}">
+         </div>
+         
+         <div class="inner-box bottom">
+            <div class="text-line line1" th:text="${rand4.nick}">받킨지</div>
+          <div class="text-line line2" th:text="${rand4.title}">베베랑 콩이랑~~</div>
+          <div class="text-line line3" th:text="${'# ' + rand4.regin + ', ' + daysBetween4 + '일'}"># 제주, 2박 3일</div>
+         </div>
+         <div class="inner-box center">
+            <img th:src="${#strings.isEmpty(rand4.profile) ? '/image/default_profile.png' : '/image/profile/' + rand4.profile}">
+         </div>
+       </div>
+       </a>
 
-		</div>
-		<div class="sidebar">
-			<span class="area_desc">
-			  <a href="/member/signUp">signUp</a><br>
-			  <th:block th:if="${session.user == null}">
-			  	<a href="/member/login">login</a><br>
-			  </th:block>
-			  <th:block th:if="${session.user != null}">
-			  	<a href="/member/logout">logout</a><br>
-			  	<a href="/member/myPage">myPage</a><br>
-			  </th:block>
-			  <a href="/member/like">like</a><br>
-			  <a href="/place/mapAPI">mapAPI</a><br>
-        <a href="/member/customer">customer</a><br>
-        <a href="/member/detail">상세페이지</a><br>
-        <a href="/place/traverserStory">Traverser's Story</a>
-			</span>
-		</div>
-	</div>
-	
-	
-	
-	<footer>
-		<hr>
-		<div>회사소개  |  이용약관  |  등등...</div>
-	</footer>
+		
+    
+</div>
 
+
+		<th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

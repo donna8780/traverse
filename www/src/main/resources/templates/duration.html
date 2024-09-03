@@ -5,70 +5,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>traverse</title>
   
-  <link href="/css/homeStyle.css" rel="stylesheet">
+  <link href="/css/mainStyle.css" rel="stylesheet">
+  <link href="/css/durationStyle.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
+ <th:block th:replace="/fragment::header"></th:block>
+      <div id="duration">
+        <span class="area_desc">
+        <form method="POST" id="travel-form">
+          <legend>여행 기간 선택</legend><br>
+          
+          <div id="inline-calendar"></div>
+          <input type="hidden" id="travel-date" name="travelDate">
+          <input type="hidden" id="travel-days" name="duration"> <!-- 총 며칠인지 저장할 필드 -->
+          <br>
+          <label for="selected-dates-display">선택한 날짜:</label>
+          <input name="seldate" type="text" id="selected-dates-display" readonly> <!-- 선택한 날짜를 표시할 input -->
+          <input name="type1" type="hidden" th:value="0">
+           
+          <button type="submit">선택</button>
+        </form>
+      </span>
+    
+  
 
-	<input type="checkbox" id="menuicon">
-	<header>
-		<div>
-			<ul class="navi">
-				<li><a href="/"><img class="logo" th:src="@{/image/logo_w.png}"></a></li>
-				<li th:if="${session.user == null}">
-					<a href="/member/login">login</a>
-				</li>
-				<li th:if="${session.user != null}">
-					<a href="/member/myPage">myPage</a>
-				</li>
-		  </ul>
-		  
-		  <label for="menuicon" class="menubtn">
-		  	<span></span>
-		  	<span></span>
-		  	<span></span>
-		  </label>
-		</div>
-	</header>
-	
-	<div class="container">
-		<div class="contents">
-			<span class="area_desc">
-				<form method="POST">
-					<legend>기간 선택</legend>
-					
-					<label><input type="radio" name="duration" value="1">당일</label>
-    			<br>
-    			<label><input type="radio" name="duration" value="2">1박2일</label>
-    			<br>
-    			<label><input type="radio" name="duration" value="3">2박3일</label>
-    			<br>
-    			
-    			<button>submit</button>
-				</form>
-			</span>
-		</div>
-		<div class="sidebar">
-			<span class="area_desc">
-			  <a href="/member/signUp">signUp</a><br>
-			  <th:block th:if="${session.user == null}">
-			  	<a href="/member/login">login</a><br>
-			  </th:block>
-			  <th:block th:if="${session.user != null}">
-			  	<a href="/member/logout">logout</a><br>
-			  	<a href="/member/myPage">myPage</a><br>
-			  </th:block>
-			  <a href="/member/like">like</a><br>
-			  <a href="/place/mapAPI">mapAPI</a><br>
-        <a href="/member/customer">customer</a><br>
-        <a href="/member/detail">상세페이지</a>
-			</span>
-		</div>
-	</div>
-	
-	<footer>
-		<hr>
-		<div>회사소개  |  이용약관  |  등등...</div>
-	</footer>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    
+    <!-- Flatpickr 초기화 스크립트 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let selectedDatesCount = 0;
 
+            flatpickr("#inline-calendar", {
+                mode: "range",  // 날짜 범위 선택
+                dateFormat: "Y-m-d",  // 날짜 형식 설정
+                minDate: "today",  // 오늘 날짜 이후만 선택 가능
+                inline: true,  // 달력을 인라인으로 고정시킴
+                onChange: function(selectedDates, dateStr, instance) {
+                    selectedDatesCount = selectedDates.length; // 선택된 날짜 개수를 저장
+                    
+                    document.getElementById('travel-date').value = dateStr;  // 선택된 날짜를 숨겨진 input에 저장
+                    
+                    if (selectedDates.length > 0) {
+                        const formattedDates = selectedDates.map(date => {
+                            const day = String(date.getDate()).padStart(2, '0');
+                            const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+                            return `${month}.${day}`;
+                        });
+                        document.getElementById('selected-dates-display').value = formattedDates.join(' - '); // 선택한 날짜를 input에 표시
+                    }
+                    
+                    if (selectedDates.length === 2) {
+                        // 선택된 날짜 범위가 있을 때만 계산
+                        const startDate = selectedDates[0];
+                        const endDate = selectedDates[1];
+                        const timeDiff = Math.abs(endDate - startDate);
+                        const diffDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) + 1; // 시작일과 종료일을 포함
+                        
+                        document.getElementById('travel-days').value = diffDays; // 총 일수를 숨겨진 input에 저장
+                    }
+                }
+            });
+
+            document.getElementById('travel-form').addEventListener('submit', function(event) {
+                if (selectedDatesCount < 2) {
+                    // 날짜가 2개 선택되지 않았으면 경고하고 폼 제출을 막음
+                    alert('돌아오는 날짜를 선택해 주세요');
+                    event.preventDefault(); //폼 제출 방지
+                }
+            });
+        });
+    </script>
+      </div>
+<th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

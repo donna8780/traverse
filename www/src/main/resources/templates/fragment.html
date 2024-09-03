@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <th:block th:fragment="header">
+   <input type="checkbox" id="menuicon">
+  <header>
+    <div>
+      <ul class="navi">
+        <li><a href="/"><img class="logo" th:src="@{/image/logo_w.png}"></a></li>
+        <li th:if="${session.user == null}">
+          <a href="/member/login"  id="nick">login</a>
+        </li>
+        <li th:if="${session.user != null}">
+        <div th:if="${session.user.profile}" class="userprofile">
+        	<a href="/member/myPage"><img th:src="@{'/image/profile/' + ${session.user.profile}}" /></a>
+				</div>
+        <a href="/member/myPage" th:text="${session.user.nick + '님'}" id="nick">myPage</a>
+        </li>
+      </ul>
+      
+      <label for="menuicon" class="menubtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
+  </header>
+    
+    <div class="container">
+    <div class="contents">
+  </th:block>
+  
+  
+  <th:block th:fragment="footer">
+    
+    </div>
+    <div class="sidebar">
+      <span class="area_desc">
+        
+        <th:block th:if="${session.user == null}">
+        <a href="/member/signUp">회원가입</a><br>
+          <a href="/member/login">로그인</a><br>
+        </th:block>
+        <th:block th:if="${session.user != null}">
+          <a href="/member/logout">로그아웃</a><br>
+          <a href="/member/myPage">마이페이지</a><br>
+        </th:block>
+        <a href="/member/like">찜</a><br>
+        <a href="/member/customer">고객지원</a><br>
+        <a href="/place/travelplan">여행계획</a><br>        
+        <a href="/member/accommodation">숙박</a><br>
+        <a href="/member/index">길찾기</a><br>
+        <a href="/place/traverserStory">여행의 향기</a>
+      </span>
+      <label for="menuicon"></label>
+    </div>
+  </div>
+    <label for="menuicon" class="background"></label>
+  
+   <footer>
+    <hr>
+    <div class="footer-container">
+    	<span>TRAVERSE</span>
+    	<span>|</span>
+    	<span><a href="/member/customer">회사소개</a></span>
+    	<span>|</span>
+    	<span><a href="/termsOfService">이용약관</a></span>
+    	<span>|</span>
+    	<span><a href="/privacyPolicy">개인정보보호방침</a></span>
+    	<span>|</span>
+    	<span>© traverse2024</span>
+    </div>
+  </footer>
+  </th:block>
+</body>
+</html>

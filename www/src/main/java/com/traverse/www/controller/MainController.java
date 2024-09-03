@@ -479,7 +479,10 @@ public class MainController {
   }
 
   @PostMapping("/duration")
-  public ModelAndView duration(@RequestParam(name = "duration") int duration, HttpSession session) {
+  public ModelAndView duration(@RequestParam(name = "duration") int duration, 
+  														 @RequestParam(name = "seldate") String seldate, 
+  														 @RequestParam(name = "type1") String type1, 
+  														 HttpSession session) {
   	ModelAndView mav = new ModelAndView();
   	
   	AccountsVO user = (AccountsVO) session.getAttribute("user");
@@ -490,16 +493,19 @@ public class MainController {
   	}
   	
   	int a_idx = user.getAccounts_idx();
+  	String type = String.format("&type=%s", type1);
   	
   	ms.sel_duration(duration, a_idx);
-  	
-  	mav.setViewName("redirect:/recommendResult");
+
+  	mav.setViewName("redirect:/recommendResult?seldate=" + seldate + type);
   	
   	return mav;
   }
   
   @GetMapping("/recommendResult")
-  public ModelAndView recommendResult(HttpSession session) {
+  public ModelAndView recommendResult(@RequestParam(name = "seldate", required = false) String seldate,
+  																		HttpSession session,
+  																		@RequestParam("type")int type) {
   	ModelAndView mav = new ModelAndView();
   	
   	AccountsVO user = (AccountsVO) session.getAttribute("user");
@@ -514,9 +520,19 @@ public class MainController {
   	SelPlaceVO result = ms.getSelPlace(a_idx);
   	
   	mav.addObject("result", result);
-  	mav.addObject("place", ms.getPlaces(result));
-  	
+  	mav.addObject("seldate", seldate);
+  	if(type == 0) {
+  		mav.addObject("place", ms.getPlaces(result));
+  	}else {
+  		mav.addObject("place", ms.getPlacesother(result,type));
+  	}
   	return mav;
   }
+
+  @GetMapping("/termsOfService")
+  public void termsOfService() {}
+  
+  @GetMapping("/privacyPolicy")
+  public void privacyPolicy() {}
   
 }
