@@ -60,7 +60,7 @@ public class AnnouncementController {
 		
 		as.deleteAccount(idx);
 		
-		return "redirect:/member/announcement";
+		return "redirect:/member/customer";
 	}
 	
 	// 게시글 수정
@@ -74,7 +74,7 @@ public class AnnouncementController {
 	public String update(AnnouncementVO input) {
 		as.update(input);
 		
-		return "redirect:/member/announcement";
+		return "redirect:/member/customer";
 		
 	}
 	

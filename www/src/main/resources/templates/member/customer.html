@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>고객지원</title>
-<link rel="stylesheet" href="/css/Customerstyle.css">
+<link rel="stylesheet" href="/css/Customerstyle00.css">
 <link rel="stylesheet" href="/css/mainStyle.css">
 </head>
 <body>
@@ -13,69 +13,64 @@
 	<header>
 		<nav>
 			<ul>
-				<li><a href="#company-intro"
-					onclick="showSection('company-intro')">기업소개</a></li>
-				<li><a href="#notice" onclick="showSection('notice')">공지사항</a></li>
-				<li><a href="#faq" onclick="showSection('faq')">FAQ</a></li>
-				<li><a href="#qna" onclick="showSection('qna')">Q&A</a></li>
+				<li><a href="#company-intro" onclick="showSection('company-intro')">  기업소개  </a></li>
+				<li>|</li>
+				<li><a href="#notice" onclick="showSection('notice')">  공지사항  </a></li>
+				<li>|</li>
+				<li><a href="#faq" onclick="showSection('faq')">  FAQ  </a></li>
+				<li>|</li>
+				<li><a href="#qna" onclick="showSection('qna')">  자유 게시판  </a></li>
 
 			</ul>
 		</nav>
 	</header>
-
-	<section id="company-intro" class="section">
+	<div id="customer-inner">
+	<section id="company-intro" class="section active">
 		<div class="intro-container">
+				<h2>기업소개</h2>
+		<div class="inner-content">
 			<div class="intro-logo">
-				<img src="/image/traverse.png">
+				<img src="/image/logo_w.png">
 			</div>
 			<div class="intro-text">
-				<h2>기업소개</h2>
 				<pre>
-Traverse는 여행을 사랑하는 모든 사람들에게 영감을 주고, 쉽게 여행을 계획하며, 
-잊지 못할 추억을 남길 수 있도록 도와주는 국내 여행 플랫폼입니다.
+Traverse는 여행을 사랑하는 모든 이들에게 영감을 주고, 쉽고 간편하게 여행을 계획하며 잊지 못할 추억을 만들어주는 국내 여행 플랫폼입니다.
 
-Traverse는 프랑스어 "traverser"에서 유래하여, '건너다'라는 의미를 지니고 있습니다. 
-이 이름은 경계를 넘고 새로운 장소를 탐험하는 여행의 본질을 잘 담고 있습니다. 
-우리의 목표는 여러분이 일상에서 벗어나 국내의 아름다운 곳곳을 경험하고, 
-새로운 경계를 넘어서는 여정을 즐길 수 있도록 지원하는 것입니다.
+"Traverse"는 프랑스어 "traverser"에서 유래되었으며, '건너다'라는 의미를 담고 있습니다. 이 이름은 경계를 넘고 새로운 장소를 탐험하는 여행의 본질을 잘 표현하고 있습니다. 우리의 목표는 여러분이 일상에서 벗어나 국내의 아름다운 곳곳을 탐험하고 새로운 경계를 넘어서는 여정을 즐길 수 있도록 돕는 것입니다.
 
-Traverse를 통해 여러분은:
+Traverse를 통해 여러분은
 
-여행 추천 받기: 
-	다양한 테마와 목적에 맞는 여행지를 추천받아, 나만의 여행을 시작할 수 있습니다.
-여행 계획 세우기: 
-	추천받은 여행지를 바탕으로 여행 일정을 쉽게 계획하고 관리할 수 있습니다.
-여행 후기와 사진 공유하기: 
-	여행을 마친 후, 간단한 후기와 사진을 공유하여 다른 여행자들과 추억을 나눌 수 있습니다.
+여행 추천 받기: 다양한 테마와 목적에 맞는 여행지를 추천받아 나만의 여행을 시작할 수 있습니다.
+여행 계획 세우기: 추천받은 여행지를 바탕으로 여행 일정을 쉽고 효율적으로 계획하고 관리할 수 있습니다.
+여행 후기와 사진 공유하기: 여행을 마친 후 간단한 후기와 사진을 공유하여 다른 여행자들과 소중한 추억을 나눌 수 있습니다.
+우리는 국내 여행에 초점을 맞추고 있으며, 여러분이 국내의 숨겨진 보석 같은 장소를 발견하고 새로운 경험을 할 수 있도록 지원합니다.
 
-우리의 서비스는 국내 여행에 초점을 맞추고 있습니다. 
-여러분이 국내의 숨겨진 보석 같은 장소들을 발견하고, 새로운 경험을 할 수 있도록 도와줍니다. 
-
-Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정을 떠나세요!
+Traverse와 함께 경계를 넘어 전국을 탐험하며 잊지 못할 여정을 떠나세요!
 			</pre></div>
+			</div>
 		</div>
 	</section>
 
 	<section id="notice" class="section" style="display: none;">
 		<h2>공지사항</h2>
-		<p>여기는 공지사항 섹션입니다. 중요한 공지 및 업데이트 정보를 제공합니다.</p>
+		
 		<table class="rwd-table">
 			<tbody>
 				<tr>
-					<th>No</th>
+					<th>No.</th>
 					<th>제목</th>
-					<th>닉네임</th>
+					<th>작성자</th>
 					<th>작성일</th>
 					<th>조회수</th>
 				</tr>
 				<tr th:each="row : ${announce}">
-					<td th:text="${row.announcement_idx}"></td>
+					<td th:text="${row.announcement_idx}" class="td-center"></td>
 					<td><a
 						th:href="@{/member/view/{announcement_idx}(announcement_idx=${row.announcement_idx})}"
 						th:text="${row.title}"></a></td>
-					<td th:text="${row.nick}"></td>
-					<td th:text="${row.w_date}"></td>
-					<td th:text="${row.v_count}"></td>
+					<td th:text="${row.nick}" class="td-center"></td>
+					<td th:text="${row.w_date}" class="td-center"></td>
+					<td th:text="${row.v_count}" class="td-center"></td>
 				</tr>
 			</tbody>
 		</table>
@@ -83,57 +78,129 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정
 
 		<ul class="pagemenu">
 
-			<li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}"><a
-				th:href="@{customer(idx=${i})} + '#notice'"> <span
-					th:text="${i}"></span>
-			</a></li>
+			<li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}">
+				<a th:href="@{customer(idx=${i})} + '#notice'"> 
+				   <span
+					    th:text="${i}">
+					 </span>
+				</a>
+			</li>
 
 		</ul>
 		<!-- 관리자가 아니면 글쓰기 활성화 안됨 -->
 		<div th:if="${session.user != null and session.user.nick == '관리자'}">
-			<a href="/member/write"><button>
-				<span class="span-mother"> <span>글</span> <span>쓰</span> <span>기</span>
-				</span> <span class="span-mother2"> <span>글</span> <span>쓰</span> <span>기</span>
-				</span>
-			</button></a>
+			<a href="/member/write" id="notice-write"><button class="write-button">글쓰기</button></a>
 		</div>
+		
+		
 	</section>
 
 	<section id="faq" class="section" style="display: none;">
 		<h2>FAQ</h2>
-		<div class="faq-item">
-			<h3>Q: 자주 묻는 질문 1</h3>
-			<p>A: 자주 묻는 질문 1에 대한 답변입니다.</p>
-		</div>
-		<div class="faq-item">
-			<h3>Q: 자주 묻는 질문 2</h3>
-			<p>A: 자주 묻는 질문 2에 대한 답변입니다.</p>
-		</div>
+		<div class="faq-item" id="first-faq">
+    	<button class="accordion">
+        <span class="question-text">Q. 예약은 어떻게 하나요?</span>
+        <span class="toggle-text">더보기 ▽</span>
+    	</button>
+        <div class="panel">
+            <pre>
+A. "예약은 저희 웹사이트에서 쉽게 할 수 있습니다. 
+원하는 여행 상품이나 숙소를 검색하고, 상세 페이지에서 '예약하기' 버튼을 클릭하세요. 이후 안내에 따라 여행 일정을 선택하고, 개인 정보를 입력한 후 결제 과정을 진행하시면 예약이 완료됩니다. 
+예약 확인 이메일이 발송되며, 해당 이메일에서 예약 내역을 확인하실 수 있습니다."
+						</pre>
+        </div>
+    </div>
+    <div class="faq-item">
+      <button class="accordion">
+        <span class="question-text">Q. 결제는 어떻게 하나요?</span>
+        <span class="toggle-text">더보기 ▽</span>
+    	</button>
+        <div class="panel">
+            <pre>
+A. "저희 사이트에서는 다양한 결제 방법을 지원합니다. 신용카드, 체크카드, 그리고 모바일 결제 등이 가능합니다.
+결제 과정에서 카드 정보를 입력하고, 결제 확인을 완료하면 예약이 확정됩니다.
+결제 시 문제가 발생할 경우 고객센터로 문의해 주시면 도움을 드리겠습니다."
+.
+						</pre>
+        </div>
+    </div>
+    <div class="faq-item">
+      <button class="accordion">
+        <span class="question-text">Q. 환불 정책은 어떻게 되나요?</span>
+        <span class="toggle-text">더보기 ▽</span>
+    	</button>
+        <div class="panel">
+            <pre>
+A. "환불 정책은 예약한 상품의 유형과 조건에 따라 다를 수 있습니다. 
+일반적으로, 여행 시작 7일 전까지 취소하시면 전액 환불이 가능하며, 그 이후 취소 시에는 일정 비율의 취소 수수료가 부과될 수 있습니다.
+자세한 환불 조건은 예약 확인 이메일에 명시된 환불 정책을 참고하시거나, 고객센터에 문의해 주시면 안내해 드리겠습니다."
+						</pre>
+        </div>
+    </div>
+        <div class="faq-item">
+      <button class="accordion">
+        <span class="question-text">Q. 여행 일정이나 상품에 대한 변경이 가능한가요?</span>
+        <span class="toggle-text">더보기 ▽</span>
+    	</button>
+        <div class="panel">
+            <pre>
+A. "여행 일정이나 상품 변경은 예약 후 특정 기간 내에 가능합니다. 변경 가능 여부와 추가 비용은 변경 요청 시점에 따라 다를 수 있습니다. 
+변경을 원하실 경우, 고객센터에 연락 주시거나 '내 예약' 페이지에서 변경 요청을 진행해 주세요.
+변경 가능성과 조건에 대해 상세히 안내해 드리겠습니다."
+						</pre>
+        </div>
+    </div>
+        <div class="faq-item">
+      <button class="accordion">
+        <span class="question-text">Q. 숙소의 체크인/체크아웃 시간은 어떻게 되나요?</span>
+        <span class="toggle-text">더보기 ▽</span>
+    	</button>
+        <div class="panel">
+            <pre>
+A. "일반적으로 숙소의 체크인 시간은 오후 3시부터 시작되며, 체크아웃 시간은 오전 11시까지입니다. 
+조기 체크인이나 늦은 체크아웃을 원하실 경우, 사전에 숙소와 연락하여 가능 여부를 확인하시기 바랍니다. 
+추가 요금이 발생할 수 있으니, 미리 확인해 주세요."
+						</pre>
+        </div>
+    </div>
+            <div class="faq-item">
+      <button class="accordion">
+        <span class="question-text">Q. 여행 시 필요한 서류나 준비물이 무엇인가요?</span>
+        <span class="toggle-text">더보기 ▽</span>
+    	</button>
+        <div class="panel">
+            <pre>
+A. "여행 시에는 신분증(주민등록증 또는 운전면허증)과 예약 확인서가 필요합니다.
+해외여행의 경우 여권이 필요하며, 비자나 기타 여행 서류는 여행지에 따라 달라질 수 있습니다.
+여행 전에 필요한 서류와 준비물을 다시 한 번 확인하고, 모든 서류를 준비해 주세요.
+자세한 정보는 여행 상품 상세 페이지나 고객센터에서 확인하실 수 있습니다."
+						</pre>
+        </div>
+    </div>
 	</section>
 
 	<section id="qna" class="section" style="display: none;">
-		<h2>Q&A</h2>
+		<h2>자유 게시판</h2>
 		<div class="qna-item">
-			<h3>qna 게시판</h3>
 
-			<table>
+			<table class="rwd-table" id="qna">
 				<tbody>
 					<tr>
-						<th>No</th>
+						<th>No.</th>
 						<th>제목</th>
-						<th>닉네임</th>
-						<th>내용</th>
-						<th>작성시간</th>
+						<th>작성자</th>
+						<th>작성일</th>
+						<th>조회수</th>
 					</tr>
 					<tr th:each="row : ${qna}">
-						<td th:text="${row.board_idx}"></td>
+						<td th:text="${row.board_idx}" class="td-center"></td>
 						<td><a
 							th:href="@{/member/csView/{board_idx}(board_idx=${row.board_idx})}"
 							th:text="${row.title}"></a></td>
-						<td th:text="${row.nick}"></td>
-						<td th:text="${row.title}"></td>
-						<td th:text="${row.content}"></td>
-						<td th:text="${row.create_at}"></td>
+						<td th:text="${row.nick}" class="td-center"></td>
+						<td th:text="${row.create_at}" class="td-center"></td>
+						<td th:text="${row.v_count}" class="td-center"></td>
+
 					</tr>
 				</tbody>
 			</table>
@@ -142,7 +209,7 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정
 
         <!-- 타임리프의 반복문을 위한 속성으로 html코드 동적으로 생성 i는 반복분에서 인텍스를 나타내고 pg.begin에서 pg.end까지 
         숫자 시퀀스를 생성 예를 들어, 1,10이면 pg.begin에서 pg.end까지 숫자에 대해 li태그를 생성 -->
-        <li th:each="i : ${#numbers.sequence(pg.begin, pg.end)}"><a
+        <li th:each="i : ${#numbers.sequence(qnapg.begin, qnapg.end)}"><a
           th:href="@{customer(idx=${i})} + '#qna'"><!-- 동적 링크 생성 --> <span
             th:text="${i}"></span>
         </a></li>
@@ -150,10 +217,31 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정
       <!-- pg.begin에서 pg.end까지 숫자에 해당하는 페이지 번호를 순서대로 li와 a태그로 감싸서 페이지네이션 링크를 만든다.
       이 링크는 사용자가 각 페이지 번호를 클릭할 수 있도록 하며 클릭 시 특정 페이지로 이동한다. a태그에 #qna가 붙어있으므로
       페이지 이동 후에도 페이지의 특정 위치로 스크롤된다. -->     
-    </div>
+      
+        
+    <a href="/member/cswrite" id="notice-write"><button class="write-button">글쓰기</button></a>
+    
+    <form method="POST">
+      <!-- 검색 -->
+        <div class="search">
+          <!-- 인풋태그에 검색어 입력 -->
+          <input name="qna_search" placeholder="궁금한 점을 검색하세요." type="text">
+          <button type="submit">검색</button>
+        </div>
+      </form>
+        <!-- 테이블 형식으로 이야기 목록을 표시 -->
+    
 
-    <a href="/member/cswrite"><button>글쓰기</button></a>
+
+      </div>
+    </div>
+  
+  
+  
   </section>
+  
+  
+
 
   <script>
   //세션에서 로그인 상태 가져옴
@@ -187,7 +275,30 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며, 잊지 못할 여정
         }
         });
 
-    
+     // 페이지 로드 시 해시값에 따라 해당 섹션으로 이동
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash;
+            if (hash) {
+                const sectionId = hash.substring(1); // 해시 값에서 '#' 제거
+                showSection(sectionId);
+            }
+        });
+     
+        document.addEventListener('DOMContentLoaded', function() {
+            var accordions = document.getElementsByClassName("accordion");
+
+            for (var i = 0; i < accordions.length; i++) {
+                accordions[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                    } else {
+                        panel.style.display = "block";
+                    }
+                });
+            }
+        });
     </script>
 	
 	</div>

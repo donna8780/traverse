@@ -1,0 +1,256 @@
+@charset "UTF-8";
+
+/* 기본 레이아웃 설정 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#notice-inner {
+	background-color: #e2e2e2;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.notice {
+	text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2A3854;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 게시글 컨테이너 스타일 */
+.post-container {
+    width: 90%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* 제목 스타일 */
+.post-container h1 {
+    font-size: 22px;
+    color: #2A3854;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.post-container .post-info {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    text-align: right;
+}
+
+.post-container .post-info p {
+    margin: 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* 수평선 스타일 */
+.post-container hr {
+    border: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* 게시글 내용 스타일 */
+.post-content {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+    white-space: pre-wrap; /* 원본 텍스트의 공백과 줄바꿈을 유지 */
+    width: 95%;
+    margin: 0 auto;
+}
+
+/* 댓글 작성 폼 스타일 */
+form {
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 97%;
+}
+
+form p {
+    margin: 5px 10px 10px 10px;
+    font-weight: bold;
+}
+
+
+form div {
+    display: flex; /* 플렉스 박스를 사용하여 textarea와 button을 수평으로 배치 */
+    align-items: center; /* 요소를 수직 가운데 정렬 */
+    gap: 10px; /* 요소 간 간격 */
+}
+
+form textarea {
+	flex: 1; /* textarea가 남는 공간을 차지하도록 설정 */
+    height: 45px; /* textarea 높이 조정 */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+}
+
+form button, #buttons button {
+    background-color: #4BB958;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover, #buttons button:hover {
+    background-color: #F89D4A;
+    color: #2A3854;
+}
+
+    #buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+/* 댓글 리스트 스타일 */
+fieldset {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+fieldset h5 {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+fieldset .reply-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+fieldset .reply-header .nickname {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+    margin-left: 5px;
+}
+
+fieldset .reply-header .date {
+    font-size: 14px;
+    color: #aaa;
+    margin: 0;
+    text-align: right; /* 날짜를 오른쪽 정렬 */
+    margin-right: 10px;
+}
+
+fieldset .reply-header h5 {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+fieldset .reply-content {
+    font-size: 16px;
+    line-height: 1.3;
+    color: #333;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+fieldset .reply-buttons {
+    text-align: right;
+    margin-top: 10px;
+}
+
+fieldset .reply-buttons button {
+    background-color: #4BB958;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 5px;
+}
+
+fieldset .reply-buttons button:hover {
+    background-color: #F89D4A;
+    color: #2A3854;
+}
+
+/* 댓글 수정 폼 스타일 */
+fieldset .edit-form {
+    margin-top: 10px;
+}
+
+fieldset .edit-form textarea {
+    width: 100%;
+    height: 60px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+}
+
+fieldset .edit-form button {
+    margin-top: 10px;
+    background-color: #4BB958;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+fieldset .edit-form button:hover {
+    background-color: #F89D4A;
+    color: #2A3854;
+}
+
+
+
+
+
+.modify {
+	margin: 10px 10px 10px 600px;
+}
+
+.re-modify {
+	margin: 10px 10px 10px 600px;
+}
+
+/*
+본인 확인 버튼 컨테이너 스타일
+div[th\\:if] {
+    text-align: center;
+    margin-top: 20px;
+}
+*/

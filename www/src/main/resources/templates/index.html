@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h1>Enter Place Content ID</h1>
+    <form th:action="@{/getPlaceDetails}" method="get">
+        <label for="contentId">Content ID:</label>
+        <input type="text" id="contentId" name="contentId">
+        <button type="submit">detail Common</button>
+    </form>
+</body>
+</html>

@@ -20,25 +20,41 @@ public class ReviewController {
     // 리뷰 작성
     @PostMapping("/review")
     public String addReview(ReviewVO review) {
+    	String detail = "?contenttypeid=%s&contentid=%s";
+    	String detail1 = String.format(detail,review.getContenttypeid(), review.getContentid());
         boolean isAdded = rs.addReview(review);
         if (!isAdded) {
             // 리뷰가 이미 있는 경우 경고 메시지와 함께 이전 페이지로 리다이렉트
             return "redirect:/member/detail/" + review.getP_idx() + "?error=duplicate";
         }
-        return "redirect:/member/detail/" + review.getP_idx(); // 등록 후 상세 페이지로 리다이렉트
+        return "redirect:/member/detail/" + review.getP_idx() + detail1; // 등록 후 상세 페이지로 리다이렉트
     }
     
     // 리뷰 수정
     @PostMapping("/review/edit")
     public String updateReview(ReviewVO review) {
+    	String detail = "?contenttypeid=%s&contentid=%s";
+    	String detail1 = String.format(detail,review.getContenttypeid(), review.getContentid());
         rs.updateReview(review);
-        return "redirect:/member/detail/" + review.getP_idx();
+        
+        System.out.println(review.getContenttypeid());
+        System.out.println(review.getContentid());
+        return "redirect:/member/detail/" + review.getP_idx()+ detail1;
     }
 
     // 리뷰 삭제
     @PostMapping("/review/delete/{id}")
-    public String deleteReview(@PathVariable("id") int id, @RequestParam("p_idx") int p_idx) {
-        rs.deleteReview(id);
-        return "redirect:/member/detail/" + p_idx;
+    public String deleteReview(
+    				@PathVariable("id") int id, 
+    				@RequestParam("p_idx") int p_idx,
+    				@RequestParam("contenttypeid") String contenttypeid,
+    				@RequestParam("contentid") String contentid) {
+    	System.out.println(contentid);
+    	System.out.println(contenttypeid);
+    	
+    	String detail = "?contenttypeid=%s&contentid=%s";
+    	String detail1 = String.format(detail,contenttypeid, contentid);
+    	rs.deleteReview(id);
+      return "redirect:/member/detail/" + p_idx + detail1;
     }
 }

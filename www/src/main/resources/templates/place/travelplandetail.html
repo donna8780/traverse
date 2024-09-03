@@ -5,6 +5,7 @@
     <title>Travel Plan Detail</title>
     <link href="/css/mainStyle.css" rel="stylesheet">
     <link href="/css/tabStyle.css" rel="stylesheet">
+    
 </head>
 <body>
 
@@ -18,74 +19,165 @@
                 th:data-seldate="${Planplace[0].seldate}"
                 class="tab-link">
         </button>
+        <a th:href="@{travelplandel?(seldate=${Planplace[0].seldate})}"><button>여행계획삭제</button></a>
     </div>
 
     <div th:each="i : ${#numbers.sequence(1, Planplace[0].duration)}"
          th:id="'tab' + ${i}"
          class="tab-content">
-         
+        <div class="left-content">
+            
+        </div>
+        <div class="right-content">
+            <div id="'map'+${i}" style="width: 100%; height: 100%;"></div>
+        </div>
     </div>
 </div>
-
-
-
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7717c2c3bc1327ef51412b55ac5ef"></script>
 <script>
-    function openTab(evt, tabName,day,seldate) {
-        var i, tabcontent, tablinks;
-        // 모든 탭 콘텐츠 숨기기
-        tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-            tabcontent[i].classList.remove("active");
-        }
-
-        // 모든 탭 링크에서 active 클래스 제거
-        tablinks = document.getElementsByClassName("tab-link");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].classList.remove("active");
-        }
-
-        // 현재 탭 콘텐츠 표시
-        document.getElementById(tabName).style.display = "block";
-        document.getElementById(tabName).classList.add("active");
-
-        // 현재 탭 링크에 active 클래스 추가
-        evt.currentTarget.classList.add("active");
-        
-        fetch("http://localhost:8080/place/dayplan?day=" + day + "&seldate="+seldate, {method:"get"})
-        .then(response => response.json())
-        .then()
-        .then(data => {
-
-        var tabContentElement = document.getElementById(tabName);
-        tabContentElement.innerHTML = `<h4>Day ${day}</h4>`;
-
-        if (Array.isArray(data)) {
-
-            data.forEach(place => {
-                tabContentElement.innerHTML += `
-                    <div>
-                        ${place.firstimage ? `<img src="${place.firstimage}" width="150px" height="100px">` : `<img src="/image/logo_w.png" width="150px" height="100px">`}
-                        <p>장소: ${place.title}</p>
-                        <p>주소: ${place.addr1}</p>
-                    </div>
-                `;
-            });
-        } else {
-            tabContentElement.innerHTML += `<p>No places available for this day.</p>`;
-        }
-    })
-        
+function openTab(evt, tabName, day, seldate) {
+    var i, tabcontent, tablinks;
+    // 모든 탭 콘텐츠 숨기기
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+        tabcontent[i].classList.remove("active");
     }
 
-    // 첫 번째 탭을 기본적으로 열기
-    document.addEventListener("DOMContentLoaded", function() {
-        var firstTab = document.querySelector(".tab-menu button");
-        if (firstTab) {
-            firstTab.click();
-        }
-    });
+    // 모든 탭 링크에서 active 클래스 제거
+    tablinks = document.getElementsByClassName("tab-link");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+    }
+
+    // 현재 탭 콘텐츠 표시
+    document.getElementById(tabName).style.display = "flex";
+    document.getElementById(tabName).classList.add("active");
+
+    // 현재 탭 링크에 active 클래스 추가
+    evt.currentTarget.classList.add("active");
+
+    fetch("http://localhost:8080/place/dayplan?day=" + day + "&seldate=" + seldate, {method: "get"})
+        .then(response => response.json())
+        .then(data => {
+            var leftContentElement = document.getElementById(tabName).querySelector('.left-content');
+
+            // 초기 콘텐츠 설정
+            leftContentElement.innerHTML = `<h3>Day ${day}</h3>`;
+
+            if (Array.isArray(data)) {
+                let htmlContent = ''; // HTML 콘텐츠를 축적할 변수
+                let markers = []; // 마커를 저장할 배열
+                let linePath = []; // 점선을 위한 경로를 저장할 배열
+
+                data.forEach((place, index) => {
+                    // HTML 콘텐츠를 변수에 축적
+                    htmlContent += `
+                        <div class="plan">
+                            <div>
+                                <div>${place.firstimage ? `<img src="${place.firstimage}" class="placefirstimage">` : `<img src="/image/logo_w.png" class="placefirstimage">`}</div>
+                                <div>
+                                    <div>${place.title}</div> 
+                                    <div>${place.addr1}</div> 
+                                </div>
+                                <label class="checkbox-container">
+                                     <input type="checkbox" id="checkbox-${index}" checked>
+                                    <span class="checkbox-custom">${index + 1}</span> <!-- 순서 번호를 표시합니다 -->
+                                </label>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // 축적된 HTML 콘텐츠를 한 번에 설정
+                leftContentElement.innerHTML += htmlContent;
+
+                // 지도를 초기화하고, 커스텀 오버레이로 마커를 추가
+                var mapContainer = document.querySelector('#' + tabName + ' .right-content > div');
+                var mapOption = {
+                    center: new kakao.maps.LatLng(36.2194188, 128.0093991),
+                    level: 10
+                };
+                var map = new kakao.maps.Map(mapContainer, mapOption);
+                
+                // 체크된 장소들에 대해서 물방울 모양의 마커 추가
+                data.forEach((place, index) => {
+                    const checkbox = document.getElementById(`checkbox-${index}`);
+                    if (checkbox && checkbox.checked) {
+                        const markerPosition = new kakao.maps.LatLng(place.mapy, place.mapx);
+                        linePath.push(markerPosition); // 마커 위치를 경로에 추가
+                        // 물방울 모양 마커와 인덱스 값을 표시할 커스텀 오버레이 생성
+                        const overlayContent = `
+                            <div style="position: relative; width: 34px; height: 42px; text-align: center; color: white; font-size: 14px; font-weight: bold;">
+                                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                    <svg width="28" height="35" viewBox="0 0 34 42">
+																		    <path d="M17 0C7.61116 0 0 7.61116 0 17C0 27.3888 17 42 17 42C17 42 34 27.3888 34 17C34 7.61116 26.3888 0 17 0Z" fill="#4CAF50"/>
+																		</svg>
+																		<div style="position: absolute; top: 8px; left: 0; width: 100%; line-height: 20px; font-size: 12px;">${index + 1}</div>
+                                </div>
+                            </div>`;
+                        const customOverlay = new kakao.maps.CustomOverlay({
+                            position: markerPosition,
+                            content: overlayContent,
+                            map: map,
+                            yAnchor: 0.6 // 오버레이가 마커 중심에 위치하도록 조정 
+                        });
+                        // 오버레이 클릭 시 인포윈도우 표시
+                        kakao.maps.event.addListener(customOverlay, 'click', function () {
+                            const infowindow = new kakao.maps.InfoWindow({
+                                content: `<div><strong>${place.title}</strong><br>${place.addr1}</div>`
+                            });
+                            infowindow.open(map, customOverlay);
+                        });
+
+                        markers.push(customOverlay); // 오버레이를 배열에 저장
+                        
+                    }
+                }); 
+                
+                const polyline = new kakao.maps.Polyline({
+                    path: linePath, // 경로 배열
+                    strokeWeight: 3, // 선의 두께
+                    strokeColor: '#4CAF50', // 선의 색상
+                    strokeOpacity: 0.8, // 선의 불투명도
+                    strokeStyle: 'dash' // 선의 스타일 (점선)
+                });
+
+                polyline.setMap(map); // 지도에 폴리라인을 표시
+                
+                // 지도 중심을 첫 번째 마커로 설정
+                if (markers.length > 0) {
+                    map.setCenter(markers[0].getPosition());
+                }
+            } else {
+                leftContentElement.innerHTML += `<p>일정이 없습니다</p>`;
+            }
+            
+            
+        });
+
+	    setTimeout(function () {
+	        var mapContainer = document.querySelector('#' + tabName + ' .right-content > div'),
+	            mapOption = {
+	                center: new kakao.maps.LatLng(36.2194188, 128.0093991),
+	                level: 10 // 지도 확대 레벨
+	            };
+	        var map = new kakao.maps.Map(mapContainer, mapOption);
+	    }, 100); // 100ms 지연 후 초기화
+}
+
+// 첫 번째 탭을 기본적으로 열기
+document.addEventListener("DOMContentLoaded", function () {
+    var firstTab = document.querySelector(".tab-menu button");
+    if (firstTab) {
+        firstTab.click();
+    }
+});
+
+
+
 </script>
+
 <th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

@@ -26,32 +26,138 @@
             padding: 20px;
             border: 1px solid #ccc;
             border-top: none;
+            display: flex; /* Flexbox를 사용하여 두 개의 섹션을 나란히 배치 */
         }
 
         .tab-content.active {
-            display: block;
+            display: flex; /* 탭 활성화 시 Flexbox 적용 */
+            height: 600px;
         }
-        .planimg{
-          width: 250px;
-          height: 150px
+
+        .left-content {
+            flex: 1;
+            padding-right: 10px;
+            border-right: 1px solid #ccc;
+            max-height: 600px; /* 높이 제한을 설정합니다 */
+            overflow-y: auto; /* 수직 스크롤을 활성화합니다 */
         }
-        .planimg img{
-          width: 100%;
-          height: 100%;
+
+        .right-content {
+            flex: 2;
+            padding-left: 10px;
+            display: flex; /* Flexbox로 내부 요소 확장 */
         }
-        .placetable{
-          width: 100%;
+
+        .planimg {
+            width: 200px;
+            height: 150px;
         }
+
+        .planimg img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .placetable {
+            width: 100%;
+        }
+
         .placetable tr:nth-child(1) {
-          height: 70px;
+            height: 70px;
+        }
+
+        .placetable th:nth-child(4) {
+            width: 70px;
+        }
+
+        .placetable th,
+        .placetable td {
+            padding: 20px;
+        }
+
+        .placetable td:nth-child(1) {
+            padding: 0;
+        }
+        #map {
+            flex: 1; /* 지도 요소가 부모 요소를 꽉 채우도록 설정 */
+            background-color: gray;
+        }
+        .placefirstimage{
+          width: 100px;
+          height: 90px;
+          border-radius: 10px
+        }
+        .plan{
+          padding: 10px;
+        }
+        .plan > div{
+        display: flex; 
+        border-radius: 10px;
+        }
+        .plan div:nth-child(1){
+          padding: 5px;
+        }
+        .plan div:nth-child(2){
+          padding: 5px;
+        }
+        .plan div:nth-child(3){
+          padding: 5px;
         }
         
-        .placetable th:nth-child(4) {
-          width: 70px;
+         .checkbox-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
         }
-        .placetable th,td{
-          padding: 20px;
+
+        .checkbox-container input[type="checkbox"] {
+            display: none;
         }
-        .placetable td:nth-child(1) {
-          padding: 0;
+
+        .checkbox-custom {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: transparent;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked + .checkbox-custom {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .plandata div, a{
+          color: inherit;
+          text-decoration: none;
+        }
+        
+        .plandata div:hover {
+            color: #4CAF50;
+            font-weight: bold; /* 글자를 두껍게 */
+            transform: scale(1.01); /* 텍스트가 튀어나오는 효과 */   
+        }
+        .markerstyle{
+          width: 200px;
+          min-height: 25px;
+          text-align: center;
+          font-weight: bold;
+         }
+         .custom-tab-row{
+          text-align: center;
+         }
+         .custom-tab-row button{
+          width: 80px;
+          height: 50px;
+          margin: 10px;
+          border-radius: 10px;
+         }
+         .custom-tab-link:hover {
+            background-color: #4CAF50;
+            color: white;
         }
