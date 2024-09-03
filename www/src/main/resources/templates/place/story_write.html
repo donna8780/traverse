@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>글 작성하기</title>
@@ -10,13 +10,18 @@
     <script>
         function addFileInput() {
             const fileInputContainer = document.getElementById('file-input-container');
-            const newFileInput = document.createElement('input');
-            newFileInput.type = 'file';
-            newFileInput.name = 'images';
-            newFileInput.accept = 'image/*';
-            fileInputContainer.appendChild(newFileInput);
+            const fileInputs = fileInputContainer.getElementsByTagName('input');
+            
+            if (fileInputs.length < 10) { // 최대 10개의 파일 입력 필드만 허용
+                const newFileInput = document.createElement('input');
+                newFileInput.type = 'file';
+                newFileInput.name = 'images';
+                newFileInput.accept = 'image/*';
+                fileInputContainer.appendChild(newFileInput);
+            } else {
+                alert('이미지는 최대 10개까지만 추가할 수 있습니다.');
+            }
         }
-
     </script>
 </head>
 <body>

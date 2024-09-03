@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>게시글 수정</title>
+    
     <link href="/css/mainStyle.css" rel="stylesheet">
-    <link href="/css/storyupStyle.css" rel="stylesheet">
+    <link href="/css/stowriteStyle00.css" rel="stylesheet">
 
     <script>
         function addFileInput() {
             const fileInputContainer = document.getElementById('file-input-container');
-            const newFileInput = document.createElement('input');
-            newFileInput.type = 'file';
-            newFileInput.name = 'images';
-            newFileInput.accept = 'image/*';
-            fileInputContainer.appendChild(newFileInput);
+            const fileInputs = fileInputContainer.getElementsByTagName('input');
+            
+            if (fileInputs.length < 10) { // 최대 10개의 파일 입력 필드만 허용
+                const newFileInput = document.createElement('input');
+                newFileInput.type = 'file';
+                newFileInput.name = 'images';
+                newFileInput.accept = 'image/*';
+                fileInputContainer.appendChild(newFileInput);
+            } else {
+                alert('이미지는 최대 10개까지만 추가할 수 있습니다.');
+            }
         }
     </script>
 </head>
@@ -22,7 +29,7 @@
 
   <div id="stup">
     <div class="content-container">
-        <h1>게시글 수정</h1>
+        <h2>게시글 수정</h2>
         <form th:action="@{'/place/story/' + ${story.idx}}" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">제목</label>
@@ -30,23 +37,24 @@
             </div>
             
             <div class="form-group">
-                <label for="regin">지역</label>
+                <label for="regin">여행 지역</label>
                 <input type="text" id="regin" name="regin" th:value="${story.regin}" required>
             </div>
 
-            <div class="form-group">
-                <label for="seldate">시작 날짜</label>
-                <input type="date" id="seldate" name="seldate" th:value="${story.seldate}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="enddate">종료 날짜</label>
-                <input type="date" id="enddate" name="enddate" th:value="${story.enddate}" required>
+            <div class="form-group date-group">
+                <div class="date-field">
+                    <label for="seldate">출발 일자</label>
+                    <input type="date" id="seldate" name="seldate" th:value="${story.seldate}" required>
+                </div>
+                <div class="date-field">
+                    <label for="enddate">도착 일자</label>
+                    <input type="date" id="enddate" name="enddate" th:value="${story.enddate}" required>
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="contents">내용</label>
-                <textarea id="contents" name="contents" rows="10" required th:text="${story.contents}"></textarea>
+                <textarea id="contents" name="contents" rows="5" required th:text="${story.contents}"></textarea>
             </div>
 
             <div class="form-group">
