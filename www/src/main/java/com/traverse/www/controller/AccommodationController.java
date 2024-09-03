@@ -1,5 +1,7 @@
 package com.traverse.www.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.AccommodationService;
+import com.traverse.www.vo.PlaceVO;
 
 @Controller
 @RequestMapping("/member")
@@ -27,7 +30,15 @@ public class AccommodationController {
     @GetMapping("/accommodation/search")
     public ModelAndView searchAccom(@RequestParam("title") String title) {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("accommodation", acs.searchByTitle(title));
+        List<PlaceVO> accommodation = acs.searchByTitle(title);
+        String msg = "";
+        
+        if (accommodation == null || accommodation.isEmpty()) {
+        	msg = "검색 결과가 없습니다.";
+        } 
+        
+        mav.addObject("msg", msg);
+        mav.addObject("accommodation", accommodation);
         mav.setViewName("member/accommodation");
         return mav;
     }

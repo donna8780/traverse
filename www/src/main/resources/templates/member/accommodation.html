@@ -38,6 +38,7 @@
                  th:src="@{/image/replace.png}" alt="Default Image" />
         </li>
     </ul>
+     <h2 th:text="${msg}"></h2>
 
 	<div>
     <!-- areaCodes를 순회하여 버튼 생성 -->
@@ -67,8 +68,6 @@
         </li>
     </ul>
 
-    <!-- 검색 결과가 없을 때 메시지 표시 -->
-    <p th:if="${accommodationList != null and #lists.isEmpty(accommodationList)}">No results found.</p>
     </div>
 
     <th:block th:replace="/fragment::footer"></th:block>
