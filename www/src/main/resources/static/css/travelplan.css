@@ -29,6 +29,7 @@ h1 {
 .travel-plan {
     display: flex;
     align-items: center;
+    justify-content: space-between; /* 요소를 양 끝으로 배치 */
     background-color: rgba(255, 255, 255, 0.8); /* 불투명한 배경색 */
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -41,6 +42,14 @@ h1 {
 
 .travel-plan:hover {
     box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.plan-thumbnail img {
+    width: 17%;
+    height: 100%;
+    position: relative;
+    right: -160px;
+    
 }
 
 .plan-details {
@@ -58,6 +67,7 @@ h1 {
 .plan-details .travel-dates {
     font-size: 20px;
     color: #555;
+    width: 300px;
 }
 
 .box-container {
@@ -65,4 +75,5 @@ h1 {
     justify-content: space-between;
     margin-top: 20px;
 }
+
 

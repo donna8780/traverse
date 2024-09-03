@@ -20,12 +20,17 @@
        th:href="@{/place/travelplandetail?(seldate=${place.seldate})}" 
        class="travel-plan">
     
+   
     
     	
         <div class="plan-details">
             <h2 th:text="${place.areaName}+' '+ ${place.sigunguName} + ' 여행'"></h2>
             <p class="travel-dates" th:text="${place.seldate}"></p>
         </div>
+        
+        <div class="plan-thumbnail">
+   	<img th:src="@{/image/화살표.png}">
+   </div>
     </a>
 </div>
 
