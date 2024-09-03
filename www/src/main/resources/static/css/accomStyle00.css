@@ -10,6 +10,21 @@
     border-radius: 20px;
 }
 
+#booking {
+	background-color: #4BB958;
+	border: none;
+	padding: 10px 15px;
+	border-radius: 10px;
+	font-size: 16px;
+	margin-left: 10px;
+}
+
+#booking:hover {
+	background-color: #F89D4A;
+	color: #2A3854;
+	cursor: pointer;
+}
+
 h1 {
     text-align: center;
     color: #2A3854;
