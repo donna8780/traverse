@@ -17,8 +17,20 @@
       <table>
 
         <tr>
-          <th>회원번호</th>
-          <td th:text="${session.user.accounts_idx}"></td>
+          <th>프로필 사진</th>
+                <td>
+                <!-- 업로드된 프로필 사진 표시 -->
+                    <div th:if="${session.user.profile}">
+                        <img th:src="@{'/image/profile/' + ${session.user.profile}}" alt="Profile Image" style="width: 150px; height: 150px;" />
+
+                    </div>
+                    
+                    <form method="POST" enctype="multipart/form-data" th:action="@{/member/uploadProfile}">
+                        <input type="file" name="profileImage" accept="image/*" />
+                        <button type="submit">업로드</button>
+                    </form>
+                    
+                </td>
         </tr>
         <tr>
           <th>아이디</th>
@@ -36,22 +48,6 @@
           <th>생년월일</th>
           <td th:text="${session.user.birth}"></td>
         </tr>
-        <tr>
-                <th>프로필 사진</th>
-                <td>
-                <!-- 업로드된 프로필 사진 표시 -->
-                    <div th:if="${session.user.profile}">
-                        <img th:src="@{'/image/profile/' + ${session.user.profile}}" alt="Profile Image" style="width: 150px; height: 150px;" />
-
-                    </div>
-                    <!-- 이미지 업로드 폼 
-                    <form method="POST" enctype="multipart/form-data" th:action="@{/member/uploadProfile}">
-                        <input type="file" name="profileImage" accept="image/*" />
-                        <button type="submit">업로드</button>
-                    </form>-->
-                    
-                </td>
-            </tr>
         </table>
     <a href="/place/myplace"><button class="submit">쓴 글</button></a>
     <a th:href="@{/member/delete/{id}(id=${session.user.accounts_idx})}"><button class="submit">탈퇴</button></a>

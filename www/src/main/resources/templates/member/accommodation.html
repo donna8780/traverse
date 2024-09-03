@@ -22,21 +22,20 @@
     <!-- 검색 결과가 있을 때만 ul을 표시 -->
     <ul th:if="${accommodation != null and !#lists.isEmpty(accommodation)}">
         <li th:each="accommodation : ${accommodation}">
-            <p>Areacode: <span th:text="${accommodation.areacode}"></span></p>
-            <p>Title: 
-                <!-- 타이틀 클릭 시 외부 링크로 이동 -->
-                <a th:href="'https://www.yanolja.com/search/' + ${accommodation.addr1}" th:text="${accommodation.title}"></a>
+            
+            <p>장소: 
+                <a th:href="@{/member/detail/{idx}(idx=${accommodation.idx},contenttypeid=32,contentid=${accommodation.contentid})}" th:text="${accommodation.title}"></a>
+                <a th:href="'https://www.yanolja.com/search/' + ${accommodation.addr1}"><button>예약하기</button></a>
             </p>
-            <p>Address: <span th:text="${accommodation.addr1}"></span></p>
-            <p>Tel: <span th:text="${accommodation.tel}"></span></p>
-            <p>Map Coordinates: (<span th:text="${accommodation.mapx}"></span>, <span th:text="${accommodation.mapy}"></span>)</p>
+            <p>주소: <span th:text="${accommodation.addr1}"></span></p>
+            
             <!-- 이미지가 있을 때 -->
             <img th:if="${accommodation.firstimage != null and !accommodation.firstimage.isEmpty()}"
                  th:src="${accommodation.firstimage}" alt="Image" />
 
             <!-- 이미지가 없을 때 -->
             <img th:if="${accommodation.firstimage == null or accommodation.firstimage.isEmpty()}"
-                 th:src="@{/image/logo_w.png}" alt="Default Image" />
+                 th:src="@{/image/replace.png}" alt="Default Image" />
         </li>
     </ul>
 
@@ -48,10 +47,6 @@
         </button>
 </div>
 
-<div class="box-container">
-    <div class="box"></div>
-    <div class="box"></div>
-</div>
 
     <!-- 선택된 AreaCode의 accommodation 정보 표시 -->
     <ul th:if="${accommodationList != null and !#lists.isEmpty(accommodationList)}">
@@ -68,7 +63,7 @@
 
             <!-- 이미지가 없을 때 -->
             <img th:if="${accommodation.firstimage == null or accommodation.firstimage.isEmpty()}"
-                 th:src="@{/image/logo_w.png}" alt="Default Image" />
+                 th:src="@{/image/replace.png}" alt="Default Image" />
         </li>
     </ul>
 
