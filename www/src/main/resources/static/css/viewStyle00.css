@@ -74,7 +74,7 @@ body {
 
 /* 댓글 작성 폼 스타일 */
 form {
-    margin: 0 auto;
+    margin: 15px auto;
     padding: 10px;
     background-color: #f9f9f9;
     border-radius: 10px;

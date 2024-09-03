@@ -53,6 +53,9 @@ public class AnnouncementService {
 		
 	}
 	
+	public List<AnnouncementVO> searchAnnouncements(String keyword) {
+    return dao.searchByTitle(keyword);
+}
 
 
 

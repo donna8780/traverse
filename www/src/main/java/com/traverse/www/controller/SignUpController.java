@@ -121,12 +121,14 @@ public class SignUpController {
     // 닉네임 중복 확인을 처리하는 메서드
     @GetMapping("/checkUserNick")
     @ResponseBody
-    public Map<String, Object> checkUserNick(@RequestParam(name = "userNick") String userNick) {
+    public Map<String, Object> checkUserNick(@RequestParam(name = "nick") String nick) {
         Map<String, Object> result = new HashMap<>();
-        String check_nick = ss.checkUserNick(userNick); // 닉네임 중복 체크를 서비스에서 수행
+        System.out.println(nick);
+        String check_nick = ss.checkUserNick(nick); // 닉네임 중복 체크를 서비스에서 수행
         // 닉네임 중복 여부에 따라 메시지 설정
         String msg = check_nick == null ? "사용 가능한 닉네임입니다." : check_nick + "는 중복된 닉네임 입니다.";
         result.put("nick", msg); // 메시지를 맵에 저장
+        
         return result; // 맵을 JSON 형식으로 반환
     }
 
