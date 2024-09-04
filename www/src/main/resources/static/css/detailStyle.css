@@ -23,13 +23,20 @@ body {
 
 
 .navbar {
-    width: 760px;
-    max-width: 1200px; /* 중앙에 배치할 최대 너비 설정 */
+    width: auto;
+    max-width: 1200px;
     padding: 20px;
-    color:#2A3854;
+    color: #2A3854;
     display: flex;
-    
+    justify-content: center; /* 자식 요소를 가로로 중앙 정렬 */
+    align-items: center; /* 자식 요소를 세로로 중앙 정렬 */
 }
+
+.navbar h1 {
+    text-align: center;
+    flex-grow: 1; /* h1이 전체 너비를 차지하게 함 */
+}
+
 
 .navbar-left{
 	position: absolute;
@@ -148,7 +155,7 @@ button:hover {
     width: 45px;
     height: 50px;
     transition: .3s;
-    right:-910px;
+    right:0px;
     top: -20px;
 }
 
