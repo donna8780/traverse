@@ -23,7 +23,11 @@
          class="tab-content">
         <div class="left-content">
             <div class="plan">
-                <h3 th:text="'Day ' + ${i}"></h3>
+            <div  class="h3">
+            <h3 th:text="'Day ' + ${i}"></h3>
+            <a th:onclick="refresh()">새로고침</a>
+            </div>
+                
                 <div class="custom-tab-menu">
 
                     <div class="custom-tab-row">
@@ -176,7 +180,9 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelector(".tab-menu button").click(); // 첫 번째 탭 클릭
         });
-        
+        function refresh(){
+          window.location.reload();
+        }
         
     </script>
     
