@@ -33,7 +33,7 @@
 					<tr th:each="result : ${qna_result}">
 						<td th:text="${result.board_idx}"></td>
 						<td><a
-							th:href="@{/member/qnaView/{board_idx}(board_idx=${result.board_idx})}"
+							th:href="@{/member/csView/{board_idx}(board_idx=${result.board_idx})}"
 							th:text="${result.title}"></a></td>
 						<td th:text="${result.nick}"></td>
 						<td th:text="${result.create_at}"></td>
