@@ -203,7 +203,7 @@
          
           <!-- 수정 및 삭제 버튼 (본인 또는 관리자만) -->
          <div
-            th:if="${review.a_idx == session.user.accounts_idx or session.user.role == 'ADMIN'}">
+            th:if="${review.a_idx == session.user.accounts_idx or session.user.nick == '관리자'}">
             <button th:onclick="|fn_update('${review.drep_idx}')|"
                th:classid="editBtn_" type="button">수정</button>
             <form
