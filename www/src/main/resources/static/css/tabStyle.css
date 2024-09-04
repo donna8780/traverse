@@ -161,3 +161,9 @@
             background-color: #4CAF50;
             color: white;
         }
+        .h3 h3{
+        padding-left: 15px;
+        padding-right: 180px;
+        display: inline-block;
+        }
+        
