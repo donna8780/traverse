@@ -89,6 +89,7 @@ public class AnnouncementController {
       List<AnnouncementVO> searchResults = as.searchAnnouncements(keyword);
 
       mav.addObject("list", searchResults);
+      mav.addObject("keyword", keyword);
       mav.setViewName("member/ann_search"); 
 
       return mav;

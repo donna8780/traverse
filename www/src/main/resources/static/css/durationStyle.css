@@ -119,10 +119,12 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-weight: bold;
 }
 
 #duration button[type="submit"]:hover {
-    background-color: #4BB958;
+    background-color: #F89D4A;
+    color: #2A3854;
 }
 
 /* Sidebar 스타일 */
