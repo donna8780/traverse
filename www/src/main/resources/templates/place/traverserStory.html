@@ -11,12 +11,13 @@
 <body>
 
 	<th:block th:replace="/fragment::header"></th:block>
-
+	
+	<div id="traverseStory">
 <!-- 사용자가 입력한 데이터를 서버로 전송 -->
 			<form method="POST">
 			<!-- 검색 -->
 				<div class="search">
-					<h1>Traverser's Story</h1>
+					<h1>여행의 향기</h1>
 					<!-- 인풋태그에 검색어 입력 -->
 					<input name="search" placeholder="Search..." type="text">
 					<button type="submit">Go</button>
@@ -25,9 +26,7 @@
 
 			<div style="text-align: right; margin: 10px 0;">
 				<a href="/place/story_write">
-					<button type="button"
-						style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer;">
-						Write a Story</button>
+					<button type="button" id="write-btn">글 쓰 기</button>
 				</a>
 			</div>
 			
@@ -107,7 +106,7 @@
     
 </div>
 
-
+	</div>
 		<th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

@@ -7,20 +7,18 @@
 <link href="/css/mainStyle.css" rel="stylesheet">
 </head>
 <body>
-	<th:block th:replace="/fragment::header"></th:block>
-	<div id="signup">
-		<div class="mid">
-			<h1 class="title">회원가입 오류</h1>
-			<p class="error" th:text="${errorMessage}">같은 정보가 이미 존재합니다. 다시 시도해주세요.</p>
-			<p th:if="${duplicateFields != null}"
-				th:each="field : ${duplicateFields}"
-					th:text="'중복된 항목: ' + ${field}">중복된 항목
-			</p>
+   <th:block th:replace="/fragment::header"></th:block>
+   <div id="signup">
+      <div class="mid">
+         <h1 class="title">회원가입 실패</h1>
+         <h2>같은 정보가 존재합니다. 다시 시도해 주세요.</h2>
+         <p th:if="${duplicateFields != null}"
+            th:each="field : ${duplicateFields}" th:text="'중복된 정보: ' + ${field}"></p>
 
 
-			<a href="/member/signUp" class="button">다시 시도하기</a>
-		</div>
-	</div>
-	<th:block th:replace="/fragment::footer"></th:block>
+         <a href="/member/signUp" class="button">회원가입</a>
+      </div>
+   </div>
+   <th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

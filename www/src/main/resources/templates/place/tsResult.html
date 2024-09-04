@@ -5,6 +5,7 @@
 <title>Insert title here</title>
 
 <link href="/css/mainStyle.css" rel="stylesheet">
+<link href="/css/tsResultStyle.css" rel="stylesheet">
 </head>
 <body>
 
@@ -13,11 +14,9 @@
 	<div class="container">
 		<div class="contents" style="min-height: 680px;">
 
-			<h1>Search Results</h1>
-			<p>
-				검색어: <span th:text="${search}"></span>
-			</p>
-			<table>
+			<h1>검색 결과</h1>
+
+			<table class="tsResult">
 				<thead>
 					<tr>
 						<th>제목</th>

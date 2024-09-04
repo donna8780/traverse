@@ -4,23 +4,45 @@
     <meta charset="UTF-8">
     <title>Travel Plan</title>
     <link href="/css/mainStyle.css" rel="stylesheet">
+    <link href="/css/travelplan.css" rel="stylesheet">
 
 </head>
 <body>
+	<th:block th:replace="/fragment::header"></th:block>
+    
+    <div id="accom">
+    <h1>내 여행</h1>
+	
 
-    <th:block th:replace="/fragment::header"></th:block>
+        
+   <div class="travel-plan-container">
+    <a th:each="place : ${place}" 
+       th:href="@{/place/travelplandetail?(seldate=${place.seldate})}" 
+       class="travel-plan">
+    
+   
+    
+    	
+        <div class="plan-details">
+            <h2 th:text="${place.areaName}+' '+ ${place.sigunguName} + ' 여행'"></h2>
+            <p class="travel-dates" th:text="${place.seldate}"></p>
+        </div>
+        
+        <div class="plan-thumbnail">
+   	<img th:src="@{/image/화살표.png}">
+   </div>
+    </a>
+</div>
 
-    <div id="plan">
-    <span class="area_desc">
-        <ul th:each="place : ${place}">
-            <li>
-                <a th:text="${place.seldate} + '  ' + ${place.areaName} + '  ' + (${place.sigunguName} ?: '')"
-                   th:href="@{/place/travelplandetail?(seldate=${place.seldate})}"></a>
-            </li>
-        </ul>
-    </span>
-    </div>
 
+        
+<div class="box-container">
+    <div class="box"></div>
+    <div class="box"></div>
+</div>
+
+
+</div>
     <th:block th:replace="/fragment::footer"></th:block>
     
 </body>
