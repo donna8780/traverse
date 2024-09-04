@@ -11,6 +11,7 @@
 
 	<div class="page-content">
     <h2 class="page-title">마이페이지 정보 수정</h2>
+    
    <form method="POST">
       <table>
          <tr>
@@ -36,13 +37,8 @@
       <button>modify</button>
    </form>
     
-    <div th:if="${session.user.profile}">
-     <img th:src="@{'/image/' + ${session.user.profile}}" alt="Profile Image" style="width: 150px; height: 150px;" />
-    </div>  
-   <form method="POST" enctype="multipart/form-data" th:action="@{/member/uploadProfile}">
-     <input type="file" name="profileImage" accept="image/*" />
-     <button type="submit">업로드</button>
-   </form>
+    
+   </div>
    
    <th:block th:replace="/fragment::footer"></th:block>
 </body>

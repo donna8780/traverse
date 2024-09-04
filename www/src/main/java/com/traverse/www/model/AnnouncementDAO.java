@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -16,7 +17,7 @@ import com.traverse.www.vo.AnnouncementVO;
 @Mapper
 public interface AnnouncementDAO {
 
-	@Select("select * from ann_view LIMIT #{perBoard} OFFSET #{offset}")
+	@Select("select * from ann_view order by announcement_idx desc LIMIT #{perBoard} OFFSET #{offset}")
 	List<AnnouncementVO> announce(Paging pg);
 	
 	@Insert("insert into announcement(title, contents, a_idx) values(#{title}, #{contents}, #{a_idx})")
@@ -40,5 +41,11 @@ public interface AnnouncementDAO {
 	
 	@Update("UPDATE announcement SET v_count = v_count + 1 WHERE announcement_idx = #{announcement_idx}")
 	int incrementViewCount(int announcement_idx);
+	
+
+	@Select("SELECT * FROM ann_view WHERE title LIKE CONCAT('%', #{keyword}, '%') ORDER BY announcement_idx DESC")
+  List<AnnouncementVO> searchByTitle(String keyword);
+  
+
 
 }

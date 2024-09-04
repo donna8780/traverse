@@ -24,16 +24,33 @@
         <div class="left-content">
             <div class="plan">
                 <h3 th:text="'Day ' + ${i}"></h3>
+                <div class="custom-tab-menu">
+
+                    <div class="custom-tab-row">
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=0)}"><button class="custom-tab-link">전체</button></a>
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=28)}"><button class="custom-tab-link">레포츠</button></a>
+                    </div>
+
+                    <div class="custom-tab-row">
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=14)}"><button class="custom-tab-link">문화시설</button></a>
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=32)}"><button class="custom-tab-link">숙박</button></a>
+                    </div>
+                    
+                     <div class="custom-tab-row">
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=12)}"><button class="custom-tab-link">관광지</button></a>
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=39)}"><button class="custom-tab-link">음식점</button></a>
+                    </div>
+                </div>
                 <div th:each="place : ${place}">
                     <div><img th:if="${place.firstimage != null and !place.firstimage.isEmpty()}"
                               th:src="${place.firstimage}" alt="Image" class="placefirstimage" />
                         <!-- 이미지가 없을 때 -->
                         <img th:if="${place.firstimage == null or place.firstimage.isEmpty()}"
-                             th:src="@{/image/logo_w.png}" alt="Default Image"  class="placefirstimage"/>
+                             th:src="@{/image/replace.png}" alt="Default Image"  class="placefirstimage"/>
                     </div>
                     <div class="plandata">
                         <div>
-                            <a th:href="@{/member/detail/{idx}(idx=${place.idx})}" th:text="${place.title}"></a>
+                            <a th:href="@{/member/detail/{idx}(idx=${place.idx},contenttypeid=${place.contenttypeid},contentid=${place.contentid})}" th:text="${place.title}"></a>
                         </div> 
                         <div th:text="${place.addr1}"
                              th:data-mapx="${place.mapx}"
@@ -159,6 +176,8 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelector(".tab-menu button").click(); // 첫 번째 탭 클릭
         });
+        
+        
     </script>
     
     <th:block th:replace="/fragment::footer"></th:block>

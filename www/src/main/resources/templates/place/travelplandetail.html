@@ -19,6 +19,10 @@
                 th:data-seldate="${Planplace[0].seldate}"
                 class="tab-link">
         </button>
+        <a th:href="@{travelplandel?(seldate=${Planplace[0].seldate})}" 
+			     onclick="return confirmDelete(event, this)">
+			    <button>여행계획삭제</button>
+        </a>
     </div>
 
     <div th:each="i : ${#numbers.sequence(1, Planplace[0].duration)}"
@@ -34,6 +38,14 @@
 </div>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7717c2c3bc1327ef51412b55ac5ef"></script>
 <script>
+
+function confirmDelete(event, element) {
+    var confirmed = confirm("여행 계획을 삭제하시겠습니까?");
+    if (!confirmed) {
+        event.preventDefault(); // 사용자가 취소를 누르면 링크 이동을 막음
+    }
+    return confirmed;
+}
 function openTab(evt, tabName, day, seldate) {
     var i, tabcontent, tablinks;
     // 모든 탭 콘텐츠 숨기기
@@ -72,20 +84,24 @@ function openTab(evt, tabName, day, seldate) {
                 data.forEach((place, index) => {
                     // HTML 콘텐츠를 변수에 축적
                     htmlContent += `
-                        <div class="plan">
-                            <div>
-                                <div>${place.firstimage ? `<img src="${place.firstimage}" class="placefirstimage">` : `<img src="/image/logo_w.png" class="placefirstimage">`}</div>
-                                <div>
-                                    <div>${place.title}</div> 
-                                    <div>${place.addr1}</div> 
-                                </div>
-                                <label class="checkbox-container">
-                                     <input type="checkbox" id="checkbox-${index}" checked>
-                                    <span class="checkbox-custom">${index + 1}</span> <!-- 순서 번호를 표시합니다 -->
-                                </label>
-                            </div>
-                        </div>
-                    `;
+							        <div class="plan">
+							            <div>
+							                <div>${place.firstimage ? `<img src="${place.firstimage}" class="placefirstimage">` : `<img src="/image/replace.png" class="placefirstimage">`}</div>
+							                <div>
+							                    <div>
+							                        <a href="/member/detail/${place.idx}?contenttypeid=${place.contenttypeid}&contentid=${place.contentid}">
+							                            ${place.title}
+							                        </a>
+							                    </div> 
+							                    <div>${place.addr1}</div> 
+							                </div>
+							                <label class="checkbox-container">
+							                     <input type="checkbox" id="checkbox-${index}" checked>
+							                    <span class="checkbox-custom">${index + 1}</span> <!-- 순서 번호를 표시합니다 -->
+							                </label>
+							            </div>
+							        </div>
+							    `;
                 });
 
                 // 축적된 HTML 콘텐츠를 한 번에 설정

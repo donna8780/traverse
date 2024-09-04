@@ -1,88 +1,101 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>회원가입 페이지</title>
-    <link href="/css/signUpStyle.css" rel="stylesheet">
-    <link href="/css/mainStyle.css" rel="stylesheet">
+<meta charset="UTF-8">
+<title>회원가입 페이지</title>
+<link href="/css/signUpStyle.css" rel="stylesheet">
+<link href="/css/mainStyle.css" rel="stylesheet">
 </head>
 
 <body>
-    <th:block th:replace="/fragment::header"></th:block>
-    <div id="signup">
+   <th:block th:replace="/fragment::header"></th:block>
+   <div id="signup">
 
-        <div class="mid">
-            <form class="form" method="post" onsubmit="return validateForm()">
-                <p class="title">Create Account</p>
+      <div class="mid">
+         <form class="form" method="post" onsubmit="return validateForm()">
+            <p class="title">Create Account</p>
 
-                <div class="flex">
-                    <label>
-                        <input name="name" required placeholder="" type="text" class="input">
-                        <span>이름</span>
-                    </label>
-                </div>
+            <div class="flex">
+               <label> <input name="name" required placeholder=""
+                  type="text" class="input"> <span>이름</span>
+               </label>
+            </div>
 
-                <div class="flex">
-                    <label class="input-label">
-                        <input id="userid" name="userid" required placeholder="" type="text" class="input" onblur="checkUserid()">
-                        <span>아이디</span>
-                    </label>
-                </div>
+            <div class="flex">
+               <label class="input-label"> <input id="userid"
+                  name="userid" required placeholder="" type="text" class="input"
+                  onblur="checkUserid()"> <span>아이디</span>
+               </label>
+            </div>
 
-                <div class="flex">
-                    <label class="input-label">
-                        <input id="nick" name="nick" required placeholder="" type="text" class="input" onblur="checkUserNick()">
-                        <span>닉네임</span>
-                    </label>
-                </div>
+            <div class="flex">
+               <label class="input-label"> <input id="nick2" name="nick"
+                  required placeholder="" type="text" class="input"
+                  onblur="checkUserNick()"> <span>닉네임</span>
+               </label>
+            </div>
 
-                <div class="flex">
-                    <label class="input-label" style="position: relative; display: block;">
-                        <input id="password" name="userpw" required type="password" class="input" style="padding-right: 30px;">
-                        <span>비밀번호</span>
-                        <button type="button" id="togglePassword" onclick="togglePasswordVisibility('password', 'togglePassword')" style="background: none; border: none; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); padding: 0; margin: 0;">
-                            <img src="/image/eye_closed_icon.png" alt="Toggle visibility" style="width: 20px; height: 20px;">
-                        </button>
-                    </label>
-                </div>
+            <div class="flex">
+               <label class="input-label"
+                  style="position: relative; display: block;"> <input
+                  id="password" name="userpw" required type="password" class="input"
+                  style="padding-right: 30px;" oninput="validatePasswordMatch()">
+                  <span>비밀번호</span>
+                  <button type="button" id="togglePassword"
+                     onclick="togglePasswordVisibility('password', 'togglePassword')"
+                     style="background: none; border: none; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); padding: 0; margin: 0;">
+                     <img src="/image/eye_closed_icon.png" alt="Toggle visibility"
+                        style="width: 20px; height: 20px;">
+                  </button>
+               </label>
+            </div>
 
-                <div class="flex">
-                    <label class="input-label" style="position: relative; display: block;">
-                        <input id="confirmPassword" name="confirmPassword" required placeholder="" type="password" class="input" style="padding-right: 30px;">
-                        <span>비밀번호 확인</span>
-                        <button type="button" id="toggleConfirmPassword" onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword')" style="background: none; border: none; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); padding: 0; margin: 0;">
-                            <img src="/image/eye_closed_icon.png" alt="Toggle visibility" style="width: 20px; height: 20px;">
-                        </button>
-                    </label>
-                </div>
+            <div class="flex">
+               <label class="input-label"
+                  style="position: relative; display: block;"> <input
+                  id="confirmPassword" name="confirmPassword" required
+                  placeholder="" type="password" class="input"
+                  style="padding-right: 30px;" oninput="validatePasswordMatch()">
+                  <span>비밀번호 확인</span>
+                  <button type="button" id="toggleConfirmPassword"
+                     onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword')"
+                     style="background: none; border: none; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); padding: 0; margin: 0;">
+                     <img src="/image/eye_closed_icon.png" alt="Toggle visibility"
+                        style="width: 20px; height: 20px;">
+                  </button>
+               </label>
+            </div>
 
-                <div id="error-message" style="color: red; display: none;">비밀번호가 일치하지 않습니다.</div>
+            <div id="error-message" style="color: red; display: none;">비밀번호가
+               일치하지 않습니다.</div>
 
-                <div class="flex">
-                    <label class="input-label">
-                        <input id="phone" name="phone" required placeholder="" type="text" class="input" oninput="formatPhoneNumber(this)" maxlength="13" onblur="checkUserPhone(this)">
-                        <span>전화번호</span>
-                    </label>
-                </div>
+            <div class="flex">
+               <label class="input-label"> <input id="phone" name="phone"
+                  required placeholder="" type="text" class="input"
+                  oninput="formatPhoneNumber(this)" maxlength="13"
+                  onblur="checkUserPhone(this)"> <span>전화번호</span>
+               </label>
+            </div>
 
-                <div class="flex">
-                    <label class="input-label">
-                        <input id="birth" name="birth" required placeholder="" type="text" class="input" onblur="validateAndFormatBirth()" maxlength="8">
-                        <span>생년월일 8자리</span>
-                    </label>
-                </div>
+            <div class="flex">
+               <label class="input-label"> <input id="birth" name="birth"
+                  required placeholder="" type="text" class="input"
+                  onblur="validateAndFormatBirth()" maxlength="8"> <span>생년월일
+                     8자리</span>
+               </label>
+            </div>
 
-                <div class="flex">
-                    <label class="input-label">
-                        <input id="email" name="email" required placeholder="" type="email" class="input" onblur="checkEmail()">
-                        <span>E-mail</span>
-                    </label>
-                </div>
+            <div class="flex">
+               <label class="input-label"> <input id="email" name="email"
+                  required placeholder="" type="email" class="input"
+                  onblur="checkEmail()"> <span>E-mail</span>
+               </label>
+            </div>
 
-                <button class="submit" type="submit">회원가입</button>
-            </form>
+            <button class="submit" type="submit">회원가입</button>
+         </form>
 
-            <script>
+         <script>
                 // 아이디 중복 확인
                 function checkUserid() {
                     let alertUseridShown = false;
@@ -103,35 +116,28 @@
                         });
                     }
                 }
-
-                //닉네임 중복 확인: 닉네임 입력 후 다시 온블러 함수가 호출되면 다시 false값으로 바뀌어서 다른 닉네임 검증 가능하게 하는 변수
-                
-                let alertNickShown = false;
-
+                //닉네임 중복 확인
                 function checkUserNick() {
-                    let userNick = document.querySelector("#nick").value.trim();
-                    // 입력값이 널 값이 아니고  alertNickShown이 false가 아니라면
-                    if (userNick !== "" && !alertNickShown) {
-                        fetch("http://localhost:8080/member/checkUserNick?userNick=" + userNick, {method:"get"})
+                    let alertUserNickShown = false;
+                    let nick2 = document.querySelector("#nick2").value;
+
+                    if (nick2 !== "") {
+                        fetch("http://localhost:8080/member/checkUserNick?nick=" + nick2, {method:"get"})
                         .then(response => response.json())
                         .then(data => {
-                            if (typeof data.nick === 'string' && data.nick.length > 0) {
+                         
+                           console.log(data);
+                            if (!alertUserNickShown && typeof data.nick=== 'string' && data.nick.length > 0) {
                                 alert(data.nick);
-                                alertNickShown = true;
+                                alertUserNickShown = true;
                             }
                         })
                         .catch(error => {
-                            console.error('Error checking user nickname:', error);
+                            console.error('Error checking Nick:', error);
                             alert('닉네임 확인 중 오류가 발생했습니다. 다시 시도해주세요.');
                         });
                     }
                 }
-
-                // 닉네임 필드에 입력이 발생할 때마다 alertNickShown을 초기화
-                document.querySelector("#nick").addEventListener("input", function() {
-                    alertNickShown = false;
-                });
-
 
                 // 이메일 중복 확인
                 function checkEmail() {
@@ -172,7 +178,6 @@
                             console.error('Error checking phone number:', error);
                             alert('전화번호 확인 중 오류가 발생했습니다. 다시 시도해주세요.');
                         });
-                        //전화번호 길이가 1부터 10까지 입력되었다면 error
                     } else if (value.length > 0 && value.length < 11) {
                         alert("전화번호를 11자리로 입력해주세요.");
                         input.value = '';
@@ -234,26 +239,32 @@
                     }
                 }
 
-                // 폼 유효성 검사 및 비밀번호 확인
-                function validateForm() {
+                // 비밀번호 및 비밀번호 확인 일치 여부 실시간 확인
+                function validatePasswordMatch() {
                     let password = document.getElementById('password').value;
-                    let confirmPassword = docum
-                    ent.getElementById('confirmPassword').value;
+                    let confirmPassword = document.getElementById('confirmPassword').value;
                     let errorMessage = document.getElementById('error-message');
+                    let passwordField = document.getElementById('password');
+                    let confirmPasswordField = document.getElementById('confirmPassword');
 
                     if (password !== confirmPassword) {
                         errorMessage.style.display = 'block';
-                        return false;
+                        confirmPasswordField.style.border = '2px solid red';
+                        passwordField.style.border = '2px solid red';
                     } else {
                         errorMessage.style.display = 'none';
-                        return true;
+                        confirmPasswordField.style.border = '';
+                        passwordField.style.border = '';
                     }
                 }
+
+                // 폼 제출 전 확인
+        
             </script>
 
-        </div>
-    </div>
-    <th:block th:replace="/fragment::footer"></th:block>
+      </div>
+   </div>
+   <th:block th:replace="/fragment::footer"></th:block>
 
 </body>
 </html>

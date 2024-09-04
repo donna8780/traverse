@@ -1,11 +1,14 @@
 package com.traverse.www.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.AnnouncementService;
@@ -60,7 +63,7 @@ public class AnnouncementController {
 		
 		as.deleteAccount(idx);
 		
-		return "redirect:/member/announcement";
+		return "redirect:/member/customer";
 	}
 	
 	// 게시글 수정
@@ -74,9 +77,22 @@ public class AnnouncementController {
 	public String update(AnnouncementVO input) {
 		as.update(input);
 		
-		return "redirect:/member/announcement";
+		return "redirect:/member/customer";
 		
 	}
+	
+	@GetMapping("/search")
+  public ModelAndView search(@RequestParam("keyword") String keyword) {
+      ModelAndView mav = new ModelAndView();
+
+      // Get the list of announcements containing the keyword in the title
+      List<AnnouncementVO> searchResults = as.searchAnnouncements(keyword);
+
+      mav.addObject("list", searchResults);
+      mav.setViewName("member/ann_search"); // Create a new template for search results
+
+      return mav;
+  }
 	
 
 }

@@ -152,7 +152,7 @@ public class TraverserStoryController {
     // 글쓰기 실행
     @PostMapping("/place/story_write")
     public String story_write(@RequestParam("a_idx") int a_idx,
-    						  @RequestParam("title") String title,
+    						  						@RequestParam("title") String title,
                               @RequestParam("regin") String regin,
                               @RequestParam("enddate") String enddate,
                               @RequestParam("seldate") String seldate,
@@ -162,7 +162,7 @@ public class TraverserStoryController {
         String[] imagePaths = new String[10];
         
         // 저장할 경로 설정
-        String uploadDir = "C:/spring/traverse/www/src/main/resources/static/story/";
+        String uploadDir = "C:/testttttt/www/src/main/resources/static/image/story/";
 
         // 업로드된 파일들을 서버에 저장하고 파일 경로를 배열에 저장
         for (int i = 0; i < images.length && i < 10; i++) {
@@ -248,6 +248,24 @@ public class TraverserStoryController {
 
         // 기존 이미지 유지 또는 업데이트
         String[] imagePaths = tss.updateImages(images, story);
+        
+     // 저장할 경로 설정
+        String uploadDir = "C:/testttttt/www/src/main/resources/static/image/story/";
+
+        // 업로드된 파일들을 서버에 저장하고 파일 경로를 배열에 저장
+        for (int i = 0; i < images.length && i < 10; i++) {
+            MultipartFile image = images[i];
+            if (!image.isEmpty()) {
+                String fileName = UUID.randomUUID().toString() + "_" + image.getOriginalFilename();
+                File file = new File(uploadDir, fileName); // 실제 저장 경로
+                try {
+                    image.transferTo(file);
+                    imagePaths[i] = fileName; // 파일명 또는 경로를 저장
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         story.setTitle(title);
         story.setRegin(regin);
@@ -273,12 +291,27 @@ public class TraverserStoryController {
     // 게시글 삭제 처리
     @GetMapping("/place/story_delete/{idx}")
     public String deleteStory(@PathVariable("idx") int idx, HttpSession session) {
-        AccountsVO user = (AccountsVO) session.getAttribute("user");
-        TraverserStoryVO story = tss.getStoryById(idx);
 
 
         tss.deleteStory(idx);
         return "redirect:/place/traverserStory";
+    }
+    
+    @GetMapping("/place/myplace")
+    public ModelAndView viewUserStories(HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+
+        AccountsVO user = (AccountsVO) session.getAttribute("user");
+
+        if (user == null) {
+            return new ModelAndView("redirect:/member/login");
+        }
+
+        List<TraverserStoryVO> userStories = tss.getStoriesByUserId(user.getAccounts_idx());
+        mav.addObject("stories", userStories);
+        mav.setViewName("/place/myplace");
+
+        return mav;
     }
  
 }

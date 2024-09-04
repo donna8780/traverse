@@ -14,7 +14,7 @@ import com.traverse.www.vo.CustomerVO;
 @Mapper
 public interface CsboardDAO {
 
-	@Select("select * from cus_view LIMIT #{perBoard} OFFSET #{offset}")
+	@Select("select * from cus_view order by board_idx desc LIMIT #{perBoard} OFFSET #{offset}")
 	List<CustomerVO> cstest(Paging pg);
 
 	@Insert("insert into customer_board(accounts_idx, title, content) values(#{accounts_idx}, #{title}, #{content})")
@@ -33,7 +33,7 @@ public interface CsboardDAO {
 	@Delete("delete from customer_board where board_idx = ${board_idx}")
 	int delete(CustomerVO idx);
 
-	@Select("select count(*) from customer_board")
+	@Select("select count(*) from cus_view")
 	int totalQna();
 	
 	@Select("SELECT * FROM cus_view where title like concat('%', #{qna_search}, '%')")

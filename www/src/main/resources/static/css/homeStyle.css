@@ -43,12 +43,12 @@
     width: 12%;
     height: 370px; /* 사이드바 높이를 콘텐츠에 맞게 조정 */
     position: absolute;
-    top: 30%; /* 로고 밑으로 내리기 위해 top 값을 조정 */
+    top: 25%; /* 로고 밑으로 내리기 위해 top 값을 조정 */
     left: 25px;
     transform: translateY(0); /* translateY(-50%) 제거 */
     background-color: #E8F0FE;
     border-right: 1px solid #ccc;
-    padding: 15px; /* 패딩을 늘려서 여유 공간 확보 */
+    padding: 10px; /* 패딩을 늘려서 여유 공간 확보 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 사이드바에 그림자 추가 */
     border-radius: 10px; /* 모서리를 둥글게 처리 */
     z-index: 19;
@@ -75,6 +75,7 @@
     margin-bottom: 10px; /* 각 정보 사이에 간격 추가 */
     font-size: 16px; /* 글자 크기를 약간 키움 */
     color: #555; /* 텍스트 색상을 중간 회색으로 설정 */
+    width: 135px;
 }
 
 .sidebar-left .weather-info div span {

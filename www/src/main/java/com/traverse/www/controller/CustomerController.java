@@ -43,14 +43,12 @@ public class CustomerController {
 		ModelAndView mav = new ModelAndView();
 		
 		Map<String, Object> announceMap = as.announce(idx);
-
 		mav.addObject("pg", announceMap.get("pg"));
 		mav.addObject("announce", announceMap.get("list"));
 		
 		Map<String, Object> qnaMap = cs.cstest(idx);
-		mav.addObject("qnapg", qnaMap.get("pg"));
+		mav.addObject("qnapg", qnaMap.get("qnapg"));
 		mav.addObject("qna", qnaMap.get("list"));
-
 		
 		return mav;
 	}
@@ -131,6 +129,7 @@ public class CustomerController {
 		cs.deleteCS(idx);
 		return "redirect:/member/customer#qna";
 	}
+
 	//qna 목록을 가져오기
 	@PostMapping("/customer")
 	public ModelAndView qnaList(@RequestParam("qna_search")String qna_search) {
@@ -141,7 +140,6 @@ public class CustomerController {
 		mav.setViewName("/member/qnaview");
 		return mav;
 	}
-	
 
 	}
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>내가 쓴 글</title>
+    <link href="/css/myPageStyle.css" rel="stylesheet">
+    <link href="/css/mainStyle.css" rel="stylesheet">
+</head>
+<body>
+    <th:block th:replace="/fragment::header"></th:block>
+
+    <div id="mypage">
+        <h2 class="mypage-title">나의 여행후기</h2>
+
+        <div class="mypage">
+            <table>
+                <thead>
+                    <tr>
+                        <th>제목</th>
+                        <th>지역</th>
+                        <th>작성일</th>
+                        <th>조회수</th>
+                        <th>수정</th>
+                        <th>삭제</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="story : ${stories}">
+                        <td><a th:href="@{/place/story/{idx}(idx=${story.idx})}" th:text="${story.title}"></a></td>
+                        <td th:text="${story.regin}"></td>
+                        <td th:text="${story.w_date}"></td>
+                        <td th:text="${story.v_count}"></td>
+                        <td><a th:href="@{/place/story_update/{idx}(idx=${story.idx})}">수정</a></td>
+                        <td><a th:href="@{/place/story_delete/{idx}(idx=${story.idx})}" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <th:block th:replace="/fragment::footer"></th:block>
+</body>
+</html>

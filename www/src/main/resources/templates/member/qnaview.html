@@ -4,38 +4,48 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/css/mainStyle.css" rel="stylesheet">
+<link href="/css/qnaviewStyle.css" rel="stylesheet">
 </head>
 <body>
 
 	<th:block th:replace="/fragment::header"></th:block>
+	
+	
 
-	<div class="container">
-		<div class="contents" style="min-height: 680px;">
+	<div class="container0">
+		<div class="contents0" style="min-height: 680px;">
 
-			<h1>Q&A Results</h1>
+			<h1>자유게시판</h1>
 			<p>
 				검색어: <span th:text="${qna_search}"></span>
 			</p>
 			<table>
 				<thead>
 					<tr>
+						<th>NO.</th>
 						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
 						<th>조회수</th>
-						<th>닉네임</th>
-						<th>날짜</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="result : ${qna_result}">
+						<td th:text="${result.board_idx}"></td>
 						<td><a
-							th:href="@{/member/qnaView/{board_idx}(board_idx=${result.board_idx})}"
+							th:href="@{/member/csView/{board_idx}(board_idx=${result.board_idx})}"
 							th:text="${result.title}"></a></td>
-						<td th:text="${result.v_count}"></td>
 						<td th:text="${result.nick}"></td>
 						<td th:text="${result.create_at}"></td>
+						<td th:text="${result.v_count}"></td>
 					</tr>
 				</tbody>
 			</table>
+			
+			<div id="buttons">
+  <button onclick="history.go(-1);">뒤로가기</button>
+    <!-- 글쓴 본인만 수정 삭제 버튼 활성화 -->
+  </div>
 		</div>
 	</div>
 

@@ -8,81 +8,184 @@
 </head>
 <body>
   <th:block th:replace="/fragment::header"></th:block>
-   <header>
+   
+   <div id="detail">
+    <header>
       <div class="navbar">
          <div class="navbar-left">
-            <h1 th:text="${detail.title}">이름</h1>
+            <h1 th:text="${place['title']}">이름</h1>
          </div>
          <div class="navbar-right">
         <div class="heart-container" title="Like">
-            <input type="checkbox" class="checkbox" id="Give-It-An-Id" th:onclick="handleLike()">
-            <div class="svg-container">
-                <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
-                    </path>
-                </svg>
-                <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
-                    </path>
-                </svg>
-                <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="10,10 20,20"></polygon>
-                    <polygon points="10,50 20,50"></polygon>
-                    <polygon points="20,80 30,70"></polygon>
-                    <polygon points="90,10 80,20"></polygon>
-                    <polygon points="90,50 80,50"></polygon>
-                    <polygon points="80,80 70,70"></polygon>
-                </svg>
-            </div>
-        </div>
+    <!-- 체크박스의 초기 상태는 isLiked 값에 따라 설정 -->
+    <input type="checkbox" class="checkbox" id="Give-It-An-Id" th:checked="${isLiked == 1}" th:onclick="handleLike()">
+    <div class="svg-container">
+        <!-- 비어있는 하트 (isLiked가 0이거나 null인 경우) -->
+        <svg th:if="${isLiked != 1}" viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+            </path>
+        </svg>
+        <!-- 채워진 하트 (isLiked가 1인 경우) -->
+        <svg th:if="${isLiked == 1}" viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+            </path>
+        </svg>
+    </div>
+</div>
          </div>
       </div>
    </header>
 
    <section class="slider">
       <div class="slide">
-         <img th:src="${detail.firstimage}" alt="Image 1">
+
+         <img th:if="${place['firstimage'] != null and !place['firstimage'].isEmpty()}"
+         th:src="${place.firstimage}" alt="Image" class="placefirstimage" />
+        <!-- 이미지가 없을 때 -->
+         <img th:if="${place['firstimage'] == null or place['firstimage'].isEmpty()}"
+          th:src="@{/image/replace.png}" alt="Default Image"  class="placefirstimage"/>
       </div>
       <div class="slide">
-         <img th:src="${detail.firstimage2}" alt="Image 2">
+          <table>  
+          <tbody th:if="@{${place['contenttypeid']} == 14}">
+          <tr>
+            <th>쉬는날</th>
+            <td th:text="${detail['restculture']}"></td>
+          </tr>
+          <tr>
+            <th>이용시간</th>    
+             <td th:text="${detail['usetimeculture']}"></td>
+          </tr>
+          <tr>
+            <th>이용요금</th>
+            <td th:text="${detail['usefee']}"></td>
+          </tr>
+          <tr>
+            <th>문의 및 안내</th>
+            <td th:text="${detail['infocenterculture']}"></td>
+          </tr>
+          <tr>
+            <th>주차시설</th>
+            <td th:text="${detail['parkingculture']}"></td>
+          </tr>
+          <tr>
+            <th>유모차 대여여부</th>
+            <td th:text="${detail['chkbagcarriageculture']}"></td>
+          </tr>
+          </tbody>
+          <tbody th:if="@{${place['contenttypeid']} == 12}">
+          <tr>
+            <th>문의 및 안내</th>
+            <td th:text="${detail['info']}"></td>
+          </tr>
+          <tr>
+            <th>체험가능연령</th>    
+             <td th:text="${detail['expgname']}"></td>
+          </tr>
+          <tr>
+            <th>쉬는날</th>
+            <td th:text="${detail['restdate']}"></td>
+          </tr>
+          <tr>
+            <th>이용시간</th>
+            <td th:text="${detail['usetime']}"></td>
+          </tr>
+          <tr>
+            <th>주차</th>
+            <td th:text="${detail['parking']}"></td>
+          </tr>
+          <tr>
+            <th>유모차 대여 여부</th>
+            <td th:text="${detail['chkbagcarriage']}"></td>
+          </tr>
+          <tr>
+            <th>애완동물 동반가능 여부</th>
+            <td th:text="${detail['chkpet']}"></td>
+          </tr>
+          </tbody>
+          <tbody th:if="@{${place['contenttypeid']} == 28}">
+          <tr>
+            <th>문의 및 안내</th>
+            <td th:text="${detail['incentreleports']}"></td>
+          </tr>
+          <tr>
+            <th>쉬는날</th>    
+             <td th:text="${detail['restateleports']}"></td>
+          </tr>
+          <tr>
+            <th>이용시간</th>
+            <td th:text="${detail['usetimeleports']}"></td>
+          </tr>
+          <tr>
+            <th>주차시설</th>
+            <td th:text="${detail['parkingleports']}"></td>
+          </tr>
+          <tr>
+            <th>parkingfeeleports</th>
+            <td th:text="${detail['parkingfeeleports']}"></td>
+          </tr>
+          </tbody>
+          <tbody th:if="@{${place['contenttypeid']} == 32}">
+          <tr>
+            <th>문의 및 안내</th>
+            <td th:text="${detail['incentreleports']}"></td>
+          </tr>
+          <tr>
+            <th>체크인</th>    
+             <td th:text="${detail['chkintime']}"></td>
+          </tr>
+          <tr>
+            <th>체크아웃</th>
+            <td th:text="${detail['chkouttime']}"></td>
+          </tr>
+          <tr>
+            <th>조리가능여부</th>
+            <td th:text="${detail['cooking']}"></td>
+          </tr>
+          <tr>
+            <th>roomtype</th>
+            <td th:text="${detail['roomtype']}"></td>
+          </tr>
+          <tr>
+            <th>주차 가능 여부</th>
+            <td th:text="${detail['parkinglodging']}"></td>
+          </tr>
+          <tr>
+            <th>예약안내 홈페이지</th>
+            <td th:text="${detail['reservationurl']}"></td>
+          </tr>
+          </tbody>
+          <tbody th:if="@{${place['contenttypeid']} == 39}">
+          <tr>
+            <th>문의 및 안내</th>
+            <td th:text="${detail['infocenterfood']}"></td>
+          </tr>
+          <tr>
+            <th>오픈시간</th>    
+             <td th:text="${detail['opentimefood']}"></td>
+          </tr>
+          <tr>
+            <th>대표메뉴</th>
+            <td th:text="${detail['firstmenu']}"></td>
+          </tr>
+          <tr>
+            <th>쉬는날</th>
+            <td th:text="${detail['restdatefood']}"></td>
+          </tr>
+          </tbody>
+         </table>
       </div>
    </section>
-
-   <section class="description">
-      <h2>장소명</h2>
-      <table>
-         <tr>
-            <td>Title:</td>
-            <td th:text="${detail.title}"></td>
-         </tr>
-         <tr>
-            <td>Address:</td>
-            <td th:text="${detail.addr1}"></td>
-         </tr>
-         <tr>
-            <td>전화번호:</td>
-            <td th:text="${detail.tel}"></td>
-         </tr>
-      </table>
-   </section>
-
+   
    <section class="features">
-      <h2>지도 좌표</h2>
-      <table>
-         <tr>
-            <td>Map X:</td>
-            <td th:text="${detail.mapx}"></td>
-         </tr>
-         <tr>
-            <td>Map Y:</td>
-            <td th:text="${detail.mapy}"></td>
-         </tr>
-      </table>
+      <h2>개요</h2>
+      <div th:text="${place['overview']}"></div>
    </section>
+   
 
-   <!-- 별점 및 후기 섹션 -->
    <section class="reviews">
-      <h2>후기 및 별점</h2>
+   
+   <h2>후기 및 별점</h2>
       <div>
          <span>평균 별점: <strong id="average-rating">0</strong></span> / 5
       </div>
@@ -97,20 +200,20 @@
             <span class="rating-value" th:text="${review.rating}"
                style="display: none;"></span>
          </p>
-         <!-- 수정 및 삭제 버튼 (본인 또는 관리자만) -->
+         
+          <!-- 수정 및 삭제 버튼 (본인 또는 관리자만) -->
          <div
             th:if="${review.a_idx == session.user.accounts_idx or session.user.role == 'ADMIN'}">
             <button th:onclick="|fn_update('${review.drep_idx}')|"
                th:classid="editBtn_" type="button">수정</button>
             <form
-               th:action="@{/member/review/delete/{id}(id=${review.drep_idx})}"
+               th:action="@{/member/review/delete/{id}(id=${review.drep_idx},contenttypeid=${detail['contenttypeid']},contentid=${detail['contentid']})}"
                method="post" style="display: inline;">
                <!-- p_idx를 히든 필드로 추가 -->
                <input type="hidden" name="p_idx" th:value="${review.p_idx}">
                <button type="submit">삭제</button>
             </form>
          </div>
-
          <!-- 수정 폼 (기본적으로 숨김) -->
          <div th:id="'editForm_' + ${review.drep_idx}" style="display: none">
             <form method="POST" th:action="@{/member/review/edit}">
@@ -131,35 +234,31 @@
                <button type="submit">수정 완료</button>
                <input name="drep_idx" type="hidden" th:value="${review.drep_idx}">
                <input name="p_idx" type="hidden" th:value="${review.p_idx}">
+               <input name="contentid" type="hidden" th:value="${detail['contentid']}">
+         <input name="contenttypeid" type="hidden" th:value="${detail['contenttypeid']}">
             </form>
          </div>
-      </div>
-
-
-      <!-- 후기 작성 폼 -->
-      <form id="reviewForm" method="POST" th:action="@{/member/review}">
+         
+   </div>
+   <form id="reviewForm" method="POST" th:action="@{/member/review}">
          <div class="rating">
-            <label> <input type="radio" name="rating" value="1">
-               1
-            </label> <label> <input type="radio" name="rating" value="2">
-               2
-            </label> <label> <input type="radio" name="rating" value="3">
-               3
-            </label> <label> <input type="radio" name="rating" value="4">
-               4
-            </label> <label> <input type="radio" name="rating" value="5">
-               5
-            </label>
+            <label> <input type="radio" name="rating" value="1">1</label> 
+            <label> <input type="radio" name="rating" value="2">2</label> 
+            <label> <input type="radio" name="rating" value="3">3</label> 
+            <label> <input type="radio" name="rating" value="4">4</label> 
+            <label> <input type="radio" name="rating" value="5">5</label>
          </div>
          <textarea name="contents" placeholder="후기를 작성하세요"></textarea>
          <button type="submit">등록</button>
-         <input name="a_idx" type="hidden"
-            th:value="${session.user.accounts_idx}"> <input name="p_idx"
-            type="hidden" th:value="${detail.idx}">
+         <input name="a_idx" type="hidden" th:value="${session.user.accounts_idx}"> 
+         <input name="p_idx" type="hidden" th:value="${detailpage.idx}">
+         <input name="contentid" type="hidden" th:value="${detail['contentid']}">
+         <input name="contenttypeid" type="hidden" th:value="${detail['contenttypeid']}">
       </form>
+  
    </section>
-
-   <script type="text/javascript">
+    </div>
+      <script type="text/javascript">
 document.addEventListener("DOMContentLoaded", function() {
     // 리뷰 항목들을 가져옴
     const reviews = document.querySelectorAll('.review-item');
@@ -190,12 +289,14 @@ function handleLike() {
     const checkbox = document.getElementById('Give-It-An-Id');
     const data = {
         a_idx: [[${session.user.accounts_idx}]],  
-        title: "[[${detail.title}]]",
-        addr1: "[[${detail.addr1}]]",
-        firstimage: "[[${detail.firstimage}]]",
-        mapx: [[${detail.mapx}]],
-        mapy: [[${detail.mapy}]],
-        p_idx: [[${detail.idx}]]
+        title: "[[${detailpage.title}]]",
+        addr1: "[[${detailpage.addr1}]]",
+        firstimage: "[[${detailpage.firstimage}]]",
+        mapx: [[${detailpage.mapx}]],
+        mapy: [[${detailpage.mapy}]],
+        p_idx: [[${detailpage.idx}]],
+        contenttypeid: [[${detailpage.contenttypeid}]],
+        contentid: [[${detailpage.contentid}]]
     };
 
     if (checkbox.checked) {
@@ -208,9 +309,10 @@ function handleLike() {
         })
         .then(response => {
             if (response.ok) {
+                window.location.reload();
                 alert('좋아요 추가 완료!');
             } else {
-                alert('Failed to like this place.');
+                alert('좋아요 추가 실패');
             }
         })
         .catch(error => {
@@ -227,9 +329,10 @@ function handleLike() {
         })
         .then(response => {
             if (response.ok) {
+                window.location.reload();
                 alert('좋아요 삭제 완료!');
             } else {
-                alert('Failed to unlike this place.');
+                alert('좋아요 삭제 실패');
             }
         })
         .catch(error => {
@@ -240,8 +343,11 @@ function handleLike() {
 }
 
   </script>
-
+ <script th:if="${alertMessage != null}">
+        alert("[[${alertMessage}]]");
+    </script>
     <th:block th:replace="/fragment::footer"></th:block>
+
 
 </body>
 </html>

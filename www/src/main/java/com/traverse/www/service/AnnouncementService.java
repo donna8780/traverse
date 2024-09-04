@@ -52,6 +52,11 @@ public class AnnouncementService {
 		return dao.update(input);
 		
 	}
+	
+	public List<AnnouncementVO> searchAnnouncements(String keyword) {
+    return dao.searchByTitle(keyword);
+}
+
 
 
 

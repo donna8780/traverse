@@ -1,0 +1,337 @@
+@charset "UTF-8";
+
+/* 전체 레이아웃 설정 */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* 고객지원 섹션 컨테이너 */
+#customer {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 10px 10px 10px;
+    
+}
+
+#customer-inner {
+  background-color: #e2e2e2;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* 내부 컨텐츠 컨테이너 */
+.inner-content {
+    padding: 20px;
+    background-color: #ffffff; /* 내부 컨테이너의 배경을 흰색으로 설정 */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+/* 네비게이션 메뉴 스타일 */
+#customer header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: #2A3854;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#customer header nav ul li {
+    margin: 0 10px;
+    color: white;
+    font-weight: bold;
+}
+
+#customer header nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#customer header nav ul li a:hover {
+     text-decoration: underline;
+    text-underline-offset: 7px;
+    text-decoration-color: #4BB958;
+    text-decoration-thickness: 3px;
+}
+
+/* 섹션 기본 스타일 */
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+.section h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2A3854;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 기업소개 섹션 스타일 */
+.intro-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.intro-logo img {
+    max-width: 150px;
+    height: auto;
+    margin: 0 auto 20px auto;
+    display: block;
+}
+
+.intro-text {
+    max-width: 70%;
+}
+
+.intro-text h2 {
+    margin-bottom: 15px;
+    font-size: 28px;
+    color: #2A3854;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.intro-text pre {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    white-space: pre-wrap;
+    padding: 10px;
+    border-radius: 5px;
+    width: 800px;
+}
+
+/* 공지사항 테이블 스타일 */
+#notice {
+  padding: 20px;
+}
+
+.rwd-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 15px; /* 테두리 둥글게 */
+    overflow: hidden;
+}
+
+.rwd-table th, .rwd-table td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.rwd-table th {
+    background-color: #2A3854;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.rwd-table td a {
+    color: #2A3854;
+    text-decoration: none;
+    
+}
+
+.rwd-table .td-center {
+    text-align: center;
+}
+
+.rwd-table td a:hover {
+    text-decoration: underline;
+}
+
+/* 페이지네이션 스타일 */
+.pagemenu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.pagemenu li {
+    margin: 0 5px;
+}
+
+.pagemenu li a {
+    display: block;
+    padding: 5px 10px;
+    background-color: #2A3854;
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+.pagemenu li a:hover {
+    background-color: #4BB958;
+}
+
+#notice-write {
+  text-decoration: none;
+}
+
+#notice-write .write-button {
+  margin-left: 88%;
+}
+
+/* FAQ 섹션 스타일 */
+#faq {
+  padding: 20px;
+}
+
+#first-faq {
+  padding: 0 15px;
+}
+
+.faq-item {
+    padding: 5px 15px 0 15px;
+}
+
+.faq-item h3 {
+    font-size: 20px;
+    color: #2A3854;
+    margin-bottom: 10px;
+}
+
+.faq-item p {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Q&A 섹션 스타일 */
+#qna {
+  padding: 20px;
+}
+
+.qna h2 {
+  text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2A3854;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.qna-item table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.qna-item th, .qna-item td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.qna-item th {
+    background-color: #2A3854;
+    color: white;
+    font-weight: bold;
+}
+
+#qna th {
+  text-align: center;
+}
+
+.qna-item td a {
+    color: #2A3854;
+    text-decoration: none;
+}
+
+.qna-item td a:hover {
+    text-decoration: underline;
+}
+
+/* faq 아코디언 스타일 */
+.accordion {
+    background-color: #2A3854;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.accordion:hover {
+    background-color: #4BB958;
+}
+
+.question-text {
+    text-align: left;
+    display: inline-block;
+}
+
+.toggle-text {
+    position: absolute; /* 추가 */
+    right: 15px; /* 오른쪽 끝으로 밀기 */
+    top: 50%; /* 중앙 정렬 */
+    transform: translateY(-50%); /* 중앙 정렬 */
+    white-space: nowrap;
+}
+
+.panel {
+    padding: 0 15px;
+    display: none;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-top: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.panel pre {
+    padding: 10px 0;
+    margin: 0;
+    color: #333; /* 텍스트 색상 */
+    font-size: 16px; /* 글자 크기 */
+    font-family: Arial, sans-serif;
+    line-height: 1.8; /* 줄 간격 */
+    white-space: pre-wrap;
+    border-radius: 5px;
+}
+
+/* 글쓰기 버튼 스타일 */
+#customer button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4BB958;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#customer button:hover {
+    background-color: #F89D4A;
+    color: #2A3854;
+}
+
+/* 섹션 활성화 스타일 */
+#customer .section.active {
+    display: block;
+}
