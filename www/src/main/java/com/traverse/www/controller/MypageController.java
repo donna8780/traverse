@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.security.NoSuchAlgorithmException;
 import java.net.MalformedURLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class MypageController {
    
    // 수정실행
    @PostMapping("/update")
-   public String update(AccountsVO input) {
+   public String update(AccountsVO input) throws NoSuchAlgorithmException {
       ms.update(input);
       return "redirect:/member/logout";
    }
@@ -78,7 +79,7 @@ public class MypageController {
                // 기존 파일 경로 확인 및 삭제
                String oldProfile = user.getProfile();
                if (oldProfile != null && !oldProfile.isEmpty() && !oldProfile.equals("default.png")) {
-                   Path oldFilePath = Paths.get("C:/spring/traverse/www/src/main/resources/static/image/profile/", oldProfile);
+                   Path oldFilePath = Paths.get("C:/testttttt/www/src/main/resources/static/image/profile/", oldProfile);
                    if (Files.exists(oldFilePath)) {
                        Files.delete(oldFilePath);
                        System.out.println("Old profile image deleted: " + oldFilePath.toString());
@@ -86,7 +87,7 @@ public class MypageController {
                }
 
                // 새 파일을 저장할 경로 설정
-               String uploadDir = "C:/spring/traverse/www/src/main/resources/static/image/profile/";
+               String uploadDir = "C:/testttttt/www/src/main/resources/static/image/profile/";
                String fileName = user.getAccounts_idx() + "_" + file.getOriginalFilename();
                Path filePath = Paths.get(uploadDir, fileName);
 

@@ -43,7 +43,8 @@ public interface AnnouncementDAO {
 	int incrementViewCount(int announcement_idx);
 	
 
-  
+	@Select("SELECT * FROM ann_view WHERE title LIKE CONCAT('%', #{keyword}, '%') ORDER BY announcement_idx DESC")
+  List<AnnouncementVO> searchByTitle(String keyword);
   
 
 

@@ -161,6 +161,7 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    padding: 0;
 }
 
 .pagemenu li {
@@ -335,3 +336,5 @@ body {
 #customer .section.active {
     display: block;
 }
+
+

@@ -3,13 +3,13 @@
 /* 페이지 본문 레이아웃 */
 .page-content {
     width: 70%;
-    margin: 30px auto; /* 상하 마진을 30px 주고, 좌우 중앙 정렬 */
+    margin: 30px auto;
     padding: 30px;
     background-color: #e2e2e2;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
-    height: 400px;
+    height: 410px;
 }
 
 /* 폼 타이틀 스타일 */
@@ -70,7 +70,6 @@
 /* 버튼 스타일 */
 .page-content button {
     padding: 10px 20px;
-    margin-right: 10px;
     background-color: #2A3854;
     color: white;
     border: none;
@@ -80,6 +79,7 @@
     font-weight: bold;
     transition: background-color 0.3s ease;
     float: right;
+    margin-top: 20px; /* 버튼이 테이블 안으로 들어가게 하기 위해 추가 */
 }
 
 .page-content button:hover {
@@ -87,8 +87,41 @@
     color: #2A3854;
 }
 
-.submit {
-    margin-top: 7px;
-    float: right;
-    margin-left: 15px;
+/* 프로필 섹션 스타일 */
+.profile-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    justify-content: flex-start; /* 이미지와 업로드 버튼을 가까이 배치 */
+}
+
+.profile-image {
+    margin-right: 20px; /* 이미지와 업로드 폼 사이에 적당한 간격 추가 */
+}
+
+.profile-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #2A3854;
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 버튼이 이미지와 가까워지도록 정렬 */
+}
+
+.upload-form input[type="file"] {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.upload-form button {
+    margin-top: 0;
+    margin-right: 0;
 }

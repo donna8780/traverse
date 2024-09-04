@@ -40,6 +40,17 @@ public class LikeService {
     dao.deletelike(likeVO);  // DAO를 통해 데이터베이스에서 삭제
 }
 
+
+	public void likeupdate(int idx, int a_idx) {
+		dao.likeupdate(idx,a_idx);		
+	}
+
+
+	public void likeupdatedel(int idx, int a_idx) {
+		dao.likeupdatede(idx,a_idx);
+		
+	}
+
 }
 
 

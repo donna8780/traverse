@@ -66,22 +66,25 @@
       
     </div>
     <div class="story-details">
-      <div th:if="${story.profile}">
-        <img th:src="@{'/image/profile/' + ${story.profile}}" alt="Profile Image" class="profile-image" />
+  <div th:if="${story.profile}">
+    <img th:src="@{'/image/profile/' + ${story.profile}}" alt="Profile Image" class="profile-image" />
+  </div>
+  <div class="info">
+    <div class="nickname" th:text="${story.nick}"></div>
+    <div class="meta">
+      <div class="left-info">
+        <span th:text="'작성일 : ' + ${story.w_date}"></span>
+        <span>|</span>
+        <span th:text="'조회수 : ' + ${story.v_count}"></span>
       </div>
-      <div class="info">
-        <div class="nickname" th:text="${story.nick}"></div>
-        <div class="meta">
-          <span th:text="'작성일 : ' + ${story.w_date}"></span>
-          <span>|</span>
-          <span th:text="'조회수 : ' + ${story.v_count}"></span>
-        </div>
-        <div th:if="${session.user != null and (session.user.nick == story.nick or session.user.nick == '관리자')}">
-            <a th:href="@{'/place/story_update/' + ${story.idx}}" class="edit-btn">수정</a>
-            <a th:href="@{'/place/story_delete/' + ${story.idx}}" class="delete-btn" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
-        </div>
+      <div class="edit-delete-buttons" th:if="${session.user != null and (session.user.nick == story.nick or session.user.nick == '관리자')}">
+        <a th:href="@{'/place/story_update/' + ${story.idx}}" class="edit-btn">수정</a>
+        <span>|</span>
+        <a th:href="@{'/place/story_delete/' + ${story.idx}}" class="delete-btn" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
       </div>
     </div>
+  </div>
+</div>
     <div class="review-display">
       <p th:text="${story.contents}"></p>
     </div>
