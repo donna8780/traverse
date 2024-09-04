@@ -94,9 +94,11 @@ Traverse와 함께 경계를 넘어 전국을 탐험하며 잊지 못할 여정�
 		
 		<!-- 검색 폼 -->
     <div class="search">
-    <div><input type="text" name="keyword" placeholder="검색어를 입력하세요."></div>
+    <form th:action="@{/member/search}" method="get">
+        <div><input type="text" name="keyword" placeholder="검색어를 입력하세요."></div>
     <div><button type="submit">검색</button></div>
-    </div>
+    </form>
+</div>
 		
 	</section>
 
