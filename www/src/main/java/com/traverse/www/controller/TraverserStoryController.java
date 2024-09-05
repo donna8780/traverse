@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.traverse.www.service.TraverserStoryService;
 import com.traverse.www.vo.AccountsVO;
@@ -114,6 +115,7 @@ public class TraverserStoryController {
         mav.addObject("rand2", rand2);
         mav.addObject("rand3", rand3);
         mav.addObject("rand4", rand4);
+        
 
         return mav;
     }
@@ -157,12 +159,13 @@ public class TraverserStoryController {
                               @RequestParam("enddate") String enddate,
                               @RequestParam("seldate") String seldate,
                               @RequestParam("contents") String contents,
-                              @RequestParam("images") MultipartFile[] images) {
+                              @RequestParam("images") MultipartFile[] images,
+                              RedirectAttributes redirect) {
         // 이미지 파일 경로 배열 (최대 10개)
         String[] imagePaths = new String[10];
         
         // 저장할 경로 설정
-        String uploadDir = "C:/testttttt/www/src/main/resources/static/image/story/";
+        String uploadDir = "C:/sts_test/traverse/www/src/main/resources/static/image/story/";
 
         // 업로드된 파일들을 서버에 저장하고 파일 경로를 배열에 저장
         for (int i = 0; i < images.length && i < 10; i++) {
@@ -199,6 +202,7 @@ public class TraverserStoryController {
         story.setImge10(imagePaths[9]);
         // 서비스 계층을 통해 DB에 저장
         tss.wirteStory(story);
+        redirect.addFlashAttribute("isupload",1);
 
         return "redirect:/place/traverserStory";
     }
@@ -242,7 +246,8 @@ public class TraverserStoryController {
                               @RequestParam("enddate") String enddate,
                               @RequestParam("seldate") String seldate,
                               @RequestParam("contents") String contents,
-                              @RequestParam("images") MultipartFile[] images) {
+                              @RequestParam("images") MultipartFile[] images,
+                              RedirectAttributes redirect) {
 
         TraverserStoryVO story = tss.getStoryById(idx);
 
@@ -250,7 +255,7 @@ public class TraverserStoryController {
         String[] imagePaths = tss.updateImages(images, story);
         
      // 저장할 경로 설정
-        String uploadDir = "C:/testttttt/www/src/main/resources/static/image/story/";
+        String uploadDir = "C:/sts_test/traverse/www/src/main/resources/static/image/story/";
 
         // 업로드된 파일들을 서버에 저장하고 파일 경로를 배열에 저장
         for (int i = 0; i < images.length && i < 10; i++) {
@@ -284,6 +289,7 @@ public class TraverserStoryController {
         story.setImge10(imagePaths[9]);
         
         tss.updateStory(story);
+        redirect.addFlashAttribute("isupload",1);
 
         return "redirect:/place/story/" + idx;
     }

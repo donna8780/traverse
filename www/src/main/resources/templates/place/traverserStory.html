@@ -101,8 +101,15 @@
          </div>
        </div>
        </a>
-
-		
+       <h5 th:text="${isupload}" id="a" style="display: none;"></h5>
+		<script>
+		  var a = document.getElementById('a').textContent;
+		  if(a !== ''){
+		   window.location.reload();
+		   window.location.reload();
+		  }
+		  
+		</script>
     
 </div>
 
