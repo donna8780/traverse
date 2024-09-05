@@ -77,8 +77,7 @@ public class CustomerController {
 	public ModelAndView csview(@PathVariable("board_idx")int idx) {
 		ModelAndView mav = new ModelAndView();
 		
-	// 조회수 증가
-    // cs.incrementViewCount(idx);
+	
 		
 		mav.addObject("row", cs.getCsBoardOne(idx));
 		mav.addObject("replys", rs.getReplys(idx));
@@ -114,15 +113,21 @@ public class CustomerController {
 
 	// QnA 게시글 수정
 	@GetMapping("/csUpdate/{board_idx}")
-	public String update(@PathVariable("board_idx")int idx) {
-		return "member/csUpdate";
+	public ModelAndView update(@PathVariable("board_idx")int idx) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("row", cs.getCsBoardOne(idx));
+		mav.setViewName("member/csUpdate");
+		return mav;
 	}
 	//Q&A게시글 수정 실행
 	@PostMapping("/csUpdate/{board_idx}") 
 		public String update(CustomerVO input) {
+		
 			cs.update(input);
 			return "redirect:/member/customer#qna";
 		}
+	//게시글 수정버튼 누른 후 수정 전 내용 그대로 받아오기
+	
 	//게시글 삭제
 	@GetMapping("/csdelete/{board_idx}")
 	public String csdelete(CustomerVO idx) {

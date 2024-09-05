@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.traverse.www.service.AnnouncementService;
-import com.traverse.www.service.ReplyService;
 import com.traverse.www.vo.AccountsVO;
 import com.traverse.www.vo.AnnouncementVO;
-import com.traverse.www.vo.ReplyVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -68,8 +66,12 @@ public class AnnouncementController {
 	
 	// 게시글 수정
 	@GetMapping("/ann_update/{announcement_idx}")
-	public String update(@PathVariable("announcement_idx") int idx) {
-		return "member/ann_update";
+	public ModelAndView update(@PathVariable("announcement_idx") int idx) {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("row", as.getBoardOne(idx));
+		mav.setViewName("member/ann_update");
+		return mav;
 	}
 	
 	// 수정 실행

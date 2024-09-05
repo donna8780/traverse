@@ -14,11 +14,11 @@
   <form method="POST">
     <div>
        <label for="title">제목</label>
-       <input id="title" name="title" type="text" placeholder="제목">
+       <input id="title" name="title" type="text"  th:value="${row.title}">
     </div>
     <div>
        <label for="contents">글 내용</label>
-       <textarea id="contents" name="contents" placeholder="글 내용"></textarea>
+       <textarea id="contents" name="contents" th:text="${row.contents}"></textarea>
     </div>
     
     <input name="a_idx" type="hidden" th:value="${session.user.accounts_idx}">
