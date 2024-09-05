@@ -4,24 +4,25 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/mainStyle.css">
+<link href="/css/csboardStyle00.css" rel="stylesheet">
 </head>
 <body>
 <th:block th:replace="/fragment::header"></th:block>
-  <form method="POST">
-    <table>
-       <tr>
-          <td><input name="title" placeholder="제목"></td>
-       </tr>
-       <tr>
-          <td><textarea name="content" placeholder="글 내용"></textarea></td>
-       </tr>
-    </table>
-    
-    <br>
-    
-    <input name="a_idx" type="hidden" th:value="${session.user.accounts_idx}">
-    <button>수정</button>
+  <div id="content-wrapper">
+  <h1>게시물 수정</h1>
+<form method="POST">
+<div>
+<label for="title">제목</label>
+<input id="title" name="title" type="text" placeholder="제목">
+</div>
+<div>
+       <label for="contents">글 내용</label>
+<textarea id="contents" name="contents" placeholder="글 내용"></textarea>
+</div>
+<input name="a_idx" type="hidden" th:value="${session.user.accounts_idx}">
+<button type="submit">수정</button>
   </form>
+</div>
   <th:block th:replace="/fragment::footer"></th:block>
 </body>
 </html>

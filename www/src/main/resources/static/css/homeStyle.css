@@ -225,7 +225,7 @@
 .submit-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #2A3854;
     color: white;
     border: none;
     cursor: pointer;
@@ -236,5 +236,11 @@
     float: right; /* 우측 정렬 */
     margin-top: 20px;
     margin-right: 10px; /* 우측 여백 추가 */
+    font-weight: bold;
+  }
+  
+  .submit-button:hover {
+  	background-color: #F89D4A;
+  	color: #2A3854;
   }
   
