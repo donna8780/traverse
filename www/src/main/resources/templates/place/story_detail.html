@@ -95,7 +95,7 @@
     <span class="close" onclick="closeModal()">&times;</span>
     <img class="modal-content" id="img01">
   </div>
-
+<h5 th:text="${isupload}" id="a" style="display: none;"></h5>
   <script>
     let slideIndex = 0;
     showSlides(slideIndex);
@@ -133,6 +133,13 @@
     function closeModal() {
       document.getElementById("myModal").style.display = "none";
     }
+    
+    var a = document.getElementById('a').textContent;
+    if(a !== ''){
+       document.getElementById('a').textContent = '';
+       window.location.reload();     
+       window.location.reload();     
+      }
   </script>
 
     <th:block th:replace="/fragment::footer"></th:block>

@@ -25,7 +25,8 @@
             
             <p>장소: 
                 <a th:href="@{/member/detail/{idx}(idx=${accommodation.idx},contenttypeid=32,contentid=${accommodation.contentid})}" th:text="${accommodation.title}"></a>
-                <a th:href="'https://www.yanolja.com/search/' + ${accommodation.addr1}"><button id="booking">예약하기</button></a>
+                <a target="_blank" th:href="'https://www.yanolja.com/search/' + ${accommodation.addr1}"><button id="booking">예약하기</button></a>
+
             </p>
             <p>주소: <span th:text="${accommodation.addr1}"></span></p>
             
@@ -54,7 +55,7 @@
         <li th:each="accommodation : ${accommodationList}">
             <p>장소: 
                 <a th:href="@{/member/detail/{idx}(idx=${accommodation.idx},contenttypeid=32,contentid=${accommodation.contentid})}" th:text="${accommodation.title}"></a>
-                <a th:href="'https://www.yanolja.com/search/' + ${accommodation.addr1}"><button id="booking">예약하기</button></a>
+                <a target="_blank" th:href="'https://www.yanolja.com/search/' + ${accommodation.addr1}"><button id="booking">예약하기</button></a>
             </p>
             <p>주소: <span th:text="${accommodation.addr1}"></span></p>
             
