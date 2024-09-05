@@ -87,11 +87,12 @@ public class AnnouncementController {
   public ModelAndView search(@RequestParam("keyword") String keyword) {
       ModelAndView mav = new ModelAndView();
 
-      // Get the list of announcements containing the keyword in the title
+      // 검색폼 실행
       List<AnnouncementVO> searchResults = as.searchAnnouncements(keyword);
 
       mav.addObject("list", searchResults);
-      mav.setViewName("member/ann_search"); // Create a new template for search results
+      mav.addObject("keyword", keyword);
+      mav.setViewName("member/ann_search"); 
 
       return mav;
   }

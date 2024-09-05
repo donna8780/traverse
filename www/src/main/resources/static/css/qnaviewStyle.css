@@ -93,3 +93,21 @@ table td a:hover {
 .contents0 #buttons {
 	margin: 10px;
 }
+
+#buttons button {
+	background-color: #2A3854;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 5px 10px;
+    margin-top: 20px;
+}
+
+#buttons button:hover {
+    background-color: #F89D4A;
+    color: #2A3854;
+}

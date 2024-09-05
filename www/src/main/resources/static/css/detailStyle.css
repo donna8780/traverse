@@ -1,3 +1,14 @@
+#out {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f3f3f3;
+    color: #333;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -8,45 +19,91 @@ body {
     flex-direction: column;
     justify-content: center; /* 수직 중앙 정렬 */
     align-items: center; /* 수평 중앙 정렬 */
-    background-color: #f0f0f0; /* 배경색 추가 (선택 사항) */
 }
 
 
 .navbar {
-    width: 100%;
-    max-width: 1200px; /* 중앙에 배치할 최대 너비 설정 */
+    width: auto;
+    max-width: 1200px;
     padding: 20px;
-    background-color: #4CAF50;
-    color: white;
+    color: #2A3854;
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* 자식 요소를 가로로 중앙 정렬 */
+    align-items: center; /* 자식 요소를 세로로 중앙 정렬 */
+}
+
+.navbar h1 {
+    text-align: center;
+    flex-grow: 1; /* h1이 전체 너비를 차지하게 함 */
+}
+
+
+.navbar-left{
+	position: absolute;
+	left: 35%;
+	top: -17%;
+	font-size: 25px;
 }
 
 .slider, .description, .features, .reviews {
     width: 100%;
-    max-width: 1200px; /* 중앙에 배치할 최대 너비 설정 */
-    margin: 10px 0;
+    max-width: 1000px; /* 중앙에 배치할 최대 너비 설정 */
+    margin: 10px auto;
     background-color: #f9f9f9;
     border-radius: 8px;
     padding: 20px;
+    
+    
 }
 
 .slider {
-    height: 300px;
     display: flex;
-    overflow: hidden;
-    position: relative;
+    flex-direction: column; /* 이미지를 위에, 표를 아래에 배치 */
+    align-items: center; /* 중앙 정렬 */
+    justify-content: center; /* 내부 콘텐츠를 수직으로 중앙 정렬 */
+    gap: 20px; /* 이미지와 표 사이의 간격 */
+    margin: 0 auto; /* 전체 요소를 페이지 중앙으로 정렬 */
+    max-width: 800px; /*슬라이더 최대 너비 설정*/
+    width: 100%;
 }
 
-.slide {
-    min-width: 50%;
-    transition: transform 0.5s ease;
+
+
+.mainimg {
+    display: flex;
+    justify-content: center; /* 이미지 중앙 정렬 */
+    width: 100%;
+}
+.mainimg, .table-container {
+    width: 100%;
+    max-width: 600px; /* 이미지와 표의 동일한 최대 너비 설정 */
+    display: flex;
+    justify-content: center; /* 콘텐츠를 중앙에 정렬 */
+    margin: 0 auto; /* 부모 컨테이너 내에서 중앙 정렬 */
 }
 
+.mainimg img {
+    width: 100%; /* 이미지가 부모 요소의 너비를 채우도록 설정 */
+    height: auto;
+    object-fit: cover;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto; /* 테이블을 부모 컨테이너 내에서 중앙 정렬 */
+}
+
+.table-container th, .table-container td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
 .slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+   	
 }
 
 .rating {
@@ -93,11 +150,13 @@ button:hover {
 }
 
 .heart-container {
-    --heart-color: rgb(255, 91, 137);
+    --heart-color:#DB4024;
     position: relative;
-    width: 50px;
+    width: 45px;
     height: 50px;
     transition: .3s;
+    right:0px;
+    top: -20px;
 }
 
 .heart-container .checkbox {
@@ -107,6 +166,8 @@ button:hover {
     opacity: 0;
     z-index: 20;
     cursor: pointer;
+    top:44%;
+    right:-57%;
 }
 
 .heart-container .svg-container {
