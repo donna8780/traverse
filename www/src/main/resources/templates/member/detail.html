@@ -9,6 +9,7 @@
 <body>
   <th:block th:replace="/fragment::header"></th:block>
    
+   <div id="out">
    <div id="detail">
     <header>
       <div class="navbar">
@@ -37,15 +38,14 @@
    </header>
 
    <section class="slider">
-      <div class="slide">
-
+      <div class="mainimg">
          <img th:if="${place['firstimage'] != null and !place['firstimage'].isEmpty()}"
          th:src="${place.firstimage}" alt="Image" class="placefirstimage" />
         <!-- 이미지가 없을 때 -->
          <img th:if="${place['firstimage'] == null or place['firstimage'].isEmpty()}"
           th:src="@{/image/replace.png}" alt="Default Image"  class="placefirstimage"/>
       </div>
-      <div class="slide">
+      <div class="table-container">
           <table>  
           <tbody th:if="@{${place['contenttypeid']} == 14}">
           <tr>
@@ -203,7 +203,7 @@
          
           <!-- 수정 및 삭제 버튼 (본인 또는 관리자만) -->
          <div
-            th:if="${review.a_idx == session.user.accounts_idx or session.user.role == 'ADMIN'}">
+            th:if="${review.a_idx == session.user.accounts_idx or session.user.nick == '관리자'}">
             <button th:onclick="|fn_update('${review.drep_idx}')|"
                th:classid="editBtn_" type="button">수정</button>
             <form
@@ -346,6 +346,9 @@ function handleLike() {
  <script th:if="${alertMessage != null}">
         alert("[[${alertMessage}]]");
     </script>
+    
+    
+    </div>
     <th:block th:replace="/fragment::footer"></th:block>
 
 
