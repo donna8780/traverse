@@ -17,7 +17,7 @@
     </div>
     <div>
        <label for="contents">글 내용</label>
-       <textarea id="contents" name="contents" th:text="${row.content}"></textarea>
+       <textarea id="contents" name="content" th:text="${row.content}"></textarea>
     </div>
     
     <input name="a_idx" type="hidden" th:value="${session.user.accounts_idx}">
