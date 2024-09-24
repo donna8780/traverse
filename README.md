@@ -15,18 +15,16 @@
 
 ## Stacks 🐈
 
-|제목|내용|설명|
+|제목|내용|
 |------|---|
-|Language|테스트2|
-|IDE|테스트2|
-|Frame Work|테스트2|
-|Build Tool|테스트2|
-|Database|테스트2|
-|Frontend|테스트2|
-|Library|테스트2|
-|API|테스트2|
-|Server|테스트2|
-|Version Control|테스트2|
+|Language|<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">|
+|Frame Work|<img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> |
+|Build Tool|<img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white">|
+|Database|<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">|
+|Frontend|<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">|
+|Library|<img src="https://img.shields.io/badge/thymeleaf-61DAFB?style=for-the-badge&logothymeleaf=&logoColor=#005F0F" style="border-radius:10px">|
+|Server|<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">|
+|Version Control|<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">|
 
 ## 화면 구성 📺
 
