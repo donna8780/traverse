@@ -78,14 +78,14 @@
 ### 6. 상세 페이지
 
 <p align="center">
-<img src="https://github.com/user-attachments/assets/07f26b09-e8b1-4468-85f1-956d41107a6f" width="40%">
+<img src="https://github.com/user-attachments/assets/07f26b09-e8b1-4468-85f1-956d41107a6f" width="30%">
    
 ### 6. 숙소 검색
 
 사용자가 지역을 검색하거나 클릭하면 해당 지역의 추천 숙소 목록이 나타나며, 숙소 클릭 시 예약 페이지로 이동합니다.
 
 <p align="center">
-<img src="https://github.com/user-attachments/assets/80e717d7-d862-4e34-809a-b54ae2355997" width="30%">
+<img src="https://github.com/user-attachments/assets/9011ed84-118c-4902-b7a6-3b7beeb3b962" width="30%">
 <img src="https://github.com/user-attachments/assets/bc1a7f45-eec6-47c2-aca3-856468fbc1df" width="30%">
 </p>
 
