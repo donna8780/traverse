@@ -77,6 +77,8 @@
 
 ### 6. 상세 페이지
 
+해당 지역에서 추천된 장소를 클릭하면, 장소에 대한 상세 페이지를 확인할 수 있습니다. 또한, 후기 및 별점을 남길 수 있습니다.
+
 <p align="center">
 <img src="https://github.com/user-attachments/assets/07f26b09-e8b1-4468-85f1-956d41107a6f" width="30%">
    
