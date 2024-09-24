@@ -160,5 +160,8 @@
 
  
 
+## ERD Diagram 📦
 
-
+<p align="center">
+<img src="https://github.com/user-attachments/assets/a352a8b6-542f-4161-ae84-43118944ef09" width="60%">
+</p>
