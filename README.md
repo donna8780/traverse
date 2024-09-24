@@ -19,6 +19,21 @@ Stacks 🐈
 
 화면 구성 📺
 ---
+0. 메인페이지
+
+실시간 날씨 정보 확인 및 지역별 지도 클릭이 가능합니다.
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/9899c60f-b674-42f9-baf4-c09bda4432c9" width="60%" height="40%">
+
+1. 로그인
+
+
+
+
+
+
+
 
 
 
