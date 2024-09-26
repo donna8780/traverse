@@ -124,9 +124,51 @@
 
 ## 주요 기능 📦
 
-1.마이페이지 기능
-기본 프로필, 닉네임, 비밀번호, 이메일 수정 버튼
+1.회원가입 예외 처리
+```
+@PostMapping("/signUp")
+public String signUp(AccountsVO input, RedirectAttributes redirectAttributes) throws DuplicateUserException {
+    try {
+        // 입력값에 대한 검증 로직 호출
+        validateInput(input);
+        // 검증 통과 시 service에서 회원가입 로직 호출
+        ss.addAccount(input);
+        return "redirect:/"; // 회원가입 성공 시 메인 페이지로 리다이렉트
 
+    } catch (NoSuchAlgorithmException e) {
+        logger.error("비밀번호 해싱 처리 실패:", e); // 올바른 로그 호출
+        redirectAttributes.addFlashAttribute("errorMessage", "서버에서 문제가 발생했습니다. 다시 시도해 주세요.");
+        return "redirect:/member/serverError"; // 에러 발생 시 에러 페이지로 리다이렉트
+
+    } catch (DuplicateUserException e) {
+        logger.warn("중복된 사용자 정보: " + input.toString(), e); // 올바른 로그 호출
+        redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+        redirectAttributes.addFlashAttribute("duplicateFields", e.getFieldNames()); // 중복된 필드명을 전달
+        return "redirect:/member/duplicateError"; // 중복된 정보로 인한 에러 페이지로 리다이렉트
+
+    } catch (ValidationException e) {
+        logger.warn("입력값이 유효하지 않음: " + input.toString(), e); // 올바른 로그 호출
+        redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+        return "redirect:/member/validateError"; // 검증 실패 시 회원가입 페이지로 다시 리다이렉트
+
+    } catch (Exception e) {
+        logger.error("Unexpected error occurred during signup", e); // 올바른 로그 호출
+        redirectAttributes.addFlashAttribute("errorMessage", "예기치 않은 오류가 발생했습니다. 다시 시도해 주세요.");
+        return "redirect:/member/signupError"; // 일반적인 예외 처리 후 에러 페이지로 리다이렉트
+    }
+}
+
+```
+
+입력값 검증 및 예외 처리:
+validateInput(input) 메서드를 통해 사용자 입력에 대한 유효성을 검사함으로써, 잘못된 데이터가 서비스 계층으로 넘어가지 않도록 예방함. 이는 비즈니스 로직의 무결성을 보장함.
+다양한 예외를 구체적으로 처리하여 각 상황에 맞는 에러 메시지를 사용자에게 전달함으로써, 사용자 경험을 향상시키도록 짬.
+
+로깅 기능:
+각 예외에 대해 적절한 로그를 남김으로써, 시스템의 상태를 모니터링할 수 있는 기회를 제공함. 이는 향후 문제 발생 시 디버깅을 용이하게 만듦.
+
+RedirectAttributes 활용:
+RedirectAttributes를 사용하여 일회성 데이터를 플래시 속성으로 전달함으로써, 페이지 간에 정보를 안전하게 전달할 수 있음. 이는 중복된 에러 메시지 전송을 피함.
 
 
 2.여행지 추천 및 계획 기능
