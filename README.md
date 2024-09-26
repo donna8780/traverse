@@ -201,10 +201,8 @@ RedirectAttributes를 사용하여 일회성 데이터를 플래시 속성으로
 
 
 
-### 5. 고객지원 ->자유게시판(페이징 처리)
-회원가입 한 사용자들이 자유롭게 글 작성 및 댓글 수정 삭제 가능
 
-6. 여행 계획
+### 5. 여행 계획
 
 ```
 public String[] updateImages(MultipartFile[] images, TraverserStoryVO story) {
@@ -250,7 +248,95 @@ try-catch 블록을 통해 파일 전송 중 발생할 수 있는 IOException을
 배열을 통한 결과 반환으로 쉽게 처리할 수 있도록 함:
 
 메서드는 배열 imagePaths를 사용하여 모든 이미지 경로를 반환함으로써, 호출 측에서 여러 이미지를 쉽게 관리하고 처리할 수 있도록 도움.
- 
+
+### 6. ApiService
+
+외부 API로부터 데이터를 JSON 형식으로 가져오고, 이를 파싱하여 ApiVO 객체로 변환한 뒤 데이터베이스에 저장하는 프로세스를 처리
+
+1)기본 url 설정
+
+```
+String url = "https://apis.data.go.kr/B551011/KorService1/areaBasedList1?";
+```
+
+API 요청을 보낼 기본 URL로, 이 URL에 추가적인 파라미터들을 붙여서 최종 API 요청 URL을 만듦
+
+2)파라미터 설정
+
+```
+HashMap<String, String> params = new HashMap<>();
+params.put("ServiceKey", "6RkKaXlTQt2IajvJnERjyEHx6pTvNp0n8ZT/iBQPLe4bXmMbm0o8mBSubhyyCBEjYC0Ur+OsD/pNUdrxNp7owQ==");
+params.put("numOfRows", "800");
+params.put("pageNo", "21");
+params.put("numOfRows", "1000");
+params.put("pageNo", "17");
+params.put("MobileOS", "ETC");
+params.put("MobileApp", "AppTest");
+params.put("listYN", "Y");
+params.put("arrange", "A");
+params.put("contentTypeId", "39");
+params.put("_type", "json");
+```
+
+요청에 필요한 파라미터들을 HashMap에 저장.
+ServiceKey: API 호출에 필요한 인증키.
+numOfRows, pageNo: 한 페이지에 보여줄 항목의 수와 페이지 번호.
+MobileOS, MobileApp: 모바일 환경 및 앱 이름을 나타내는 값.
+listYN: 리스트 표시 여부.
+arrange: 정렬 방식.
+contentTypeId: 특정 카테고리(여기서는 음식점)의 콘텐츠를 나타내는 값.
+_type: 응답 데이터를 JSON 형식으로 요청.
+
+3)파라미터 URL 인코딩 및 URL 생성
+
+```
+for(String key : params.keySet()) {
+   String value = params.get(key);
+   value = URLEncoder.encode(value, "UTF-8");
+   url += String.format("%s=%s&", key, value);
+}
+```
+
+파라미터 값들을 UTF-8로 인코딩하여 안전한 URL로 변환.
+url에 파라미터들을 key=value 형식으로 추가.
+
+4)HTTP 연결 설정 및 요청
+```
+HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+int responseCode = conn.getResponseCode();
+System.out.println(responseCode);
+```
+
+HttpURLConnection을 통해 API에 GET 요청을 보냄.
+conn.getResponseCode()는 서버에서 응답하는 HTTP 상태 코드를 반환. 여기서 200은 요청이 성공했음을 의미
+
+5) 응답 데이터 수신
+```
+if (responseCode == 200) {
+   Scanner sc = new Scanner(conn.getInputStream());
+   while (sc.hasNextLine()) {
+      data += sc.nextLine() + "\n";
+   }
+   sc.close();
+   System.out.println(data);
+}
+```
+서버가 200 응답을 보낸 경우, Scanner를 사용해 응답 바디 데이터를 읽어오고, 읽어온 데이터를 문자열로 변환하여 data에 저장
+
+6) JSON 파싱 및 데이터 매핑
+```
+JsonMapper jsonMapper = JsonMapper.builder()
+                                  .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                                  .build();
+JsonNode jsonNode = jsonMapper.readTree(data).get("response").get("body").get("items").get("item");
+return jsonMapper.readValue(jsonNode.toString(), new TypeReference<List<ApiVO>>() {});
+```
+
+JsonMapper: Jackson 라이브러리를 사용하여 JSON 데이터를 처리하는 객체.
+DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES를 false로 설정하여, 정의되지 않은 속성이 있어도 오류를 발생시키지 않고 무시.
+readTree: 응답받은 JSON 데이터를 파싱하여 JsonNode 트리 구조로 변환.
+jsonNode는 JSON 데이터에서 response.body.items.item 노드에 접근.
+readValue: jsonNode를 List<ApiVO>로 변환합니다. TypeReference를 사용하여 제네릭 타입인 List<ApiVO>에 JSON 데이터를 매핑.
 
 ## ERD Diagram 📦
 
