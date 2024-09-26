@@ -337,7 +337,7 @@ JsonMapper: Jackson 라이브러리를 사용하여 JSON 데이터를 처리하�
 DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES를 false로 설정하여, 정의되지 않은 속성이 있어도 오류를 발생시키지 않고 무시.
 readTree: 응답받은 JSON 데이터를 파싱하여 JsonNode 트리 구조로 변환.
 jsonNode는 JSON 데이터에서 response.body.items.item 노드에 접근.
-readValue: jsonNode를 List<ApiVO>로 변환합니다. TypeReference를 사용하여 제네릭 타입인 List<ApiVO>에 JSON 데이터를 매핑.
+readValue: jsonNode를 List<ApiVO>로 변환 후,TypeReference를 사용하여 제네릭 타입인 List<ApiVO>에 JSON 데이터를 매핑.
 
 ## ERD Diagram 📦
 
