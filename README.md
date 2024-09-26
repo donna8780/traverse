@@ -125,8 +125,9 @@
 ## 코드 리뷰 📦
 
 ### 1. 회원가입 예외 처리
-```
-@PostMapping("/signUp")
+
+
+```@PostMapping("/signUp")
 public String signUp(AccountsVO input, RedirectAttributes redirectAttributes) throws DuplicateUserException {
     try {
         // 입력값에 대한 검증 로직 호출
@@ -157,9 +158,7 @@ public String signUp(AccountsVO input, RedirectAttributes redirectAttributes) th
         return "redirect:/member/signupError"; // 일반적인 예외 처리 후 에러 페이지로 리다이렉트
     }
 }
-
 ```
-
 입력값 검증 및 예외 처리:
 
 validateInput(input) 메서드를 통해 사용자 입력에 대한 유효성을 검사함으로써, 잘못된 데이터가 서비스 계층으로 넘어가지 않도록 예방함. 이는 비즈니스 로직의 무결성을 보장함.
@@ -172,7 +171,9 @@ validateInput(input) 메서드를 통해 사용자 입력에 대한 유효성을
 
 RedirectAttributes 활용:
 
-RedirectAttributes를 사용하여 일회성 데이터를 플래시 속성으로 전달함으로써, 페이지 간에 정보를 안전하게 전달할 수 있음. 이는 중복된 에러 메시지 전송을 피함.
+RedirectAttributes를 사용하여 일회성 데이터를 플래시 속성으로 전달함으로써, 페이지 간에 정보를 안전하게 전달할 수 있음. 이는 중복된 에러 메시지 전송을 피함. |
+
+
 
 
 ### 2.여행지 추천 및 계획 기능
