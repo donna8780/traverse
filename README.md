@@ -11,7 +11,7 @@
 
 ## 프로젝트 소개
 
-국내 여행지 추천 및 일정 계획 사이트
+### 국내 여행지 추천 및 일정 계획 사이트
 
 이 웹사이트는 여행자들이 더욱 편리하게 국내 여행을 계획할 수 있도록 다양한 기능을 제공합니다.
 지도 API를 활용하여 사용자는 지도 상에서 직관적으로 여행지를 탐색할 수 있으며, 투어 API를 통해 각 장소의 상세 정보와 추천 명소를 실시간으로 확인할 수 있습니다.
@@ -162,18 +162,13 @@ public String signUp(AccountsVO input, RedirectAttributes redirectAttributes) th
 }
 ```
 입력값 검증 및 예외 처리:
-
-validateInput(input) 메서드를 통해 사용자 입력에 대한 유효성을 검사함으로써, 잘못된 데이터가 서비스 계층으로 넘어가지 않도록 예방함. 이는 비즈니스 로직의 무결성을 보장함.
-
-다양한 예외를 구체적으로 처리하여 각 상황에 맞는 에러 메시지를 사용자에게 전달함으로써, 사용자 경험을 향상시키도록 짬.
+validateInput(input) 메서드를 통해 사용자 입력에 대한 유효성을 검사함으로써, 잘못된 데이터가 서비스로 넘어가지 않도록 예방하고 다양한 예외를 구체적으로 처리하여 각 상황에 맞는 에러 메시지를 사용자에게 전달함.
 
 로깅 기능:
-
-각 예외에 대해 적절한 로그를 남김으로써, 시스템의 상태를 모니터링할 수 있는 기회를 제공함. 이는 향후 문제 발생 시 디버깅을 용이하게 만듦.
+각 예외에 대해 적절한 로그를 남김으로써, 시스템의 상태를 모니터링할 수 있는 기회를 제공하여 문제 발생 시 디버깅을 용이하게 만듦.
 
 RedirectAttributes 활용:
-
-RedirectAttributes를 사용하여 일회성 데이터를 플래시 속성으로 전달함으로써, 페이지 간에 정보를 안전하게 전달할 수 있음. 이는 중복된 에러 메시지 전송을 피함. |
+RedirectAttributes를 사용하여 일회성 데이터를 플래시 속성으로 전달함으로써 중복된 에러 메세지 전송을 피하고 페이지 간 정보를 안전하게 전달할 수 있음.
 
 
 ### 2.여행지 추천 및 계획 기능
@@ -191,17 +186,18 @@ Service
 
 ```
 
+DAO
 
+```
 
-
+```
 
 
 #### 2-2.카테고리 별로(문화시설, 관광지, 레포츠, 숙박, 음식점 등) 해당 지역의 추천장소가 지도에 마커로 표시되어 추천됨
 
-
 #### 2-3.플러스 버튼을 동해 여행 계획에 추가 , 장소 이름 클릭 시 상세 페이지로 이동
 
-Controller
+Controller 
 
 ```
 @GetMapping("planadd")//get요청이 /place/planadd로 들어왔을 때 (url패턴은 place/planadd)
@@ -244,17 +240,16 @@ Controller
 	
 ```
 
-Service
+Service 
 ```
-//planadd메서드는 DAO를 호출하여 실제 DB에 삽입 작업을 수행
 	public int planadd(int p_idx, int a_idx, int areaCode, int sigunguCode1,
 			int duration, String seldate,int day) {
 		
 		return dao.insert(p_idx,a_idx,areaCode,sigunguCode1,duration,seldate,day);
 	}
 ```
-DAO
 
+DAO
 ```
 @Insert("insert into travelplan(p_idx,a_idx,areaCode,sigunguCode1,duration,seldate,day) values(#{p_idx},#{a_idx},#{areaCode},#{sigunguCode1},#{duration},#{seldate},#{day})")
 	int insert(@Param("p_idx") int p_idx, 
@@ -267,8 +262,9 @@ DAO
 ```
 
 
-2-4.일정에 따른 장소 추가 후 여행 계획 버튼 클릭 시 내가 날짜별 추가한 장소 리스트 확인 가능
-View
+#### 2-4.일정에 따른 장소 추가 후 여행 계획 버튼 클릭 시 내가 날짜별 추가한 장소 리스트 확인 가능
+
+HTML
 ```
 <div th:if="${Planplace.size() > 0}"><!-- 타임리프 조건문, 서버에서 받아온 여행 계획 리스트가 있는 경우에만 해당 내용 출력 -->
     <div class="tab-menu"><!-- 탭 메뉴 -->
@@ -317,6 +313,7 @@ Controller
 	 이 데이터를 사용해 여행 계획 상세 정보를 화면에 출력할 수 있도록 뷰로 전달.*/
 
 ```
+
 Service
 ```
 public List<PlaceVO> getPlanplace(int user_idx, String seldate) {
@@ -324,8 +321,8 @@ public List<PlaceVO> getPlanplace(int user_idx, String seldate) {
 		return dao.getPlanplace(user_idx,seldate);
 	}
 ```
-DAO
 
+DAO
 ```
 @Select("select * from place_a_idx where a_idx = #{user_idx} and seldate = #{seldate}")
 	List<PlaceVO> getPlanplace(@Param("user_idx") int user_idx, @Param("seldate") String seldate);
