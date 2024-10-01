@@ -127,13 +127,36 @@
 
 #### 0. 메인 페이지
 
-##### HTML
+##### VIEW - 체크박스 상태 변경
+```
+checkbox.checked = !checkbox.checked;
+
+if (checkbox.checked) {
+    button.classList.add('checked');
+} else {
+    button.classList.remove('checked');
+}
+
+```
+여행할 지역을 클릭하면 해당 체크박스의 상태를 반전시키고 버튼 스타일을 변경.
 
 
+##### 폼 유효성 검사
+```
+if (checkedCheckboxes === 0) {
+    alert('여행할 지역을 선택해주세요.');
+    return false;
+}
 
+if (checkedCheckboxes > maxSelections) {
+    alert('하나의 지역만 선택할 수 있습니다.');
+    return false;
+}
 
+```
+사용자가 체크박스를 선택하지 않았거나, 선택한 체크박스의 수가 최대 선택 가능 수를 초과하는 경우 경고 메시지를 표시하고 폼 제출을 방지
 
-##### Controller - (지도 상에서 경기 지역 클릭)
+##### Controller - 예)지도 상에서 경기도 클릭
 
 ```
 @PostMapping("/gyeonggi")
@@ -169,7 +192,7 @@ public ModelAndView gyeonggi(@RequestParam(name = "gyeonggi", required = false) 
 }
 
 ```
-sigunguCode1, sigunguCode2, sigunguCode3 변수를 0으로 초기화한다. 이 변수들은 선택된 장소의 코드.
+선택된 장소의 코드인 sigunguCode1, sigunguCode2, sigunguCode3 변수를 0으로 초기화. 
 선택된 장소가 null이 아니고 비어있지 않은 경우에 리스트에 있는 장소 코드를 반복하면서 각각의 코드 값을 변수에 할당 후 ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3)를 통해 선택 장소 코드들을 db에 저장한다. 이후 duration 페이지로 리다이렉트 해서 경기 장소에 대한 다음 단계로 이동하게 함.
 
 #### 1. 회원가입 예외 처리
@@ -177,36 +200,35 @@ sigunguCode1, sigunguCode2, sigunguCode3 변수를 0으로 초기화한다. 이 
 
 ```
 @PostMapping("/signUp")
-public String signUp(AccountsVO input, RedirectAttributes redirectAttributes) throws DuplicateUserException {
+public String signUp(AccountsVO input, RedirectAttributes redirectAttributes) {
     try {
-        // 입력값에 대한 검증 로직 호출
         validateInput(input);
-        // 검증 통과 시 service에서 회원가입 로직 호출
         ss.addAccount(input);
-        return "redirect:/"; // 회원가입 성공 시 메인 페이지로 리다이렉트
+        return "redirect:/"; // 성공 시 메인 페이지로 리다이렉트
 
     } catch (NoSuchAlgorithmException e) {
-        logger.error("비밀번호 해싱 처리 실패:", e); // 올바른 로그 호출
+        logger.error("비밀번호 해싱 처리 실패:", e);
         redirectAttributes.addFlashAttribute("errorMessage", "서버에서 문제가 발생했습니다. 다시 시도해 주세요.");
-        return "redirect:/member/serverError"; // 에러 발생 시 에러 페이지로 리다이렉트
+        return "redirect:/member/serverError"; 
 
     } catch (DuplicateUserException e) {
-        logger.warn("중복된 사용자 정보: " + input.toString(), e); // 올바른 로그 호출
+        logger.warn("중복된 사용자 정보: " + input.toString(), e);
         redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-        redirectAttributes.addFlashAttribute("duplicateFields", e.getFieldNames()); // 중복된 필드명을 전달
-        return "redirect:/member/duplicateError"; // 중복된 정보로 인한 에러 페이지로 리다이렉트
+        redirectAttributes.addFlashAttribute("duplicateFields", e.getFieldNames()); 
+        return "redirect:/member/duplicateError"; 
 
     } catch (ValidationException e) {
-        logger.warn("입력값이 유효하지 않음: " + input.toString(), e); // 올바른 로그 호출
+        logger.warn("입력값이 유효하지 않음: " + input.toString(), e);
         redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-        return "redirect:/member/validateError"; // 검증 실패 시 회원가입 페이지로 다시 리다이렉트
+        return "redirect:/member/validateError"; 
 
     } catch (Exception e) {
-        logger.error("Unexpected error occurred during signup", e); // 올바른 로그 호출
+        logger.error("Unexpected error occurred during signup", e);
         redirectAttributes.addFlashAttribute("errorMessage", "예기치 않은 오류가 발생했습니다. 다시 시도해 주세요.");
-        return "redirect:/member/signupError"; // 일반적인 예외 처리 후 에러 페이지로 리다이렉트
+        return "redirect:/member/signupError"; 
     }
 }
+
 ```
 입력값 검증 및 예외 처리:
 validateInput(input) 메서드를 통해 사용자 입력에 대한 유효성을 검사함으로써, 잘못된 데이터가 서비스로 넘어가지 않도록 예방하고 다양한 예외를 구체적으로 처리하여 각 상황에 맞는 에러 메시지를 사용자에게 전달함.
@@ -218,14 +240,41 @@ RedirectAttributes 활용:
 RedirectAttributes를 사용하여 일회성 데이터를 플래시 속성으로 전달함으로써 중복된 에러 메세지 전송을 피하고 페이지 간 정보를 안전하게 전달할 수 있음.
 
 #### 2. 카테고리 별로(문화시설, 관광지, 레포츠, 숙박, 음식점 등) 해당 지역의 추천장소가 지도에 마커로 표시되어 추천
+	
+##### VIEW
 
 ```
-```
+<div class="custom-tab-menu">
+
+                    <div class="custom-tab-row">
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=0)}"><button class="custom-tab-link">전체</button></a>
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=28)}"><button class="custom-tab-link">레포츠</button></a>
+                    </div>
+
+                    <div class="custom-tab-row">
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=14)}"><button class="custom-tab-link">문화시설</button></a>
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=32)}"><button class="custom-tab-link">숙박</button></a>
+                    </div>
+                    
+                     <div class="custom-tab-row">
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=12)}"><button class="custom-tab-link">관광지</button></a>
+                        <a th:href="@{/recommendResult?(seldate=${seldate},type=39)}"><button class="custom-tab-link">음식점</button></a>
+                    </div>
+                </div>
+
 
 ```
+TOUR API에 있는 데이터를 활용해서 각각의 카테고리별로 장소를 추천해 줌.
+
+##### Service
 ```
 
+
+
 ```
+##### DAO
+```
+
 ```
 
 
@@ -344,9 +393,6 @@ user 고유 번호와 user가 선택한 날짜를 파라미터로 받아서 getP
 컨트롤러에서 가져온 user_idx와 선택한 날짜(seldate)에 맞는 여행 계획을 데이터베이스에서 찾아서 그 정보를 가져온 후 PlaceVO 객체로 여러 개 담아 리스트 형식으로 반환함.
 
 
-
-
-
 ### 5. 특정 장소에 대한 상세 정보를 확인.
 
 ##### 5-1. 사용자 인증 확인
@@ -387,13 +433,89 @@ mav.addObject("isLiked", islike);
 ```
 사용자가 해당 장소를 좋아요 했는지 여부를 확인하고, 그 상태를 모델에 추가
 
-#### 6. 후기 및 별점을 남길 수 있는 댓글 기능
+#### 6.게시판 CRUD
 
+##### CREATE (생성)
+```
+// Q&A 글쓰기
+@PostMapping("/cswrite")
+public String cswrite(CustomerVO input) {
+    cs.cusWrite(input); // 고객 서비스에 새로운 Q&A 게시글 추가
+    return "redirect:/member/customer"; // 목록으로 리다이렉트
+}
+```
+##### Read (읽기)
+```
+@GetMapping("/customer")
+public ModelAndView csboard(@RequestParam(value = "idx", required = false) Integer idx) {
+    ModelAndView mav = new ModelAndView();
+    
+    Map<String, Object> announceMap = as.announce(idx);
+    mav.addObject("pg", announceMap.get("pg"));
+    mav.addObject("announce", announceMap.get("list"));
+    
+    Map<String, Object> qnaMap = cs.cstest(idx);
+    mav.addObject("qnapg", qnaMap.get("qnapg"));
+    mav.addObject("qna", qnaMap.get("list"));
+    
+    return mav; // 공지사항과 Q&A 목록 반환
+}
 
+```
 
+##### Q&A 게시글 보기
 
+```
+@GetMapping("/csView/{board_idx}")
+public ModelAndView csview(@PathVariable("board_idx") int idx) {
+    ModelAndView mav = new ModelAndView();
+    
+    mav.addObject("row", cs.getCsBoardOne(idx)); // 게시글 정보
+    mav.addObject("replys", rs.getReplys(idx)); // 댓글 정보
+    mav.setViewName("member/csView");
+    
+    return mav; // 게시글 상세 정보 반환
+}
 
+```
+##### Update (수정) Q&A 게시글 수정
 
+```
+@PostMapping("/csUpdate/{board_idx}")
+public String update(CustomerVO input) {
+    cs.update(input); // Q&A 게시글 수정
+    return "redirect:/member/customer#qna"; // 목록으로 리다이렉트
+}
+
+```
+##### 댓글 수정
+```
+@PostMapping("/repUpdate")
+public String repUpdate(ReplyVO input) {
+    rs.updateReply(input); // 댓글 수정
+    return "redirect:/member/csView/" + input.getC_idx(); // 게시글 상세로 리다이렉트
+}
+```
+##### Delete (삭제)
+##### Q&A 게시글 삭제
+```
+@GetMapping("/csdelete/{board_idx}")
+public String csdelete(CustomerVO idx) {
+    cs.deleteCS(idx); // Q&A 게시글 삭제
+    return "redirect:/member/customer#qna"; // 목록으로 리다이렉트
+}
+
+```
+##### 댓글 삭제
+```
+@GetMapping("/csView/delete")
+public String repdelete(@RequestParam(value = "rep_idx", required = false) Integer rep_idx, 
+                        @RequestParam(value = "c_idx", required = false) Integer c_idx) {
+    rs.deleteRep(rep_idx); // 댓글 삭제
+    return "redirect:/member/csView/" + c_idx; // 게시글 상세로 리다이렉트
+}
+
+```
 
 ### 7. 찜 목록 
 장소 별 상세 페이지에서 우측 상단의 하트를 클릭하면, 찜 목록에서 지도에 마커로 표시된 정보를 확인할 수 있음(삭제 가능)
@@ -598,3 +720,98 @@ readValue: jsonNode를 List<ApiVO>로 변환 후,TypeReference를 사용하여 �
 <p align="center">
 <img src="https://github.com/user-attachments/assets/a352a8b6-542f-4161-ae84-43118944ef09" width="60%">
 </p>
+
+#### 1. accounts 테이블
+기본 키: accounts_idx
+accounts_idx 사용자마다 고유한 식별자 값이 부여되며, 유저가 중복 없이 관리된다.
+외래 키 없음
+이유: accounts 테이블은 사용자 계정 정보를 관리하는 테이블로, 다른 테이블에 연결되기 위한 중심 테이블이기 때문에 외래 키는 없고 다른 테이블에서 참조.
+
+
+#### 2. customer_board 테이블
+기본 키: board_idx
+board_idx는 각 게시물을 고유하게 식별하는 기본 키이며 각 게시물은 고유 ID로 식별됨.
+외래 키: accounts_idx
+accounts_idx는 accounts 테이블의 기본 키를 참조하는 외래 키이며 게시물을 작성한 사용자와 연결되며, 게시물이 어떤 사용자의 것인지 관계를 나타냄.
+이유: 게시물(customer_board)은 작성한 사용자(accounts)와 연결되어야 하므로 accounts 테이블의 기본 키를 참조하게 설정됨. 이를 통해 사용자가 작성한 게시물을 쉽게 조회할 수 있음.
+
+
+#### 3. reply 테이블
+기본 키: rep_idx
+rep_idx는 각 댓글을 고유하게 식별하는 기본 키이며 각 댓글은 고유한 식별자가 있어야 함.
+외래 키: a_idx, c_idx
+a_idx는 accounts 테이블의 기본 키를 참조하여 댓글을 작성한 사용자와 연결됨.
+c_idx는 customer_board 테이블의 기본 키를 참조하여 댓글이 달린 게시물과 연결됨.
+이유: 댓글은 반드시 특정 사용자(accounts)와 특정 게시물(customer_board)에 속해야 하므로 두 테이블의 외래 키를 설정함.
+
+
+#### 4. announcement 테이블
+기본 키: announcement_idx
+announcement_idx는 공지사항을 고유하게 식별하는 기본 키. 각 공지사항은 고유한 식별자 값을 가짐.
+외래 키 없음
+이유: 공지사항 테이블은 공지사항 자체만을 관리하는 테이블로, 별도의 외래 키가 필요 없음.
+
+
+#### 5. like_place 테이블
+기본 키: like_idx
+like_idx는 각 좋아요를 고유하게 식별하는 기본 키.
+외래 키: a_idx, p_idx
+a_idx는 accounts 테이블의 기본 키를 참조하여 좋아요를 누른 사용자를 나타냄.
+p_idx는 place 테이블의 기본 키를 참조하여 좋아요를 누른 장소를 나타냄.
+이유: 좋아요는 사용자(accounts)와 장소(place)에 속하는 기능이므로, 각각의 외래 키를 설정하여 사용자가 어떤 장소에 좋아요를 눌렀는지 알 수 있도록 설계함.
+
+
+#### 6. place 테이블
+기본 키: idx
+idx는 장소를 고유하게 식별하는 기본 키.
+외래 키 없음
+이유: 장소 테이블은 각 장소의 정보를 관리하는 독립된 테이블이므로 외래 키 참조는 없음.
+
+#### 7. dep_reply 테이블
+기본 키: drep_idx
+drep_idx는 각 답글(댓글에 달린 댓글)을 고유하게 식별하는 기본 키.
+외래 키: a_idx, p_idx
+a_idx는 accounts 테이블을 참조하여 답글을 작성한 사용자를 나타냄.
+p_idx는 place 테이블을 참조하여 답글이 달린 장소를 나타냄.
+이유: 답글은 사용자와 특정 장소와 관련이 있으므로, 각각의 외래 키를 통해 관계 정의.
+
+
+#### 8. sel_place 테이블
+기본 키: sel_idx
+sel_idx는 선택된 장소를 고유하게 식별하는 기본 키.
+외래 키: a_idx
+a_idx는 accounts 테이블의 기본 키를 참조하여 장소를 선택한 사용자를 나타냄.
+이유: 선택된 장소는 특정 사용자에 의해 결정되므로, 사용자 정보를 참조하기 위해 외래 키 사용.
+
+
+#### 9. Travelreview 테이블
+기본 키: idx
+idx는 여행 리뷰를 고유하게 식별하는 기본 키.
+외래 키: a_idx
+a_idx는 accounts 테이블의 기본 키를 참조하여 여행 리뷰를 작성한 사용자를 나타냄.
+이유: 여행 리뷰는 사용자와 연관되므로, 리뷰 작성자를 나타내기 위해 외래 키 사용.
+
+
+#### 10. travelplan 테이블
+기본 키: idx
+idx는 여행 계획을 고유하게 식별하는 기본 키.
+외래 키: a_idx, p_idx
+a_idx는 accounts 테이블의 기본 키를 참조하여 여행 계획을 작성한 사용자를 나타냄.
+p_idx는 place 테이블의 기본 키를 참조하여 계획된 여행 장소를 나타냄.
+이유: 여행 계획은 사용자와 장소에 연결되므로, 이를 나타내기 위해 두 테이블의 외래 키를 사용함.
+
+
+#### 11. sigungu 테이블
+기본 키: sigunguCode
+sigunguCode는 행정 구역(시군구)을 고유하게 식별하는 기본 키.
+외래 키 없음
+이유: 이 독립된 행정 구역 정보를 저장하는 테이블이기 때문에 다른 테이블과의 관계가 필요 없음.
+
+
+#### 12. area 테이블
+기본 키: areaCode
+areaCode는 지역을 고유하게 식별하는 기본 키.
+외래 키 없음
+이유: 지역 정보를 관리하는 독립 테이블로 외부 참조가 필요하지 않음
+
+
