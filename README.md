@@ -26,7 +26,7 @@
 |Build Tool|<img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white">|
 |Database|<img src="https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white">|
 |Frontend|<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">|
-|Library|<img src="https://img.shields.io/badge/Thymeleaf-%23005C0F.svg?style=for-the-badge&logo=Thymeleaf&logoColor=white">|
+|Library|<img src="https://img.shields.io/badge/Thymeleaf-%23005C0F.svg?style=for-the-badge&logo=Thymeleaf&logoColor=white">, 히카리|
 |Server|<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">|
 |Version Control|<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">|
 
@@ -125,10 +125,11 @@
 
 ## 코드 리뷰 📦
 
-### 1. 회원가입 예외 처리
+#### 1. 회원가입 예외 처리
 
 
-```@PostMapping("/signUp")
+```
+@PostMapping("/signUp")
 public String signUp(AccountsVO input, RedirectAttributes redirectAttributes) throws DuplicateUserException {
     try {
         // 입력값에 대한 검증 로직 호출
@@ -169,43 +170,21 @@ validateInput(input) 메서드를 통해 사용자 입력에 대한 유효성을
 RedirectAttributes 활용:
 RedirectAttributes를 사용하여 일회성 데이터를 플래시 속성으로 전달함으로써 중복된 에러 메세지 전송을 피하고 페이지 간 정보를 안전하게 전달할 수 있음.
 
+#### 2. 카테고리 별로(문화시설, 관광지, 레포츠, 숙박, 음식점 등) 해당 지역의 추천장소가 지도에 마커로 표시되어 추천
 
-### 2.여행지 추천 및 계획 기능
+```
+```
 
-#### 2-1.지도상에서 원하는 지역 및 날짜 선택 
+```
+```
 
-Controller
+```
 ```
 
 
+#### 3.플러스 버튼을 동해 여행 계획에 추가 , 장소 이름 클릭 시 상세 페이지로 이동
 
-
-```
-
-Service
-
-```
-
-
-
-
-```
-
-DAO
-
-```
-
-
-
-
-```
-
-
-#### 2-2.카테고리 별로(문화시설, 관광지, 레포츠, 숙박, 음식점 등) 해당 지역의 추천장소가 지도에 마커로 표시되어 추천됨
-
-#### 2-3.플러스 버튼을 동해 여행 계획에 추가 , 장소 이름 클릭 시 상세 페이지로 이동
-
-Controller 
+##### Controller 
 ```
 @GetMapping("planadd")
 	public ModelAndView planaddpublic ModelAndView planadd(int p_idx, int a_idx, int areaCode, int sigunguCode1, 
@@ -236,7 +215,7 @@ Controller
 	    return mav;
 	}	
 ```
-Service 
+##### Service 
 ```
 	public int planadd(int p_idx, int a_idx, int areaCode, int sigunguCode1,
 			int duration, String seldate,int day) {
@@ -244,7 +223,7 @@ Service
 		return dao.insert(p_idx,a_idx,areaCode,sigunguCode1,duration,seldate,day);
 	}
 ```
-DAO
+##### DAO
 ```
 @Insert("insert into travelplan(p_idx,a_idx,areaCode,sigunguCode1,duration,seldate,day) values(#{p_idx},#{a_idx},#{areaCode},#{sigunguCode1},#{duration},#{seldate},#{day})")
 	int insert(@Param("p_idx") int p_idx, 
@@ -256,7 +235,7 @@ DAO
       @Param("day") int day);
 ```
 
-#### 2-4.일정에 따른 장소 추가 후 여행 계획 버튼 클릭 시 내가 날짜별 추가한 장소 리스트 확인 가능
+#### 4. 일정에 따른 장소 추가 후 여행 계획 버튼 클릭 시 사용자가 날짜별 추가한 장소 리스트 확인 가능
 
 ##### HTML
 ```
@@ -318,21 +297,119 @@ user 고유 번호와 user가 선택한 날짜를 파라미터로 받아서 getP
 컨트롤러에서 가져온 user_idx와 선택한 날짜(seldate)에 맞는 여행 계획을 데이터베이스에서 찾아서 그 정보를 가져온 후 PlaceVO 객체로 여러 개 담아 리스트 형식으로 반환함.
 
 
-### 3.장소 별 상세 페이지
 
 
-#### 3-1. 장소에 대한 상세 정보를 확인 가능.
-#### 3-2. 후기 및 별점을 남길 수 있는 댓글 기능
-#### 3-3. 다른 유저가 해당 장소에 작성한 댓글 및 좋아요 확인 기능.
-#### 3-4. 찜 목록에서 확인 가능
 
-### 4.찜 목록 
+### 5. 특정 장소에 대한 상세 정보를 확인.
+
+##### 5-1. 사용자 인증 확인
+```
+if (user == null) {
+    mav.setViewName("redirect:/member/login");
+    return mav;
+}
+```
+##### 5-2.장소 정보 가져오기
+```
+HashMap<String, String> place = ts.getPlace(contenttypeid, contentid);
+mav.addObject("place", place);
+
+HashMap<String, String> placeDetails = ts.getPlaceDetails(contenttypeid, contentid);
+mav.addObject("detail", placeDetails);
+```
+사용자가 요청한 장소에 대한 정보를 ts 서비스를 통해 가져옵니다. 이 정보는 페이지에 표시될 내용입니다.
+
+
+##### 5-3. 리뷰 데이터 추가
+```
+mav.addObject("reviews", rs.getReviewsByPlaceId(idx)); // 리뷰 데이터 추가
+장소에 대한 리뷰 데이터를 추가하여 사용자가 다른 사람들의 의견을 볼 수 있도록 합니다.
+```
+##### 5-4. 좋아요 상태 확인
+```
+PlaceVO isLiked = ds.isLikedByUser(user.getAccounts_idx(), idx);
+int islike;
+if (isLiked == null) {
+    islike = 0;
+} else {
+    islike = isLiked.getIslike();
+}
+
+mav.addObject("isLiked", islike);
+
+```
+사용자가 해당 장소를 좋아요 했는지 여부를 확인하고, 그 상태를 모델에 추가
+
+#### 6. 후기 및 별점을 남길 수 있는 댓글 기능
+
+
+
+
+
+
+
+### 7. 찜 목록 
 장소 별 상세 페이지에서 우측 상단의 하트를 클릭하면, 찜 목록에서 지도에 마커로 표시된 정보를 확인할 수 있음(삭제 가능)
 
+##### HTML - 마커 추가 및 토글 기능
+
+```
+function toggleMarker(check, x, y) {
+    var key = x + ',' + y; // 키를 x, y 좌표로 설정
+    var locationItem = check.closest('.location-item');
+
+    if (check.checked) {
+        // 체크된 경우 마커 추가
+        var marker = new kakao.maps.Marker({
+            position: new kakao.maps.LatLng(y, x),
+            map: map // 현재 지도에 마커 추가
+        });
+        markers[key] = marker; // 마커를 markers 객체에 저장
+        addMarkerClickEvent(marker, key, locationItem); // 마커 클릭 이벤트 추가
+        locationItem.classList.add('selected'); // 선택된 항목 스타일 변경
+    } else {
+        // 체크 해제된 경우 마커 제거
+        if (markers[key]) {
+            markers[key].setMap(null); // 지도에서 마커 제거
+            delete markers[key]; // markers 객체에서 삭제
+        }
+        if (overlays[key]) {
+            overlays[key].setMap(null); // 오버레이 제거
+            delete overlays[key]; // overlays 객체에서 삭제
+        }
+        locationItem.classList.remove('selected'); // 선택 해제 시 스타일 변경
+    }
+}
+```
+
+##### Controller - 사용자가 특정 장소에 좋아요 추가하는 기능
+```
+@PostMapping("/member/like")
+public ResponseEntity<String> likePlace(@RequestBody LikeVO likeVO) {
+    try {
+        // 장소 ID와 사용자 ID를 가져와 좋아요 추가
+        int idx = likeVO.getP_idx();
+        like.likeupdate(idx, likeVO.getA_idx());
+        like.insertLike(likeVO);
+        return ResponseEntity.ok("Liked"); // 성공 시 응답
+    } catch (Exception e) {
+        e.printStackTrace();  // 오류 로그 출력
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                             .body("Error occurred while liking place.");
+    }
+}
+
+```
 
 
+##### DAO - 사용자가 좋아하는 장소에 대한 정보를 like_place 테이블에 추가하는 기능을 구현
+```
+@Insert("INSERT INTO like_place (a_idx, title, addr1, firstimage, mapx, mapy, p_idx, contenttypeid, contentid) " +
+       "VALUES (#{a_idx}, #{title}, #{addr1}, #{firstimage}, #{mapx}, #{mapy}, #{p_idx}, #{contenttypeid}, #{contentid})")
+void insert(LikeVO likeVO);
+```
 
-### 5. 여행 계획
+### 8. 여행 계획
 
 ```
 public String[] updateImages(MultipartFile[] images, TraverserStoryVO story) {
@@ -359,6 +436,7 @@ public String[] updateImages(MultipartFile[] images, TraverserStoryVO story) {
 }
 
 ```
+
 다중 파일 업로드를 가능하게 함:
 
 메서드는 MultipartFile[] images를 매개변수로 받아 여러 파일을 한 번에 처리할 수 있도록 설계됨으로써, 사용자가 여러 이미지를 동시에 업로드할 수 있는 편리함을 제공함.
@@ -379,7 +457,7 @@ try-catch 블록을 통해 파일 전송 중 발생할 수 있는 IOException을
 
 메서드는 배열 imagePaths를 사용하여 모든 이미지 경로를 반환함으로써, 호출 측에서 여러 이미지를 쉽게 관리하고 처리할 수 있도록 도움.
 
-### 6. ApiService
+### 9. ApiService
 
 외부 API로부터 데이터를 JSON 형식으로 가져오고, 이를 파싱하여 ApiVO 객체로 변환한 뒤 데이터베이스에 저장하는 프로세스를 처리
 
