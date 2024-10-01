@@ -13,10 +13,9 @@
 
 ### 국내 여행지 추천 및 일정 계획 사이트
 
-이 웹사이트는 여행자들이 더욱 편리하게 국내 여행을 계획할 수 있도록 다양한 기능을 제공합니다.
 지도 API를 활용하여 사용자는 지도 상에서 직관적으로 여행지를 탐색할 수 있으며, 투어 API를 통해 각 장소의 상세 정보와 추천 명소를 실시간으로 확인할 수 있습니다.
 또한, 사용자의 선호도와 여행 스타일을 반영한 맞춤형 여행지 추천 알고리즘이 적용되어, 개인화된 여행지 목록을 제공합니다. 사용자는 이를 기반으로 쉽게 일정을 구성하고, 추가적인 여행 정보를 받아볼 수 있습니다.
-여행지 정보뿐만 아니라, 숙박, 맛집, 관광지 등을 한눈에 확인할 수 있어 더욱 편리한 여행 계획 수립이 가능합니다.
+여행지 정보뿐만 아니라, 숙박, 맛집, 관광지 등을 한눈에 확인할 수 있어 더욱 편리한 여행 계획 수립이 가능하도록 설계하였습니다.
 
 ## Stacks 🐈
 
@@ -178,17 +177,26 @@ RedirectAttributes를 사용하여 일회성 데이터를 플래시 속성으로
 Controller
 ```
 
+
+
+
 ```
 
 Service
 
 ```
 
+
+
+
 ```
 
 DAO
 
 ```
+
+
+
 
 ```
 
@@ -198,22 +206,12 @@ DAO
 #### 2-3.플러스 버튼을 동해 여행 계획에 추가 , 장소 이름 클릭 시 상세 페이지로 이동
 
 Controller 
-
 ```
-@GetMapping("planadd")//get요청이 /place/planadd로 들어왔을 때 (url패턴은 place/planadd)
-	public ModelAndView planadd(@RequestParam("p_idx") int p_idx,
-	                            @RequestParam("a_idx") int a_idx,
-	                            @RequestParam("areaCode") int areaCode,
-	                            @RequestParam("sigunguCode1") int sigunguCode1,
-	                            @RequestParam("sel_idx") int sel_idx,
-	                            @RequestParam("duration") int duration,
-	                            @RequestParam("seldate")String seldate,
-	                            @RequestParam("day") int day) {
+@GetMapping("planadd")
+	public ModelAndView planaddpublic ModelAndView planadd(int p_idx, int a_idx, int areaCode, int sigunguCode1, 
+                            int sel_idx, int duration, String seldate, int day) {
 
-		//RequetParam의 매개변수는 HTTP요청에서 전달되는 쿼리 파라미터를 받아온다.
-		//예를 들어, /plan/planadd?p_idx=1&a_idx=2&..와 같은 url로 요청이 오면,
-		//해당 쿼리 스트링을 매개변수로 변환해서 사용한다.
-		
+		// HTTP요청에서 전달되는 쿼리 파라미터를 받아온다.
 	    ModelAndView mav = new ModelAndView();
 	    int duration1 = duration /5;//총 기간을 5로 나눠서 저장
 	    
@@ -236,10 +234,8 @@ Controller
 	    mav.setViewName("redirect:/recommendResult?seldate="+seldate+"&type=0");
 	    //리디렉션할 url이 설정된 상태에서 이 메서드가 종료되면, 브라우저는 해당 url로 이동
 	    return mav;
-	}
-	
+	}	
 ```
-
 Service 
 ```
 	public int planadd(int p_idx, int a_idx, int areaCode, int sigunguCode1,
@@ -248,7 +244,6 @@ Service
 		return dao.insert(p_idx,a_idx,areaCode,sigunguCode1,duration,seldate,day);
 	}
 ```
-
 DAO
 ```
 @Insert("insert into travelplan(p_idx,a_idx,areaCode,sigunguCode1,duration,seldate,day) values(#{p_idx},#{a_idx},#{areaCode},#{sigunguCode1},#{duration},#{seldate},#{day})")
@@ -261,10 +256,9 @@ DAO
       @Param("day") int day);
 ```
 
-
 #### 2-4.일정에 따른 장소 추가 후 여행 계획 버튼 클릭 시 내가 날짜별 추가한 장소 리스트 확인 가능
 
-HTML
+##### HTML
 ```
 <div th:if="${Planplace.size() > 0}"><!-- 타임리프 조건문, 서버에서 받아온 여행 계획 리스트가 있는 경우에만 해당 내용 출력 -->
     <div class="tab-menu"><!-- 탭 메뉴 -->
@@ -275,15 +269,11 @@ HTML
                 th:data-seldate="${Planplace[0].seldate}"
                 class="tab-link">
         </button>
-        <!-- 여행 계획 삭제 링크 -->
-        <a th:href="@{travelplandel?(seldate=${Planplace[0].seldate})}" 
-			     onclick="return confirmDelete(event, this)">
-			    <button>여행계획삭제</button>
-        </a>
+       
     </div>
 ```
 
-Controller
+##### Controller
 ```
 	@GetMapping("travelplandetail")
 	//1.메서드 선언
@@ -305,28 +295,27 @@ Controller
 		//이 메서드에서 가져온 여행 계획 데이터는 Planplace라는 이름으로 모델에 추가
 		return mav;
 	}
-	/*traveldetail 메서드가 호출되면, 사용자가 선택한 날짜(seldate)를 파라미터로 받고, 세션에서 로그인한 사용자의 정보를 가져옴
-	사용자의 고유 ID(user_idx)와 선택한 날짜를 이용해,
-	 TravelplanService의 getPlanplace() 메서드를 호출하여 
-	 해당 날짜에 맞는 여행 계획 데이터를 가져옴.
-	 가져온 데이터를 Planplace라는 이름으로 ModelAndView 객체에 추가하고,
-	 이 데이터를 사용해 여행 계획 상세 정보를 화면에 출력할 수 있도록 뷰로 전달.*/
 
 ```
+traveldetail 메서드가 호출되면, 사용자가 선택한 날짜(seldate)를 파라미터로 받고, 세션에서 로그인한 사용자의 정보를 가져옴
+사용자의 고유 ID(user_idx)와 선택한 날짜를 이용해 TravelplanService의 getPlanplace() 메서드를 호출하여 해당 날짜에 맞는 여행 계획 데이터를 가져옴.
+가져온 데이터를 Planplace라는 이름으로 ModelAndView 객체에 추가하고, 이 데이터를 사용해 여행 계획 상세 정보를 화면에 출력할 수 있도록 뷰로 전달
 
-Service
+##### Service
 ```
 public List<PlaceVO> getPlanplace(int user_idx, String seldate) {
 
 		return dao.getPlanplace(user_idx,seldate);
 	}
 ```
+user 고유 번호와 user가 선택한 날짜를 파라미터로 받아서 getPlanPlace로 넘겨준다.
 
-DAO
+##### DAO
 ```
 @Select("select * from place_a_idx where a_idx = #{user_idx} and seldate = #{seldate}")
 	List<PlaceVO> getPlanplace(@Param("user_idx") int user_idx, @Param("seldate") String seldate);
 ```
+컨트롤러에서 가져온 user_idx와 선택한 날짜(seldate)에 맞는 여행 계획을 데이터베이스에서 찾아서 그 정보를 가져온 후 PlaceVO 객체로 여러 개 담아 리스트 형식으로 반환함.
 
 
 ### 3.장소 별 상세 페이지
