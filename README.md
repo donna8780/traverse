@@ -123,7 +123,54 @@
 <img src="https://github.com/user-attachments/assets/c92e4ae5-a23d-4861-9e6b-3615cfaae643" width="30%">
 </p>
 
-## 코드 리뷰 📦
+## 코드 리뷰 📝
+
+#### 0. 메인 페이지
+
+##### HTML
+
+
+
+
+
+##### Controller - (지도 상에서 경기 지역 클릭)
+
+```
+@PostMapping("/gyeonggi")
+public ModelAndView gyeonggi(@RequestParam(name = "gyeonggi", required = false) List<Integer> selectePlaces, HttpSession session) {
+    ModelAndView mav = new ModelAndView();
+    
+    AccountsVO user = (AccountsVO) session.getAttribute("user");
+    
+    if (user == null) {
+        mav.setViewName("redirect:/member/login");
+        return mav;
+    }
+    
+    int a_idx = user.getAccounts_idx();
+    
+    int sigunguCode1 = 0, sigunguCode2 = 0, sigunguCode3 = 0;
+
+    if (selectePlaces != null && !selectePlaces.isEmpty()) {
+        for (int i = 0; i < selectePlaces.size(); i++) {
+            int place = selectePlaces.get(i);
+
+            switch (i) {
+                case 0: sigunguCode1 = place; break;
+                case 1: sigunguCode2 = place; break;
+                case 2: sigunguCode3 = place; break;
+            }
+        }
+        ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3);
+    }
+    mav.setViewName("redirect:/duration");
+    
+    return mav;
+}
+
+```
+sigunguCode1, sigunguCode2, sigunguCode3 변수를 0으로 초기화한다. 이 변수들은 선택된 장소의 코드.
+선택된 장소가 null이 아니고 비어있지 않은 경우에 리스트에 있는 장소 코드를 반복하면서 각각의 코드 값을 변수에 할당 후 ms.sel_sigunguCode(a_idx, sigunguCode1, sigunguCode2, sigunguCode3)를 통해 선택 장소 코드들을 db에 저장한다. 이후 duration 페이지로 리다이렉트 해서 경기 장소에 대한 다음 단계로 이동하게 함.
 
 #### 1. 회원가입 예외 처리
 
